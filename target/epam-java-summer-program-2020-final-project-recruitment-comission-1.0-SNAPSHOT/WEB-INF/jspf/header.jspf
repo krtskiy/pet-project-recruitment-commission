@@ -1,0 +1,12 @@
+<%@ include file="/WEB-INF/jspf/directive/page.jspf" %>
+<%@ include file="/WEB-INF/jspf/directive/taglib.jspf" %>
+
+<tr>
+    <td>
+        <c:if test="${not empty user}">
+
+
+            <a href="controller?command=logout">Logout</a>
+        </c:if>
+    </td>
+</tr>

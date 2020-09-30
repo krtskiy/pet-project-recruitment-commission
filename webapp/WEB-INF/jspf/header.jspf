@@ -5,9 +5,7 @@
     <td id="header">
 
         <div id="leftHeader">
-            <c:if test="${title ne 'Welcome'}">
-                <a href="welcome.jsp">Home page</a>
-            </c:if>
+            <a href="welcome.jsp">Home page</a>
             <a href="controller?command=facultiesPage">List of faculties</a>
             <c:if test="${not empty user}">
                 <c:choose>

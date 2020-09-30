@@ -13,7 +13,6 @@
     <%@ include file="/WEB-INF/jspf/header.jspf" %>
     <tr>
         <td class="content center">
-            <h1>Welcome!</h1>
             <h3>List of faculties:</h3>
         </td>
     </tr>

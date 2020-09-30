@@ -13,8 +13,6 @@ t
 Dsrc/main/java/com/epam/koretskyi/commission/web/command/Command.java,1\1\11d27ec00fa7e31f5a3114850d0b3c7ce1da418a
 }
 Msrc/main/java/com/epam/koretskyi/commission/web/listener/ContextListener.java,1\7\171100c8061983d50638270ab38acdce5562d00c
-r
-Bsrc/main/java/com/epam/koretskyi/commission/db/entity/Entrant.java,2\5\253ab57a8db1c516f806c7cb33015d6062a7c37b
 i
 9src/main/java/com/epam/koretskyi/commission/db/Field.java,4\1\4141d47bf98bd538b4575358e7b6badd1b2345ef
 q
@@ -47,8 +45,6 @@ o
 ?src/main/java/com/epam/koretskyi/commission/web/Controller.java,2\2\2278855ebedea11974106b8fd4f17fe960fc6c73
 z
 Jsrc/main/java/com/epam/koretskyi/commission/web/filter/EncodingFilter.java,b\6\b6eece49f8273633a2a496d1d173cded75f1851e
-€
-Psrc/main/java/com/epam/koretskyi/commission/web/command/RegisterPageCommand.java,b\1\b17e540c4b04f2ece484838383cfc41905bf7c1e
 }
 Msrc/main/java/com/epam/koretskyi/commission/web/command/LoginPageCommand.java,8\a\8ae5e959dc3c3c6b027f523154b4dae378f1d6a0
 B

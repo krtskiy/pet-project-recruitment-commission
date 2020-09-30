@@ -23,8 +23,6 @@ o
 ?src/main/java/com/epam/koretskyi/commission/db/entity/User.java,7\9\7944c7fb287718ccf0d5fea3951db7d802ea1b20
 z
 Jsrc/main/java/com/epam/koretskyi/commission/web/command/LogoutCommand.java,3\8\389f25d0c007c8c5f19609282e52d7948dcc1484
-X
-(webapp/WEB-INF/jsp/list_of_faculties.jsp,3\6\36c6bb6f0759be7d208f26433f4d1f4c2aa05d9b
 }
 Msrc/main/java/com/epam/koretskyi/commission/web/command/CommandContainer.java,4\b\4bb01c8dfde46351bb8b994be1cf9039f670d4b4
 O
@@ -59,3 +57,27 @@ L
 webapp/WEB-INF/jsp/login.jsp,0\1\016bb668c96c7a7f3865563d556399e706beb9ec
 |
 Lsrc/main/java/com/epam/koretskyi/commission/web/command/RegisterCommand.java,9\5\95fd99d167a146b15543d1900c0ad24ad8f0945c
+n
+>src/main/java/com/epam/koretskyi/commission/db/UserStatus.java,e\6\e69729075d7df8776dc35b4798a599028413f029
+O
+webapp/WEB-INF/log4j.properties,f\d\fda3ddce61a183c3efb5c8cf448a3a26292fc32d
+W
+'webapp/WEB-INF/jspf/directive/page.jspf,b\d\bde76387ff9173ec5a1d78efa55e1e0831b78907
+M
+webapp/WEB-INF/jspf/head.jspf,3\e\3e77499df6db27e274a053e510c827ec0cd4ed3b
+F
+webapp/css/finproj.css,7\6\7619c8c68e50f612180296485c08d226fef4a983
+O
+webapp/WEB-INF/jspf/header.jspf,a\e\ae87d6ba335586adb87e94b5a3208523a72f13a0
+Ñ
+Tsrc/main/java/com/epam/koretskyi/commission/web/command/RegisterUserPageCommand.java,8\c\8cbd52bdbdb6463dde71906431a4d8fb87ed7fb3
+U
+%webapp/WEB-INF/jsp/private_office.jsp,b\7\b79d9ab078e6c3f33fab9e6ec50ea333b6351238
+Å
+Qsrc/main/java/com/epam/koretskyi/commission/web/command/FacultiesPageCommand.java,b\c\bcf9b9a129c01f13e14d34dcf01464a43d38aa22
+Ö
+Usrc/main/java/com/epam/koretskyi/commission/web/command/PrivateOfficePageCommand.java,8\f\8fdbb83947f9ca7c3b2e12aaa6b08b071f6009fb
+R
+"webapp/WEB-INF/jsp/admin_panel.jsp,6\b\6b8d363abc84fdad01f16a2a3278efb71cc282d1
+Ç
+Rsrc/main/java/com/epam/koretskyi/commission/web/command/AdminPanelPageCommand.java,d\4\d4f716acd5729674b24e02e8bf20ae246c8fcec9

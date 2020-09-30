@@ -1,14 +1,23 @@
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ include file="/WEB-INF/jspf/directive/page.jspf" %>
+<%@ include file="/WEB-INF/jspf/directive/taglib.jspf" %>
+
 <html>
-<head>
-    <title>Welcome</title>
-</head>
+
+<c:set var="title" value="Welcome" scope="page"/>
+<%@ include file="/WEB-INF/jspf/head.jspf" %>
+
 <body>
-<%@ include file="/WEB-INF/jspf/header.jspf" %>
+<table id="main-container">
+    <%@ include file="/WEB-INF/jspf/header.jspf" %>
+    <tr>
+        <td class="content center">
 
-<h1>Welcome to welcome page!</h1><br>
-<a href="controller?command=registerUserPage">Register</a>
-<a href="controller?command=loginPage">Login</a>
+            <h1>Welcome to welcome page!</h1><br>
 
-<%@ include file="/WEB-INF/jspf/footer.jspf" %>
+        </td>
+    </tr>
+    <%@ include file="/WEB-INF/jspf/footer.jspf" %>
+</table>
 </body>
 </html>

@@ -49,7 +49,7 @@ public class LoginCommand extends Command {
 
         String forward = Path.PAGE_ERROR;
         if (userRole == Role.ADMIN) {
-
+            forward = Path.PAGE_ADMIN_PANEL;
         }
 
         if (userRole == Role.USER) {

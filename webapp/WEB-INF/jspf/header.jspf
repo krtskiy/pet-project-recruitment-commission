@@ -2,11 +2,37 @@
 <%@ include file="/WEB-INF/jspf/directive/taglib.jspf" %>
 
 <tr>
-    <td>
-        <c:if test="${not empty user}">
+    <td id="header">
 
+        <div id="leftHeader">
+            <c:if test="${title ne 'Welcome'}">
+                <a href="welcome.jsp">Home page</a>
+            </c:if>
+            <a href="controller?command=facultiesPage">List of faculties</a>
+            <c:if test="${not empty user}">
+                <c:choose>
+                    <c:when test="${userRole.name == 'admin' }">
+                        <a href="controller?command=adminPanelPage">Admin panel</a>
+                    </c:when>
 
-            <a href="controller?command=logout">Logout</a>
-        </c:if>
+                    <c:when test="${userRole.name == 'user'}">
+                        <a href="controller?command=privateOfficePage">Private office</a>
+                    </c:when>
+                </c:choose>
+            </c:if>
+        </div>
+
+        <div id="rightHeader">
+            <c:if test="${empty user}">
+                <a href="controller?command=loginPage">Log In</a>
+                <a href="controller?command=registerUserPage">Sign Up</a>
+            </c:if>
+
+            <c:if test="${not empty user}">
+                <c:out value="${user.name} ${user.surname}"/>
+                <a href="controller?command=logout">Log Out</a>
+            </c:if>
+        </div>
+
     </td>
 </tr>

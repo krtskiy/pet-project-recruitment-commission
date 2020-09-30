@@ -5,6 +5,8 @@ package com.epam.koretskyi.commission.db.entity;
  */
 public class User extends Entity {
 
+    private static final long serialVersionUID = -5834048910117049143L;
+
     private int id;
     private String name;
     private String surname;

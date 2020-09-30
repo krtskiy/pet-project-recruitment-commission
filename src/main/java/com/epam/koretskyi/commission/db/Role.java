@@ -12,4 +12,9 @@ public enum Role {
         int roleId = user.getRoleId();
         return Role.values()[roleId];
     }
+
+    public String getName() {
+        return name().toLowerCase();
+    }
+
 }

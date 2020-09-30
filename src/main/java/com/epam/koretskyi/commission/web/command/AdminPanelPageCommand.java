@@ -10,19 +10,18 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * @author D.Koretskyi on 27.09.2020.
+ * @author D.Koretskyi on 01.10.2020.
  */
-public class RegisterPageCommand extends Command {
-    private static final long serialVersionUID = 8554790514858104479L;
+public class AdminPanelPageCommand extends Command {
+    private static final long serialVersionUID = 5348420537823486913L;
 
-    private static final Logger LOG = Logger.getLogger(RegisterPageCommand.class);
+    private static final Logger LOG = Logger.getLogger(AdminPanelPageCommand.class);
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException,
-            AppException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
         LOG.debug("Command starts");
 
         LOG.debug("Command finished");
-        return Path.PAGE_REGISTER;
+        return Path.PAGE_ADMIN_PANEL;
     }
 }

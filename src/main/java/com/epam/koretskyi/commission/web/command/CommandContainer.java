@@ -21,8 +21,10 @@ public class CommandContainer {
         commands.put("logout", new LogoutCommand());
         commands.put("registerUser", new RegisterCommand());
         commands.put("loginPage", new LoginPageCommand());
-        commands.put("registerUserPage", new RegisterPageCommand());
-
+        commands.put("registerUserPage", new RegisterUserPageCommand());
+        commands.put("adminPanelPage", new AdminPanelPageCommand());
+        commands.put("facultiesPage", new FacultiesPageCommand());
+        commands.put("privateOfficePage", new PrivateOfficePageCommand());
 
         LOG.debug("Command container was successfully initialized");
         LOG.trace("Number of commands --> " + commands.size());

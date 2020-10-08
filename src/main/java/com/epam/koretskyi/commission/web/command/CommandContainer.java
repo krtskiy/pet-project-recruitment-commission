@@ -16,15 +16,33 @@ public class CommandContainer {
 
 
     static {
+        // user
         commands.put("noCommand", new NoCommand());
         commands.put("login", new LoginCommand());
         commands.put("logout", new LogoutCommand());
         commands.put("registerUser", new RegisterCommand());
+        commands.put("listOfFaculties", new ListOfFacultiesCommand());
+        commands.put("updateUser", new UpdateUserCommand());
+        commands.put("listOfEntrantsApplications", new ListOfEntrantsApplicationsCommand());
+
+        // page view commands
         commands.put("loginPage", new LoginPageCommand());
         commands.put("registerUserPage", new RegisterUserPageCommand());
-        commands.put("adminPanelPage", new AdminPanelPageCommand());
-        commands.put("facultiesPage", new FacultiesPageCommand());
         commands.put("privateOfficePage", new PrivateOfficePageCommand());
+        commands.put("updateUserPage", new UpdateUserPageCommand());
+
+        commands.put("updateFacultyPage", new UpdateFacultyPageCommand());
+        commands.put("createNewFacultyPage", new CreateNewFacultyPageCommand());
+
+        // admin
+        commands.put("listOfUsers", new ListOfUsersCommand());
+        commands.put("adminPanelPage", new AdminPanelPageCommand());
+        commands.put("findUserByEmail", new FindUserByEmailCommand());
+        commands.put("updateUsersStatus", new UpdateUsersStatusCommand());
+        commands.put("deleteFaculty", new DeleteFacultyCommand());
+        commands.put("updateFaculty", new UpdateFacultyCommand());
+        commands.put("viewFacultyEntrants", new ViewFacultyEntrantsCommand());
+        commands.put("createNewFaculty", new CreateNewFacultyCommand());
 
         LOG.debug("Command container was successfully initialized");
         LOG.trace("Number of commands --> " + commands.size());

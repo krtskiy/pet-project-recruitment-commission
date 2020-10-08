@@ -1,5 +1,6 @@
 package com.epam.koretskyi.commission.web;
 
+import com.epam.koretskyi.commission.constant.ActionType;
 import com.epam.koretskyi.commission.constant.Path;
 import com.epam.koretskyi.commission.exception.AppException;
 import com.epam.koretskyi.commission.web.command.Command;
@@ -21,14 +22,15 @@ public class Controller extends HttpServlet {
     private static final Logger LOG = Logger.getLogger(Controller.class);
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        process(request, response);
+        process(request, response, ActionType.POST);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        process(request, response);
+        process(request, response, ActionType.GET);
     }
 
-    private void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void process(HttpServletRequest request, HttpServletResponse response, ActionType actionType)
+            throws ServletException, IOException {
         LOG.debug("Controller starts");
 
         // extract command name from the request

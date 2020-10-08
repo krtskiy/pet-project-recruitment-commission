@@ -5,11 +5,14 @@
          version="3.1">
 
     <display-name>Recruitment-commission</display-name>
-    
+
     <welcome-file-list>
         <welcome-file>welcome.jsp</welcome-file>
     </welcome-file-list>
 
+    <!--============================================================
+    Controller
+    ============================================================= -->
     <servlet>
         <servlet-name>Controller</servlet-name>
         <servlet-class>com.epam.koretskyi.commission.web.Controller</servlet-class>
@@ -19,7 +22,9 @@
         <url-pattern>/controller</url-pattern>
     </servlet-mapping>
 
-
+    <!--============================================================
+    Encoding support filter
+    ============================================================= -->
     <filter>
         <filter-name>EncodingFilter</filter-name>
         <filter-class>com.epam.koretskyi.commission.web.filter.EncodingFilter</filter-class>
@@ -33,5 +38,73 @@
         <url-pattern>/WEB-INF/jsp/*</url-pattern>
         <servlet-name>Controller</servlet-name>
     </filter-mapping>
+
+    <!--============================================================
+	Security filter.
+	1) admin: admin commands
+	2) client: client commands
+	3) commons: commands for all roles
+	4) out-of-control: commands without access control
+	Delimiter - space/tab
+    =============================================================-->
+    <!-- todo add new commands to filter -->
+    <filter>
+        <filter-name>CommandAccessFilter</filter-name>
+        <filter-class>com.epam.koretskyi.commission.web.filter.CommandAccessFilter</filter-class>
+        <init-param>
+            <param-name>admin</param-name>
+            <param-value>listOfUsers adminPanelPage findUserByEmail updateUsersStatus deleteFaculty
+                updateFaculty updateFacultyPage viewFacultyEntrants createNewFaculty createNewFacultyPage
+            </param-value>
+        </init-param>
+        <init-param>
+            <param-name>user</param-name>
+            <param-value>privateOfficePage updateUser updateUserPage listOfEntrantsApplications</param-value>
+        </init-param>
+        <init-param>
+            <param-name>common</param-name>
+            <param-value>logout</param-value>
+        </init-param>
+        <init-param>
+            <param-name>without-access-control</param-name>
+            <param-value>loginPage login registerUser registerUserPage listOfFaculties noCommand</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>CommandAccessFilter</filter-name>
+        <servlet-name>Controller</servlet-name>
+    </filter-mapping>
+
+    <!--============================================================
+    Context listener
+    ============================================================= -->
+    <listener>
+        <listener-class>com.epam.koretskyi.commission.web.listener.ContextListener</listener-class>
+    </listener>
+
+    <!--============================================================
+    Error page
+	============================================================= -->
+    <error-page>
+        <exception-type>java.lang.Throwable</exception-type>
+        <location>/WEB-INF/jsp/error_page.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/jsp/error_page.jsp</location>
+    </error-page>
+    <context-param>
+        <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
+        <param-value>resources</param-value>
+    </context-param>
+    <context-param>
+        <param-name>javax.servlet.jsp.jstl.fmt.locale</param-name>
+        <param-value>en</param-value>
+    </context-param>
+    <context-param>
+        <param-name>locales</param-name>
+        <param-value>/WEB-INF/locales.properties</param-value>
+    </context-param>
 
 </web-app>

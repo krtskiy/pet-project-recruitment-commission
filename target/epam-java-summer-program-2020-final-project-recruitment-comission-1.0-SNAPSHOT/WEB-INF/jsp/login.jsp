@@ -1,26 +1,33 @@
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ include file="/WEB-INF/jspf/directive/page.jspf" %>
+<%@ include file="/WEB-INF/jspf/directive/taglib.jspf" %>
+
 <html>
-<head>
-    <title>Login</title>
-</head>
+
+<c:set var="title" value="Log In" scope="page"/>
+<%@ include file="/WEB-INF/jspf/head.jspf" %>
+
 <body>
-<%@ include file="/WEB-INF/jspf/header.jspf" %>
+<table id="main-container">
+    <%@ include file="/WEB-INF/jspf/header.jspf" %>
 
-<h1>Login:</h1>
+    <tr>
+        <td class="content center">
 
-<form method="post" action="controller" class="form-style-7">
-    <input type="hidden" name="command" value="login">
+            <h1>Login form:</h1>
 
-    <label>
-        <input type="email" name="email" maxlength="255">
-    </label>Email<br>
+            <form id="login_form" method="post" action="controller">
+                <input type="hidden" name="command" value="login">
 
-    <label>
-        <input type="password" name="password" maxlength="32">
-    </label>Password<br>
+                <input type="email" name="email" maxlength="255" placeholder="Email"><br>
+                <input type="password" name="password" maxlength="32" placeholder="Password"><br>
 
-    <input type="submit" value="Login">
-</form>
+                <input type="submit" value="Log In">
+            </form>
+        </td>
+    </tr>
 
-<%@ include file="/WEB-INF/jspf/footer.jspf" %>
+    <%@ include file="/WEB-INF/jspf/footer.jspf" %>
+</table>
 </body>
 </html>

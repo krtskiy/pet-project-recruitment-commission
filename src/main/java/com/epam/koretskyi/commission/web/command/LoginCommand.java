@@ -4,6 +4,7 @@ import com.epam.koretskyi.commission.constant.Path;
 import com.epam.koretskyi.commission.db.DBManager;
 import com.epam.koretskyi.commission.db.MD5Util;
 import com.epam.koretskyi.commission.db.Role;
+import com.epam.koretskyi.commission.db.UserStatus;
 import com.epam.koretskyi.commission.db.entity.User;
 import com.epam.koretskyi.commission.exception.AppException;
 import org.apache.log4j.Logger;
@@ -47,14 +48,18 @@ public class LoginCommand extends Command {
         Role userRole = Role.getRole(user);
         LOG.trace("userRole --> " + userRole);
 
+
         String forward = Path.PAGE_ERROR;
         if (userRole == Role.ADMIN) {
             forward = Path.PAGE_ADMIN_PANEL;
         }
 
         if (userRole == Role.USER) {
-            forward = Path.PAGE_FACULTIES;
+            forward = Path.PAGE_WELCOME;
         }
+
+        UserStatus userStatus = UserStatus.getStatus(user);
+        LOG.trace("userStatus --> " + userStatus);
 
         httpSession.setAttribute("user", user);
         LOG.trace("Set the session attribute: user --> " + user);
@@ -62,7 +67,14 @@ public class LoginCommand extends Command {
         httpSession.setAttribute("userRole", userRole);
         LOG.trace("Set the session attribute: userRole --> " + userRole);
 
+        httpSession.setAttribute("userStatus", userStatus);
+        LOG.trace("Set the session attribute: userStatus --> " + userStatus);
+
         LOG.info("User " + user + " logged as " + userRole.toString().toLowerCase());
+
+        if (userStatus == UserStatus.BLOCKED) {
+            forward = Path.PAGE_BLOCKED_USER;
+        }
 
         LOG.debug("Command finished");
         return forward;

@@ -4,7 +4,6 @@ package com.epam.koretskyi.commission.db.entity;
  * @author D.Koretskyi on 22.09.2020.
  */
 public class User extends Entity {
-
     private static final long serialVersionUID = -5834048910117049143L;
 
     private int id;
@@ -13,17 +12,11 @@ public class User extends Entity {
     private String patronymic;
     private String email;
     private String password;
+    private String region;
+    private String city;
+    private String institutionName;
     private int roleId;
     private int statusId;
-
-    @Override
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -81,6 +74,30 @@ public class User extends Entity {
         this.statusId = statusId;
     }
 
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getInstitutionName() {
+        return institutionName;
+    }
+
+    public void setInstitutionName(String institutionName) {
+        this.institutionName = institutionName;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -89,6 +106,9 @@ public class User extends Entity {
                 ", surname='" + surname + '\'' +
                 ", patronymic='" + patronymic + '\'' +
                 ", email='" + email + '\'' +
+                ", region='" + region + '\'' +
+                ", city='" + city + '\'' +
+                ", institutionName='" + institutionName + '\'' +
                 '}';
     }
 }

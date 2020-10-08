@@ -16,4 +16,9 @@ public abstract class Command implements Serializable {
 
     public abstract String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException,
             AppException;
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName();
+    }
 }

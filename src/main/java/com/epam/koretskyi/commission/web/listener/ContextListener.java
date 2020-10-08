@@ -6,6 +6,10 @@ import org.apache.log4j.PropertyConfigurator;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
 
 /**
  * @author D.Koretskyi on 22.09.2020.
@@ -22,9 +26,23 @@ public class ContextListener implements ServletContextListener {
         initLog4J(servletContext);
         initCommandContainer();
 
-        System.out.println("Servlet context initialization finished");
+        System.out.println("[ContextListener] Servlet context initialization finished");
+        String localesFileName = servletContext.getInitParameter("locales");
 
-        // TODO locales
+        // obtain real path on server
+        String localesFileRealPath = servletContext.getRealPath(localesFileName);
+
+        // locale descriptions
+        Properties locales = new Properties();
+        try {
+            locales.load(new FileInputStream(localesFileRealPath));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // save descriptions to servlet context
+        servletContext.setAttribute("locales", locales);
+        locales.list(System.out);
     }
 
     public void contextDestroyed(ServletContextEvent servletContextEvent) {

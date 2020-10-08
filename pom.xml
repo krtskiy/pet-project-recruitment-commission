@@ -74,6 +74,19 @@
             <version>8.0.21</version>
         </dependency>
 
+        <dependency>
+            <groupId>net.tanesha.recaptcha4j</groupId>
+            <artifactId>recaptcha4j</artifactId>
+            <version>0.0.7</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-jsp-api</artifactId>
+            <version>9.0.31</version>
+        </dependency>
+
+
     </dependencies>
 
 </project>

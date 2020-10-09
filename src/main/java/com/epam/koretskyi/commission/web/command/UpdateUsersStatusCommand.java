@@ -25,11 +25,20 @@ public class UpdateUsersStatusCommand extends Command {
         LOG.debug("Command starts");
         String status = request.getParameter("status");
         LOG.trace("Request parameter: status --> " + status);
-        HttpSession session = request.getSession();
-        User foundUser = (User)session.getAttribute("foundUser");
-        int userId = foundUser.getId();
-        DBManager.getInstance().updateUserStatus(Integer.parseInt(status),userId);
 
-        return Path.COMMAND_FIND_USER_BY_EMAIL+"&email="+foundUser.getEmail();
+        HttpSession session = request.getSession();
+        User foundUser = (User) session.getAttribute("foundUser");
+
+        if (request.getParameter("userId") != null) {
+            int userId = Integer.parseInt(request.getParameter("userId"));
+            DBManager.getInstance().updateUserStatus(Integer.parseInt(status), userId);
+            return Path.COMMAND_FIND_USER_BY_EMAIL + "&email=" + foundUser.getEmail();
+        }
+
+        int userId = foundUser.getId();
+        DBManager.getInstance().updateUserStatus(Integer.parseInt(status), userId);
+
+        LOG.debug("Command finished");
+        return Path.COMMAND_FIND_USER_BY_EMAIL + "&email=" + foundUser.getEmail();
     }
 }

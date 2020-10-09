@@ -13,8 +13,8 @@
 
     <%@ include file="/WEB-INF/jspf/header.jspf" %>
 
-    <c:if test="${userRole.name == 'admin' or userRole.name == 'user'}">
-        <c:set var="errorMessage" value="You already registered!"/>
+    <c:if test="${userRole.name == 'user'}">
+        <c:set var="errorMessage" value="You already registered!" scope="request"/>
         <jsp:forward page="error_page.jsp"/>
     </c:if>
 

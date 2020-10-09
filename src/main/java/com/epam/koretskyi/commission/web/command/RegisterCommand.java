@@ -3,6 +3,7 @@ package com.epam.koretskyi.commission.web.command;
 import com.epam.koretskyi.commission.constant.Path;
 import com.epam.koretskyi.commission.db.DBManager;
 import com.epam.koretskyi.commission.db.MD5Util;
+import com.epam.koretskyi.commission.db.Role;
 import com.epam.koretskyi.commission.db.entity.User;
 import com.epam.koretskyi.commission.exception.AppException;
 import com.epam.koretskyi.commission.exception.DBException;
@@ -10,6 +11,7 @@ import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * @author D.Koretskyi on 23.09.2020.
@@ -57,12 +59,18 @@ public class RegisterCommand extends Command {
 
         if (email.equals("") || password.equals("") || name.equals("") || surname.equals("") ||
                 patronymic.equals("") || region.equals("") ||
-                city.equals("") || institutionName.equals(""))
-        {
+                city.equals("") || institutionName.equals("")) {
             throw new AppException("Fields can not be empty!");
         }
 
         DBManager.getInstance().insertUser(user);
+
+        HttpSession session = request.getSession();
+        Role userRole = (Role) session.getAttribute("userRole");
+        if (userRole == Role.ADMIN) {
+            LOG.debug("Command finished");
+            return Path.COMMAND_USERS;
+        }
 
         LOG.debug("Command finished");
         return Path.PAGE_LOGIN;

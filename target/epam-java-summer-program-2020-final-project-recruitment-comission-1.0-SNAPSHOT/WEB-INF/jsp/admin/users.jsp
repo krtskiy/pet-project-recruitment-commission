@@ -108,6 +108,7 @@
                                     </c:if>
                                     <form action="controller" method="get">
                                         <input name="command" type="hidden" value="updateUsersStatus"/>
+                                        <input name="userId" type="hidden" value="${user.id}">
                                         <c:choose>
                                             <c:when test="${user.statusId == 0 and user.roleId != 1}">
                                                 <button name="status" value="1">
@@ -123,10 +124,10 @@
                                     </form>
                                 </c:when>
                                 <c:when test="${user.statusId == 1}">
-                                    <span
-                                        style="color: rgb(204, 0, 0); ">Blocked</span>
+                                    <span style="color: rgb(204, 0, 0); ">Blocked</span>
                                     <form action="controller" method="get">
                                         <input name="command" type="hidden" value="updateUsersStatus"/>
+                                        <input name="userId" type="hidden" value="${user.id}">
                                         <c:choose>
                                             <c:when test="${user.statusId == 0 and user.roleId != 1}">
                                                 <button name="status" value="1">
@@ -226,7 +227,11 @@
             <form action="controller?command=findUserByEmail" method="post">
                 <table id="list_search_table">
                     <tr>
-                        <td><input required type="email" name="email" placeholder="Email for search"/><br></td>
+                        <td><input required type="email" name="email"
+                                <c:choose>
+                                    <c:when test="${not empty foundUser}">value="${foundUser.email}"</c:when>
+                                    <c:when test="${empty foundUser}">placeholder="Email for search"</c:when>
+                                </c:choose>/><br></td>
                     </tr>
                     <tr>
                         <td>
@@ -235,6 +240,8 @@
                     </tr>
                 </table>
             </form>
+
+            <a href="controller?command=registerUserPage"><strong>Register new user</strong></a>
 
 
         </td>

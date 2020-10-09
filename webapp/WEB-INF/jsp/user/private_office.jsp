@@ -15,9 +15,9 @@
     <tr>
         <td class="content">
 
-            <a href="controller?command=updateUserPage">Change login data</a>
+            <a href="controller?command=updateUserPage"><strong>Change login data</strong></a>
             <%-- todo add applications view --%>
-            <a href="controller?command=listOfEntrantsApplications">View my applications</a>
+            <a href="controller?command=listOfEntrantsApplications"><strong>View my applications</strong></a>
 
             <h3>Personal information:</h3>
             <p><c:out value="Email | ${user.email}"/></p>

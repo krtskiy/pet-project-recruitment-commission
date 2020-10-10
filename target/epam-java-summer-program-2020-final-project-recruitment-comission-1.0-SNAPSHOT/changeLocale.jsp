@@ -11,7 +11,6 @@
 <%-- set current locale to session --%>
 <c:set var="currentLocale" value="${param.locale}" scope="session"/>
 
-<%-- todo fix hardcoded forward --%>
-<%-- go back to home page--%>
-<jsp:forward page="/welcome.jsp"/>
+<%-- go back to referer page--%>
+<%response.sendRedirect(request.getHeader("referer"));%>
 

@@ -47,7 +47,7 @@
 	4) out-of-control: commands without access control
 	Delimiter - space/tab
     =============================================================-->
-    <!-- todo add new commands to filter -->
+    <!-- TODO add new commands to filter -->
     <filter>
         <filter-name>CommandAccessFilter</filter-name>
         <filter-class>com.epam.koretskyi.commission.web.filter.CommandAccessFilter</filter-class>

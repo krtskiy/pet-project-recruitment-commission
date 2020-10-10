@@ -1,6 +1,7 @@
 <%@ page isErrorPage="true" %>
 <%@ include file="/WEB-INF/jspf/directive/page.jspf" %>
 <%@ include file="/WEB-INF/jspf/directive/taglib.jspf" %>
+<%@page import="org.apache.commons.httpclient.*" %>
 
 <html>
 
@@ -11,9 +12,7 @@
 
 <table id="main-container">
 
-    <%-- HEADER --%>
     <%@ include file="/WEB-INF/jspf/header.jspf" %>
-    <%-- HEADER --%>
 
     <tr>
         <td class="content center">
@@ -23,7 +22,14 @@
                 The following error occurred<br>
             </h3>
 
+            <c:if test="${empty errorMessage}">
+                <h3><%=HttpStatus.getStatusText(response.getStatus())%> <%=response.getStatus()%>
+                </h3>
+            </c:if>
+
             <h3><c:out value="${errorMessage}"/></h3>
+
+            <% request.getSession().removeAttribute("errorMessage"); %>
 
         </td>
     </tr>

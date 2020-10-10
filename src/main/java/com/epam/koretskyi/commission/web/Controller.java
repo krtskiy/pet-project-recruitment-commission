@@ -42,17 +42,22 @@ public class Controller extends HttpServlet {
         LOG.trace("Obtained command --> " + command);
 
         // execute command and get forward address
-        String forward = Path.PAGE_ERROR;
+        String forward = Path.COMMAND_ERROR_PAGE;
         try {
             forward = command.execute(request, response);
         } catch (AppException e) {
-            request.setAttribute("errorMessage", e.getMessage());
+            request.getSession().setAttribute("errorMessage", e.getMessage());
         }
         LOG.trace("Forward address --> " + forward);
 
         LOG.debug("Controller finished, now go to forward address --> " + forward);
 
-        // go to forward
-        request.getRequestDispatcher(forward).forward(request, response);
+        if (actionType == ActionType.POST) {
+            response.sendRedirect(forward);
+        }
+
+        if (actionType == ActionType.GET) {
+            request.getRequestDispatcher(forward).forward(request, response);
+        }
     }
 }

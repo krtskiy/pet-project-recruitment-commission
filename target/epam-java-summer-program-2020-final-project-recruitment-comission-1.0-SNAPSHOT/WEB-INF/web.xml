@@ -67,7 +67,7 @@
         </init-param>
         <init-param>
             <param-name>without-access-control</param-name>
-            <param-value>loginPage login registerUser registerUserPage listOfFaculties noCommand</param-value>
+            <param-value>loginPage login registerUser registerUserPage listOfFaculties noCommand errorPage</param-value>
         </init-param>
     </filter>
 
@@ -94,6 +94,8 @@
         <error-code>404</error-code>
         <location>/WEB-INF/jsp/error_page.jsp</location>
     </error-page>
+
+
     <context-param>
         <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
         <param-value>resources</param-value>

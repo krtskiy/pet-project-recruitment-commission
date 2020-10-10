@@ -11,10 +11,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.text.Collator;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Locale;
 import java.util.stream.Collectors;
 
 /**
@@ -36,33 +34,37 @@ public class ListOfUsersCommand extends Command {
 
         String sortParam = request.getParameter("sort");
         request.setAttribute("sortParam", sortParam);
+
         // sort users by id
         if ("id".equals(sortParam)) {
             users.sort(Comparator.comparingInt(Entity::getId));
             LOG.trace("Users sorted by id in ascending order");
         }
-        // define collator to sort by Ukrainian alphabet correctly
-        Collator uaCollator = Collator.getInstance(new Locale("uk", "UA"));
+
         // sort users by name asc
         if ("nameAsc".equals(sortParam)) {
-            users.sort((o1, o2) -> uaCollator.compare(o1.getName(), o2.getName()));
+            users.sort(Comparator.comparing(User::getName));
             LOG.trace("Users sorted by name in ascending order");
         }
+
         // sort users by name desc
         if ("nameDesc".equals(sortParam)) {
-            users.sort((o1, o2) -> uaCollator.compare(o2.getName(), o1.getName()));
+            users.sort(Comparator.comparing(User::getName).reversed());
             LOG.trace("Users sorted by name in descending order");
         }
+
         // sort users by email asc
         if ("emailAsc".equals(sortParam)) {
             users.sort(Comparator.comparing(User::getEmail));
             LOG.trace("Users sorted by email in ascending order");
         }
+
         // sort users by email desc
         if ("emailDesc".equals(sortParam)) {
             users.sort(Comparator.comparing(User::getEmail).reversed());
             LOG.trace("Users sorted by email in descending order");
         }
+
         // banned first
         if ("banStatus".equals(sortParam)) {
             users.sort(Comparator.comparingInt(User::getStatusId).reversed());

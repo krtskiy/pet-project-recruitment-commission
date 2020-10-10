@@ -126,7 +126,8 @@ Register form (register.jsp, new_faculty.jsp)
 }
 
 #register_form > input {
-    margin-top: 2px;
+    margin-top: 1px;
+    margin-bottom: 1px;
 }
 
 #selectRegion {

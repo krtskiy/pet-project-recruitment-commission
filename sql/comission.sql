@@ -9,6 +9,8 @@ DROP TABLE IF EXISTS `commission`.`users`;
 DROP TABLE IF EXISTS `commission`.`faculties`;
 
 
+-- CREATE SCHEMA `commission` DEFAULT CHARACTER SET utf8 ;
+
 
 CREATE TABLE `commission`.`roles`
 (
@@ -70,44 +72,44 @@ CREATE TABLE `commission`.`users`
 );
 
 INSERT INTO users
-VALUES (DEFAULT, 'Адмін', 'Адмін', 'Адмінович', 'admin@admin.com', '21232f297a57a5a743894a0e4a801fc3', 'адмін', 'адмін',
-        'адмін', 1, DEFAULT);
+VALUES (DEFAULT, 'Admin', 'Admin', 'Admin', 'admin@admin.com', '21232f297a57a5a743894a0e4a801fc3', 'Admin obl.',
+        'Admin', 'Admin №1', 1, DEFAULT);
 INSERT INTO users
-VALUES (DEFAULT, 'Денис', 'Денисов', 'Денисович', 'user@user.com', 'ee11cbb19052e40b07aac0ca060c23ee', 'Київська обл.',
-        'Київ', 'ЗОШ №10', DEFAULT, DEFAULT);
+VALUES (DEFAULT, 'Denys', 'Denysov', 'Denysovich', 'user@user.com', 'ee11cbb19052e40b07aac0ca060c23ee', 'Kyiv obl.',
+        'Kiyv', 'School #1', DEFAULT, DEFAULT);
 INSERT INTO users
-VALUES (DEFAULT, 'Віталій', 'Волочай', 'Віталієвич', 'user1@user.com', 'ee11cbb19052e40b07aac0ca060c23ee',
-        'Харківська обл.', 'Харків', 'ЗОШ №11', DEFAULT, DEFAULT);
+VALUES (DEFAULT, 'Vitaly', 'Vitaliev', 'Vitalievych', 'user1@user.com', 'ee11cbb19052e40b07aac0ca060c23ee',
+        'Kharkiv obl.', 'Kharkiv', 'School #2', DEFAULT, DEFAULT);
 INSERT INTO users
-VALUES (DEFAULT, 'Сергій', 'Сергієнко', 'Сергійович', 'user2@user.com', 'ee11cbb19052e40b07aac0ca060c23ee',
-        'Луганська обл.', 'Луганськ', 'ЗОШ №12', DEFAULT, DEFAULT);
+VALUES (DEFAULT, 'Sergiy', 'Sergiiev', 'Sergiyovych', 'user2@user.com', 'ee11cbb19052e40b07aac0ca060c23ee',
+        'Luhansk obl.', 'Luhansk', 'School #3', DEFAULT, DEFAULT);
 INSERT INTO users
-VALUES (DEFAULT, 'Володимир', 'Володимиров', 'Володимирович', 'user3@user.com', 'ee11cbb19052e40b07aac0ca060c23ee',
-        'Донецька обл.', 'Донецьк', 'ЗОШ №13', DEFAULT, DEFAULT);
+VALUES (DEFAULT, 'Volodymyr', 'Volodymyrov', 'Volodymyrovych', 'user3@user.com', 'ee11cbb19052e40b07aac0ca060c23ee',
+        'Donetsk obl.', 'Donetsk', 'School #4', DEFAULT, DEFAULT);
 INSERT INTO users
-VALUES (DEFAULT, 'Артем', 'Артемов', 'Артемович', 'user4@user.com', 'ee11cbb19052e40b07aac0ca060c23ee',
-        'Черкаська обл.', 'Черкаси', 'ЗОШ №14', DEFAULT, DEFAULT);
+VALUES (DEFAULT, 'Artyom', 'Artyomov', 'Artyomovych', 'user4@user.com', 'ee11cbb19052e40b07aac0ca060c23ee',
+        'Cherkasy obl.', 'Cherkasy', 'School #5', DEFAULT, DEFAULT);
 INSERT INTO users
-VALUES (DEFAULT, 'Данило', 'Данилов', 'Данилович', 'user5@user.com', 'ee11cbb19052e40b07aac0ca060c23ee',
-        'Полтавська обл.', 'Полтава', 'ЗОШ №15', DEFAULT, DEFAULT);
+VALUES (DEFAULT, 'Danylo', 'Danylov', 'Danylovych', 'user5@user.com', 'ee11cbb19052e40b07aac0ca060c23ee',
+        'Poltava obl.', 'Poltava', 'School #6', DEFAULT, DEFAULT);
 INSERT INTO users
-VALUES (DEFAULT, 'Олександр', 'Олександров', 'Олександрович', 'user6@user.com', 'ee11cbb19052e40b07aac0ca060c23ee',
-        'Одеська обл.', 'Одеса', 'ЗОШ №16', DEFAULT, DEFAULT);
+VALUES (DEFAULT, 'Oleksandr', 'Oleksandrov', 'Oleksandrovych', 'user6@user.com', 'ee11cbb19052e40b07aac0ca060c23ee',
+        'Odesa obl.', 'Odesa', 'School #7', DEFAULT, DEFAULT);
 INSERT INTO users
-VALUES (DEFAULT, 'Євген', 'Євгенов', 'Євгенович', 'user7@user.com', 'ee11cbb19052e40b07aac0ca060c23ee', 'Сумська обл.',
-        'Суми', 'ЗОШ №17', DEFAULT, DEFAULT);
+VALUES (DEFAULT, 'Yevgen', 'Yevgenov', 'Yevgenovych', 'user7@user.com', 'ee11cbb19052e40b07aac0ca060c23ee', 'Sumy obl.',
+        'Sumy', 'School #8', DEFAULT, DEFAULT);
 INSERT INTO users
-VALUES (DEFAULT, 'Алла', 'Аллова', 'Аллівна', 'user8@user.com', 'ee11cbb19052e40b07aac0ca060c23ee', 'Запорізька обл.',
-        'Запоріжжя', 'ЗОШ №18', DEFAULT, DEFAULT);
+VALUES (DEFAULT, 'Alla', 'Allova', 'Allivna', 'user8@user.com', 'ee11cbb19052e40b07aac0ca060c23ee', 'Zaporizhia obl.',
+        'Zaporizhia', 'School #9', DEFAULT, DEFAULT);
 INSERT INTO users
-VALUES (DEFAULT, 'Аліна', 'Алінова', 'Алінівна', 'user9@user.com', 'ee11cbb19052e40b07aac0ca060c23ee', 'Львівська обл.',
-        'Львів', 'ЗОШ №19', DEFAULT, DEFAULT);
+VALUES (DEFAULT, 'Alina', 'Alinova', 'Alinivna', 'user9@user.com', 'ee11cbb19052e40b07aac0ca060c23ee', 'Lviv obl.',
+        'Lviv', 'School #10', DEFAULT, DEFAULT);
 
 
 
 CREATE TABLE `commission`.`faculties`
 (
-    `id`           INT          NOT NULL,
+    `id`           INT          NOT NULL AUTO_INCREMENT,
     `name_en`      VARCHAR(100) NOT NULL,
     `name_uk`      VARCHAR(100) NOT NULL,
     `total_seats`  INT          NOT NULL,
@@ -118,11 +120,11 @@ CREATE TABLE `commission`.`faculties`
 );
 
 INSERT INTO faculties
-VALUES (1, 'Faculty of Economics', 'Факультет Економіки', 25, 10);
+VALUES (DEFAULT, 'Faculty of Economics', 'Факультет Економіки', 25, 10);
 INSERT INTO faculties
-VALUES (2, 'Faculty of Engineering', 'Факультет Інженерії', 20, 15);
+VALUES (DEFAULT, 'Faculty of Engineering', 'Факультет Інженерії', 20, 15);
 INSERT INTO faculties
-VALUES (3, 'Faculty of Information Technologies', 'Факультет Інформацийних Технологій', 10, 5);
+VALUES (DEFAULT, 'Faculty of Information Technologies', 'Факультет Інформацийних Технологій', 10, 5);
 
 
 

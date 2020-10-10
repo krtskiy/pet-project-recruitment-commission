@@ -14,7 +14,6 @@ public class CommandContainer {
 
     private static final Logger LOG = Logger.getLogger(CommandContainer.class);
 
-
     static {
         // user
         commands.put("noCommand", new NoCommand());
@@ -30,6 +29,7 @@ public class CommandContainer {
         commands.put("registerUserPage", new RegisterUserPageCommand());
         commands.put("privateOfficePage", new PrivateOfficePageCommand());
         commands.put("updateUserPage", new UpdateUserPageCommand());
+        commands.put("errorPage", new ErrorPageCommand());
 
         commands.put("updateFacultyPage", new UpdateFacultyPageCommand());
         commands.put("createNewFacultyPage", new CreateNewFacultyPageCommand());

@@ -220,10 +220,6 @@
                 </table>
             </c:if>
 
-            <c:if test="${not empty requestScope.notFoundMessage}">
-                <span style="color: rgb(204, 0, 0); ">There is no such user</span>
-            </c:if>
-
             <form action="controller?command=findUserByEmail" method="post">
                 <table id="list_search_table">
                     <tr>

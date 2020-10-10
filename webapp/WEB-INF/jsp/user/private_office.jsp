@@ -15,6 +15,10 @@
     <tr>
         <td class="content">
 
+            <c:if test="${not empty requestScope.successMessage}">
+                <span style="color: #1B860A">Login data changed successfully</span>
+            </c:if>
+
             <a href="controller?command=updateUserPage"><strong>Change login data</strong></a>
             <%-- todo add applications view --%>
             <a href="controller?command=listOfEntrantsApplications"><strong>View my applications</strong></a>

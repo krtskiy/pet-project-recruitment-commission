@@ -54,7 +54,11 @@ public class UpdateUserCommand extends Command {
         session.setAttribute("user", user);
         DBManager.getInstance().updateUser(user);
 
+        if (!newPassword.equals("") || !newEmail.equals("")) {
+            String successMessage = "Login data changed successfully";
+            request.setAttribute("successMessage", successMessage);
+        }
         LOG.debug("Command finished");
-        return Path.PAGE_PRIVATE_OFFICE;
+        return Path.COMMAND_PRIVATE_OFFICE;
     }
 }

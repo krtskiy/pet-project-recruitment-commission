@@ -1,4 +1,3 @@
-<%@ page import="java.io.PrintWriter" %>
 <%@ page isErrorPage="true" %>
 <%@ include file="/WEB-INF/jspf/directive/page.jspf" %>
 <%@ include file="/WEB-INF/jspf/directive/taglib.jspf" %>
@@ -21,32 +20,11 @@
             <%-- CONTENT --%>
 
             <h3 class="error">
-                The following error occurred
+                The following error occurred<br>
             </h3>
 
-            <%-- this way we obtain an information about an exception (if it has been occurred) --%>
-            <c:set var="code" value="${requestScope['javax.servlet.error.status_code']}"/>
-            <c:set var="message" value="${requestScope['javax.servlet.error.message']}"/>
-            <c:set var="exception" value="${requestScope['javax.servlet.error.exception']}"/>
+            <h3><c:out value="${errorMessage}"/></h3>
 
-            <c:if test="${not empty code}">
-                <h3>Error code: ${code}</h3>
-            </c:if>
-
-            <c:if test="${not empty message}">
-                <h3>${message}</h3>
-            </c:if>
-
-            <c:if test="${not empty exception}">
-                <% exception.printStackTrace(response.getWriter());%>
-            </c:if>
-
-            <%-- if we get this page using forward --%>
-            <c:if test="${not empty requestScope.errorMessage}">
-                <h3>${requestScope.errorMessage}</h3>
-            </c:if>
-
-            <%-- CONTENT --%>
         </td>
     </tr>
 

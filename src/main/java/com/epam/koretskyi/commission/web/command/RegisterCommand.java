@@ -6,7 +6,6 @@ import com.epam.koretskyi.commission.db.MD5Util;
 import com.epam.koretskyi.commission.db.Role;
 import com.epam.koretskyi.commission.db.entity.User;
 import com.epam.koretskyi.commission.exception.AppException;
-import com.epam.koretskyi.commission.exception.DBException;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -73,6 +72,6 @@ public class RegisterCommand extends Command {
         }
 
         LOG.debug("Command finished");
-        return Path.PAGE_LOGIN;
+        return Path.COMMAND_LOGIN_PAGE;
     }
 }

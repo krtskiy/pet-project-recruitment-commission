@@ -3,7 +3,7 @@ package com.epam.koretskyi.commission.db.entity;
 /**
  * @author D.Koretskyi on 10.10.2020.
  */
-public class Entrant extends Entity {
+public class Application extends Entity {
     private static final long serialVersionUID = 2172092490868575073L;
 
     private int userId;
@@ -27,7 +27,7 @@ public class Entrant extends Entity {
 
     @Override
     public String toString() {
-        return "Entrant{" +
+        return "Application{" +
                 "userId=" + userId +
                 ", facultyId=" + facultyId +
                 '}';

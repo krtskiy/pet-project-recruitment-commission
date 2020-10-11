@@ -9,8 +9,6 @@ DROP TABLE IF EXISTS `commission`.`users`;
 DROP TABLE IF EXISTS `commission`.`faculties`;
 
 
--- CREATE SCHEMA `commission` DEFAULT CHARACTER SET utf8 ;
-
 
 CREATE TABLE `commission`.`roles`
 (
@@ -59,12 +57,12 @@ CREATE TABLE `commission`.`users`
     UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE,
     INDEX `user_status_idx` (`status_id` ASC) VISIBLE,
     INDEX `user_role_idx` (`role_id` ASC) VISIBLE,
-    CONSTRAINT `fk_user_status`
+    CONSTRAINT `fk_users_user_statuses_id`
         FOREIGN KEY (`status_id`)
             REFERENCES `commission`.`user_statuses` (`id`)
             ON DELETE NO ACTION
             ON UPDATE NO ACTION,
-    CONSTRAINT `fk_user_role`
+    CONSTRAINT `fk_users_roles_id`
         FOREIGN KEY (`role_id`)
             REFERENCES `commission`.`roles` (`id`)
             ON DELETE NO ACTION
@@ -109,7 +107,7 @@ VALUES (DEFAULT, 'Alina', 'Alinova', 'Alinivna', 'user9@user.com', 'ee11cbb19052
 
 CREATE TABLE `commission`.`faculties`
 (
-    `id`           INT          NOT NULL AUTO_INCREMENT,
+    `id`           INT          NOT NULL,
     `name_en`      VARCHAR(100) NOT NULL,
     `name_uk`      VARCHAR(100) NOT NULL,
     `total_seats`  INT          NOT NULL,
@@ -120,11 +118,134 @@ CREATE TABLE `commission`.`faculties`
 );
 
 INSERT INTO faculties
-VALUES (DEFAULT, 'Faculty of Economics', 'Факультет Економіки', 25, 10);
+VALUES (1, 'Faculty of Economics', 'Факультет Економіки', 25, 10);
 INSERT INTO faculties
-VALUES (DEFAULT, 'Faculty of Engineering', 'Факультет Інженерії', 20, 15);
+VALUES (2, 'Faculty of Engineering', 'Факультет Інженерії', 20, 15);
 INSERT INTO faculties
-VALUES (DEFAULT, 'Faculty of Information Technologies', 'Факультет Інформацийних Технологій', 10, 5);
+VALUES (3, 'Faculty of Information Technologies', 'Факультет Інформацийних Технологій', 10, 5);
 
 
 
+CREATE TABLE `commission`.`criteria`
+(
+    `id`      INT         NOT NULL AUTO_INCREMENT,
+    `name_en` VARCHAR(45) NOT NULL,
+    `name_uk` VARCHAR(45) NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE INDEX `name_en_UNIQUE` (`name_en` ASC) VISIBLE,
+    UNIQUE INDEX `name_uk_UNIQUE` (`name_uk` ASC) VISIBLE
+)
+    ENGINE = InnoDB
+    DEFAULT CHARACTER SET = utf8;
+
+INSERT INTO criteria
+VALUES (DEFAULT, 'Average certificate grade', 'Середній бал атестату');
+INSERT INTO criteria
+VALUES (DEFAULT, 'Ukrainian language', 'Українська мова');
+INSERT INTO criteria
+VALUES (DEFAULT, 'Foreign language', 'Іноземна мова');
+INSERT INTO criteria
+VALUES (DEFAULT, 'Biology', 'Біологія');
+INSERT INTO criteria
+VALUES (DEFAULT, 'Chemistry', 'Хімія');
+INSERT INTO criteria
+VALUES (DEFAULT, 'Math', 'Математика');
+INSERT INTO criteria
+VALUES (DEFAULT, 'Physics', 'Фізика');
+INSERT INTO criteria
+VALUES (DEFAULT, 'History of Ukraine', 'Історія України');
+INSERT INTO criteria
+VALUES (DEFAULT, 'Geography', 'Географія');
+
+
+
+CREATE TABLE `commission`.`faculty_criteria`
+(
+    `faculty_id`   INT NOT NULL,
+    `criterion_id` INT NOT NULL,
+    PRIMARY KEY (`faculty_id`, `criterion_id`),
+    INDEX `fk_criterion_id_idx` (`criterion_id` ASC) VISIBLE,
+    INDEX `fk_faculty_id_idx` (`faculty_id` ASC) VISIBLE,
+    CONSTRAINT `fk_faculty_criteria_faculties_id`
+        FOREIGN KEY (`faculty_id`)
+            REFERENCES `commission`.`faculties` (`id`)
+            ON DELETE CASCADE
+            ON UPDATE NO ACTION,
+    CONSTRAINT `fk_faculty_criteria_criteria_id`
+        FOREIGN KEY (`criterion_id`)
+            REFERENCES `commission`.`criteria` (`id`)
+            ON DELETE CASCADE
+            ON UPDATE NO ACTION
+)
+    ENGINE = InnoDB
+    DEFAULT CHARACTER SET = utf8;
+
+INSERT INTO faculty_criteria
+VALUES (1, 1);
+INSERT INTO faculty_criteria
+VALUES (1, 2);
+INSERT INTO faculty_criteria
+VALUES (1, 6);
+INSERT INTO faculty_criteria
+VALUES (1, 9);
+INSERT INTO faculty_criteria
+VALUES (2, 1);
+INSERT INTO faculty_criteria
+VALUES (2, 2);
+INSERT INTO faculty_criteria
+VALUES (2, 6);
+INSERT INTO faculty_criteria
+VALUES (2, 7);
+INSERT INTO faculty_criteria
+VALUES (3, 1);
+INSERT INTO faculty_criteria
+VALUES (3, 2);
+INSERT INTO faculty_criteria
+VALUES (3, 3);
+INSERT INTO faculty_criteria
+VALUES (3, 6);
+
+
+
+CREATE TABLE `commission`.`user_marks`
+(
+    `user_id`      INT    NOT NULL,
+    `criterion_id` INT    NOT NULL,
+    `mark`         INT(3) NOT NULL,
+    PRIMARY KEY (`user_id`, `criterion_id`),
+    INDEX `fk_user_marks_criteria_id_idx` (`criterion_id` ASC) VISIBLE,
+    CONSTRAINT `fk_user_marks_users_id`
+        FOREIGN KEY (`user_id`)
+            REFERENCES `commission`.`users` (`id`)
+            ON DELETE CASCADE
+            ON UPDATE NO ACTION,
+    CONSTRAINT `fk_user_marks_criteria_id`
+        FOREIGN KEY (`criterion_id`)
+            REFERENCES `commission`.`criteria` (`id`)
+            ON DELETE NO ACTION
+            ON UPDATE NO ACTION
+)
+    ENGINE = InnoDB
+    DEFAULT CHARACTER SET = utf8;
+
+
+
+CREATE TABLE `commission`.`applications`
+(
+    `user_id`    INT NOT NULL,
+    `faculty_id` INT NOT NULL,
+    PRIMARY KEY (`user_id`, `faculty_id`),
+    INDEX `fk_applications_faculties_id_idx` (`faculty_id` ASC) VISIBLE,
+    CONSTRAINT `fk_applications_users_id`
+        FOREIGN KEY (`user_id`)
+            REFERENCES `commission`.`users` (`id`)
+            ON DELETE CASCADE
+            ON UPDATE NO ACTION,
+    CONSTRAINT `fk_applications_faculties_id`
+        FOREIGN KEY (`faculty_id`)
+            REFERENCES `commission`.`faculties` (`id`)
+            ON DELETE CASCADE
+            ON UPDATE NO ACTION
+)
+    ENGINE = InnoDB
+    DEFAULT CHARACTER SET = utf8;

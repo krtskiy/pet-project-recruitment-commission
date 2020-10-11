@@ -1,5 +1,7 @@
 package com.epam.koretskyi.commission.db.entity;
 
+import java.util.List;
+
 /**
  * @author D.Koretskyi on 22.09.2020.
  */

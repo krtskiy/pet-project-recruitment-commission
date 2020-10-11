@@ -18,11 +18,18 @@ public class Messages {
     public static final String ERR_CANNOT_OBTAIN_USER_BY_EMAIL = "Cannot obtain user with this email!";
     public static final String ERR_CANNOT_FIND_USERS = "Cannot find users!";
 
+    public static final String ERR_CANNOT_INSERT_USER_MARKS = "Cannot insert user marks!";
+    public static final String ERR_CANNOT_FIND_USER_MARKS = "Cannot find user marks!";
+
+    // applications-related
+    public static final String ERR_CANNOT_INSERT_APPLICATION = "Cannot insert application!";
+    public static final String ERR_CANNOT_FIND_USER_APPLICATIONS = "Cannot find user application!";
+
     // faculty-related
     public static final String ERR_CANNOT_UPDATE_FACULTY = "Cannot update faculty!";
     public static final String ERR_CANNOT_INSERT_FACULTY = "Cannot insert faculty!";
     public static final String ERR_CANNOT_FIND_FACULTIES = "Cannot find faculties!";
-    public static final String ERR_CANNOT_DELETE_FACULTY = "Cannot delete faculty";
+    public static final String ERR_CANNOT_DELETE_FACULTY = "Cannot delete faculty!";
     public static final String ERR_CANNOT_OBTAIN_FACULTY_BY_ID = "Cannot obtain faculty by this id!";
 
     // faculty criteria-related

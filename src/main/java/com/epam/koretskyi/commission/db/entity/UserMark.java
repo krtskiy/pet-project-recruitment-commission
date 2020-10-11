@@ -1,10 +1,10 @@
 package com.epam.koretskyi.commission.db.entity;
 
 /**
- * @author D.Koretskyi on 10.10.2020.
+ * @author D.Koretskyi on 11.10.2020.
  */
-public class UserMarks extends Entity {
-    private static final long serialVersionUID = 3096589858363433927L;
+public class UserMark extends Entity {
+    private static final long serialVersionUID = 9009283224322353946L;
 
     private int userId;
     private int criterionId;

@@ -1,9 +1,7 @@
 package com.epam.koretskyi.commission.db;
 
 import com.epam.koretskyi.commission.constant.Field;
-import com.epam.koretskyi.commission.db.entity.Criterion;
-import com.epam.koretskyi.commission.db.entity.Faculty;
-import com.epam.koretskyi.commission.db.entity.User;
+import com.epam.koretskyi.commission.db.entity.*;
 import com.epam.koretskyi.commission.exception.DBException;
 import com.epam.koretskyi.commission.exception.Messages;
 import org.apache.log4j.Logger;
@@ -44,6 +42,14 @@ public class DBManager {
     private static final String SQL_UPDATE_USER = "UPDATE users SET email=?, password=? WHERE id=?";
     private static final String SQL_FIND_ALL_USERS = "SELECT * FROM users";
     private static final String SQL_UPDATE_USER_STATUS = "UPDATE users SET status_id=? WHERE id=?";
+
+    // user marks
+    private static final String SQL_INSERT_USER_MARKS = "REPLACE INTO user_marks VALUES (?, ?, ?)";
+    private static final String SQL_FIND_USER_MARKS2 = "SELECT * FROM user_marks WHERE user_id=?;";
+
+    // applications
+    private static final String SQL_INSERT_APPLICATION = "REPLACE INTO applications VALUES (?, ?)";
+    private static final String SQL_FIND_USER_APPLICATIONS = "SELECT * FROM applications WHERE user_id = ?;";
 
     ///////////////////////////////////
     // singleton
@@ -480,6 +486,112 @@ public class DBManager {
         }
     }
 
+    ///////////////////////////////////
+    // user marks
+    ///////////////////////////////////
+
+    public void insertUserMarks(List<UserMark> userMarks) throws DBException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        try {
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement(SQL_INSERT_USER_MARKS);
+            for (UserMark userMark : userMarks) {
+                int k = 0;
+                preparedStatement.setInt(++k, userMark.getUserId());
+                preparedStatement.setInt(++k, userMark.getCriterionId());
+                preparedStatement.setInt(++k, userMark.getMark());
+                preparedStatement.addBatch();
+            }
+            preparedStatement.executeBatch();
+            connection.commit();
+        } catch (SQLException e) {
+            rollback(connection);
+            LOG.error(Messages.ERR_CANNOT_INSERT_USER_MARKS, e);
+            throw new DBException(Messages.ERR_CANNOT_INSERT_USER_MARKS, e);
+        } finally {
+            close(preparedStatement);
+            close(connection);
+        }
+    }
+
+
+    public List<UserMark> findUserMarksByUserId(int userId) throws DBException {
+        List<UserMark> userMarks = new ArrayList<>();
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement(SQL_FIND_USER_MARKS2);
+            preparedStatement.setInt(1, userId);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                userMarks.add(extractUserMark(resultSet));
+            }
+            connection.commit();
+        } catch (SQLException e) {
+            rollback(connection);
+            LOG.error(Messages.ERR_CANNOT_FIND_FACULTY_CRITERIA);
+            throw new DBException(Messages.ERR_CANNOT_FIND_FACULTY_CRITERIA, e);
+        } finally {
+            close(resultSet);
+            close(preparedStatement);
+            close(connection);
+        }
+        return userMarks;
+    }
+
+    ///////////////////////////////////
+    // application
+    ///////////////////////////////////
+
+    public void insertApplication(int userId, int facultyId) throws DBException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        try {
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement(SQL_INSERT_APPLICATION);
+            int k = 0;
+            preparedStatement.setInt(++k, userId);
+            preparedStatement.setInt(++k, facultyId);
+            preparedStatement.execute();
+            connection.commit();
+        } catch (SQLException e) {
+            rollback(connection);
+            LOG.error(Messages.ERR_CANNOT_INSERT_APPLICATION, e);
+            throw new DBException(Messages.ERR_CANNOT_INSERT_APPLICATION, e);
+        } finally {
+            close(preparedStatement);
+            close(connection);
+        }
+    }
+
+    public List<Application> findUserApplications(int userId) throws DBException {
+        List<Application> applications = new ArrayList<>();
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement(SQL_FIND_USER_APPLICATIONS);
+            preparedStatement.setInt(1, userId);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                applications.add(extractApplication(resultSet));
+            }
+            connection.commit();
+        } catch (SQLException e) {
+            rollback(connection);
+            LOG.error(Messages.ERR_CANNOT_FIND_USER_APPLICATIONS);
+            throw new DBException(Messages.ERR_CANNOT_FIND_USER_APPLICATIONS, e);
+        } finally {
+            close(resultSet);
+            close(preparedStatement);
+            close(connection);
+        }
+        return applications;
+    }
 
     ///////////////////////////////////
     // util methods
@@ -504,7 +616,7 @@ public class DBManager {
 
     private Faculty extractFaculty(ResultSet resultSet) throws SQLException, DBException {
         Faculty faculty = new Faculty();
-        faculty.setId(resultSet.getInt(Field.FACULTY_ID));
+        faculty.setId(resultSet.getInt(Field.ID));
         faculty.setNameEn(resultSet.getString(Field.FACULTY_NAME_EN));
         faculty.setNameUk(resultSet.getString(Field.FACULTY_NAME_UK));
         faculty.setTotalSeats(resultSet.getInt(Field.FACULTY_TOTAL_SEATS));
@@ -521,6 +633,20 @@ public class DBManager {
         return criterion;
     }
 
+    private UserMark extractUserMark(ResultSet resultSet) throws SQLException {
+        UserMark userMark = new UserMark();
+        userMark.setUserId(resultSet.getInt(Field.USER_ID));
+        userMark.setCriterionId(resultSet.getInt(Field.CRITERION_ID));
+        userMark.setMark(resultSet.getInt(Field.MARK));
+        return userMark;
+    }
+
+    private Application extractApplication(ResultSet resultSet) throws SQLException {
+        Application application = new Application();
+        application.setFacultyId(resultSet.getInt(Field.FACULTY_ID));
+        application.setUserId(resultSet.getInt(Field.USER_ID));
+        return application;
+    }
 
     private void close(Connection connection) {
         if (connection != null) {

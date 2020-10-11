@@ -21,7 +21,6 @@ public final class Field {
     public static final String USER_STATUS_ID = "status_id";
 
 
-    public static final String FACULTY_ID = "id";
     public static final String FACULTY_NAME_EN = "name_en";
     public static final String FACULTY_NAME_UK = "name_uk";
     public static final String FACULTY_TOTAL_SEATS = "total_seats";
@@ -31,5 +30,11 @@ public final class Field {
     public static final String CRITERIA_ID = "id";
     public static final String CRITERIA_NAME_EN = "name_en";
     public static final String CRITERIA_NAME_UK = "name_uk";
+
+    public static final String USER_ID = "user_id";
+    public static final String CRITERION_ID = "criterion_id";
+    public static final String MARK = "mark";
+
+    public static final String FACULTY_ID = "faculty_id";
 
 }

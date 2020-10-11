@@ -19,10 +19,10 @@ public class CommandContainer {
         commands.put("noCommand", new NoCommand());
         commands.put("login", new LoginCommand());
         commands.put("logout", new LogoutCommand());
-        commands.put("registerUser", new RegisterCommand());
+        commands.put("registerUser", new RegisterUserCommand());
         commands.put("listOfFaculties", new ListOfFacultiesCommand());
         commands.put("updateUser", new UpdateUserCommand());
-        commands.put("listOfEntrantsApplications", new ListOfEntrantsApplicationsCommand());
+        commands.put("registerForFaculty", new RegisterForFacultyCommand());
 
         // page view commands
         commands.put("loginPage", new LoginPageCommand());
@@ -31,6 +31,7 @@ public class CommandContainer {
         commands.put("updateUserPage", new UpdateUserPageCommand());
         commands.put("errorPage", new ErrorPageCommand());
         commands.put("blockedUserPage", new BlockedUserPageCommand());
+        commands.put("registerForFacultyPage", new RegisterForFacultyPageCommand());
 
         commands.put("updateFacultyPage", new UpdateFacultyPageCommand());
         commands.put("createNewFacultyPage", new CreateNewFacultyPageCommand());

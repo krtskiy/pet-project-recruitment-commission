@@ -142,3 +142,15 @@ r
 Bsrc/main/java/com/epam/koretskyi/commission/db/entity/Entrant.java,2\5\253ab57a8db1c516f806c7cb33015d6062a7c37b
 t
 Dsrc/main/java/com/epam/koretskyi/commission/db/entity/Criterion.java,8\4\84ea69e40debfa40258f3c2430c78f7954675d54
+Š
+Zsrc/main/java/com/epam/koretskyi/commission/web/command/RegisterForFacultyPageCommand.java,0\e\0e9929d67f9d3ca316a3d6931dbc1d92347bb6cb
+s
+Csrc/main/java/com/epam/koretskyi/commission/db/entity/UserMark.java,6\9\69a8999acd3acd0245d4075a2615fb3c84f2c5d6
+€
+Psrc/main/java/com/epam/koretskyi/commission/web/command/RegisterUserCommand.java,7\6\76767dbb008f9a27abaf1a2a7a5ede0d78e92a53
+a
+1webapp/WEB-INF/jsp/user/faculty_register_page.jsp,7\a\7a41f9f5cd375191390f907bdde4a635c46478e0
+†
+Vsrc/main/java/com/epam/koretskyi/commission/web/command/RegisterForFacultyCommand.java,6\a\6aa5b66292b1773013034037aea29553c5109be8
+v
+Fsrc/main/java/com/epam/koretskyi/commission/db/entity/Application.java,8\5\85fd563e56a6be12679a980f470ffb68a4005eb2

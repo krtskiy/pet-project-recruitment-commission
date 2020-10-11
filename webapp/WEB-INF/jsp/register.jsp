@@ -22,7 +22,7 @@
         <td class="content center">
 
             <h1><fmt:message key="register_jsp.text.registration_form"/></h1>
-            <small><span style="color:  rgb(204, 0, 0);"> <fmt:message key="register_jsp.text.transliteration_message"/></span></small>
+            <small><fmt:message key="register_jsp.text.transliteration_message"/></small>
 
             <form id="register_form" method="post" action="controller">
                 <input type="hidden" name="command" value="registerUser">

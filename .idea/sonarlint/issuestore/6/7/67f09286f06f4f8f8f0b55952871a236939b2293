@@ -1,13 +1,29 @@
 
+m
+java:S2095Á"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(ø”Èº8•ô‡ÊÑ.
+m
+java:S2095´"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(¡Åü8à¸Ê¸Ñ.
+m
+java:S2095»"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(õÈŞî8à¸Ê¸Ñ.
+m
+java:S2095€"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(¥Öç°8à¸Ê¸Ñ.
+r
+java:S2095ã"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(ÇÖÃ³ûÿÿÿÿ8ş“âºÑ.
+r
+java:S2095ï"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(‹í´öøÿÿÿÿ8¹»èºÑ.
+m
+java:S2095‘"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(½Û†8ÊÜÎ¶Ñ.
 j
-java:S2095¨"GUse try-with-resources or close this "Statement" in a "finally" clause.(‡²€·ıÿÿÿÿ8÷¯şÆĞ.
+java:S2095†"GUse try-with-resources or close this "Statement" in a "finally" clause.(‡²€·ıÿÿÿÿ8à¸Ê¸Ñ.
+r
+java:S2095Ø"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(õ–‘¤ùÿÿÿÿ8ÓèÜºÑ.
 m
-java:S2095İ"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(õÈŞî8÷¯şÆĞ.
+java:S2095ì"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(”Ïâ8à¸Ê¸Ñ.
+°
+java:S1130é"ŒRemove the declaration of thrown exception 'com.epam.koretskyi.commission.exception.DBException', as it cannot be thrown from method's body.(ªä’Öüÿÿÿÿ8öÇìÈÑ.
 i
-java:S2095["GUse try-with-resources or close this "Statement" in a "finally" clause.(‡²€·ıÿÿÿÿ8¾Áà¹Î.
+java:S2095e"GUse try-with-resources or close this "Statement" in a "finally" clause.(‡²€·ıÿÿÿÿ8ÊÜÎ¶Ñ.
+j
+java:S2095›"GUse try-with-resources or close this "Statement" in a "finally" clause.(‡²€·ıÿÿÿÿ8à¸Ê¸Ñ.
 m
-java:S2095Õ"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(ÍáÕÄ8ú–Š¡Ñ.
-m
-java:S2095‡"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(½Û†8†£ÙÂĞ.
-m
-java:S2095"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(”Ïâ8‚¸ìÁĞ.
+java:S2095"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(òÇµ8ö³çÈÑ.

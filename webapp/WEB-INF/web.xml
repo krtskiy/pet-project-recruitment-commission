@@ -59,7 +59,7 @@
         </init-param>
         <init-param>
             <param-name>user</param-name>
-            <param-value>privateOfficePage updateUser updateUserPage listOfEntrantsApplications blockedUserPage</param-value>
+            <param-value>privateOfficePage updateUser updateUserPage listOfEntrantsApplications blockedUserPage registerForFacultyPage registerForFaculty</param-value>
         </init-param>
         <init-param>
             <param-name>common</param-name>
@@ -70,7 +70,6 @@
             <param-value>loginPage login registerUser registerUserPage listOfFaculties noCommand errorPage</param-value>
         </init-param>
     </filter>
-
     <filter-mapping>
         <filter-name>CommandAccessFilter</filter-name>
         <servlet-name>Controller</servlet-name>

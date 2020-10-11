@@ -6,7 +6,6 @@ package com.epam.koretskyi.commission.constant;
 public final class Path {
 
 
-
     private Path() {
     }
 
@@ -21,7 +20,7 @@ public final class Path {
     public static final String PAGE_FACULTIES = "/WEB-INF/jsp/user/faculties.jsp";
     public static final String PAGE_PRIVATE_OFFICE = "/WEB-INF/jsp/user/private_office.jsp";
     public static final String PAGE_UPDATE_PROFILE = "/WEB-INF/jsp/user/update_profile.jsp";
-    public static final String PAGE_ENTRANTS_APPLICATIONS = "/WEB-INF/jsp/user/entrants_applications.jsp";
+    public static final String PAGE_FACULTY_REGISTER = "/WEB-INF/jsp/user/faculty_register_page.jsp";
 
     // admin
     public static final String PAGE_ADMIN_PANEL = "/WEB-INF/jsp/admin/admin_panel.jsp";
@@ -30,7 +29,7 @@ public final class Path {
     public static final String PAGE_FACULTIES_ADMIN = "/WEB-INF/jsp/admin/faculties_admin.jsp";
     public static final String PAGE_CREATE_NEW_FACULTY = "/WEB-INF/jsp/admin/new_faculty.jsp";
 
-
+    // redirect commands
     public static final String COMMAND_BLOCKED_USER = "/controller?command=blockedUserPage";
     public static final String COMMAND_ERROR_PAGE = "controller?command=errorPage";
     public static final String COMMAND_PRIVATE_OFFICE = "/controller?command=privateOfficePage";

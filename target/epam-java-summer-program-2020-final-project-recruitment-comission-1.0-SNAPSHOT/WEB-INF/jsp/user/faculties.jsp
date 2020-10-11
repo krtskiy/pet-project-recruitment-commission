@@ -96,6 +96,12 @@
                                 </c:choose>
                             </c:forEach>
                         </td>
+                        <c:if test="${userRole.name == 'user'}">
+                            <td>
+                                <a href="controller?command=registerForFacultyPage&facultyId=${faculty.id}"><strong>Register
+                                    for faculty</strong></a>
+                            </td>
+                        </c:if>
                     </tr>
                 </c:forEach>
             </table>

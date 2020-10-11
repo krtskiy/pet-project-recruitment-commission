@@ -15,10 +15,10 @@ import javax.servlet.http.HttpSession;
 /**
  * @author D.Koretskyi on 23.09.2020.
  */
-public class RegisterCommand extends Command {
+public class RegisterUserCommand extends Command {
     private static final long serialVersionUID = -2318239355277653587L;
 
-    private static final Logger LOG = Logger.getLogger(RegisterCommand.class);
+    private static final Logger LOG = Logger.getLogger(RegisterUserCommand.class);
 
     public String execute(HttpServletRequest request, HttpServletResponse response) throws AppException {
         LOG.debug("Command starts");

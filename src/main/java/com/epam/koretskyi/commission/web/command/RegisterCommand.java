@@ -66,6 +66,11 @@ public class RegisterCommand extends Command {
 
         HttpSession session = request.getSession();
         Role userRole = (Role) session.getAttribute("userRole");
+
+        String successRegMessage = "Registered successfully";
+        session.setAttribute("successRegMessage", successRegMessage);
+        LOG.trace("Set the session attribute: successRegMessage --> " + successRegMessage);
+
         if (userRole == Role.ADMIN) {
             LOG.debug("Command finished");
             return Path.COMMAND_USERS;

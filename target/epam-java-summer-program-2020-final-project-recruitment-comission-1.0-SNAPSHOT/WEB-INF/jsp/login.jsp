@@ -14,6 +14,11 @@
     <tr>
         <td class="content center">
 
+            <c:if test="${not empty successRegMessage}">
+                <h3><span style="color: #1B860A"><c:out value="${successRegMessage}"/></span></h3>
+                <% request.getSession().removeAttribute("successRegMessage"); %>
+            </c:if>
+
             <h1>Login form:</h1>
 
             <form id="login_form" method="post" action="controller">

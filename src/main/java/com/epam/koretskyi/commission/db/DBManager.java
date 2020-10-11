@@ -1,6 +1,7 @@
 package com.epam.koretskyi.commission.db;
 
 import com.epam.koretskyi.commission.constant.Field;
+import com.epam.koretskyi.commission.db.entity.Criterion;
 import com.epam.koretskyi.commission.db.entity.Faculty;
 import com.epam.koretskyi.commission.db.entity.User;
 import com.epam.koretskyi.commission.exception.DBException;
@@ -20,10 +21,33 @@ import java.util.List;
  */
 public class DBManager {
     private static final Logger LOG = Logger.getLogger(DBManager.class);
+    private DataSource dataSource;
 
-    /////////////////////////
-    /////// singleton ///////
-    /////////////////////////
+    // faculty
+    private static final String SQL_FIND_FACULTY_BY_ID = "SELECT * FROM faculties WHERE id=?";
+    private static final String SQL_DELETE_FACULTY = "DELETE FROM faculties WHERE id=? LIMIT 1";
+    private static final String SQL_FIND_ALL_FACULTIES = "SELECT * FROM faculties;";
+    private static final String SQL_UPDATE_FACULTY = "UPDATE faculties SET name_en=?, name_uk=?, total_seats=?, budget_seats=? WHERE id=?";
+    private static final String SQL_INSERT_FACULTY = "INSERT INTO faculties VALUES (?, ?, ?, ?, ?)";
+
+    // criterion
+    private static final String SQL_FIND_FACULTY_CRITERIA = "SELECT * FROM criteria WHERE id IN (SELECT criterion_id FROM faculty_criteria WHERE faculty_id = ?);";
+    private static final String SQL_FIND_ALL_CRITERIA = "SELECT * FROM criteria";
+    private static final String SQL_FIND_CRITERION_BY_ID = "SELECT * FROM criteria WHERE id=?";
+    private static final String SQL_INSERT_FACULTY_CRITERIA = "INSERT INTO faculty_criteria VALUES (?, ?);";
+    private static final String SQL_DELETE_FACULTY_CRITERIA = "DELETE FROM faculty_criteria WHERE faculty_id=?";
+
+    // user
+    private static final String SQL_FIND_USER_STATUS_BY_ID = "SELECT * FROM user_statuses WHERE id=?";
+    private static final String SQL_FIND_USER_BY_EMAIL = "SELECT * FROM users WHERE email=?";
+    private static final String SQL_INSERT_USER = "INSERT INTO users VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, DEFAULT , DEFAULT)";
+    private static final String SQL_UPDATE_USER = "UPDATE users SET email=?, password=? WHERE id=?";
+    private static final String SQL_FIND_ALL_USERS = "SELECT * FROM users";
+    private static final String SQL_UPDATE_USER_STATUS = "UPDATE users SET status_id=? WHERE id=?";
+
+    ///////////////////////////////////
+    // singleton
+    ///////////////////////////////////
 
     private static DBManager dbManager;
 
@@ -45,22 +69,6 @@ public class DBManager {
         return dbManager;
     }
 
-    private DataSource dataSource;
-
-    // faculty
-    private static final String SQL_FIND_FACULTY_BY_ID = "SELECT * FROM faculties WHERE id=?";
-    private static final String SQL_DELETE_FACULTY = "DELETE FROM faculties WHERE id=? LIMIT 1";
-    private static final String SQL_FIND_ALL_FACULTIES = "SELECT * FROM faculties";
-    private static final String SQL_UPDATE_FACULTY = "UPDATE faculties SET name_en=?, name_uk=?, total_seats=?, budget_seats=? WHERE id=?";
-    private static final String SQL_INSERT_FACULTY = "INSERT INTO faculties VALUES (?, ?, ?, ?, ?)";
-
-    // user
-    private static final String SQL_FIND_USER_STATUS_BY_ID = "SELECT * FROM user_statuses WHERE id=?";
-    private static final String SQL_FIND_USER_BY_EMAIL = "SELECT * FROM users WHERE email=?";
-    private static final String SQL_INSERT_USER = "INSERT INTO users VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, DEFAULT , DEFAULT)";
-    private static final String SQL_UPDATE_USER = "UPDATE users SET email=?, password=? WHERE id=?";
-    private static final String SQL_FIND_ALL_USERS = "SELECT * FROM users";
-    private static final String SQL_UPDATE_USER_STATUS = "UPDATE users SET status_id=? WHERE id=?";
 
     private Connection getConnection() throws DBException {
         Connection connection;
@@ -73,9 +81,9 @@ public class DBManager {
         return connection;
     }
 
-    //////////////////////////////
+    ///////////////////////////////////
     // faculty
-    //////////////////////////////
+    ///////////////////////////////////
 
     public List<Faculty> findAllFaculties() throws DBException {
         List<Faculty> faculties = new ArrayList<>();
@@ -133,6 +141,7 @@ public class DBManager {
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 faculty = extractFaculty(resultSet);
+                faculty.setCriteria(findFacultyCriteriaByFacultyId(facultyId));
             }
         } catch (SQLException e) {
             rollback(connection);
@@ -151,12 +160,13 @@ public class DBManager {
         try {
             connection = getConnection();
             updateFaculty(connection, faculty);
+            deleteFacultyCriteria(connection, faculty);
+            insertFacultyCriteria(connection, faculty);
             connection.commit();
         } catch (SQLException e) {
             rollback(connection);
             throw new DBException(Messages.ERR_CANNOT_UPDATE_FACULTY, e);
         }
-
     }
 
     private void updateFaculty(Connection connection, Faculty faculty) throws SQLException {
@@ -181,13 +191,10 @@ public class DBManager {
         try {
             connection = getConnection();
             preparedStatement = connection.prepareStatement(SQL_INSERT_FACULTY);
-            int k = 0;
-            preparedStatement.setInt(++k, faculty.getId());
-            preparedStatement.setString(++k, faculty.getNameEn());
-            preparedStatement.setString(++k, faculty.getNameUk());
-            preparedStatement.setInt(++k, faculty.getTotalSeats());
-            preparedStatement.setInt(++k, faculty.getBudgetSeats());
-            preparedStatement.execute();
+
+            insertFaculty(connection, faculty);
+            insertFacultyCriteria(connection, faculty);
+
             connection.commit();
         } catch (SQLException e) {
             rollback(connection);
@@ -199,9 +206,120 @@ public class DBManager {
         }
     }
 
-    //////////////////////////////
+    private void insertFaculty(Connection connection, Faculty faculty) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT_FACULTY);
+        int k = 0;
+        preparedStatement.setInt(++k, faculty.getId());
+        preparedStatement.setString(++k, faculty.getNameEn());
+        preparedStatement.setString(++k, faculty.getNameUk());
+        preparedStatement.setInt(++k, faculty.getTotalSeats());
+        preparedStatement.setInt(++k, faculty.getBudgetSeats());
+        preparedStatement.execute();
+    }
+
+    private void insertFacultyCriteria(Connection connection, Faculty faculty) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT_FACULTY_CRITERIA);
+        List<Criterion> facultyCriteria = faculty.getCriteria();
+        for (Criterion facultyCriterion : facultyCriteria) {
+            int k = 0;
+            preparedStatement.setInt(++k, faculty.getId());
+            preparedStatement.setInt(++k, facultyCriterion.getId());
+            preparedStatement.addBatch();
+        }
+        preparedStatement.executeBatch();
+    }
+
+    private void deleteFacultyCriteria(Connection connection, Faculty faculty) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_FACULTY_CRITERIA);
+        preparedStatement.setInt(1, faculty.getId());
+        preparedStatement.executeUpdate();
+    }
+
+
+    ///////////////////////////////////
+    // criterion
+    ///////////////////////////////////
+
+    public List<Criterion> findFacultyCriteriaByFacultyId(int facultyId) throws DBException {
+        List<Criterion> criteria = new ArrayList<>();
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement(SQL_FIND_FACULTY_CRITERIA);
+            preparedStatement.setInt(1, facultyId);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                criteria.add(extractCriterion(resultSet));
+            }
+            connection.commit();
+        } catch (SQLException e) {
+            rollback(connection);
+            LOG.error(Messages.ERR_CANNOT_FIND_FACULTY_CRITERIA);
+            throw new DBException(Messages.ERR_CANNOT_FIND_FACULTY_CRITERIA, e);
+        } finally {
+            close(resultSet);
+            close(preparedStatement);
+            close(connection);
+        }
+        return criteria;
+    }
+
+
+    public List<Criterion> findAllCriteria() throws DBException {
+        List<Criterion> criteria = new ArrayList<>();
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = getConnection();
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(SQL_FIND_ALL_CRITERIA);
+            while (resultSet.next()) {
+                criteria.add(extractCriterion(resultSet));
+            }
+            connection.commit();
+        } catch (SQLException e) {
+            rollback(connection);
+            LOG.error(Messages.ERR_CANNOT_FIND_ALL_CRITERIA, e);
+            throw new DBException(Messages.ERR_CANNOT_FIND_ALL_CRITERIA, e);
+        } finally {
+            close(resultSet);
+            close(statement);
+            close(connection);
+        }
+        return criteria;
+    }
+
+    public Criterion findCriterionById(int criteriaId) throws DBException {
+        Criterion criterion = null;
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement(SQL_FIND_CRITERION_BY_ID);
+            preparedStatement.setInt(1, criteriaId);
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                criterion = extractCriterion(resultSet);
+            }
+        } catch (SQLException e) {
+            rollback(connection);
+            LOG.error(Messages.ERR_CANNOT_OBTAIN_CRITERION_BY_ID, e);
+            throw new DBException(Messages.ERR_CANNOT_OBTAIN_CRITERION_BY_ID, e);
+        } finally {
+            close(resultSet);
+            close(preparedStatement);
+            close(connection);
+        }
+        return criterion;
+    }
+
+    ///////////////////////////////////
     // user
-    //////////////////////////////
+    ///////////////////////////////////
 
     public void insertUser(User user) throws DBException {
         Connection connection = null;
@@ -363,9 +481,10 @@ public class DBManager {
     }
 
 
-    ////////////////////////
-    ///// Util methods /////
-    ////////////////////////
+    ///////////////////////////////////
+    // util methods
+    ///////////////////////////////////
+
 
     private User extractUser(ResultSet resultSet) throws SQLException {
         User user = new User();
@@ -383,15 +502,25 @@ public class DBManager {
         return user;
     }
 
-    private Faculty extractFaculty(ResultSet resultSet) throws SQLException {
+    private Faculty extractFaculty(ResultSet resultSet) throws SQLException, DBException {
         Faculty faculty = new Faculty();
         faculty.setId(resultSet.getInt(Field.FACULTY_ID));
         faculty.setNameEn(resultSet.getString(Field.FACULTY_NAME_EN));
         faculty.setNameUk(resultSet.getString(Field.FACULTY_NAME_UK));
         faculty.setTotalSeats(resultSet.getInt(Field.FACULTY_TOTAL_SEATS));
         faculty.setBudgetSeats(resultSet.getInt(Field.FACULTY_BUDGET_SEATS));
+
         return faculty;
     }
+
+    private Criterion extractCriterion(ResultSet resultSet) throws SQLException {
+        Criterion criterion = new Criterion();
+        criterion.setId(resultSet.getInt(Field.CRITERIA_ID));
+        criterion.setNameEn(resultSet.getString(Field.CRITERIA_NAME_EN));
+        criterion.setNameUk(resultSet.getString(Field.CRITERIA_NAME_UK));
+        return criterion;
+    }
+
 
     private void close(Connection connection) {
         if (connection != null) {
@@ -432,7 +561,6 @@ public class DBManager {
             }
         }
     }
-
 
 
 }

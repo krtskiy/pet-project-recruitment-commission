@@ -30,6 +30,7 @@ public class CommandContainer {
         commands.put("privateOfficePage", new PrivateOfficePageCommand());
         commands.put("updateUserPage", new UpdateUserPageCommand());
         commands.put("errorPage", new ErrorPageCommand());
+        commands.put("blockedUserPage", new BlockedUserPageCommand());
 
         commands.put("updateFacultyPage", new UpdateFacultyPageCommand());
         commands.put("createNewFacultyPage", new CreateNewFacultyPageCommand());

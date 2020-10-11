@@ -33,13 +33,17 @@ public class FindUserByEmailCommand extends Command {
         LOG.trace("Found in DB: findUser --> " + foundUser);
         session.setAttribute("foundUser", foundUser);
         LOG.trace("Set the session attribute: foundUser --> " + foundUser);
+
         if (foundUser != null) {
             String status = manager.findUserStatusById(foundUser.getStatusId());
             session.setAttribute("userStatus", status);
             LOG.trace("Set the session attribute: userStatus --> " + status);
-        } else {
-            String notFound = "There is no such user!";
-            request.setAttribute("notFoundMessage", notFound);
+        }
+
+        if (foundUser == null && email != null) {
+            String notFoundMessage = "There is no such user!";
+            session.setAttribute("notFoundMessage", notFoundMessage);
+            LOG.trace("Set the session attribute: notFoundMessage --> " + notFoundMessage);
         }
 
         LOG.debug("Commands finished");

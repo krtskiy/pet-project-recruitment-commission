@@ -13,6 +13,11 @@
     <tr>
         <td class="content">
 
+            <c:if test="${not empty successNewFacMessage}">
+                <h3><span style="color: #1B860A"><c:out value="${successNewFacMessage}"/></span></h3>
+                <% request.getSession().removeAttribute("successNewFacMessage"); %>
+            </c:if>
+
             <strong>Sort by:</strong>
             <a href="controller?command=listOfFaculties&page=1&sort=nameAsc">
                 <c:choose>
@@ -62,25 +67,45 @@
                     <th>Faculty name</th>
                     <th>Total seats</th>
                     <th>Budget seats</th>
+                    <th>Selection criteria</th>
                 </tr>
                 </thead>
                 <c:forEach var="faculty" items="${faculties}">
                     <tr>
                         <td>${faculty.id}</td>
                         <c:choose>
-                            <c:when test="${currentLocale == 'en' or currentLocale == null}">
-                                <td>${faculty.nameEn}</td>
-                            </c:when>
                             <c:when test="${currentLocale == 'uk'}">
                                 <td>${faculty.nameUk}</td>
                             </c:when>
+                            <c:when test="${currentLocale == 'en'}">
+                                <td>${faculty.nameEn}</td>
+                            </c:when>
+                            <c:otherwise>
+                                <td>${faculty.nameEn}</td>
+                            </c:otherwise>
                         </c:choose>
                         <td>${faculty.totalSeats}</td>
                         <td>${faculty.budgetSeats}</td>
                         <td>
+                            <c:forEach var="criterion" items="${faculty.criteria}">
+                                <c:choose>
+                                    <c:when test="${currentLocale == 'uk'}">
+                                        ${criterion.nameUk}<br>
+                                    </c:when>
+                                    <c:when test="${currentLocale == 'en'}">
+                                        ${criterion.nameEn}<br>
+                                    </c:when>
+                                    <c:otherwise>
+                                        ${criterion.nameEn}<br>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:forEach>
+                        </td>
+                        <td>
                             <a href="controller?command=deleteFaculty&facultyId=${faculty.id}"><strong>Delete</strong></a>
                             <a href="controller?command=updateFacultyPage&facultyId=${faculty.id}"><strong>Edit</strong></a>
-                            <a href="controller?command=viewFacultyEntrants&facultyId=${faculty.id}"><strong>View entrants</strong></a>
+                            <a href="controller?command=viewFacultyEntrants&facultyId=${faculty.id}"><strong>View
+                                entrants</strong></a>
                         </td>
                     </tr>
                 </c:forEach>

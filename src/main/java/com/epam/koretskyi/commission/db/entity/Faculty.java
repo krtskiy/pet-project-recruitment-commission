@@ -1,5 +1,6 @@
 package com.epam.koretskyi.commission.db.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,6 +14,7 @@ public class Faculty extends Entity {
     private String nameUk;
     private int totalSeats;
     private int budgetSeats;
+    private List<Criterion> criteria = new ArrayList<>();
 
     public String getNameEn() {
         return nameEn;
@@ -46,6 +48,14 @@ public class Faculty extends Entity {
         this.budgetSeats = budgetSeats;
     }
 
+    public List<Criterion> getCriteria() {
+        return criteria;
+    }
+
+    public void setCriteria(List<Criterion> criteria) {
+        this.criteria = criteria;
+    }
+
     @Override
     public String toString() {
         return "Faculty{" +
@@ -54,5 +64,29 @@ public class Faculty extends Entity {
                 ", totalSeats=" + totalSeats +
                 ", budgetSeats=" + budgetSeats +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Faculty faculty = (Faculty) o;
+
+        if (id != faculty.id) return false;
+        if (totalSeats != faculty.totalSeats) return false;
+        if (budgetSeats != faculty.budgetSeats) return false;
+        if (!nameEn.equals(faculty.nameEn)) return false;
+        return nameUk.equals(faculty.nameUk);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + nameEn.hashCode();
+        result = 31 * result + nameUk.hashCode();
+        result = 31 * result + totalSeats;
+        result = 31 * result + budgetSeats;
+        return result;
     }
 }

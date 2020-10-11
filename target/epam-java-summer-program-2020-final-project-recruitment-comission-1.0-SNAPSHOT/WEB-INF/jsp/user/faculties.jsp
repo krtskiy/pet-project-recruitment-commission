@@ -62,21 +62,40 @@
                     <th>Faculty name</th>
                     <th>Total seats</th>
                     <th>Budget seats</th>
+                    <th>Selection criteria</th>
                 </tr>
                 </thead>
-                <c:forEach var="user" items="${faculties}">
+                <c:forEach var="faculty" items="${faculties}">
                     <tr>
-                        <td>${user.id}</td>
+                        <td>${faculty.id}</td>
                         <c:choose>
-                            <c:when test="${currentLocale == 'en' or currentLocale == null}">
-                                <td>${user.nameEn}</td>
-                            </c:when>
                             <c:when test="${currentLocale == 'uk'}">
-                                <td>${user.nameUk}</td>
+                                <td>${faculty.nameUk}</td>
                             </c:when>
+                            <c:when test="${currentLocale == 'en'}">
+                                <td>${faculty.nameEn}</td>
+                            </c:when>
+                            <c:otherwise>
+                                <td>${faculty.nameEn}</td>
+                            </c:otherwise>
                         </c:choose>
-                        <td>${user.totalSeats}</td>
-                        <td>${user.budgetSeats}</td>
+                        <td>${faculty.totalSeats}</td>
+                        <td>${faculty.budgetSeats}</td>
+                        <td>
+                            <c:forEach var="criterion" items="${faculty.criteria}">
+                                <c:choose>
+                                    <c:when test="${currentLocale == 'uk'}">
+                                        ${criterion.nameUk}<br>
+                                    </c:when>
+                                    <c:when test="${currentLocale == 'en'}">
+                                        ${criterion.nameEn}<br>
+                                    </c:when>
+                                    <c:otherwise>
+                                        ${criterion.nameEn}<br>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:forEach>
+                        </td>
                     </tr>
                 </c:forEach>
             </table>

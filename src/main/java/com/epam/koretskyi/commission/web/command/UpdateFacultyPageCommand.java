@@ -2,6 +2,7 @@ package com.epam.koretskyi.commission.web.command;
 
 import com.epam.koretskyi.commission.constant.Path;
 import com.epam.koretskyi.commission.db.DBManager;
+import com.epam.koretskyi.commission.db.entity.Criterion;
 import com.epam.koretskyi.commission.db.entity.Faculty;
 import com.epam.koretskyi.commission.exception.AppException;
 import org.apache.log4j.Logger;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * @author D.Koretskyi on 08.10.2020.
@@ -32,6 +34,11 @@ public class UpdateFacultyPageCommand extends Command {
 
         Faculty faculty = DBManager.getInstance().findFacultyById(Integer.parseInt(facultyId));
         session.setAttribute("faculty", faculty);
+        LOG.trace("Set the session attribute: faculty --> " + faculty);
+
+        List<Criterion> criteria = DBManager.getInstance().findAllCriteria();
+        request.setAttribute("criteria", criteria);
+        LOG.trace("Set the request attribute: criteria --> " + criteria);
 
         LOG.debug("Command finished");
         return Path.PAGE_UPDATE_FACULTY;

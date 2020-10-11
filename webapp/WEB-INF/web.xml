@@ -59,7 +59,7 @@
         </init-param>
         <init-param>
             <param-name>user</param-name>
-            <param-value>privateOfficePage updateUser updateUserPage listOfEntrantsApplications</param-value>
+            <param-value>privateOfficePage updateUser updateUserPage listOfEntrantsApplications blockedUserPage</param-value>
         </init-param>
         <init-param>
             <param-name>common</param-name>

@@ -26,4 +26,10 @@ public final class Field {
     public static final String FACULTY_NAME_UK = "name_uk";
     public static final String FACULTY_TOTAL_SEATS = "total_seats";
     public static final String FACULTY_BUDGET_SEATS = "budget_seats";
+
+
+    public static final String CRITERIA_ID = "id";
+    public static final String CRITERIA_NAME_EN = "name_en";
+    public static final String CRITERIA_NAME_UK = "name_uk";
+
 }

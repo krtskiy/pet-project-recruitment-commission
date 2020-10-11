@@ -89,33 +89,33 @@
                     <th>Status</th>
                 </tr>
                 </thead>
-                <c:forEach var="user" items="${users}">
+                <c:forEach var="faculty" items="${users}">
                     <tr>
-                        <td>${user.id}</td>
-                        <td>${user.email}</td>
-                        <td>${user.name}</td>
-                        <td>${user.surname}</td>
-                        <td>${user.patronymic}</td>
-                        <td>${user.region}</td>
-                        <td>${user.city}</td>
-                        <td>${user.institutionName}</td>
+                        <td>${faculty.id}</td>
+                        <td>${faculty.email}</td>
+                        <td>${faculty.name}</td>
+                        <td>${faculty.surname}</td>
+                        <td>${faculty.patronymic}</td>
+                        <td>${faculty.region}</td>
+                        <td>${faculty.city}</td>
+                        <td>${faculty.institutionName}</td>
                         <td>
                             <c:choose>
-                                <c:when test="${user.statusId == 0}">
+                                <c:when test="${faculty.statusId == 0}">
                                     Unblocked
-                                    <c:if test="${user.roleId == 1}">
+                                    <c:if test="${faculty.roleId == 1}">
                                         <br><span style="color: #1B860A">Admin</span>
                                     </c:if>
                                     <form action="controller" method="get">
                                         <input name="command" type="hidden" value="updateUsersStatus"/>
-                                        <input name="userId" type="hidden" value="${user.id}">
+                                        <input name="userId" type="hidden" value="${faculty.id}">
                                         <c:choose>
-                                            <c:when test="${user.statusId == 0 and user.roleId != 1}">
+                                            <c:when test="${faculty.statusId == 0 and faculty.roleId != 1}">
                                                 <button name="status" value="1">
                                                     Block
                                                 </button>
                                             </c:when>
-                                            <c:when test="${user.statusId == 1 and user.roleId != 1}">
+                                            <c:when test="${faculty.statusId == 1 and faculty.roleId != 1}">
                                                 <button name="status" value="0">
                                                     Unblock
                                                 </button>
@@ -123,18 +123,18 @@
                                         </c:choose>
                                     </form>
                                 </c:when>
-                                <c:when test="${user.statusId == 1}">
+                                <c:when test="${faculty.statusId == 1}">
                                     <span style="color: rgb(204, 0, 0); ">Blocked</span>
                                     <form action="controller" method="get">
                                         <input name="command" type="hidden" value="updateUsersStatus"/>
-                                        <input name="userId" type="hidden" value="${user.id}">
+                                        <input name="userId" type="hidden" value="${faculty.id}">
                                         <c:choose>
-                                            <c:when test="${user.statusId == 0 and user.roleId != 1}">
+                                            <c:when test="${faculty.statusId == 0 and faculty.roleId != 1}">
                                                 <button name="status" value="1">
                                                     Block
                                                 </button>
                                             </c:when>
-                                            <c:when test="${user.statusId == 1 and user.roleId != 1}">
+                                            <c:when test="${faculty.statusId == 1 and faculty.roleId != 1}">
                                                 <button name="status" value="0">
                                                     Unblock
                                                 </button>
@@ -166,6 +166,11 @@
             <br>
 
             <h3>Find by email</h3>
+
+            <c:if test="${not empty notFoundMessage}">
+                <h3><span style="color:  rgb(204, 0, 0);"><c:out value="${notFoundMessage}"/></span></h3>
+                <% request.getSession().removeAttribute("notFoundMessage"); %>
+            </c:if>
 
             <c:if test="${not empty foundUser}">
                 <table id="list_users_table">
@@ -236,6 +241,11 @@
                     </tr>
                 </table>
             </form>
+
+            <c:if test="${not empty successRegMessage}">
+                <h3><span style="color: #1B860A"><c:out value="${successRegMessage}"/></span></h3>
+                <% request.getSession().removeAttribute("successRegMessage"); %>
+            </c:if>
 
             <a href="controller?command=registerUserPage"><strong>Register new user</strong></a>
 

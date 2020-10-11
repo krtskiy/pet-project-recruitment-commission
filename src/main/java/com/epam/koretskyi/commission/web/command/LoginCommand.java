@@ -73,7 +73,7 @@ public class LoginCommand extends Command {
         LOG.info("User " + user + " logged as " + userRole.toString().toLowerCase());
 
         if (userStatus == UserStatus.BLOCKED) {
-            forward = Path.PAGE_BLOCKED_USER;
+            forward = Path.COMMAND_BLOCKED_USER;
         }
 
         LOG.debug("Command finished");

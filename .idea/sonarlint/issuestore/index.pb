@@ -131,3 +131,14 @@ Xsrc/main/java/com/epam/koretskyi/commission/web/command/CreateNewFacultyPageCom
 Qsrc/main/java/com/epam/koretskyi/commission/web/command/UpdateFacultyCommand.java,3\4\346087e7378d3f4334cbb8fc50318dafa88ee90f
 …
 Usrc/main/java/com/epam/koretskyi/commission/web/command/UpdateUsersStatusCommand.java,8\5\85ba40cd1adfab1441afad880cb01cfaee260cc0
+:
+
+.gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
+ƒ
+Ssrc/main/java/com/epam/koretskyi/commission/web/command/BlockedUserPageCommand.java,a\a\aaee097e5cae8e21fada3bff81b2c581f010fefc
+t
+Dsrc/main/java/com/epam/koretskyi/commission/db/entity/UserMarks.java,d\a\daa856d9c531087d5bc803f4ab10db84bbca3159
+r
+Bsrc/main/java/com/epam/koretskyi/commission/db/entity/Entrant.java,2\5\253ab57a8db1c516f806c7cb33015d6062a7c37b
+t
+Dsrc/main/java/com/epam/koretskyi/commission/db/entity/Criterion.java,8\4\84ea69e40debfa40258f3c2430c78f7954675d54

@@ -2,7 +2,7 @@
 <tr>
     <td id="footer">&copy; Recruitment Commission by Koretskyi D. 2020
 
-            <form action="changeLocale.jsp" method="get" onchange="submit()">
+            <form action="changeLocale.jsp" method="post" onchange="submit()">
                 Change language: <select name="locale">
                 <c:forEach items="${applicationScope.locales}" var="locale">
                     <c:set var="selected"

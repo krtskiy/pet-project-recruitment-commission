@@ -5,6 +5,8 @@ package com.epam.koretskyi.commission.exception;
  */
 public class Messages {
 
+
+
     private Messages() {
     }
 
@@ -22,6 +24,11 @@ public class Messages {
     public static final String ERR_CANNOT_FIND_FACULTIES = "Cannot find faculties!";
     public static final String ERR_CANNOT_DELETE_FACULTY = "Cannot delete faculty";
     public static final String ERR_CANNOT_OBTAIN_FACULTY_BY_ID = "Cannot obtain faculty by this id!";
+
+    // faculty criteria-related
+    public static final String ERR_CANNOT_FIND_FACULTY_CRITERIA = "Cannot find faculty criteria!";
+    public static final String ERR_CANNOT_FIND_ALL_CRITERIA = "Cannot find all criteria!";
+    public static final String ERR_CANNOT_OBTAIN_CRITERION_BY_ID = "Cannot obtain criterion by id!";
 
     // program-related
     public static final String ERR_CANNOT_OBTAIN_CONNECTION = "Cannot obtain connection from the pool!";

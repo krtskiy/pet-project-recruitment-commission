@@ -47,7 +47,7 @@
 	4) out-of-control: commands without access control
 	Delimiter - space/tab
     =============================================================-->
-    <!-- todo add new commands to filter -->
+    <!-- TODO add new commands to filter -->
     <filter>
         <filter-name>CommandAccessFilter</filter-name>
         <filter-class>com.epam.koretskyi.commission.web.filter.CommandAccessFilter</filter-class>
@@ -59,7 +59,7 @@
         </init-param>
         <init-param>
             <param-name>user</param-name>
-            <param-value>privateOfficePage updateUser updateUserPage listOfEntrantsApplications</param-value>
+            <param-value>privateOfficePage updateUser updateUserPage listOfEntrantsApplications blockedUserPage</param-value>
         </init-param>
         <init-param>
             <param-name>common</param-name>

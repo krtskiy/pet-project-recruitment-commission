@@ -3,9 +3,9 @@ package com.epam.koretskyi.commission.web.command;
 import com.epam.koretskyi.commission.constant.Path;
 import com.epam.koretskyi.commission.db.DBManager;
 import com.epam.koretskyi.commission.db.Role;
+import com.epam.koretskyi.commission.db.entity.Criterion;
 import com.epam.koretskyi.commission.db.entity.Faculty;
 import com.epam.koretskyi.commission.exception.AppException;
-import com.epam.koretskyi.commission.exception.DBException;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -28,7 +28,6 @@ public class ListOfFacultiesCommand extends Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
         LOG.debug("Command starts");
-        // todo filter by role
         HttpSession httpSession = request.getSession();
         Role userRole = (Role) httpSession.getAttribute("userRole");
 
@@ -56,6 +55,13 @@ public class ListOfFacultiesCommand extends Command {
         if ("totalSeats".equals(sortParam)) {
             faculties.sort(Comparator.comparingInt(Faculty::getTotalSeats).reversed());
             LOG.trace("Faculties sorted by total amount of seats");
+        }
+
+        // set criteria for each faculty
+        for (int i = 0; i < faculties.size(); i++) {
+            List<Criterion> criteria = DBManager.getInstance().findFacultyCriteriaByFacultyId(i + 1);
+            LOG.trace("Set the criteria for faculty # " + (i + 1) + " --> " + criteria);
+            faculties.get(i).setCriteria(criteria);
         }
 
         // put faculties list to the request

@@ -2,6 +2,7 @@ package com.epam.koretskyi.commission.web.command;
 
 import com.epam.koretskyi.commission.constant.Path;
 import com.epam.koretskyi.commission.db.DBManager;
+import com.epam.koretskyi.commission.db.entity.Criterion;
 import com.epam.koretskyi.commission.db.entity.Faculty;
 import com.epam.koretskyi.commission.exception.AppException;
 import org.apache.log4j.Logger;
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author D.Koretskyi on 08.10.2020.
@@ -39,6 +42,16 @@ public class UpdateFacultyCommand extends Command {
 
         HttpSession session = request.getSession();
         Faculty faculty = (Faculty) session.getAttribute("faculty");
+
+        String[] criteriaIdArr = request.getParameterValues("criterionId");
+        if (criteriaIdArr != null) {
+            List<Criterion> criteria = new ArrayList<>();
+            for (String criteriaId : criteriaIdArr) {
+                criteria.add(DBManager.getInstance().findCriterionById(Integer.parseInt(criteriaId)));
+            }
+            faculty.setCriteria(criteria);
+            LOG.trace("Request parameter: faculty criteria --> " + criteria);
+        }
 
         if (!newNameEn.equals("")) {
             faculty.setNameEn(newNameEn);

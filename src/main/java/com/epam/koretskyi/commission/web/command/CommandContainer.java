@@ -29,6 +29,7 @@ public class CommandContainer {
         commands.put("updateUser", new UpdateUserCommand());
         commands.put("registerForFaculty", new RegisterForFacultyCommand());
         commands.put("viewFacultyApplications", new ViewFacultyApplicationsCommand());
+        // TODO delete entrants application
 
         // admin
         commands.put("listOfUsers", new ListOfUsersCommand());

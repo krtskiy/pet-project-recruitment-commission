@@ -47,9 +47,7 @@ public class RegisterForFacultyCommand extends Command {
             userMarks.add(uMark);
         }
 
-        // TODO this should be as a transaction
-        DBManager.getInstance().insertApplication(user.getId(), faculty.getId());
-        DBManager.getInstance().insertUserMarks(userMarks);
+        DBManager.getInstance().insertApplication(user.getId(), faculty.getId(), userMarks);
 
         session.setAttribute("facultyRegisteredFor", faculty);
         LOG.trace("Set the session attribute: facultyRegisteredFor --> " + faculty);

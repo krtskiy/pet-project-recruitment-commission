@@ -528,7 +528,7 @@ public class DBManager {
     // application
     ///////////////////////////////////
 
-    public void insertApplication(int userId, int facultyId) throws DBException {
+    public void insertApplication(int userId, int facultyId, List<UserMark> userMarks) throws DBException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         try {
@@ -538,6 +538,9 @@ public class DBManager {
             preparedStatement.setInt(++k, userId);
             preparedStatement.setInt(++k, facultyId);
             preparedStatement.execute();
+
+            insertUserMarks(userMarks);
+
             connection.commit();
         } catch (SQLException e) {
             rollback(connection);

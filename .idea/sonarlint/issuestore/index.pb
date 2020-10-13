@@ -148,3 +148,13 @@ s
 Csrc/main/java/com/epam/koretskyi/commission/util/constant/Path.java,8\8\883c62117e9dc21ad1dfef5cd9d630422fc77324
 €
 Psrc/main/java/com/epam/koretskyi/commission/db/bean/FacultyApplicationsBean.java,2\e\2ee3f1244acff02c6ab1f2f0110e4cd016b5ca7e
+q
+Asrc/main/java/com/epam/koretskyi/commission/db/FacultyStatus.java,6\f\6ff46dedb4972d2c37658584b73dcff5c8540fd3
+y
+Isrc/main/java/com/epam/koretskyi/commission/util/constant/ActionType.java,7\8\781390f2f0ebabd13707bd31f0d4ac3781f1609c
+}
+Msrc/main/java/com/epam/koretskyi/commission/web/command/ErrorPageCommand.java,8\4\841f4ba70e3626cd2e647af3cbd15f2f5b3b28d8
+\
+,webapp/WEB-INF/jsp/user/faculty_entrants.jsp,f\2\f226917e0aa098357e128e8e77dfe7cd5497742b
+‹
+[src/main/java/com/epam/koretskyi/commission/web/command/ViewFacultyApplicationsCommand.java,4\7\470eba93d425c2a4e0228a449a171d078cba4449

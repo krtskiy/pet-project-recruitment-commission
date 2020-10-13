@@ -55,25 +55,25 @@
                     <c:choose>
                         <c:when test="${currentLocale == 'uk'}">
                             <p>${faculty.facultyNameUk} |
-                                <a href=href="controller?command=viewFacultyApplications&facultyId=${faculty.id}"><strong><fmt:message
+                                <a href="controller?command=viewFacultyApplications&facultyId=${faculty.facultyId}"><strong><fmt:message
                                         key="private_office_jsp.button.view_entrants"/> </strong></a> |
-                                <a href=href="controller?command=deleteEntrantsApplication&facultyId=${faculty.id}"><strong><fmt:message
+                                <a href="controller?command=deleteEntrantsApplication&facultyId=${faculty.facultyId}"><strong><fmt:message
                                         key="private_office_jsp.button.delete_application"/></strong></a>
                             </p>
                         </c:when>
                         <c:when test="${currentLocale == 'en'}">
                             <p>${faculty.facultyNameEn} |
-                                <a href=href="controller?command=viewFacultyApplications&facultyId=${faculty.id}"><strong><fmt:message
+                                <a href="controller?command=viewFacultyApplications&facultyId=${faculty.facultyId}"><strong><fmt:message
                                         key="private_office_jsp.button.view_entrants"/></strong></a> |
-                                <a href=href="controller?command=deleteEntrantsApplication&facultyId=${faculty.id}"><strong><fmt:message
+                                <a href=href="controller?command=deleteEntrantsApplication&facultyId=${faculty.facultyId}"><strong><fmt:message
                                         key="private_office_jsp.button.delete_application"/></strong></a>
                             </p>
                         </c:when>
                         <c:otherwise>
                             <p>${faculty.facultyNameEn} |
-                                <a href=href="controller?command=viewFacultyApplications&facultyId=${faculty.id}"><strong><fmt:message
+                                <a href="controller?command=viewFacultyApplications&facultyId=${faculty.facultyId}"><strong><fmt:message
                                         key="private_office_jsp.button.view_entrants"/></strong></a> |
-                                <a href=href="controller?command=deleteEntrantsApplication&facultyId=${faculty.id}"><strong><fmt:message
+                                <a href="controller?command=deleteEntrantsApplication&facultyId=${faculty.facultyId}"><strong><fmt:message
                                         key="private_office_jsp.button.delete_application"/></strong></a>
                             </p>
                         </c:otherwise>

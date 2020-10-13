@@ -12,7 +12,8 @@ import java.util.TreeMap;
  */
 public class CommandContainer {
 
-    private CommandContainer() {}
+    private CommandContainer() {
+    }
 
     private static Map<String, Command> commands = new TreeMap<>();
 
@@ -29,6 +30,15 @@ public class CommandContainer {
         commands.put("registerForFaculty", new RegisterForFacultyCommand());
         commands.put("viewFacultyApplications", new ViewFacultyApplicationsCommand());
 
+        // admin
+        commands.put("listOfUsers", new ListOfUsersCommand());
+        commands.put("adminPanelPage", new AdminPanelPageCommand());
+        commands.put("findUserByEmail", new FindUserByEmailCommand());
+        commands.put("updateUsersStatus", new UpdateUsersStatusCommand());
+        commands.put("deleteFaculty", new DeleteFacultyCommand());
+        commands.put("updateFaculty", new UpdateFacultyCommand());
+        commands.put("createNewFaculty", new CreateNewFacultyCommand());
+
         // page view commands
         commands.put("loginPage", new LoginPageCommand());
         commands.put("registerUserPage", new RegisterUserPageCommand());
@@ -41,15 +51,6 @@ public class CommandContainer {
         commands.put("updateFacultyPage", new UpdateFacultyPageCommand());
         commands.put("createNewFacultyPage", new CreateNewFacultyPageCommand());
 
-        // admin
-        commands.put("listOfUsers", new ListOfUsersCommand());
-        commands.put("adminPanelPage", new AdminPanelPageCommand());
-        commands.put("findUserByEmail", new FindUserByEmailCommand());
-        commands.put("updateUsersStatus", new UpdateUsersStatusCommand());
-        commands.put("deleteFaculty", new DeleteFacultyCommand());
-        commands.put("updateFaculty", new UpdateFacultyCommand());
-        commands.put("createNewFaculty", new CreateNewFacultyCommand());
-
         LOG.debug("Command container was successfully initialized");
         LOG.trace("Number of commands --> " + commands.size());
     }
@@ -59,7 +60,7 @@ public class CommandContainer {
      *
      * @param commandName Name of the command.
      * @return Command object if container contains such command, otherwise
-     *         specific <code>noCommand</code object will be returned.
+     * specific <code>noCommand</code object will be returned.
      */
     public static Command getCommand(String commandName) {
         if (commandName == null || !commands.containsKey(commandName)) {

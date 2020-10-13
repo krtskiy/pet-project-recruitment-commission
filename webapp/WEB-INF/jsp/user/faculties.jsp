@@ -125,13 +125,15 @@
                         </td>
                         <c:if test="${userRole.name == 'user' and user.statusId != 1}">
                             <td>
-                                <a href="controller?command=viewFacultyApplications&facultyId=${faculty.id}"><strong><fmt:message key="faculties_jsp.button.view_entrants"/></strong></a>
+                                <a href="controller?command=viewFacultyApplications&facultyId=${faculty.id}"><strong><fmt:message
+                                        key="faculties_jsp.button.view_entrants"/></strong></a>
                                 <c:choose>
                                     <c:when test="${fn:contains(userFaculties, faculty.id)}">
                                         <strong><fmt:message key="faculties_jsp.text.already_registered"/></strong>
                                     </c:when>
                                     <c:otherwise>
-                                        <a href="controller?command=registerForFacultyPage&facultyId=${faculty.id}"><strong><fmt:message key="faculties_jsp.button.register"/></strong></a>
+                                        <a href="controller?command=registerForFacultyPage&facultyId=${faculty.id}"><strong><fmt:message
+                                                key="faculties_jsp.button.register"/></strong></a>
                                     </c:otherwise>
                                 </c:choose>
                             </td>

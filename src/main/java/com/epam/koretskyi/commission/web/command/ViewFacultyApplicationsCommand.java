@@ -44,6 +44,7 @@ public class ViewFacultyApplicationsCommand extends Command {
 
         // sort by sum of marks
         facultyApplications.sort(Comparator.comparingInt(FacultyApplicationsBean::sumOfMarks).reversed());
+        LOG.trace("Applications sorted by sum of marks");
 
         request.setAttribute("facultyApplications", facultyApplications);
         LOG.trace("Set request attribute: facultyApplications --> " + facultyApplications);

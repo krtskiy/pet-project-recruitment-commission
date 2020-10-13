@@ -589,7 +589,7 @@ public class DBManager {
                 FacultyApplicationsBean facultyApplicationsBean = new FacultyApplicationsBean();
                 facultyApplicationsBean.setUserName(resultSet.getString(Field.USER_NAME));
                 facultyApplicationsBean.setUserSurname(resultSet.getString(Field.USER_SURNAME));
-                facultyApplicationsBean.setUserMarks(findUserMarksByUserIdAndFacultyId(resultSet.getInt(Field.ID), facultyId));
+                facultyApplicationsBean.setUserMarks(findUserMarksForSpecificFacultyByUserId(resultSet.getInt(Field.ID), facultyId));
                 facultyApplications.add(facultyApplicationsBean);
             }
         } catch (SQLException e) {
@@ -666,7 +666,7 @@ public class DBManager {
         return userMarks;
     }
 
-    private List<UserMarksBean> findUserMarksByUserIdAndFacultyId(int userId, int facultyId) throws DBException {
+    private List<UserMarksBean> findUserMarksForSpecificFacultyByUserId(int userId, int facultyId) throws DBException {
         List<UserMarksBean> userMarks = new ArrayList<>();
         Connection connection = null;
         PreparedStatement preparedStatement = null;

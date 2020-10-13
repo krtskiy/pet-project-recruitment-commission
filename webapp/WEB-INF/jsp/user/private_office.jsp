@@ -15,50 +15,67 @@
     <tr>
         <td class="content">
 
-            <c:if test="${not empty requestScope.successMessage}">
-                <span style="color: #1B860A">Login data changed successfully</span>
+            <c:if test="${not empty successMessage}">
+                <h3><span style="color: #1B860A"><fmt:message key="private_office_jsp.message.data_changed"/><br> </span></h3>
+                <% request.getSession().removeAttribute("successMessage"); %>
             </c:if>
 
-            <h3>Personal information:</h3>
-            <p><c:out value="Email | ${user.email}"/></p>
-            <p><c:out value="Name | ${user.name}"/></p>
-            <p><c:out value="Surname | ${user.surname}"/></p>
-            <p><c:out value="Patronymic | ${user.patronymic}"/></p>
-            <p><c:out value="Region | ${user.region}"/></p>
-            <p><c:out value="City | ${user.city}"/></p>
-            <p><c:out value="Educational institution | ${user.institutionName}"/></p>
+            <a href="controller?command=updateUserPage"><strong><fmt:message
+                    key="private_office_jsp.button.change_data"/></strong></a>
 
-            <a href="controller?command=updateUserPage"><strong>Change login data</strong></a>
+            <h3><fmt:message key="private_office_jsp.text.personal_info"/></h3>
+            <p>Email | <strong>${user.email}</strong></p>
+            <p><fmt:message key="private_office_jsp.text.name"/> | <strong>${user.name}</strong></p>
+            <p><fmt:message key="private_office_jsp.text.surname"/> | <strong>${user.surname}</strong></p>
+            <p><fmt:message key="private_office_jsp.text.patronymic"/> | <strong>${user.patronymic}</strong></p>
+            <p><fmt:message key="private_office_jsp.text.region"/> | <strong>${user.region}</strong></p>
+            <p><fmt:message key="private_office_jsp.text.city"/> | <strong>${user.city}</strong></p>
+            <p><fmt:message key="private_office_jsp.text.institution"/> | <strong>${user.institutionName}</strong></p>
 
             <c:if test="${not empty userMarks}">
-                <h3>Your marks:</h3>
+                <h3><fmt:message key="private_office_jsp.text.marks"/></h3>
                 <c:forEach var="mark" items="${userMarks}">
                     <c:choose>
                         <c:when test="${currentLocale == 'uk'}">
-                            <p>${criteria[mark.criterionId - 1].nameUk} : <strong>${mark.mark}</strong></p>
+                            <p>${mark.criterionNameUk} : <strong>${mark.mark}</strong></p>
                         </c:when>
                         <c:when test="${currentLocale == 'en'}">
-                            <p>${criteria[mark.criterionId - 1].nameEn} : <strong>${mark.mark}</strong></p>
+                            <p>${mark.criterionNameEn} : <strong>${mark.mark}</strong></p>
                         </c:when>
                         <c:otherwise>
-                            <p>${criteria[mark.criterionId - 1].nameEn} : <strong>${mark.mark}</strong></p>
+                            <p>${mark.criterionNameEn} : <strong>${mark.mark}</strong></p>
                         </c:otherwise>
                     </c:choose>
                 </c:forEach>
             </c:if>
 
-            <c:if test="${not empty applications}">
-                <h3>You applied for:</h3>
-                <c:forEach var="application" items="${applications}">
+            <c:if test="${not empty userFaculties}">
+                <h3><fmt:message key="private_office_jsp.text.applications"/></h3>
+                <c:forEach var="faculty" items="${userFaculties}">
                     <c:choose>
                         <c:when test="${currentLocale == 'uk'}">
-                            <p>${faculties[application.facultyId - 1].nameUk}</p>
+                            <p>${faculty.facultyNameUk} |
+                                <a href=href="controller?command=viewFacultyApplications&facultyId=${faculty.id}"><strong><fmt:message
+                                        key="private_office_jsp.button.view_entrants"/> </strong></a> |
+                                <a href=href="controller?command=deleteEntrantsApplication&facultyId=${faculty.id}"><strong><fmt:message
+                                        key="private_office_jsp.button.delete_application"/></strong></a>
+                            </p>
                         </c:when>
                         <c:when test="${currentLocale == 'en'}">
-                            <p>${faculties[application.facultyId - 1].nameEn}</p>
+                            <p>${faculty.facultyNameEn} |
+                                <a href=href="controller?command=viewFacultyApplications&facultyId=${faculty.id}"><strong><fmt:message
+                                        key="private_office_jsp.button.view_entrants"/></strong></a> |
+                                <a href=href="controller?command=deleteEntrantsApplication&facultyId=${faculty.id}"><strong><fmt:message
+                                        key="private_office_jsp.button.delete_application"/></strong></a>
+                            </p>
                         </c:when>
                         <c:otherwise>
-                            <p>${faculties[application.facultyId - 1].nameEn}</p>
+                            <p>${faculty.facultyNameEn} |
+                                <a href=href="controller?command=viewFacultyApplications&facultyId=${faculty.id}"><strong><fmt:message
+                                        key="private_office_jsp.button.view_entrants"/></strong></a> |
+                                <a href=href="controller?command=deleteEntrantsApplication&facultyId=${faculty.id}"><strong><fmt:message
+                                        key="private_office_jsp.button.delete_application"/></strong></a>
+                            </p>
                         </c:otherwise>
                     </c:choose>
                 </c:forEach>

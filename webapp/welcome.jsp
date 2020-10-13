@@ -9,6 +9,7 @@
 
 <body>
 <table id="main-container">
+    <%-- TODO l10n --%>
     <%@ include file="/WEB-INF/jspf/header.jspf" %>
     <tr>
         <td class="content">

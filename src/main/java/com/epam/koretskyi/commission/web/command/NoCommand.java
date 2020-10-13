@@ -1,6 +1,6 @@
 package com.epam.koretskyi.commission.web.command;
 
-import com.epam.koretskyi.commission.constant.Path;
+import com.epam.koretskyi.commission.util.constant.Path;
 import com.epam.koretskyi.commission.exception.AppException;
 import org.apache.log4j.Logger;
 
@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
+ * Invoked when no command was found for client request.
+ *
  * @author D.Koretskyi on 29.09.2020.
  */
 public class NoCommand extends Command {

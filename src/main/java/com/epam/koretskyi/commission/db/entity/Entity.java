@@ -3,6 +3,9 @@ package com.epam.koretskyi.commission.db.entity;
 import java.io.Serializable;
 
 /**
+ * Basic common parent for all entities. Provides id field and get/set methods
+ * for him.
+ *
  * @author D.Koretskyi on 22.09.2020.
  */
 public abstract class Entity implements Serializable {

@@ -17,8 +17,8 @@
             <%-- CONTENT --%>
 
             <h2 class="error">
-                You are blocked by an administrator.<br>
-                Contacts: admin@krtskiy.com
+                <fmt:message key="blocked_user_page_jsp.text.message"/><br>
+                <fmt:message key="blocked_user_page_jsp.text.contacts"/> admin@krtskiy.com
             </h2>
 
 

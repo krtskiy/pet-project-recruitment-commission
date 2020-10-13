@@ -24,6 +24,7 @@ public class Messages {
     // applications-related
     public static final String ERR_CANNOT_INSERT_APPLICATION = "Cannot insert application!";
     public static final String ERR_CANNOT_FIND_USER_APPLICATIONS = "Cannot find user application!";
+    public static final String ERR_CANNOT_FIND_FACULTY_APPLICATIONS = "Cannot  find faculty applications!";
 
     // faculty-related
     public static final String ERR_CANNOT_UPDATE_FACULTY = "Cannot update faculty!";

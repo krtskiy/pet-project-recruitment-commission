@@ -1,6 +1,7 @@
 package com.epam.koretskyi.commission.web.command;
 
-import com.epam.koretskyi.commission.constant.Path;
+import com.epam.koretskyi.commission.db.bean.UserFacultiesBean;
+import com.epam.koretskyi.commission.util.constant.Path;
 import com.epam.koretskyi.commission.db.DBManager;
 import com.epam.koretskyi.commission.db.entity.Criterion;
 import com.epam.koretskyi.commission.db.entity.Faculty;
@@ -46,10 +47,18 @@ public class RegisterForFacultyCommand extends Command {
             userMarks.add(uMark);
         }
 
+        // TODO this should be as a transaction
         DBManager.getInstance().insertApplication(user.getId(), faculty.getId());
         DBManager.getInstance().insertUserMarks(userMarks);
 
+        session.setAttribute("facultyRegisteredFor", faculty);
+        LOG.trace("Set the session attribute: facultyRegisteredFor --> " + faculty);
+
+        List<UserFacultiesBean> userFacultiesBean = DBManager.getInstance().findUserFacultiesByUserId(user.getId());
+        session.setAttribute("userFaculties", userFacultiesBean);
+        LOG.trace("Set the session attribute: userFaculties --> " + userFacultiesBean);
+
         LOG.debug("Command finished");
-        return Path.COMMAND_PRIVATE_OFFICE;
+        return Path.COMMAND_FACULTIES;
     }
 }

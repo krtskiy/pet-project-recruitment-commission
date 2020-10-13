@@ -6,9 +6,9 @@
 
         <div id="leftHeader">
 
-            <a href="welcome.jsp"><fmt:message key="header_jspf.link.homepage"/> </a>
+            <a href="welcome.jsp"><fmt:message key="header_jspf.button.homepage"/> </a>
             <c:if test="${userRole.name ne 'admin'}">
-                <a href="controller?command=listOfFaculties&sort=nameAsc"><fmt:message
+                <a href="controller?command=listOfFaculties&sort=number"><fmt:message
                         key="header_jspf.button.faculties_list"/> </a>
             </c:if>
 

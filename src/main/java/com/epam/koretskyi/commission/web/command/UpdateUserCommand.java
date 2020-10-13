@@ -1,8 +1,8 @@
 package com.epam.koretskyi.commission.web.command;
 
-import com.epam.koretskyi.commission.constant.Path;
+import com.epam.koretskyi.commission.util.constant.Path;
 import com.epam.koretskyi.commission.db.DBManager;
-import com.epam.koretskyi.commission.db.MD5Util;
+import com.epam.koretskyi.commission.util.MD5Util;
 import com.epam.koretskyi.commission.db.entity.User;
 import com.epam.koretskyi.commission.exception.AppException;
 import org.apache.log4j.Logger;
@@ -51,13 +51,16 @@ public class UpdateUserCommand extends Command {
             user.setPassword(newPasswordHash);
         }
 
-        session.setAttribute("user", user);
         DBManager.getInstance().updateUser(user);
+        session.setAttribute("user", user);
+        LOG.trace("Set the request attribute: user --> " + user);
 
         if (!newPassword.equals("") || !newEmail.equals("")) {
             String successMessage = "Login data changed successfully";
-            request.setAttribute("successMessage", successMessage);
+            session.setAttribute("successMessage", successMessage);
+            LOG.trace("Set the session attribute: successMessage --> " + successMessage);
         }
+
         LOG.debug("Command finished");
         return Path.COMMAND_PRIVATE_OFFICE;
     }

@@ -1,6 +1,8 @@
 package com.epam.koretskyi.commission.web.command;
 
-import com.epam.koretskyi.commission.constant.Path;
+import com.epam.koretskyi.commission.db.bean.UserFacultiesBean;
+import com.epam.koretskyi.commission.db.entity.User;
+import com.epam.koretskyi.commission.util.constant.Path;
 import com.epam.koretskyi.commission.db.DBManager;
 import com.epam.koretskyi.commission.db.Role;
 import com.epam.koretskyi.commission.db.entity.Criterion;
@@ -30,12 +32,18 @@ public class ListOfFacultiesCommand extends Command {
         LOG.debug("Command starts");
         HttpSession httpSession = request.getSession();
         Role userRole = (Role) httpSession.getAttribute("userRole");
+        User user = (User) httpSession.getAttribute("user");
 
         // get faculties list
         List<Faculty> faculties = DBManager.getInstance().findAllFaculties();
         LOG.trace("Found in DB: faculties --> " + faculties);
 
         String sortParam = request.getParameter("sort");
+        // sort faculties by faculty number
+        if ("number".equals(sortParam)) {
+            faculties.sort(Comparator.comparing(Faculty::getId));
+            LOG.trace("Faculties sorted by faculty number in ascending order");
+        }
         // sort faculties by name asc
         if ("nameAsc".equals(sortParam)) {
             faculties.sort(Comparator.comparing(Faculty::getNameEn));
@@ -67,6 +75,12 @@ public class ListOfFacultiesCommand extends Command {
         // put faculties list to the request
         request.setAttribute("faculties", faculties);
         LOG.trace("Set the request attribute: faculties --> " + faculties);
+
+        if (user != null) {
+            List<UserFacultiesBean> userFaculties = DBManager.getInstance().findUserFacultiesByUserId(user.getId());
+            request.setAttribute("userFaculties", userFaculties);
+            LOG.trace("Set the request attribute: userFaculties --> " + userFaculties);
+        }
 
         if (userRole == Role.ADMIN) {
             return Path.PAGE_FACULTIES_ADMIN;

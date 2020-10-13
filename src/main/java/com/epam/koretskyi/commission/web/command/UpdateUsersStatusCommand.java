@@ -1,6 +1,6 @@
 package com.epam.koretskyi.commission.web.command;
 
-import com.epam.koretskyi.commission.constant.Path;
+import com.epam.koretskyi.commission.util.constant.Path;
 import com.epam.koretskyi.commission.db.DBManager;
 import com.epam.koretskyi.commission.db.entity.User;
 import com.epam.koretskyi.commission.exception.AppException;

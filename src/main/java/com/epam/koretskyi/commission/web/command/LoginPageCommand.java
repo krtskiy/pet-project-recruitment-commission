@@ -1,6 +1,6 @@
 package com.epam.koretskyi.commission.web.command;
 
-import com.epam.koretskyi.commission.constant.Path;
+import com.epam.koretskyi.commission.util.constant.Path;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;

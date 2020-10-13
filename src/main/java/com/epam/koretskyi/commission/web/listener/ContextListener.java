@@ -12,12 +12,13 @@ import java.io.IOException;
 import java.util.Properties;
 
 /**
+ * Context listener. Initializes log4j and Command Manager for future use.
+ *
  * @author D.Koretskyi on 22.09.2020.
  */
 public class ContextListener implements ServletContextListener {
 
     private static final Logger LOG = Logger.getLogger(ContextListener.class);
-
 
     public void contextInitialized(ServletContextEvent event) {
         System.out.println("[ContextListener] Servlet context initialization starts");
@@ -51,6 +52,12 @@ public class ContextListener implements ServletContextListener {
         System.out.println("[ContextListener] Servlet context destruction finished");
     }
 
+    /**
+     * Initializes log4j framework.
+     *
+     * @param servletContext with <code>log4j.properties</code> file path, from which
+     *                       <code>log4j</code> will be configured
+     */
     private void initLog4J(ServletContext servletContext) {
         System.out.println("[ContextListener] Log4j initialization started");
         try {
@@ -64,6 +71,9 @@ public class ContextListener implements ServletContextListener {
 
     }
 
+    /**
+     * Initializes CommandManager.
+     */
     private void initCommandContainer() {
         try {
             Class.forName("com.epam.koretskyi.commission.web.command.CommandContainer");

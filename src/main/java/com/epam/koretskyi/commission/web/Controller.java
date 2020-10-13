@@ -1,7 +1,7 @@
 package com.epam.koretskyi.commission.web;
 
-import com.epam.koretskyi.commission.constant.ActionType;
-import com.epam.koretskyi.commission.constant.Path;
+import com.epam.koretskyi.commission.util.constant.ActionType;
+import com.epam.koretskyi.commission.util.constant.Path;
 import com.epam.koretskyi.commission.exception.AppException;
 import com.epam.koretskyi.commission.web.command.Command;
 import com.epam.koretskyi.commission.web.command.CommandContainer;
@@ -29,6 +29,17 @@ public class Controller extends HttpServlet {
         process(request, response, ActionType.GET);
     }
 
+    /**
+     * Handles all requests coming from the client by executing the specified
+     * command name in a request. Implements PRG pattern by checking action type
+     * specified by the invoked method.
+     *
+     * @param request
+     * @param response
+     * @param actionType
+     * @throws ServletException
+     * @throws IOException
+     */
     private void process(HttpServletRequest request, HttpServletResponse response, ActionType actionType)
             throws ServletException, IOException {
         LOG.debug("Controller starts");

@@ -20,21 +20,49 @@
             <form id="register_form" method="post" action="controller">
                 <input type="hidden" name="command" value="registerForFaculty">
 
-                <h3>Enter your grades</h3>
+                <h3><fmt:message key="faculty_register_page_jsp.text.enter_grades"/></h3>
                 <c:forEach var="criterion" items="${faculty.criteria}">
                     <c:choose>
-                        <c:when test="${criterion.id == 1}">
-                            <small>${criterion.nameEn}:</small><br><input type="number" required name="marks"
-                                                                         min="0" max="12"><br>
+                        <c:when test="${currentLocale == 'uk'}">
+                            <c:choose>
+                                <c:when test="${criterion.id == 1}">
+                                    <small>${criterion.nameUk}:</small><br><input type="number" required name="marks"
+                                                                                  min="0" max="12"><br>
+                                </c:when>
+                                <c:otherwise>
+                                    <small>${criterion.nameUk}:</small><br><input type="number" required name="marks"
+                                                                                  min="0" max="200"><br>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:when>
+                        <c:when test="${currentLocale == 'en'}">
+                            <c:choose>
+                                <c:when test="${criterion.id == 1}">
+                                    <small>${criterion.nameEn}:</small><br><input type="number" required name="marks"
+                                                                                  min="0" max="12"><br>
+                                </c:when>
+                                <c:otherwise>
+                                    <small>${criterion.nameEn}:</small><br><input type="number" required name="marks"
+                                                                                  min="0" max="200"><br>
+                                </c:otherwise>
+                            </c:choose>
                         </c:when>
                         <c:otherwise>
-                            <small>${criterion.nameEn}:</small><br><input type="number" required name="marks"
-                                                                         min="0" max="200"><br>
+                            <c:choose>
+                                <c:when test="${criterion.id == 1}">
+                                    <small>${criterion.nameEn}:</small><br><input type="number" required name="marks"
+                                                                                  min="0" max="12"><br>
+                                </c:when>
+                                <c:otherwise>
+                                    <small>${criterion.nameEn}:</small><br><input type="number" required name="marks"
+                                                                                  min="0" max="200"><br>
+                                </c:otherwise>
+                            </c:choose>
                         </c:otherwise>
                     </c:choose>
                 </c:forEach>
 
-                <input type="submit" value="Apply">
+                <input type="submit" value="<fmt:message key="faculty_register_page_jsp.button.apply"/>">
             </form>
 
         </td>

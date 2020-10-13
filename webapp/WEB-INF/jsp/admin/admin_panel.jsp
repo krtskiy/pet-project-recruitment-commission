@@ -12,9 +12,9 @@
     <%@ include file="/WEB-INF/jspf/header.jspf" %>
     <tr>
         <td class="content center">
-            <h1>Admin panel</h1>
-            <a href="controller?command=listOfFaculties&sort=nameAsc">Faculties</a>
-            <a href="controller?command=listOfUsers&page=1&sort=id">Users</a>
+            <h1><fmt:message key="admin_panel_jsp.text.admin_panel"/></h1>
+            <a href="controller?command=listOfFaculties&sort=nameAsc"><strong><fmt:message key="admin_panel_jsp.button.faculties"/></strong></a>
+            <a href="controller?command=listOfUsers&page=1&sort=id"><strong><fmt:message key="admin_panel_jsp.button.users"/></strong></a>
         </td>
     </tr>
         <%@ include file="/WEB-INF/jspf/footer.jspf" %>

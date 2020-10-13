@@ -9,11 +9,24 @@ import java.io.IOException;
 import java.io.Serializable;
 
 /**
+ * Main parent for the Command pattern implementation.
+ *
  * @author D.Koretskyi on 22.09.2020.
  */
 public abstract class Command implements Serializable {
     private static final long serialVersionUID = 6980195259452967649L;
 
+    /**
+     * Execution method for command. Returns path to go to based on the client
+     * request.
+     *
+     * @param request  - client request
+     * @param response - server response
+     * @return Address to go once the command is executed.
+     * @throws IOException
+     * @throws ServletException
+     * @throws AppException
+     */
     public abstract String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException,
             AppException;
 

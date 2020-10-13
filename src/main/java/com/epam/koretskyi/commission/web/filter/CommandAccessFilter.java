@@ -1,6 +1,6 @@
 package com.epam.koretskyi.commission.web.filter;
 
-import com.epam.koretskyi.commission.constant.Path;
+import com.epam.koretskyi.commission.util.constant.Path;
 import com.epam.koretskyi.commission.db.Role;
 import org.apache.log4j.Logger;
 

@@ -1,6 +1,6 @@
 package com.epam.koretskyi.commission.web.command;
 
-import com.epam.koretskyi.commission.constant.Path;
+import com.epam.koretskyi.commission.util.constant.Path;
 import com.epam.koretskyi.commission.db.DBManager;
 import com.epam.koretskyi.commission.db.entity.Criterion;
 import com.epam.koretskyi.commission.db.entity.Faculty;
@@ -51,8 +51,10 @@ public class CreateNewFacultyCommand extends Command {
 
         String[] criteriaIdArr = request.getParameterValues("criterionId");
         List<Criterion> criteria = new ArrayList<>();
-        for (String criteriaId : criteriaIdArr) {
-            criteria.add(DBManager.getInstance().findCriterionById(Integer.parseInt(criteriaId)));
+        if (criteriaIdArr != null) {
+            for (String criteriaId : criteriaIdArr) {
+                criteria.add(DBManager.getInstance().findCriterionById(Integer.parseInt(criteriaId)));
+            }
         }
 
         if (!criteria.isEmpty()) {
@@ -62,7 +64,7 @@ public class CreateNewFacultyCommand extends Command {
         LOG.trace("Request parameter: faculty criteria --> " + criteria);
 
         if (id.equals("") || nameEn.equals("") || nameUk.equals("") ||
-                totalSeats.equals("") || budgetSeats.equals("")) {
+                totalSeats.equals("") || budgetSeats.equals("") || criteriaIdArr == null) {
             throw new AppException("Fields can not be empty!");
         }
 

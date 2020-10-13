@@ -17,32 +17,35 @@
     <tr>
         <td class="content center">
 
-            <h1><fmt:message key="register_jsp.text.registration_form"/></h1>
+            <h1><fmt:message key="new_faculty_jsp.text.add_faculty"/></h1>
             <h4></h4>
 
             <form id="register_form" method="post" action="controller">
                 <input type="hidden" name="command" value="createNewFaculty">
 
-                <input type="number" name="id" min="0" placeholder="Id" style="width: 250px"><br>
-                <input type="text" name="nameEn" maxlength="100" placeholder="Name in English" style="width: 250px"><br>
-                <input type="text" name="nameUk" maxlength="100" placeholder="Name in Ukrainian"
+                <input type="number" name="id" min="0" placeholder="<fmt:message key="new_faculty_jsp.placeholder.faculty_number"/>" style="width: 250px"><br>
+                <input type="text" name="nameEn" maxlength="100" placeholder="<fmt:message key="update_faculty_jsp.placeholder.new_name_en"/>" style="width: 250px"><br>
+                <input type="text" name="nameUk" maxlength="100" placeholder="<fmt:message key="update_faculty_jsp.placeholder.new_name_uk"/>"
                        style="width: 250px"><br>
-                <input type="number" name="totalSeats" min="0" placeholder="Total amount of seats" style="width: 250px"><br>
-                <input type="number" name="budgetSeats" min="0" placeholder="Amount of budget seats"
+                <input type="number" name="totalSeats" min="0" placeholder="<fmt:message key="update_faculty_jsp.placeholder.new_total_seats"/>" style="width: 250px"><br>
+                <input type="number" name="budgetSeats" min="0" placeholder="<fmt:message key="update_faculty_jsp.placeholder.new_budget_seats"/>"
                        style="width: 250px"><br>
 
-                <strong>Select criteria for selection </strong><small>(select 4):</small><br>
+                <strong><fmt:message key="new_faculty_jsp.text.criteria"/> </strong><small><fmt:message key="new_faculty_jsp.text.criteria_quantity"/></small><br>
                 <c:forEach var="criterion" items="${criteria}">
                     <c:choose>
-                        <c:when test="${criterion.id == 1}">
-                            <input type="checkbox" name="criterionId" value="${criterion.id}" checked onclick="return false;"> ${criterion.nameEn}<br>
+                        <c:when test="${currentLocale == 'uk'}">
+                            <input type="checkbox" name="criterionId" value="${criterion.id}"> ${criterion.nameUk}<br>
+                        </c:when>
+                        <c:when test="${currentLocale == 'en'}">
+                            <input type="checkbox" name="criterionId" value="${criterion.id}"> ${criterion.nameEn}<br>
                         </c:when>
                         <c:otherwise>
                             <input type="checkbox" name="criterionId" value="${criterion.id}"> ${criterion.nameEn}<br>
                         </c:otherwise>
                     </c:choose>
                 </c:forEach>
-                <input type="submit" value="Submit">
+                <input type="submit" value="<fmt:message key="new_faculty_jsp.button.submit"/>">
             </form>
 
 

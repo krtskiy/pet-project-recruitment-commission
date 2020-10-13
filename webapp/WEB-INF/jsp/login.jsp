@@ -15,19 +15,19 @@
         <td class="content center">
 
             <c:if test="${not empty successRegMessage}">
-                <h3><span style="color: #1B860A"><c:out value="${successRegMessage}"/></span></h3>
+                <h3><span style="color: #1B860A"><fmt:message key="login_jsp.text.success_message"/> </span></h3><br>
                 <% request.getSession().removeAttribute("successRegMessage"); %>
             </c:if>
 
-            <h1>Login form:</h1>
+            <h1><fmt:message key="login_jsp.text.login_form"/></h1>
 
             <form id="login_form" method="post" action="controller">
                 <input type="hidden" name="command" value="login">
 
                 <input type="email" name="email" maxlength="255" placeholder="Email"><br>
-                <input type="password" name="password" maxlength="32" placeholder="Password"><br>
+                <input type="password" name="password" maxlength="32" placeholder="<fmt:message key="login_jsp.placeholder.password"/> "><br>
 
-                <input type="submit" value="Log In">
+                <input type="submit" value="<fmt:message key="login_jsp.button.log_in"/> ">
             </form>
         </td>
     </tr>

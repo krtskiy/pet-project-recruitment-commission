@@ -3,6 +3,8 @@ package com.epam.koretskyi.commission.db;
 import com.epam.koretskyi.commission.db.entity.User;
 
 /**
+ * User role type.
+ *
  * @author D.Koretskyi on 22.09.2020.
  */
 public enum Role {

@@ -1,6 +1,6 @@
 package com.epam.koretskyi.commission.web.command;
 
-import com.epam.koretskyi.commission.constant.Path;
+import com.epam.koretskyi.commission.util.constant.Path;
 import com.epam.koretskyi.commission.db.DBManager;
 import com.epam.koretskyi.commission.db.entity.Criterion;
 import com.epam.koretskyi.commission.db.entity.Faculty;
@@ -73,6 +73,14 @@ public class UpdateFacultyCommand extends Command {
         }
 
         DBManager.getInstance().updateFaculty(faculty);
+
+        if (!newNameEn.equals("") || !newNameUk.equals("") || !newTotalSeats.equals("")
+                || !newBudgetSeats.equals("") || criteriaIdArr != null)
+        {
+            String successFacEditMessage = "Faculty changed successfully";
+            session.setAttribute("successFacEditMessage", successFacEditMessage);
+            LOG.trace("Set the session attribute: successFacEditMessage --> " + successFacEditMessage);
+        }
 
         LOG.debug("Command finished");
         return Path.COMMAND_FACULTIES;

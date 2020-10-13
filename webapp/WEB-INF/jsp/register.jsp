@@ -6,7 +6,6 @@
 
 <c:set var="title" value="Sign Up" scope="page"/>
 <%@ include file="/WEB-INF/jspf/head.jspf" %>
-<script src="https://www.google.com/recaptcha/api.js"></script>
 
 <body>
 <table id="main-container">
@@ -32,19 +31,19 @@
 
                 <input type="password" name="password" minlength="6" maxlength="32" size="35"
                        required pattern=".*\S+.*"
-                       placeholder="<fmt:message key="register_jsp.field_placeholder.password"/> "><br>
+                       placeholder="<fmt:message key="register_jsp.placeholder.password"/> "><br>
 
                 <input type="text" name="name" pattern="[A-Za-z]{1,45}" size="35"
                        required title="<fmt:message key="register_jsp.field_popup.name_format"/>"
-                       placeholder="<fmt:message key="register_jsp.field_placeholder.name"/>"><br>
+                       placeholder="<fmt:message key="register_jsp.placeholder.name"/>"><br>
 
                 <input type="text" name="surname" pattern="[A-Za-z]{1,45}" size="35"
                        required title="<fmt:message key="register_jsp.field_popup.surname_format"/>"
-                       placeholder="<fmt:message key="register_jsp.field_placeholder.surname"/>"><br>
+                       placeholder="<fmt:message key="register_jsp.placeholder.surname"/>"><br>
 
                 <input type="text" name="patronymic" pattern="[A-Za-z]{1,45}" size="35"
                        required title="<fmt:message key="register_jsp.field_popup.patronymic_format"/>"
-                       placeholder="<fmt:message key="register_jsp.field_placeholder.patronymic"/>"><br>
+                       placeholder="<fmt:message key="register_jsp.placeholder.patronymic"/>"><br>
 
                 <select name="region" id="selectRegion">
                     <option disabled selected><fmt:message key="register_jsp.select_region.placeholder"/></option>
@@ -84,11 +83,11 @@
 
                 <input type="text" name="city" size="35"
                        required pattern="[A-Za-z]{1,45}" title="<fmt:message key="register_jsp.field_popup.city_format"/>"
-                       placeholder="<fmt:message key="register_jsp.field_placeholder.city"/>"><br>
+                       placeholder="<fmt:message key="register_jsp.placeholder.city"/>"><br>
 
                 <input type="text" name="institutionName" size="35"
                        required title="<fmt:message key="register_jsp.field_popup.institution_format"/>"
-                       placeholder="<fmt:message key="register_jsp.field_placeholder.institution"/>"><br>
+                       placeholder="<fmt:message key="register_jsp.placeholder.institution"/>"><br>
 
                 <input type="submit" value="<fmt:message key="register_jsp.button.submit"/> ">
             </form>

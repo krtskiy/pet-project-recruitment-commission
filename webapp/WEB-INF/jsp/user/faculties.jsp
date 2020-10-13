@@ -13,44 +13,71 @@
     <tr>
         <td class="content">
 
-            <strong>Sort by:</strong>
-            <a href="controller?command=listOfFaculties&page=1&sort=nameAsc">
+            <c:if test="${not empty facultyRegisteredFor}">
+                <h3><span style="color: #1B860A"><fmt:message key="faculties_jsp.message.registered_for"/>
                 <c:choose>
-                    <c:when test="${param.sort == 'nameAsc'}">
-                        <strong>Name (a-z)</strong>
+                    <c:when test="${currentLocale == 'uk'}">
+                        ${facultyRegisteredFor.nameUk}<br>
                     </c:when>
-                    <c:when test="${param.sort != 'nameAsc'}">
-                        Name (a-z)
+                    <c:when test="${currentLocale == 'en'}">
+                        ${facultyRegisteredFor.nameEn}<br>
+                    </c:when>
+                    <c:otherwise>
+                        ${facultyRegisteredFor.nameEn}<br>
+                    </c:otherwise>
+                </c:choose>
+                </span></h3>
+                <% request.getSession().removeAttribute("facultyRegisteredFor"); %>
+            </c:if>
+
+            <strong><fmt:message key="faculties_jsp.text.sort_by"/></strong>
+            <a href="controller?command=listOfFaculties&sort=number">
+                <c:choose>
+                    <c:when test="${param.sort == 'number'}">
+                        <strong><fmt:message key="faculties_jsp.button.sort_number"/></strong>
+                    </c:when>
+                    <c:when test="${param.sort != 'number'}">
+                        <fmt:message key="faculties_jsp.button.sort_number"/>
                     </c:when>
                 </c:choose>
             </a>
-            <a href="controller?command=listOfFaculties&page=1&sort=nameDesc">
+            <a href="controller?command=listOfFaculties&sort=nameAsc">
+                <c:choose>
+                    <c:when test="${param.sort == 'nameAsc'}">
+                        <strong><fmt:message key="faculties_jsp.button.sort_name_az"/></strong>
+                    </c:when>
+                    <c:when test="${param.sort != 'nameAsc'}">
+                        <fmt:message key="faculties_jsp.button.sort_name_az"/>
+                    </c:when>
+                </c:choose>
+            </a>
+            <a href="controller?command=listOfFaculties&sort=nameDesc">
                 <c:choose>
                     <c:when test="${param.sort == 'nameDesc'}">
-                        <strong>Name (z-a)</strong>
+                        <strong><fmt:message key="faculties_jsp.button.sort_name_za"/></strong>
                     </c:when>
                     <c:when test="${param.sort != 'nameDesc'}">
-                        Name (z-a)
+                        <fmt:message key="faculties_jsp.button.sort_name_za"/>
                     </c:when>
                 </c:choose>
             </a>
             <a href="controller?command=listOfFaculties&sort=budgetSeats">
                 <c:choose>
                     <c:when test="${param.sort == 'budgetSeats'}">
-                        <strong>Budget seats</strong>
+                        <strong><fmt:message key="faculties_jsp.button.sort_budget_seats"/></strong>
                     </c:when>
                     <c:when test="${param.sort != 'budgetSeats'}">
-                        Budget seats
+                        <fmt:message key="faculties_jsp.button.sort_budget_seats"/>
                     </c:when>
                 </c:choose>
             </a>
             <a href="controller?command=listOfFaculties&sort=totalSeats">
                 <c:choose>
                     <c:when test="${param.sort == 'totalSeats'}">
-                        <strong>Total seats</strong>
+                        <strong><fmt:message key="faculties_jsp.button.sort_total_seats"/></strong>
                     </c:when>
                     <c:when test="${param.sort != 'totalSeats'}">
-                        Total seats
+                        <fmt:message key="faculties_jsp.button.sort_total_seats"/>
                     </c:when>
                 </c:choose>
             </a>
@@ -59,10 +86,10 @@
                 <thead>
                 <tr>
                     <th>№</th>
-                    <th>Faculty name</th>
-                    <th>Total seats</th>
-                    <th>Budget seats</th>
-                    <th>Selection criteria</th>
+                    <th><fmt:message key="faculties_jsp.text.faculty_name"/></th>
+                    <th><fmt:message key="faculties_jsp.text.faculty_total_seats"/></th>
+                    <th><fmt:message key="faculties_jsp.text.faculty_budget_seats"/></th>
+                    <th><fmt:message key="faculties_jsp.text.faculty_selection_criteria"/></th>
                 </tr>
                 </thead>
                 <c:forEach var="faculty" items="${faculties}">
@@ -96,10 +123,17 @@
                                 </c:choose>
                             </c:forEach>
                         </td>
-                        <c:if test="${userRole.name == 'user'}">
+                        <c:if test="${userRole.name == 'user' and user.statusId != 1}">
                             <td>
-                                <a href="controller?command=registerForFacultyPage&facultyId=${faculty.id}"><strong>Register
-                                    for faculty</strong></a>
+                                <a href="controller?command=viewFacultyApplications&facultyId=${faculty.id}"><strong><fmt:message key="faculties_jsp.button.view_entrants"/></strong></a>
+                                <c:choose>
+                                    <c:when test="${fn:contains(userFaculties, faculty.id)}">
+                                        <strong><fmt:message key="faculties_jsp.text.already_registered"/></strong>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a href="controller?command=registerForFacultyPage&facultyId=${faculty.id}"><strong><fmt:message key="faculties_jsp.button.register"/></strong></a>
+                                    </c:otherwise>
+                                </c:choose>
                             </td>
                         </c:if>
                     </tr>

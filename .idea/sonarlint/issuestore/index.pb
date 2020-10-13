@@ -7,8 +7,6 @@ F
 webapp/WEB-INF/web.xml,1\7\17acf86fbbd0ea8e42ee5c9a7dff786e586719c8
 7
 pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
-k
-;src/main/java/com/epam/koretskyi/commission/db/MD5Util.java,8\c\8c16cb01f8b479cb84b0bca2d6639e9f7c42cea1
 t
 Dsrc/main/java/com/epam/koretskyi/commission/web/command/Command.java,1\1\11d27ec00fa7e31f5a3114850d0b3c7ce1da418a
 }
@@ -33,8 +31,6 @@ y
 Isrc/main/java/com/epam/koretskyi/commission/web/command/LoginCommand.java,9\9\99fc2c47c1397f9d6c245b7a436b0e24860a612e
 Q
 !webapp/WEB-INF/jsp/error_page.jsp,f\5\f524a1b8d858b78970c826d6119e7f1e1905276b
-n
->src/main/java/com/epam/koretskyi/commission/constant/Path.java,e\8\e8692268d0848126617148019b731937c303e96e
 o
 ?src/main/java/com/epam/koretskyi/commission/web/Controller.java,2\2\2278855ebedea11974106b8fd4f17fe960fc6c73
 z
@@ -45,8 +41,6 @@ B
 webapp/welcome.jsp,c\d\cd3d2f2ec9846cc1281ce2ce95cda19727669f07
 L
 webapp/WEB-INF/jsp/login.jsp,0\1\016bb668c96c7a7f3865563d556399e706beb9ec
-|
-Lsrc/main/java/com/epam/koretskyi/commission/web/command/RegisterCommand.java,9\5\95fd99d167a146b15543d1900c0ad24ad8f0945c
 n
 >src/main/java/com/epam/koretskyi/commission/db/UserStatus.java,e\6\e69729075d7df8776dc35b4798a599028413f029
 O
@@ -67,10 +61,6 @@ r
 Bsrc/main/java/com/epam/koretskyi/commission/db/entity/Faculty.java,b\0\b0a658d5975529c3668af6ebf8ba0e8ed0cc6b15
 v
 Fsrc/main/java/com/epam/koretskyi/commission/exception/DBException.java,5\a\5a0425643f39ae8735ffc2a7dee66e1a05480dfb
-t
-Dsrc/main/java/com/epam/koretskyi/commission/constant/ActionType.java,2\f\2f2f268addafcb61ef847f5ea957b92178e43a3f
-o
-?src/main/java/com/epam/koretskyi/commission/constant/Field.java,b\1\b130828e73eedb7ea03e717dcf5200c6f70d0451
 s
 Csrc/main/java/com/epam/koretskyi/commission/exception/Messages.java,a\0\a016da2aadb6e74129f969cf378bb9742be48ad9
 É
@@ -105,10 +95,6 @@ U
 ,webapp/WEB-INF/jsp/admin/faculties_admin.jsp,4\2\42cf90a8378e86774a82489245831914116afa67
 X
 (webapp/WEB-INF/jsp/blocked_user_page.jsp,f\a\fa673c6d789cf811707538fa55ab2cf3b2a011d7
-a
-1webapp/WEB-INF/jsp/user/entrants_applications.jsp,b\c\bc9a3e12c511247271ad9fe40f6dfc502a245c7a
-é
-^src/main/java/com/epam/koretskyi/commission/web/command/ListOfEntrantsApplicationsCommand.java,5\a\5a647b808b9165966aee3a67c576ea1e6fe7ad1b
 á
 Wsrc/main/java/com/epam/koretskyi/commission/web/command/ViewFacultyEntrantsCommand.java,8\3\83133f84e4781f5b569081ad39caaba8be705d95
 Å
@@ -137,10 +123,6 @@ Usrc/main/java/com/epam/koretskyi/commission/web/command/UpdateUsersStatusComman
 É
 Ssrc/main/java/com/epam/koretskyi/commission/web/command/BlockedUserPageCommand.java,a\a\aaee097e5cae8e21fada3bff81b2c581f010fefc
 t
-Dsrc/main/java/com/epam/koretskyi/commission/db/entity/UserMarks.java,d\a\daa856d9c531087d5bc803f4ab10db84bbca3159
-r
-Bsrc/main/java/com/epam/koretskyi/commission/db/entity/Entrant.java,2\5\253ab57a8db1c516f806c7cb33015d6062a7c37b
-t
 Dsrc/main/java/com/epam/koretskyi/commission/db/entity/Criterion.java,8\4\84ea69e40debfa40258f3c2430c78f7954675d54
 ä
 Zsrc/main/java/com/epam/koretskyi/commission/web/command/RegisterForFacultyPageCommand.java,0\e\0e9929d67f9d3ca316a3d6931dbc1d92347bb6cb
@@ -154,3 +136,15 @@ a
 Vsrc/main/java/com/epam/koretskyi/commission/web/command/RegisterForFacultyCommand.java,6\a\6aa5b66292b1773013034037aea29553c5109be8
 v
 Fsrc/main/java/com/epam/koretskyi/commission/db/entity/Application.java,8\5\85fd563e56a6be12679a980f470ffb68a4005eb2
+m
+=src/main/java/com/epam/koretskyi/commission/util/MD5Util.java,2\5\25e1fa09652936d739f5f58a876f7eb6221f5ff0
+t
+Dsrc/main/java/com/epam/koretskyi/commission/util/constant/Field.java,2\2\224cff92a525066adf1a4eea66477e4c97f88536
+v
+Fsrc/main/java/com/epam/koretskyi/commission/db/bean/UserMarksBean.java,9\d\9de7e51044cf7d30403b5da7c8cc74d40379bc3d
+z
+Jsrc/main/java/com/epam/koretskyi/commission/db/bean/UserFacultiesBean.java,2\9\2936c6854202e80289333a98357a3a13b050b0cf
+s
+Csrc/main/java/com/epam/koretskyi/commission/util/constant/Path.java,8\8\883c62117e9dc21ad1dfef5cd9d630422fc77324
+Ä
+Psrc/main/java/com/epam/koretskyi/commission/db/bean/FacultyApplicationsBean.java,2\e\2ee3f1244acff02c6ab1f2f0110e4cd016b5ca7e

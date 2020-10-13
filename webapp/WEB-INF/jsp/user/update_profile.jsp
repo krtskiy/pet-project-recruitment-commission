@@ -18,12 +18,12 @@
             <form id="login_form" method="post" action="controller">
                 <input type="hidden" name="command" value="updateUser">
 
-                <h3>Enter new login data</h3>
-                <small>leave the field blank if dont want to change it</small><br>
-                <input type="email" name="email" maxlength="255" placeholder="New email"><br>
-                <input type="password" name="password" minlength="6" maxlength="32" placeholder="New password"><br>
+                <h3><fmt:message key="update_profile_jsp.text.enter_new"/></h3>
+                <small><fmt:message key="update_profile_jsp.text.empty_message"/> </small><br>
+                <input type="email" name="email" maxlength="255" placeholder="<fmt:message key="update_profile_jsp.placeholder.new_email"/>"><br>
+                <input type="password" name="password" minlength="6" maxlength="32" placeholder="<fmt:message key="update_profile_jsp.placeholder.new_password"/>"><br>
 
-                <input type="submit" value="Apply">
+                <input type="submit" value="<fmt:message key="update_profile_jsp.button.apply"/>">
             </form>
         </td>
     </tr>

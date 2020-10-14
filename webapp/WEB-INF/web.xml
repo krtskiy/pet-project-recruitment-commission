@@ -56,12 +56,13 @@
             <param-name>admin</param-name>
             <param-value>listOfUsers adminPanelPage findUserByEmail updateUsersStatus deleteFaculty
                 updateFaculty updateFacultyPage createNewFaculty createNewFacultyPage viewFacultyApplications
+                viewUserProfilePage deleteUserApplication
             </param-value>
         </init-param>
         <init-param>
             <param-name>user</param-name>
             <param-value>privateOfficePage updateUser updateUserPage listOfEntrantsApplications blockedUserPage
-                registerForFacultyPage registerForFaculty viewFacultyApplications
+                registerForFacultyPage registerForFaculty viewFacultyApplications deleteUserApplication
             </param-value>
         </init-param>
         <init-param>

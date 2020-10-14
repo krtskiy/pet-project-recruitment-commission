@@ -7,6 +7,7 @@ package com.epam.koretskyi.commission.util.constant;
  */
 public final class Field {
 
+
     private Field() {}
 
     public static final String ID = "id";
@@ -26,6 +27,7 @@ public final class Field {
     public static final String FACULTY_NAME_UK = "name_uk";
     public static final String FACULTY_TOTAL_SEATS = "total_seats";
     public static final String FACULTY_BUDGET_SEATS = "budget_seats";
+    public static final String FACULTY_STATUS_ID = "status_id";
 
 
     public static final String CRITERIA_ID = "id";

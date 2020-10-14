@@ -24,7 +24,7 @@
             </c:if>
 
             <strong><fmt:message key="faculties_jsp.text.sort_by"/></strong>
-            <a href="controller?command=listOfFaculties&page=1&sort=nameAsc">
+            <a href="controller?command=listOfFaculties&page=1&sort=number">
                 <c:choose>
                     <c:when test="${param.sort == 'number'}">
                         <strong><fmt:message key="faculties_jsp.button.sort_number"/></strong>

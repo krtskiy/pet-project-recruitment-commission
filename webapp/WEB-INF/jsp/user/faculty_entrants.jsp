@@ -8,38 +8,95 @@
 <%@ include file="/WEB-INF/jspf/head.jspf" %>
 
 <body>
+<%@ include file="/WEB-INF/jspf/blocked_user.jspf" %>
 <table id="main-container">
     <%@ include file="/WEB-INF/jspf/header.jspf" %>
     <tr>
         <td class="content">
             <c:if test="${not empty facultyApplications}">
 
-                <h3>List of applications for ${faculty.nameEn}</h3>
-                <small>sorted by sum of all marks</small><br>
+                <h3><fmt:message key="faculty_entrants_jsp.text.list_of_applications"/>
+                    <c:choose>
+                        <c:when test="${currentLocale == 'uk'}">
+                            ${faculty.nameUk}<br>
+                        </c:when>
+                        <c:when test="${currentLocale == 'en'}">
+                            ${faculty.nameEn}<br>
+                        </c:when>
+                        <c:otherwise>
+                            ${faculty.nameEn}<br>
+                        </c:otherwise>
+                    </c:choose></h3>
+                <small><fmt:message key="faculty_entrants_jsp.text.sorted"/></small><br>
+
+                <svg width="15" height="15">
+                    <rect width="15" height="15" style="fill:#CCFF99;stroke-width:3;stroke:rgb(0,0,0)"/>
+                </svg>
+                <fmt:message key="faculty_entrants_jsp.text.color_hint_budget"/> (${faculty.budgetSeats})<br>
+                <svg width="15" height="15">
+                    <rect width="15" height="15" style="fill:#9AD4FF;stroke-width:3;stroke:rgb(0,0,0)"/>
+                </svg>
+                <fmt:message
+                        key="faculty_entrants_jsp.text.contract"/> (${faculty.totalSeats - faculty.budgetSeats})<br>
 
                 <table id="list_users_table">
                     <tr>
                         <th>#</th>
-                        <th>Entrant name</th>
-                        <th>Entrant surname</th>
+                        <th><fmt:message key="faculty_entrants_jsp.text.entr_name"/></th>
+                        <th><fmt:message key="faculty_entrants_jsp.text.entr_surname"/></th>
                         <c:forEach var="criterion" items="${faculty.criteria}">
-                            <th>${criterion.nameEn}</th>
+                            <c:choose>
+                                <c:when test="${currentLocale == 'uk'}">
+                                    <th>${criterion.nameUk}</th>
+                                </c:when>
+                                <c:when test="${currentLocale == 'en'}">
+                                    <th>${criterion.nameEn}</th>
+                                </c:when>
+                                <c:otherwise>
+                                    <th>${criterion.nameEn}</th>
+                                </c:otherwise>
+                            </c:choose>
                         </c:forEach>
-                        <th>Sum of marks</th>
+                        <th><fmt:message key="faculty_entrants_jsp.text.entr_marks_sum"/></th>
                     </tr>
                     <c:set var="k" value="0"/>
                     <c:forEach var="application" items="${facultyApplications}">
                         <c:set var="k" value="${k+1}"/>
-                        <tr>
-                            <td>${k}</td>
-                            <td>${application.userName}</td>
-                            <td>${application.userSurname}</td>
-                            <c:set var="markSum" value="${0}"/>
-                            <c:forEach var="mark" items="${application.userMarks}">
-                                <c:set var="markSum" value="${markSum + mark.mark}"/>
-                                <td>${mark.mark}</td>
-                            </c:forEach>
-                            <td><strong>${markSum}</strong></td>
+                        <tr
+                                <c:choose>
+                                    <c:when test="${k <= faculty.budgetSeats}">bgcolor="#D3FFCA"</c:when>
+                                    <c:when test="${k > faculty.budgetSeats and k <= faculty.totalSeats}">bgcolor="#CAF3FF"</c:when>
+                                </c:choose>
+
+                        >
+                            <c:choose>
+                                <c:when test="${user.id == application.userId}">
+                                    <td><strong>${k}</strong></td>
+                                    <td><strong>${application.userName}</strong></td>
+                                    <td><strong>${application.userSurname}</strong></td>
+                                    <c:set var="markSum" value="${0}"/>
+                                    <c:forEach var="mark" items="${application.userMarks}">
+                                        <c:set var="markSum" value="${markSum + mark.mark}"/>
+                                        <td><strong>${mark.mark}</strong></td>
+                                    </c:forEach>
+                                    <td><strong>${markSum}</strong></td>
+                                </c:when>
+                                <c:otherwise>
+                                    <td>${k}</td>
+                                    <td>${application.userName}</td>
+                                    <td>${application.userSurname}</td>
+                                    <c:set var="markSum" value="${0}"/>
+                                    <c:forEach var="mark" items="${application.userMarks}">
+                                        <c:set var="markSum" value="${markSum + mark.mark}"/>
+                                        <td>${mark.mark}</td>
+                                    </c:forEach>
+                                    <td><strong>${markSum}</strong></td>
+                                    <c:if test="${user.roleId == 1}">
+                                        <td><a href="controller?command=viewUserProfilePage&userId=${application.userId}"><strong><fmt:message
+                                                key="users_jsp.button.view_profile"/></strong></a></td>
+                                    </c:if>
+                                </c:otherwise>
+                            </c:choose>
                         </tr>
                     </c:forEach>
                 </table>

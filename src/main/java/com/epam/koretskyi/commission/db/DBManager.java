@@ -28,8 +28,8 @@ public class DBManager {
     private static final String SQL_FIND_FACULTY_BY_ID = "SELECT * FROM faculties WHERE id=?";
     private static final String SQL_DELETE_FACULTY = "DELETE FROM faculties WHERE id=? LIMIT 1";
     private static final String SQL_FIND_ALL_FACULTIES = "SELECT * FROM faculties;";
-    private static final String SQL_UPDATE_FACULTY = "UPDATE faculties SET name_en=?, name_uk=?, total_seats=?, budget_seats=? WHERE id=?";
-    private static final String SQL_INSERT_FACULTY = "INSERT INTO faculties VALUES (?, ?, ?, ?, ?)";
+    private static final String SQL_UPDATE_FACULTY = "UPDATE faculties SET name_en=?, name_uk=?, total_seats=?, budget_seats=?, status_id=? WHERE id=?";
+    private static final String SQL_INSERT_FACULTY = "INSERT INTO faculties VALUES (?, ?, ?, ?, ?, DEFAULT)";
 
     private static final String SQL_FIND_USER_FACULTIES = "SELECT faculties.id, faculties.name_en, faculties.name_uk FROM faculties INNER JOIN applications ON faculties.id = applications.faculty_id WHERE applications.user_id = ?;";
 
@@ -47,6 +47,7 @@ public class DBManager {
     private static final String SQL_UPDATE_USER = "UPDATE users SET email=?, password=? WHERE id=?";
     private static final String SQL_FIND_ALL_USERS = "SELECT * FROM users";
     private static final String SQL_UPDATE_USER_STATUS = "UPDATE users SET status_id=? WHERE id=?";
+    private static final String SQL_FIND_USER_BY_ID = "SELECT * FROM users WHERE id=?";
 
     // user marks
     private static final String SQL_INSERT_USER_MARKS = "REPLACE INTO user_marks VALUES (?, ?, ?)";
@@ -58,6 +59,7 @@ public class DBManager {
     private static final String SQL_INSERT_APPLICATION = "REPLACE INTO applications VALUES (DEFAULT, ?, ?)";
     private static final String SQL_FIND_USER_APPLICATIONS = "SELECT * FROM applications WHERE user_id = ?;";
     private static final String SQL_FIND_FACULTY_APPLICATIONS = "SELECT users.id, users.name, users.surname FROM users INNER JOIN applications ON users.id = applications.user_id WHERE applications.faculty_id = ?;";
+    private static final String SQL_DELETE_USER_APPLICATION = "DELETE FROM applications WHERE faculty_id=? AND user_id=?";
 
     ///////////////////////////////////
     // singleton
@@ -157,6 +159,7 @@ public class DBManager {
                 faculty = extractFaculty(resultSet);
                 faculty.setCriteria(findFacultyCriteriaByFacultyId(facultyId));
             }
+            connection.commit();
         } catch (SQLException e) {
             rollback(connection);
             LOG.error(Messages.ERR_CANNOT_OBTAIN_FACULTY_BY_ID, e);
@@ -192,6 +195,7 @@ public class DBManager {
             preparedStatement.setString(++k, faculty.getNameUk());
             preparedStatement.setInt(++k, faculty.getTotalSeats());
             preparedStatement.setInt(++k, faculty.getBudgetSeats());
+            preparedStatement.setInt(++k, faculty.getStatusId());
             preparedStatement.setInt(++k, faculty.getId());
             preparedStatement.executeUpdate();
         } finally {
@@ -494,11 +498,37 @@ public class DBManager {
         }
     }
 
+    public User findUserById(int userId) throws DBException {
+        User user = null;
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement(SQL_FIND_USER_BY_ID);
+            preparedStatement.setInt(1, userId);
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                user = extractUser(resultSet);
+            }
+            connection.commit();
+        } catch (SQLException e) {
+            rollback(connection);
+            LOG.error(Messages.ERR_CANNOT_OBTAIN_USER_BY_EMAIL, e);
+            throw new DBException(Messages.ERR_CANNOT_OBTAIN_USER_BY_EMAIL, e);
+        } finally {
+            close(resultSet);
+            close(preparedStatement);
+            close(connection);
+        }
+        return user;
+    }
+
     ///////////////////////////////////
     // user marks
     ///////////////////////////////////
 
-    public void insertUserMarks(List<UserMark> userMarks) throws DBException {
+    private void insertUserMarks(List<UserMark> userMarks) throws DBException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         try {
@@ -589,11 +619,7 @@ public class DBManager {
             preparedStatement.setInt(1, facultyId);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                FacultyApplicationsBean facultyApplicationsBean = new FacultyApplicationsBean();
-                facultyApplicationsBean.setUserName(resultSet.getString(Field.USER_NAME));
-                facultyApplicationsBean.setUserSurname(resultSet.getString(Field.USER_SURNAME));
-                facultyApplicationsBean.setUserMarks(findUserMarksForSpecificFacultyByUserId(resultSet.getInt(Field.ID), facultyId));
-                facultyApplications.add(facultyApplicationsBean);
+                facultyApplications.add(extractFacultyApplicationsBean(resultSet, facultyId));
             }
         } catch (SQLException e) {
             rollback(connection);
@@ -605,6 +631,27 @@ public class DBManager {
             close(connection);
         }
         return facultyApplications;
+    }
+
+    public void deleteUserApplication(int userId, int facultyId) throws DBException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        try {
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement(SQL_DELETE_USER_APPLICATION);
+            int k = 0;
+            preparedStatement.setInt(++k, facultyId);
+            preparedStatement.setInt(++k, userId);
+            preparedStatement.executeUpdate();
+            connection.commit();
+        } catch (SQLException e) {
+            rollback(connection);
+            LOG.error(Messages.ERR_CANNOT_DELETE_APPLICATION, e);
+            throw new DBException(Messages.ERR_CANNOT_DELETE_APPLICATION, e);
+        } finally {
+            close(preparedStatement);
+            close(connection);
+        }
     }
 
 
@@ -621,11 +668,7 @@ public class DBManager {
             preparedStatement.setInt(1, userId);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                UserFacultiesBean userFacultiesBean = new UserFacultiesBean();
-                userFacultiesBean.setFacultyId(resultSet.getInt(Field.ID));
-                userFacultiesBean.setFacultyNameEn(resultSet.getString(Field.FACULTY_NAME_EN));
-                userFacultiesBean.setFacultyNameUk(resultSet.getString(Field.FACULTY_NAME_UK));
-                userFaculties.add(userFacultiesBean);
+                userFaculties.add(extractUserFacultiesBean(resultSet));
             }
         } catch (SQLException e) {
             rollback(connection);
@@ -650,12 +693,7 @@ public class DBManager {
             preparedStatement.setInt(1, userId);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                UserMarksBean userMarksBean = new UserMarksBean();
-                userMarksBean.setCriterionId(resultSet.getInt(Field.CRITERIA_ID));
-                userMarksBean.setCriterionNameEn(resultSet.getString(Field.CRITERIA_NAME_EN));
-                userMarksBean.setCriterionNameUk(resultSet.getString(Field.CRITERIA_NAME_UK));
-                userMarksBean.setMark(resultSet.getInt(Field.MARK));
-                userMarks.add(userMarksBean);
+                userMarks.add(extractUserMarksBean(resultSet));
             }
         } catch (SQLException e) {
             rollback(connection);
@@ -682,12 +720,7 @@ public class DBManager {
             preparedStatement.setInt(++k, facultyId);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                UserMarksBean userMarksBean = new UserMarksBean();
-                userMarksBean.setCriterionId(resultSet.getInt(Field.CRITERIA_ID));
-                userMarksBean.setCriterionNameEn(resultSet.getString(Field.CRITERIA_NAME_EN));
-                userMarksBean.setCriterionNameUk(resultSet.getString(Field.CRITERIA_NAME_UK));
-                userMarksBean.setMark(resultSet.getInt(Field.MARK));
-                userMarks.add(userMarksBean);
+                userMarks.add(extractUserMarksBean(resultSet));
             }
         } catch (SQLException e) {
             rollback(connection);
@@ -719,6 +752,7 @@ public class DBManager {
         user.setInstitutionName(resultSet.getString(Field.USER_INSTITUTION_NAME));
         user.setRoleId(resultSet.getInt(Field.USER_ROLE_ID));
         user.setStatusId(resultSet.getInt(Field.USER_STATUS_ID));
+
         return user;
     }
 
@@ -729,6 +763,7 @@ public class DBManager {
         faculty.setNameUk(resultSet.getString(Field.FACULTY_NAME_UK));
         faculty.setTotalSeats(resultSet.getInt(Field.FACULTY_TOTAL_SEATS));
         faculty.setBudgetSeats(resultSet.getInt(Field.FACULTY_BUDGET_SEATS));
+        faculty.setStatusId(resultSet.getInt(Field.FACULTY_STATUS_ID));
 
         return faculty;
     }
@@ -754,6 +789,32 @@ public class DBManager {
         application.setFacultyId(resultSet.getInt(Field.FACULTY_ID));
         application.setUserId(resultSet.getInt(Field.USER_ID));
         return application;
+    }
+
+    private UserMarksBean extractUserMarksBean(ResultSet resultSet) throws SQLException {
+        UserMarksBean userMarksBean = new UserMarksBean();
+        userMarksBean.setCriterionId(resultSet.getInt(Field.CRITERIA_ID));
+        userMarksBean.setCriterionNameEn(resultSet.getString(Field.CRITERIA_NAME_EN));
+        userMarksBean.setCriterionNameUk(resultSet.getString(Field.CRITERIA_NAME_UK));
+        userMarksBean.setMark(resultSet.getInt(Field.MARK));
+        return userMarksBean;
+    }
+
+    private UserFacultiesBean extractUserFacultiesBean(ResultSet resultSet) throws SQLException {
+        UserFacultiesBean userFacultiesBean = new UserFacultiesBean();
+        userFacultiesBean.setFacultyId(resultSet.getInt(Field.ID));
+        userFacultiesBean.setFacultyNameEn(resultSet.getString(Field.FACULTY_NAME_EN));
+        userFacultiesBean.setFacultyNameUk(resultSet.getString(Field.FACULTY_NAME_UK));
+        return userFacultiesBean;
+    }
+
+    private FacultyApplicationsBean extractFacultyApplicationsBean(ResultSet resultSet, int facultyId) throws SQLException, DBException {
+        FacultyApplicationsBean facultyApplicationsBean = new FacultyApplicationsBean();
+        facultyApplicationsBean.setUserId(resultSet.getInt(Field.ID));
+        facultyApplicationsBean.setUserName(resultSet.getString(Field.USER_NAME));
+        facultyApplicationsBean.setUserSurname(resultSet.getString(Field.USER_SURNAME));
+        facultyApplicationsBean.setUserMarks(findUserMarksForSpecificFacultyByUserId(resultSet.getInt(Field.ID), facultyId));
+        return facultyApplicationsBean;
     }
 
     private void close(Connection connection) {

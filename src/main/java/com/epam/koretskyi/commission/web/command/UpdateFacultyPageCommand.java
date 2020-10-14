@@ -1,5 +1,6 @@
 package com.epam.koretskyi.commission.web.command;
 
+import com.epam.koretskyi.commission.db.bean.FacultyApplicationsBean;
 import com.epam.koretskyi.commission.util.constant.Path;
 import com.epam.koretskyi.commission.db.DBManager;
 import com.epam.koretskyi.commission.db.entity.Criterion;
@@ -28,15 +29,22 @@ public class UpdateFacultyPageCommand extends Command {
         LOG.debug("Command starts");
 
         HttpSession session = request.getSession();
+        DBManager manager = DBManager.getInstance();
 
-        String facultyId = request.getParameter("facultyId");
+        int facultyId = Integer.parseInt(request.getParameter("facultyId"));
         LOG.trace("Request parameter: Id --> " + facultyId);
 
-        Faculty faculty = DBManager.getInstance().findFacultyById(Integer.parseInt(facultyId));
+        List<FacultyApplicationsBean> facultyApplications = manager.findFacultyApplicationsByFacultyId(facultyId);
+        if (!facultyApplications.isEmpty()) {
+            request.setAttribute("isEmpty", true);
+//            throw new AppException("Entrants have already registered for this faculty! You can't change it anymore!");
+        }
+
+        Faculty faculty = manager.findFacultyById(facultyId);
         session.setAttribute("faculty", faculty);
         LOG.trace("Set the session attribute: faculty --> " + faculty);
 
-        List<Criterion> criteria = DBManager.getInstance().findAllCriteria();
+        List<Criterion> criteria = manager.findAllCriteria();
         request.setAttribute("criteria", criteria);
         LOG.trace("Set the request attribute: criteria --> " + criteria);
 

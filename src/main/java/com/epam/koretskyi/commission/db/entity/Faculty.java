@@ -15,6 +15,7 @@ public class Faculty extends Entity {
     private int totalSeats;
     private int budgetSeats;
     private List<Criterion> criteria = new ArrayList<>();
+    private int statusId;
 
     public String getNameEn() {
         return nameEn;
@@ -56,6 +57,14 @@ public class Faculty extends Entity {
         this.criteria = criteria;
     }
 
+    public int getStatusId() {
+        return statusId;
+    }
+
+    public void setStatusId(int statusId) {
+        this.statusId = statusId;
+    }
+
     @Override
     public String toString() {
         return "Faculty{" +
@@ -64,6 +73,8 @@ public class Faculty extends Entity {
                 ", nameUk='" + nameUk + '\'' +
                 ", totalSeats=" + totalSeats +
                 ", budgetSeats=" + budgetSeats +
+                ", criteria=" + criteria +
+                ", statusId=" + statusId +
                 '}';
     }
 

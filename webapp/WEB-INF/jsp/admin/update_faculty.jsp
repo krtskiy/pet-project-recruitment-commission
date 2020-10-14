@@ -20,28 +20,48 @@
 
                 <h3><fmt:message key="update_faculty_jsp.text.new_info"/></h3>
                 <small><fmt:message key="update_faculty_jsp.text.new_info_hint"/></small><br>
-                <input type="text" name="nameEn" maxlength="100" placeholder="<fmt:message key="update_faculty_jsp.placeholder.new_name_en"/>" style="width: 250px"><br>
-                <input type="text" name="nameUk" maxlength="100" placeholder="<fmt:message key="update_faculty_jsp.placeholder.new_name_uk"/>"
+                <input type="text" name="nameEn" maxlength="100"
+                       placeholder="<fmt:message key="update_faculty_jsp.placeholder.new_name_en"/>"
                        style="width: 250px"><br>
-                <input type="number" name="totalSeats" min="0" placeholder="<fmt:message key="update_faculty_jsp.placeholder.new_total_seats"/>"
+                <input type="text" name="nameUk" maxlength="100"
+                       placeholder="<fmt:message key="update_faculty_jsp.placeholder.new_name_uk"/>"
                        style="width: 250px"><br>
-                <input type="number" name="budgetSeats" min="0" placeholder="<fmt:message key="update_faculty_jsp.placeholder.new_budget_seats"/>"
+                <input type="number" name="totalSeats" min="0"
+                       placeholder="<fmt:message key="update_faculty_jsp.placeholder.new_total_seats"/>"
+                       style="width: 250px"><br>
+                <input type="number" name="budgetSeats" min="0"
+                       placeholder="<fmt:message key="update_faculty_jsp.placeholder.new_budget_seats"/>"
                        style="width: 250px"><br>
 
-                <strong><fmt:message key="update_faculty_jsp.text.new_criteria"/> </strong><small><fmt:message key="update_faculty_jsp.text.new_criteria_quantity"/></small><br>
-                <c:forEach var="criterion" items="${criteria}">
-                    <c:choose>
-                        <c:when test="${currentLocale == 'uk'}">
-                            <input type="checkbox" name="criterionId" value="${criterion.id}"> ${criterion.nameUk}<br>
-                        </c:when>
-                        <c:when test="${currentLocale == 'en'}">
-                            <input type="checkbox" name="criterionId" value="${criterion.id}"> ${criterion.nameEn}<br>
-                        </c:when>
-                        <c:otherwise>
-                            <input type="checkbox" name="criterionId" value="${criterion.id}"> ${criterion.nameEn}<br>
-                        </c:otherwise>
-                    </c:choose>
-                </c:forEach>
+                <c:choose>
+                    <c:when test="${isEmpty eq true}">
+                        <h6><span style="color: rgb(204, 0, 0); "><fmt:message
+                                key="update_faculty_jsp.text.if_not_empty_applications"/><br><fmt:message
+                                key="update_faculty_jsp.text.can_not_change"/></span>
+                        </h6>
+                    </c:when>
+                    <c:otherwise>
+                        <strong><fmt:message key="update_faculty_jsp.text.new_criteria"/> </strong><small><fmt:message
+                            key="update_faculty_jsp.text.new_criteria_quantity"/></small><br>
+                        <c:forEach var="criterion" items="${criteria}">
+                            <c:choose>
+                                <c:when test="${currentLocale == 'uk'}">
+                                    <input type="checkbox" name="criterionId"
+                                           value="${criterion.id}"> ${criterion.nameUk}<br>
+                                </c:when>
+                                <c:when test="${currentLocale == 'en'}">
+                                    <input type="checkbox" name="criterionId"
+                                           value="${criterion.id}"> ${criterion.nameEn}<br>
+                                </c:when>
+                                <c:otherwise>
+                                    <input type="checkbox" name="criterionId"
+                                           value="${criterion.id}"> ${criterion.nameEn}<br>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:forEach>
+                    </c:otherwise>
+                </c:choose>
+
 
                 <input type="submit" value="<fmt:message key="update_faculty_jsp.button.apply"/>">
             </form>

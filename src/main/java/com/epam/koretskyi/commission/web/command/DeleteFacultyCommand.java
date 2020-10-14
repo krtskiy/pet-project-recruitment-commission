@@ -24,7 +24,7 @@ public class DeleteFacultyCommand extends Command {
         LOG.debug("Command starts");
 
         String facultyId = request.getParameter("facultyId");
-        LOG.trace("Request parameter: Id --> " + facultyId);
+        LOG.trace("Request parameter: facultyId --> " + facultyId);
 
         DBManager.getInstance().deleteFaculty(Integer.parseInt(facultyId));
 

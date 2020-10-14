@@ -24,22 +24,22 @@
                     </c:when>
                 </c:choose>
             </a>
-            <a href="controller?command=listOfUsers&page=1&sort=nameAsc">
+            <a href="controller?command=listOfUsers&page=1&sort=surnameAsc">
                 <c:choose>
-                    <c:when test="${param.sort == 'nameAsc'}">
+                    <c:when test="${param.sort == 'surnameAsc'}">
                         <strong><fmt:message key="users_jsp.button.sort_name_az"/></strong>
                     </c:when>
-                    <c:when test="${param.sort != 'nameAsc'}">
+                    <c:when test="${param.sort != 'surnameAsc'}">
                         <fmt:message key="users_jsp.button.sort_name_az"/>
                     </c:when>
                 </c:choose>
             </a>
-            <a href="controller?command=listOfUsers&page=1&sort=nameDesc">
+            <a href="controller?command=listOfUsers&page=1&sort=surnameDesc">
                 <c:choose>
-                    <c:when test="${param.sort == 'nameDesc'}">
+                    <c:when test="${param.sort == 'surnameDesc'}">
                         <strong><fmt:message key="users_jsp.button.sort_name_za"/></strong>
                     </c:when>
-                    <c:when test="${param.sort != 'nameDesc'}">
+                    <c:when test="${param.sort != 'surnameDesc'}">
                         <fmt:message key="users_jsp.button.sort_name_za"/>
                     </c:when>
                 </c:choose>
@@ -82,40 +82,32 @@
                     <th>Email</th>
                     <th><fmt:message key="users_jsp.text.user_name"/></th>
                     <th><fmt:message key="users_jsp.text.user_surname"/></th>
-                    <th><fmt:message key="users_jsp.text.user_patronymic"/></th>
-                    <th><fmt:message key="users_jsp.text.user_region"/></th>
-                    <th><fmt:message key="users_jsp.text.user_city"/></th>
-                    <th><fmt:message key="users_jsp.text.user_institution"/></th>
                     <th><fmt:message key="users_jsp.text.user_status"/></th>
                 </tr>
                 </thead>
-                <c:forEach var="faculty" items="${users}">
+                <c:forEach var="user" items="${users}">
                     <tr>
-                        <td>${faculty.id}</td>
-                        <td>${faculty.email}</td>
-                        <td>${faculty.name}</td>
-                        <td>${faculty.surname}</td>
-                        <td>${faculty.patronymic}</td>
-                        <td>${faculty.region}</td>
-                        <td>${faculty.city}</td>
-                        <td>${faculty.institutionName}</td>
+                        <td>${user.id}</td>
+                        <td>${user.email}</td>
+                        <td>${user.name}</td>
+                        <td>${user.surname}</td>
                         <td>
                             <c:choose>
-                                <c:when test="${faculty.statusId == 0}">
+                                <c:when test="${user.statusId == 0}">
                                     <fmt:message key="users_jsp.text.unblocked"/>
-                                    <c:if test="${faculty.roleId == 1}">
+                                    <c:if test="${user.roleId == 1}">
                                         <br><span style="color: #1B860A">Admin</span>
                                     </c:if>
                                     <form action="controller" method="get">
                                         <input name="command" type="hidden" value="updateUsersStatus"/>
-                                        <input name="userId" type="hidden" value="${faculty.id}">
+                                        <input name="userId" type="hidden" value="${user.id}">
                                         <c:choose>
-                                            <c:when test="${faculty.statusId == 0 and faculty.roleId != 1}">
+                                            <c:when test="${user.statusId == 0 and user.roleId != 1}">
                                                 <button name="status" value="1">
                                                     <fmt:message key="users_jsp.button.block"/>
                                                 </button>
                                             </c:when>
-                                            <c:when test="${faculty.statusId == 1 and faculty.roleId != 1}">
+                                            <c:when test="${user.statusId == 1 and user.roleId != 1}">
                                                 <button name="status" value="0">
                                                     <fmt:message key="users_jsp.button.unblock"/>
                                                 </button>
@@ -123,18 +115,19 @@
                                         </c:choose>
                                     </form>
                                 </c:when>
-                                <c:when test="${faculty.statusId == 1}">
-                                    <span style="color: rgb(204, 0, 0); "><fmt:message key="users_jsp.text.blocked"/></span>
+                                <c:when test="${user.statusId == 1}">
+                                    <span style="color: rgb(204, 0, 0); "><fmt:message
+                                            key="users_jsp.text.blocked"/></span>
                                     <form action="controller" method="get">
                                         <input name="command" type="hidden" value="updateUsersStatus"/>
-                                        <input name="userId" type="hidden" value="${faculty.id}">
+                                        <input name="userId" type="hidden" value="${user.id}">
                                         <c:choose>
-                                            <c:when test="${faculty.statusId == 0 and faculty.roleId != 1}">
+                                            <c:when test="${user.statusId == 0 and user.roleId != 1}">
                                                 <button name="status" value="1">
                                                     <fmt:message key="users_jsp.button.block"/>
                                                 </button>
                                             </c:when>
-                                            <c:when test="${faculty.statusId == 1 and faculty.roleId != 1}">
+                                            <c:when test="${user.statusId == 1 and user.roleId != 1}">
                                                 <button name="status" value="0">
                                                     <fmt:message key="users_jsp.button.unblock"/>
                                                 </button>
@@ -144,6 +137,8 @@
                                 </c:when>
                             </c:choose>
                         </td>
+                        <td><a href="controller?command=viewUserProfilePage&userId=${user.id}"/><strong><fmt:message
+                                key="users_jsp.button.view_profile"/></strong></td>
                     </tr>
                 </c:forEach>
             </table>
@@ -154,10 +149,12 @@
                     <c:set var="k" value="${k+1}"/>
                     <c:choose>
                         <c:when test="${param.page == k}"><a
-                                href="controller?command=listOfUsers&page=${k}&sort=${sortParam}"><strong><fmt:message key="users_jsp.button.page"/> <c:out
+                                href="controller?command=listOfUsers&page=${k}&sort=${sortParam}"><strong><fmt:message
+                                key="users_jsp.button.page"/> <c:out
                                 value="${k}"/></strong></a></c:when>
                         <c:when test="${param.page != k}"><a
-                                href="controller?command=listOfUsers&page=${k}&sort=${sortParam}"><fmt:message key="users_jsp.button.page"/> <c:out
+                                href="controller?command=listOfUsers&page=${k}&sort=${sortParam}"><fmt:message
+                                key="users_jsp.button.page"/> <c:out
                                 value="${k}"/></a></c:when>
                     </c:choose>
                 </c:forEach>
@@ -168,7 +165,8 @@
             <h3><fmt:message key="users_jsp.text.find_by_email"/></h3>
 
             <c:if test="${not empty notFoundMessage}">
-                <h3><span style="color:  rgb(204, 0, 0);"><fmt:message key="users_jsp.message.user_not_found"/></span></h3>
+                <h3><span style="color:  rgb(204, 0, 0);"><fmt:message key="users_jsp.message.user_not_found"/></span>
+                </h3>
                 <% request.getSession().removeAttribute("notFoundMessage"); %>
             </c:if>
 
@@ -179,10 +177,6 @@
                         <th>Email</th>
                         <th><fmt:message key="users_jsp.text.user_name"/></th>
                         <th><fmt:message key="users_jsp.text.user_surname"/></th>
-                        <th><fmt:message key="users_jsp.text.user_patronymic"/></th>
-                        <th><fmt:message key="users_jsp.text.user_region"/></th>
-                        <th><fmt:message key="users_jsp.text.user_city"/></th>
-                        <th><fmt:message key="users_jsp.text.user_institution"/></th>
                         <th><fmt:message key="users_jsp.text.user_status"/></th>
                     </tr>
                     <tr>
@@ -190,10 +184,6 @@
                         <td>${foundUser.email}</td>
                         <td>${foundUser.name}</td>
                         <td>${foundUser.surname}</td>
-                        <td>${foundUser.patronymic}</td>
-                        <td>${foundUser.region}</td>
-                        <td>${foundUser.city}</td>
-                        <td>${foundUser.institutionName}</td>
                         <td>
                             <c:choose>
                                 <c:when test="${foundUser.statusId == 0}">
@@ -203,7 +193,8 @@
                                     </c:if>
                                 </c:when>
                                 <c:when test="${foundUser.statusId == 1}"><span
-                                        style="color: rgb(204, 0, 0); "><fmt:message key="users_jsp.text.blocked"/></span></c:when>
+                                        style="color: rgb(204, 0, 0); "><fmt:message
+                                        key="users_jsp.text.blocked"/></span></c:when>
                             </c:choose>
                             <form action="controller" method="get">
                                 <input name="command" type="hidden" value="updateUsersStatus"/>
@@ -221,6 +212,8 @@
                                 </c:choose>
                             </form>
                         </td>
+                        <td><a href="controller?command=viewUserProfilePage&userId=${foundUser.id}"/><strong><fmt:message
+                                key="users_jsp.button.view_profile"/></strong></td>
                     </tr>
                 </table>
             </c:if>
@@ -231,7 +224,8 @@
                         <td><input required type="email" name="email"
                                 <c:choose>
                                     <c:when test="${not empty foundUser}">value="${foundUser.email}"</c:when>
-                                    <c:when test="${empty foundUser}">placeholder="<fmt:message key="users_jsp.placeholder.email_for_search"/>"</c:when>
+                                    <c:when test="${empty foundUser}">placeholder="<fmt:message
+                                            key="users_jsp.placeholder.email_for_search"/>"</c:when>
                                 </c:choose>/><br></td>
                     </tr>
                     <tr>
@@ -247,7 +241,8 @@
                 <% request.getSession().removeAttribute("successRegMessage"); %>
             </c:if>
 
-            <a href="controller?command=registerUserPage"><strong><fmt:message key="users_jsp.button.register_new_user"/></strong></a>
+            <a href="controller?command=registerUserPage"><strong><fmt:message
+                    key="users_jsp.button.register_new_user"/></strong></a>
 
 
         </td>

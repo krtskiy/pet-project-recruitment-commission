@@ -40,6 +40,14 @@ public class FacultyApplicationsBean extends Entity {
         this.userMarks = userMarks;
     }
 
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
     @Override
     public String toString() {
         return "FacultyApplicationsBean{" +

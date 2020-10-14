@@ -32,9 +32,15 @@ public class UpdateUsersStatusCommand extends Command {
         if (request.getParameter("userId") != null) {
             int userId = Integer.parseInt(request.getParameter("userId"));
             DBManager.getInstance().updateUserStatus(Integer.parseInt(status), userId);
+
+            if ("profile".equals(request.getParameter("forwardTo"))) {
+                return Path.COMMAND_USER_PROFILE + "&userId=" + userId;
+            }
+
             if (foundUser != null) {
                 return Path.COMMAND_FIND_USER_BY_EMAIL + "&email=" + foundUser.getEmail();
             }
+
             return Path.COMMAND_FIND_USER_BY_EMAIL;
         }
 

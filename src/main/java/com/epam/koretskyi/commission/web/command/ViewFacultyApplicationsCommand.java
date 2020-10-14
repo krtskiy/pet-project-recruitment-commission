@@ -31,7 +31,6 @@ public class ViewFacultyApplicationsCommand extends Command {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
         LOG.debug("Command starts");
 
-        HttpSession session = request.getSession();
         DBManager manager = DBManager.getInstance();
 
         int facultyId = Integer.parseInt(request.getParameter("facultyId"));

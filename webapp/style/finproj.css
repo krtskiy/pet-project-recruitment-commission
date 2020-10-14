@@ -20,6 +20,11 @@ ul {
     list-style: inside;
 }
 
+th {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
 #header, #footer, .content {
     border: 1px solid black;
 }
@@ -105,6 +110,7 @@ Miscellaneous
 .noborder {
     border: 2px solid red;
 }
+
 
 /***************************************************************
 Login form (login.jsp)

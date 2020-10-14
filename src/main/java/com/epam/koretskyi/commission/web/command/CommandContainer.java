@@ -29,7 +29,7 @@ public class CommandContainer {
         commands.put("updateUser", new UpdateUserCommand());
         commands.put("registerForFaculty", new RegisterForFacultyCommand());
         commands.put("viewFacultyApplications", new ViewFacultyApplicationsCommand());
-        // TODO delete entrants application
+        commands.put("deleteUserApplication", new DeleteUserApplicationCommand());
 
         // admin
         commands.put("listOfUsers", new ListOfUsersCommand());
@@ -39,6 +39,7 @@ public class CommandContainer {
         commands.put("deleteFaculty", new DeleteFacultyCommand());
         commands.put("updateFaculty", new UpdateFacultyCommand());
         commands.put("createNewFaculty", new CreateNewFacultyCommand());
+        commands.put("viewUserProfilePage", new UserProfilePageCommand());
 
         // page view commands
         commands.put("loginPage", new LoginPageCommand());

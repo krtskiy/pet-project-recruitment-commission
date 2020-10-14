@@ -41,15 +41,15 @@ public class ListOfUsersCommand extends Command {
             LOG.trace("Users sorted by id in ascending order");
         }
 
-        // sort users by name asc
-        if ("nameAsc".equals(sortParam)) {
-            users.sort(Comparator.comparing(User::getName));
+        // sort users by surname asc
+        if ("surnameAsc".equals(sortParam)) {
+            users.sort(Comparator.comparing(User::getSurname));
             LOG.trace("Users sorted by name in ascending order");
         }
 
-        // sort users by name desc
-        if ("nameDesc".equals(sortParam)) {
-            users.sort(Comparator.comparing(User::getName).reversed());
+        // sort users by surname desc
+        if ("surnameDesc".equals(sortParam)) {
+            users.sort(Comparator.comparing(User::getSurname).reversed());
             LOG.trace("Users sorted by name in descending order");
         }
 

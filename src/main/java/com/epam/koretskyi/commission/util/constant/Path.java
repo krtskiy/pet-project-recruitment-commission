@@ -32,8 +32,10 @@ public final class Path {
     public static final String PAGE_UPDATE_FACULTY = "/WEB-INF/jsp/admin/update_faculty.jsp";
     public static final String PAGE_FACULTIES_ADMIN = "/WEB-INF/jsp/admin/faculties_admin.jsp";
     public static final String PAGE_CREATE_NEW_FACULTY = "/WEB-INF/jsp/admin/new_faculty.jsp";
+    public static final String PAGE_USER_PROFILE = "/WEB-INF/jsp/admin/user_profile.jsp";
 
     // redirect commands
+    public static final String COMMAND_USER_PROFILE = "/controller?command=viewUserProfilePage";
     public static final String COMMAND_BLOCKED_USER = "/controller?command=blockedUserPage";
     public static final String COMMAND_ERROR_PAGE = "controller?command=errorPage";
     public static final String COMMAND_PRIVATE_OFFICE = "/controller?command=privateOfficePage";

@@ -98,7 +98,7 @@
                                     <c:if test="${user.roleId == 1}">
                                         <br><span style="color: #1B860A">Admin</span>
                                     </c:if>
-                                    <form action="controller" method="get">
+                                    <form action="controller" method="post">
                                         <input name="command" type="hidden" value="updateUsersStatus"/>
                                         <input name="userId" type="hidden" value="${user.id}">
                                         <c:choose>
@@ -118,7 +118,7 @@
                                 <c:when test="${user.statusId == 1}">
                                     <span style="color: rgb(204, 0, 0); "><fmt:message
                                             key="users_jsp.text.blocked"/></span>
-                                    <form action="controller" method="get">
+                                    <form action="controller" method="post">
                                         <input name="command" type="hidden" value="updateUsersStatus"/>
                                         <input name="userId" type="hidden" value="${user.id}">
                                         <c:choose>

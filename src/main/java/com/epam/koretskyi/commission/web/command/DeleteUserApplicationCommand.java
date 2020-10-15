@@ -32,7 +32,7 @@ public class DeleteUserApplicationCommand extends Command {
         int userId;
 
         String userIdStr = request.getParameter("userId");
-        if (!"".equals(userIdStr)) {
+        if (userIdStr != null) {
             userId = Integer.parseInt(userIdStr);
             LOG.trace("Current user id --> " + userId);
         } else {

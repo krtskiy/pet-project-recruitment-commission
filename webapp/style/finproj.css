@@ -140,6 +140,11 @@ Register form (register.jsp, new_faculty.jsp)
     width: 288px;
 }
 
+#initials_form {
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
+
 /***************************************************************
 Links
 ***************************************************************/

@@ -86,7 +86,7 @@
                        placeholder="<fmt:message key="register_jsp.placeholder.city"/>"><br>
 
                 <input type="text" name="institutionName" size="35"
-                       required title="<fmt:message key="register_jsp.field_popup.institution_format"/>"
+                       required pattern="[\w\s#№]{1,45}" title="<fmt:message key="register_jsp.field_popup.institution_format"/>"
                        placeholder="<fmt:message key="register_jsp.placeholder.institution"/>"><br>
 
                 <input type="submit" value="<fmt:message key="register_jsp.button.submit"/> ">

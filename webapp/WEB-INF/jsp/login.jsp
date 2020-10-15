@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <%@ include file="/WEB-INF/jspf/directive/page.jspf" %>
 <%@ include file="/WEB-INF/jspf/directive/taglib.jspf" %>
 
@@ -14,21 +14,32 @@
     <tr>
         <td class="content center">
 
-            <c:if test="${not empty successRegMessage}">
-                <h3><span style="color: #1B860A"><fmt:message key="login_jsp.text.success_message"/> </span></h3><br>
-                <% request.getSession().removeAttribute("successRegMessage"); %>
-            </c:if>
+            <c:choose>
+                <c:when test="${not empty user}">
+                    <h3><span style="color: rgb(204, 0, 0); "><fmt:message key="login_jsp.text.already_logged"/></span>
+                    </h3>
+                </c:when>
+                <c:otherwise>
 
-            <h1><fmt:message key="login_jsp.text.login_form"/></h1>
+                    <c:if test="${not empty successRegMessage}">
+                        <h3><span style="color: #1B860A"><fmt:message key="login_jsp.text.success_message"/> </span>
+                        </h3><br>
+                        <% request.getSession().removeAttribute("successRegMessage"); %>
+                    </c:if>
 
-            <form id="login_form" method="post" action="controller">
-                <input type="hidden" name="command" value="login">
+                    <h1><fmt:message key="login_jsp.text.login_form"/></h1>
 
-                <input type="email" name="email" maxlength="255" placeholder="Email"><br>
-                <input type="password" name="password" maxlength="32" placeholder="<fmt:message key="login_jsp.placeholder.password"/> "><br>
+                    <form id="login_form" method="post" action="controller">
+                        <input type="hidden" name="command" value="login">
 
-                <input type="submit" value="<fmt:message key="login_jsp.button.log_in"/> ">
-            </form>
+                        <input type="email" name="email" maxlength="255" placeholder="Email"><br>
+                        <input type="password" name="password" maxlength="32"
+                               placeholder="<fmt:message key="login_jsp.placeholder.password"/> "><br>
+
+                        <input type="submit" value="<fmt:message key="login_jsp.button.log_in"/> ">
+                    </form>
+                </c:otherwise>
+            </c:choose>
         </td>
     </tr>
 

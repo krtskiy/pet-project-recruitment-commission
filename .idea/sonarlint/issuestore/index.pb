@@ -156,3 +156,9 @@ Msrc/main/java/com/epam/koretskyi/commission/web/command/ErrorPageCommand.java,
 ,webapp/WEB-INF/jsp/user/faculty_entrants.jsp,f\2\f226917e0aa098357e128e8e77dfe7cd5497742b
 ‹
 [src/main/java/com/epam/koretskyi/commission/web/command/ViewFacultyApplicationsCommand.java,4\7\470eba93d425c2a4e0228a449a171d078cba4449
+ƒ
+Ssrc/main/java/com/epam/koretskyi/commission/web/command/UserProfilePageCommand.java,a\4\a4c424920afe7782d968f9b7b4228caa53064c63
+‰
+Ysrc/main/java/com/epam/koretskyi/commission/web/command/DeleteUserApplicationCommand.java,c\2\c24f65ad4e254bf27fd5f37736fbf56d521a318b
+Y
+)webapp/WEB-INF/jsp/admin/user_profile.jsp,6\2\62a45f1e81119e5cf118e093a78db0399caa79c0

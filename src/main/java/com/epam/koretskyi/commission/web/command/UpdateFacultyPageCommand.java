@@ -37,7 +37,6 @@ public class UpdateFacultyPageCommand extends Command {
         List<FacultyApplicationsBean> facultyApplications = manager.findFacultyApplicationsByFacultyId(facultyId);
         if (!facultyApplications.isEmpty()) {
             request.setAttribute("isEmpty", true);
-//            throw new AppException("Entrants have already registered for this faculty! You can't change it anymore!");
         }
 
         Faculty faculty = manager.findFacultyById(facultyId);

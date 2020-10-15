@@ -117,12 +117,22 @@
                             </c:forEach>
                         </td>
                         <td>
-                            <a href="controller?command=deleteFaculty&facultyId=${faculty.id}"><strong><fmt:message
-                                    key="faculties_admin_jsp.button.delete"/></strong></a>
-                            <a href="controller?command=updateFacultyPage&facultyId=${faculty.id}"><strong><fmt:message
-                                    key="faculties_admin_jsp.button.edit"/></strong></a>
-                            <a href="controller?command=viewFacultyApplications&facultyId=${faculty.id}"><strong><fmt:message
-                                    key="faculties_admin_jsp.button.view_entrants"/></strong></a>
+                            <c:choose>
+                                <c:when test="${faculty.statusId == 1}">
+                                    <span style="color:  rgb(204, 0, 0);"><strong><fmt:message
+                                            key="faculties_jsp.text.recruitment_closed"/></strong></span><br>
+                                    <a href="controller?command=viewReportSheetPage&facultyId=${faculty.id}"><strong><fmt:message
+                                            key="faculties_jsp.button.view_report"/></strong></a>
+                                </c:when>
+                                <c:otherwise>
+                                    <a href="controller?command=deleteFaculty&facultyId=${faculty.id}"><strong><fmt:message
+                                            key="faculties_admin_jsp.button.delete"/></strong></a>
+                                    <a href="controller?command=updateFacultyPage&facultyId=${faculty.id}"><strong><fmt:message
+                                            key="faculties_admin_jsp.button.edit"/></strong></a>
+                                    <a href="controller?command=viewFacultyApplications&facultyId=${faculty.id}"><strong><fmt:message
+                                            key="faculties_admin_jsp.button.view_entrants"/></strong></a>
+                                </c:otherwise>
+                            </c:choose>
                         </td>
                     </tr>
                 </c:forEach>

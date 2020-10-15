@@ -23,6 +23,7 @@ public class UpdateUsersStatusCommand extends Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
         LOG.debug("Command starts");
+
         String status = request.getParameter("status");
         LOG.trace("Request parameter: status --> " + status);
 

@@ -31,7 +31,7 @@ public class DBManager {
     private static final String SQL_UPDATE_FACULTY = "UPDATE faculties SET name_en=?, name_uk=?, total_seats=?, budget_seats=?, status_id=? WHERE id=?";
     private static final String SQL_INSERT_FACULTY = "INSERT INTO faculties VALUES (?, ?, ?, ?, ?, DEFAULT)";
 
-    private static final String SQL_FIND_USER_FACULTIES = "SELECT faculties.id, faculties.name_en, faculties.name_uk FROM faculties INNER JOIN applications ON faculties.id = applications.faculty_id WHERE applications.user_id = ?;";
+    private static final String SQL_FIND_USER_FACULTIES = "SELECT faculties.id, faculties.status_id, faculties.name_en, faculties.name_uk FROM faculties INNER JOIN applications ON faculties.id = applications.faculty_id WHERE applications.user_id = ?;";
 
     // criterion
     private static final String SQL_FIND_FACULTY_CRITERIA = "SELECT * FROM criteria WHERE id IN (SELECT criterion_id FROM faculty_criteria WHERE faculty_id = ?);";
@@ -60,6 +60,7 @@ public class DBManager {
     private static final String SQL_FIND_USER_APPLICATIONS = "SELECT * FROM applications WHERE user_id = ?;";
     private static final String SQL_FIND_FACULTY_APPLICATIONS = "SELECT users.id, users.name, users.surname FROM users INNER JOIN applications ON users.id = applications.user_id WHERE applications.faculty_id = ?;";
     private static final String SQL_DELETE_USER_APPLICATION = "DELETE FROM applications WHERE faculty_id=? AND user_id=?";
+    private static final String SQL_FIND_SUCCESSFUL_APPLICATIONS = "SELECT applications.faculty_id, users.id, users.name, users.surname FROM users INNER JOIN applications ON users.id = applications.user_id WHERE applications.faculty_id = ? LIMIT ?, ?;";
 
     ///////////////////////////////////
     // singleton
@@ -633,6 +634,34 @@ public class DBManager {
         return facultyApplications;
     }
 
+    public List<FacultyApplicationsBean> findSuccessfulApplicationsByFacultyId(int skip, int seatQuantity, int facultyId) throws DBException {
+        List<FacultyApplicationsBean> facultyApplications = new ArrayList<>();
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement(SQL_FIND_SUCCESSFUL_APPLICATIONS);
+            int k = 0;
+            preparedStatement.setInt(++k, facultyId);
+            preparedStatement.setInt(++k, skip);
+            preparedStatement.setInt(++k, seatQuantity);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                facultyApplications.add(extractFacultyApplicationsBean(resultSet, facultyId));
+            }
+        } catch (SQLException e) {
+            rollback(connection);
+            LOG.error(Messages.ERR_CANNOT_FIND_FACULTY_APPLICATIONS);
+            throw new DBException(Messages.ERR_CANNOT_FIND_FACULTY_APPLICATIONS, e);
+        } finally {
+            close(resultSet);
+            close(preparedStatement);
+            close(connection);
+        }
+        return facultyApplications;
+    }
+
     public void deleteUserApplication(int userId, int facultyId) throws DBException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -803,6 +832,7 @@ public class DBManager {
     private UserFacultiesBean extractUserFacultiesBean(ResultSet resultSet) throws SQLException {
         UserFacultiesBean userFacultiesBean = new UserFacultiesBean();
         userFacultiesBean.setFacultyId(resultSet.getInt(Field.ID));
+        userFacultiesBean.setFacultyStatusId(resultSet.getInt(Field.FACULTY_STATUS_ID));
         userFacultiesBean.setFacultyNameEn(resultSet.getString(Field.FACULTY_NAME_EN));
         userFacultiesBean.setFacultyNameUk(resultSet.getString(Field.FACULTY_NAME_UK));
         return userFacultiesBean;
@@ -856,6 +886,7 @@ public class DBManager {
             }
         }
     }
+
 
 
 }

@@ -11,6 +11,7 @@ import java.util.List;
 public class FacultyApplicationsBean extends Entity {
     private static final long serialVersionUID = 4489430004235774335L;
 
+    private int facultyId;
     private int userId;
     private String userName;
     private String userSurname;
@@ -46,6 +47,14 @@ public class FacultyApplicationsBean extends Entity {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public int getFacultyId() {
+        return facultyId;
+    }
+
+    public void setFacultyId(int facultyId) {
+        this.facultyId = facultyId;
     }
 
     @Override

@@ -125,17 +125,29 @@
                         </td>
                         <c:if test="${userRole.name == 'user' and user.statusId != 1}">
                             <td>
-                                <a href="controller?command=viewFacultyApplications&facultyId=${faculty.id}"><strong><fmt:message
-                                        key="faculties_jsp.button.view_entrants"/></strong></a>
                                 <c:choose>
-                                    <c:when test="${fn:contains(userFaculties, faculty.id)}">
-                                        <strong><span style="color: #1B860A"><fmt:message key="faculties_jsp.text.already_registered"/></span></strong>
+                                    <c:when test="${faculty.statusId == 1}">
+                                        <span style="color:  rgb(204, 0, 0);"><strong><fmt:message
+                                                key="faculties_jsp.text.recruitment_closed"/></strong></span><br>
+                                        <a href="controller?command=viewReportSheetPage&facultyId=${faculty.id}"><strong><fmt:message
+                                                key="faculties_jsp.button.view_report"/></strong></a>
                                     </c:when>
                                     <c:otherwise>
-                                        <a href="controller?command=registerForFacultyPage&facultyId=${faculty.id}"><strong><fmt:message
-                                                key="faculties_jsp.button.register"/></strong></a>
+                                        <a href="controller?command=viewFacultyApplications&facultyId=${faculty.id}"><strong><fmt:message
+                                                key="faculties_jsp.button.view_entrants"/></strong></a>
+                                        <c:choose>
+                                            <c:when test="${fn:contains(userFaculties, faculty.id)}">
+                                                <strong><span style="color: #1B860A"><fmt:message
+                                                        key="faculties_jsp.text.already_registered"/></span></strong>
+                                            </c:when>
+                                            <c:when test="${faculty.statusId ne 1}">
+                                                <a href="controller?command=registerForFacultyPage&facultyId=${faculty.id}"><strong><fmt:message
+                                                        key="faculties_jsp.button.register"/></strong></a>
+                                            </c:when>
+                                        </c:choose>
                                     </c:otherwise>
                                 </c:choose>
+
                             </td>
                         </c:if>
                     </tr>

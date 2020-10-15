@@ -1,30 +1,22 @@
 
-n Web:TableHeaderHasIdOrScopeCheckV";Add either an 'id' or a 'scope' attribute to this <th> tag.(†‹Ê 8šœ£—Ğ.
-cWeb:DoctypePresenceCheck":Insert a <!DOCTYPE> declaration to before this <html> tag.(œ÷Ãûÿÿÿÿ
-n Web:TableHeaderHasIdOrScopeCheckU";Add either an 'id' or a 'scope' attribute to this <th> tag.(¨©å£8šœ£—Ğ.
-t Web:TableHeaderHasIdOrScopeCheck¸";Add either an 'id' or a 'scope' attribute to this <th> tag.(ö‚›•øÿÿÿÿ8Á…æÇĞ.
+o Web:TableHeaderHasIdOrScopeCheck²";Add either an 'id' or a 'scope' attribute to this <th> tag.(ÁáŠ8šêß¹Ò.
+o Web:TableHeaderHasIdOrScopeCheck³";Add either an 'id' or a 'scope' attribute to this <th> tag.(‚§„¤8šêß¹Ò.
+n Web:TableHeaderHasIdOrScopeCheckT";Add either an 'id' or a 'scope' attribute to this <th> tag.(‚§„¤8šœ£—Ğ.
 OWeb:TableWithoutCaptionCheck
 " Add a description to this table.(ÉÚ¶Æ8ä•šÃÎ.
-n Web:TableHeaderHasIdOrScopeCheckY";Add either an 'id' or a 'scope' attribute to this <th> tag.(ºŞ‹º8šœ£—Ğ.
-o Web:TableHeaderHasIdOrScopeCheck¶";Add either an 'id' or a 'scope' attribute to this <th> tag.(¨©å£8Á…æÇĞ.
-s Web:TableHeaderHasIdOrScopeCheckW";Add either an 'id' or a 'scope' attribute to this <th> tag.(ö‚›•øÿÿÿÿ8šœ£—Ğ.
-n Web:TableHeaderHasIdOrScopeCheckT";Add either an 'id' or a 'scope' attribute to this <th> tag.(‚§„¤8šœ£—Ğ.
-o Web:TableHeaderHasIdOrScopeCheckº";Add either an 'id' or a 'scope' attribute to this <th> tag.(ºŞ‹º8 ÿ’Ñ.
-s Web:TableHeaderHasIdOrScopeCheckQ";Add either an 'id' or a 'scope' attribute to this <th> tag.(÷©éúÿÿÿÿ8šœ£—Ğ.
-o Web:TableHeaderHasIdOrScopeCheck´";Add either an 'id' or a 'scope' attribute to this <th> tag.(ÁáŠ8Á…æÇĞ.
-n Web:TableHeaderHasIdOrScopeCheckS";Add either an 'id' or a 'scope' attribute to this <th> tag.(ÁáŠ8šœ£—Ğ.
-G	Web:S5256å"%Add "<th>" headers to this "<table>".(ß³‚–úÿÿÿÿ8Á…æÇĞ.
-UWeb:TableWithoutCaptionCheckå" Add a description to this table.(ß³‚–úÿÿÿÿ8Á…æÇĞ.
-Z	Web:S5254"@Add "lang" and/or "xml:lang" attributes to this "<html>" element(œ÷Ãûÿÿÿÿ
 A	Web:S5256
 "%Add "<th>" headers to this "<table>".(ÉÚ¶Æ8ä•šÃÎ.
-PWeb:PageWithoutTitleCheck"Add a <title> tag to this page.(œ÷Ãûÿÿÿÿ8Á…æÇĞ.
-n Web:TableHeaderHasIdOrScopeCheckR";Add either an 'id' or a 'scope' attribute to this <th> tag.(æËİâ8šœ£—Ğ.
-t Web:TableHeaderHasIdOrScopeCheck²";Add either an 'id' or a 'scope' attribute to this <th> tag.(÷©éúÿÿÿÿ8Á…æÇĞ.
-UWeb:TableWithoutCaptionCheck°" Add a description to this table.(ÓòÀüÿÿÿÿ8Á…æÇĞ.
-o Web:TableHeaderHasIdOrScopeCheckµ";Add either an 'id' or a 'scope' attribute to this <th> tag.(‚§„¤8Á…æÇĞ.
-o Web:TableHeaderHasIdOrScopeCheck³";Add either an 'id' or a 'scope' attribute to this <th> tag.(æËİâ8Á…æÇĞ.
-n Web:TableHeaderHasIdOrScopeCheckX";Add either an 'id' or a 'scope' attribute to this <th> tag.(“ü½ş8šœ£—Ğ.
+t Web:TableHeaderHasIdOrScopeCheck°";Add either an 'id' or a 'scope' attribute to this <th> tag.(÷©éúÿÿÿÿ8šêß¹Ò.
+PWeb:PageWithoutTitleCheck"Add a <title> tag to this page.(œ÷Ãûÿÿÿÿ8šêß¹Ò.
+s Web:TableHeaderHasIdOrScopeCheckQ";Add either an 'id' or a 'scope' attribute to this <th> tag.(÷©éúÿÿÿÿ8šœ£—Ğ.
+o Web:TableHeaderHasIdOrScopeCheck´";Add either an 'id' or a 'scope' attribute to this <th> tag.(ºŞ‹º8šêß¹Ò.
+n Web:TableHeaderHasIdOrScopeCheckU";Add either an 'id' or a 'scope' attribute to this <th> tag.(ºŞ‹º8šœ£—Ğ.
+n Web:TableHeaderHasIdOrScopeCheckS";Add either an 'id' or a 'scope' attribute to this <th> tag.(ÁáŠ8šœ£—Ğ.
 TWeb:TableWithoutCaptionCheckN" Add a description to this table.(ÓòÀüÿÿÿÿ8šœ£—Ğ.
-o Web:TableHeaderHasIdOrScopeCheck¹";Add either an 'id' or a 'scope' attribute to this <th> tag.(“ü½ş8Á…æÇĞ.
-o Web:TableHeaderHasIdOrScopeCheck·";Add either an 'id' or a 'scope' attribute to this <th> tag.(†‹Ê 8Á…æÇĞ.
+UWeb:TableWithoutCaptionCheck®" Add a description to this table.(ÓòÀüÿÿÿÿ8šêß¹Ò.
+G	Web:S5256Ş"%Add "<th>" headers to this "<table>".(ß³‚–úÿÿÿÿ8šêß¹Ò.
+o Web:TableHeaderHasIdOrScopeCheck±";Add either an 'id' or a 'scope' attribute to this <th> tag.(æËİâ8šêß¹Ò.
+n Web:TableHeaderHasIdOrScopeCheckR";Add either an 'id' or a 'scope' attribute to this <th> tag.(æËİâ8šœ£—Ğ.
+Z	Web:S5254"@Add "lang" and/or "xml:lang" attributes to this "<html>" element(œ÷Ãûÿÿÿÿ
+UWeb:TableWithoutCaptionCheckŞ" Add a description to this table.(ß³‚–úÿÿÿÿ8šêß¹Ò.
+cWeb:DoctypePresenceCheck":Insert a <!DOCTYPE> declaration to before this <html> tag.(œ÷Ãûÿÿÿÿ

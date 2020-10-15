@@ -63,8 +63,12 @@ public class CreateNewFacultyCommand extends Command {
 
         LOG.trace("Request parameter: faculty criteria --> " + criteria);
 
+        if (criteriaIdArr == null) {
+            throw new AppException("Selection criteria can not be empty!");
+        }
+
         if (id.equals("") || nameEn.equals("") || nameUk.equals("") ||
-                totalSeats.equals("") || budgetSeats.equals("") || criteriaIdArr == null) {
+                totalSeats.equals("") || budgetSeats.equals("")) {
             throw new AppException("Fields can not be empty!");
         }
 

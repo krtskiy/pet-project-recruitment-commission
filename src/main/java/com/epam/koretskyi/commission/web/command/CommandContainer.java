@@ -30,6 +30,7 @@ public class CommandContainer {
         commands.put("registerForFaculty", new RegisterForFacultyCommand());
         commands.put("viewFacultyApplications", new ViewFacultyApplicationsCommand());
         commands.put("deleteUserApplication", new DeleteUserApplicationCommand());
+        commands.put("viewReportSheetPage", new ViewReportSheetPage());
 
         // admin
         commands.put("listOfUsers", new ListOfUsersCommand());
@@ -40,6 +41,7 @@ public class CommandContainer {
         commands.put("updateFaculty", new UpdateFacultyCommand());
         commands.put("createNewFaculty", new CreateNewFacultyCommand());
         commands.put("viewUserProfilePage", new UserProfilePageCommand());
+        commands.put("closeFacultyRecruitment", new CloseFacultyRecruitmentCommand());
 
         // page view commands
         commands.put("loginPage", new LoginPageCommand());
@@ -49,7 +51,6 @@ public class CommandContainer {
         commands.put("errorPage", new ErrorPageCommand());
         commands.put("blockedUserPage", new BlockedUserPageCommand());
         commands.put("registerForFacultyPage", new RegisterForFacultyPageCommand());
-
         commands.put("updateFacultyPage", new UpdateFacultyPageCommand());
         commands.put("createNewFacultyPage", new CreateNewFacultyPageCommand());
 

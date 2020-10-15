@@ -34,36 +34,17 @@ public class ViewReportSheetPage extends Command {
         LOG.trace("Set request attribute: faculty --> " + faculty);
 
         int totalSeats = faculty.getTotalSeats();
-        int budgetSeats = faculty.getBudgetSeats();
 
         List<FacultyApplicationsBean> facultyApplications = manager.findFacultyApplicationsByFacultyId(facultyId);
         facultyApplications.sort(Comparator.comparingInt(FacultyApplicationsBean::sumOfMarks).reversed());
 
-        if (facultyApplications.size() < budgetSeats) {
-            List<FacultyApplicationsBean> facultyApplicationsBudget = facultyApplications.subList(0, budgetSeats);
-            LOG.trace("Set request attribute: facultyApplicationsBudget --> " + facultyApplicationsBudget);
-            request.setAttribute("facultyApplicationsBudget", facultyApplicationsBudget);
-
-            LOG.debug("Command finished");
-            return Path.PAGE_REPORT_SHEET;
+        if (facultyApplications.size() < totalSeats) {
+            LOG.trace("Set request attribute: facultyApplications --> " + facultyApplications);
+            request.setAttribute("facultyApplications", facultyApplications.subList(0, facultyApplications.size()));
+        } else {
+            LOG.trace("Set request attribute: facultyApplications --> " + facultyApplications);
+            request.setAttribute("facultyApplications", facultyApplications.subList(0, totalSeats));
         }
-
-        List<FacultyApplicationsBean> facultyApplicationsBudget = facultyApplications.subList(0, budgetSeats);
-        LOG.trace("Set request attribute: facultyApplicationsBudget --> " + facultyApplicationsBudget);
-        request.setAttribute("facultyApplicationsBudget", facultyApplicationsBudget);
-
-        if (facultyApplications.size() > budgetSeats && facultyApplications.size() < totalSeats) {
-            List<FacultyApplicationsBean> facultyApplicationsContract = facultyApplications.subList(budgetSeats, facultyApplications.size());
-            LOG.trace("Set request attribute: facultyApplicationsContract --> " + facultyApplicationsContract);
-            request.setAttribute("facultyApplicationsContract", facultyApplicationsContract);
-
-            LOG.debug("Command finished");
-            return Path.PAGE_REPORT_SHEET;
-        }
-
-        List<FacultyApplicationsBean> facultyApplicationsContract = facultyApplications.subList(budgetSeats, totalSeats);
-        LOG.trace("Set request attribute: facultyApplicationsContract --> " + facultyApplicationsContract);
-        request.setAttribute("facultyApplicationsContract", facultyApplicationsContract);
 
         LOG.debug("Command finished");
         return Path.PAGE_REPORT_SHEET;

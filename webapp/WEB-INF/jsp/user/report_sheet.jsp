@@ -33,7 +33,8 @@
             <fmt:message key="report_sheet_jsp.text.applied_budget"/> (${faculty.budgetSeats})<br>
             <svg width="15" height="15">
                 <rect width="15" height="15" style="fill:#9AD4FF;stroke-width:3;stroke:rgb(0,0,0)"/>
-            </svg> <fmt:message key="report_sheet_jsp.text.applied_contract"/>
+            </svg>
+            <fmt:message key="report_sheet_jsp.text.applied_contract"/>
             (${faculty.totalSeats - faculty.budgetSeats})<br>
 
             <table id="list_users_table">
@@ -56,80 +57,51 @@
                     </c:forEach>
                     <th><fmt:message key="faculty_entrants_jsp.text.entr_marks_sum"/></th>
                 </tr>
-                <c:choose>
-                    <c:when test="${not empty facultyApplicationsBudget}">
-                        <c:set var="k" value="0"/>
-                        <c:forEach var="application" items="${facultyApplicationsBudget}">
-                            <c:set var="k" value="${k+1}"/>
-                            <tr bgcolor="#D3FFCA">
+                <%--                <c:choose>--%>
+                <%--                    <c:when test="${not empty facultyApplications}">--%>
+                <c:set var="k" value="0"/>
+                <c:forEach var="application" items="${facultyApplications}">
+                    <c:if test="${k < faculty.totalSeats}">
+                        <c:set var="k" value="${k+1}"/>
+                        <tr
                                 <c:choose>
-                                    <c:when test="${user.id == application.userId}">
-                                        <td><strong>${k}</strong></td>
-                                        <td><strong>${application.userName}</strong></td>
-                                        <td><strong>${application.userSurname}</strong></td>
-                                        <c:set var="markSum" value="${0}"/>
-                                        <c:forEach var="mark" items="${application.userMarks}">
-                                            <c:set var="markSum" value="${markSum + mark.mark}"/>
-                                            <td><strong>${mark.mark}</strong></td>
-                                        </c:forEach>
-                                        <td><strong>${markSum}</strong></td>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <td>${k}</td>
-                                        <td>${application.userName}</td>
-                                        <td>${application.userSurname}</td>
-                                        <c:set var="markSum" value="${0}"/>
-                                        <c:forEach var="mark" items="${application.userMarks}">
-                                            <c:set var="markSum" value="${markSum + mark.mark}"/>
-                                            <td>${mark.mark}</td>
-                                        </c:forEach>
-                                        <td><strong>${markSum}</strong></td>
-                                        <c:if test="${user.roleId == 1}">
-                                            <td>
-                                                <a href="controller?command=viewUserProfilePage&userId=${application.userId}"><strong><fmt:message
-                                                        key="users_jsp.button.view_profile"/></strong></a></td>
-                                        </c:if>
-                                    </c:otherwise>
+                                    <c:when test="${k <= faculty.budgetSeats}">bgcolor="#D3FFCA"</c:when>
+                                    <c:when test="${k > faculty.budgetSeats and k <= faculty.totalSeats}">bgcolor="#CAF3FF"</c:when>
                                 </c:choose>
-                            </tr>
-                        </c:forEach>
-                        <c:forEach var="application" items="${facultyApplicationsContract}">
-                            <c:set var="k" value="${k+1}"/>
-                            <tr bgcolor="#CAF3FF">
-                                <c:choose>
-                                    <c:when test="${user.id == application.userId}">
-                                        <td><strong>${k}</strong></td>
-                                        <td><strong>${application.userName}</strong></td>
-                                        <td><strong>${application.userSurname}</strong></td>
-                                        <c:set var="markSum" value="${0}"/>
-                                        <c:forEach var="mark" items="${application.userMarks}">
-                                            <c:set var="markSum" value="${markSum + mark.mark}"/>
-                                            <td><strong>${mark.mark}</strong></td>
-                                        </c:forEach>
-                                        <td><strong>${markSum}</strong></td>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <td>${k}</td>
-                                        <td>${application.userName}</td>
-                                        <td>${application.userSurname}</td>
-                                        <c:set var="markSum" value="${0}"/>
-                                        <c:forEach var="mark" items="${application.userMarks}">
-                                            <c:set var="markSum" value="${markSum + mark.mark}"/>
-                                            <td>${mark.mark}</td>
-                                        </c:forEach>
-                                        <td><strong>${markSum}</strong></td>
-                                        <c:if test="${user.roleId == 1}">
-                                            <td>
-                                                <a href="controller?command=viewUserProfilePage&userId=${application.userId}"><strong><fmt:message
-                                                        key="users_jsp.button.view_profile"/></strong></a></td>
-                                        </c:if>
-                                    </c:otherwise>
-                                </c:choose>
-                            </tr>
-                        </c:forEach>
 
-                    </c:when>
-                </c:choose>
+                        >
+                            <c:choose>
+                                <c:when test="${user.id == application.userId}">
+                                    <td><strong>${k}</strong></td>
+                                    <td><strong>${application.userName}</strong></td>
+                                    <td><strong>${application.userSurname}</strong></td>
+                                    <c:set var="markSum" value="${0}"/>
+                                    <c:forEach var="mark" items="${application.userMarks}">
+                                        <c:set var="markSum" value="${markSum + mark.mark}"/>
+                                        <td><strong>${mark.mark}</strong></td>
+                                    </c:forEach>
+                                    <td><strong>${markSum}</strong></td>
+                                </c:when>
+                                <c:otherwise>
+                                    <td>${k}</td>
+                                    <td>${application.userName}</td>
+                                    <td>${application.userSurname}</td>
+                                    <c:set var="markSum" value="${0}"/>
+                                    <c:forEach var="mark" items="${application.userMarks}">
+                                        <c:set var="markSum" value="${markSum + mark.mark}"/>
+                                        <td>${mark.mark}</td>
+                                    </c:forEach>
+                                    <td><strong>${markSum}</strong></td>
+                                    <c:if test="${user.roleId == 1}">
+                                        <td>
+                                            <a href="controller?command=viewUserProfilePage&userId=${application.userId}"><strong><fmt:message
+                                                    key="users_jsp.button.view_profile"/></strong></a></td>
+                                    </c:if>
+                                </c:otherwise>
+                            </c:choose>
+                        </tr>
+                    </c:if>
+                </c:forEach>
             </table>
 
         </td>

@@ -51,16 +51,13 @@ public class DBManager {
 
     // user marks
     private static final String SQL_INSERT_USER_MARKS = "REPLACE INTO user_marks VALUES (?, ?, ?)";
-
     private static final String SQL_FIND_USER_MARKS = "SELECT criteria.id, criteria.name_en, criteria.name_uk, user_marks.mark FROM criteria INNER JOIN user_marks ON criteria.id = user_marks.criterion_id WHERE user_marks.user_id = ?;";
     private static final String SQL_FIND_USER_MARKS_FOR_FACULTY = "SELECT criteria.id, criteria.name_en, criteria.name_uk, user_marks.mark FROM criteria INNER JOIN user_marks ON criteria.id = user_marks.criterion_id WHERE user_marks.user_id = ? AND criteria.id IN (SELECT criterion_id FROM faculty_criteria WHERE faculty_id=?);";
 
     // applications
     private static final String SQL_INSERT_APPLICATION = "REPLACE INTO applications VALUES (DEFAULT, ?, ?)";
-    private static final String SQL_FIND_USER_APPLICATIONS = "SELECT * FROM applications WHERE user_id = ?;";
     private static final String SQL_FIND_FACULTY_APPLICATIONS = "SELECT users.id, users.name, users.surname FROM users INNER JOIN applications ON users.id = applications.user_id WHERE applications.faculty_id = ?;";
     private static final String SQL_DELETE_USER_APPLICATION = "DELETE FROM applications WHERE faculty_id=? AND user_id=?";
-    private static final String SQL_FIND_SUCCESSFUL_APPLICATIONS = "SELECT applications.faculty_id, users.id, users.name, users.surname FROM users INNER JOIN applications ON users.id = applications.user_id WHERE applications.faculty_id = ? LIMIT ?, ?;";
 
     ///////////////////////////////////
     // singleton
@@ -158,7 +155,6 @@ public class DBManager {
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 faculty = extractFaculty(resultSet);
-                faculty.setCriteria(findFacultyCriteriaByFacultyId(facultyId));
             }
             connection.commit();
         } catch (SQLException e) {
@@ -583,32 +579,6 @@ public class DBManager {
         }
     }
 
-    public List<Application> findUserApplications(int userId) throws DBException {
-        List<Application> applications = new ArrayList<>();
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        try {
-            connection = getConnection();
-            preparedStatement = connection.prepareStatement(SQL_FIND_USER_APPLICATIONS);
-            preparedStatement.setInt(1, userId);
-            resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                applications.add(extractApplication(resultSet));
-            }
-            connection.commit();
-        } catch (SQLException e) {
-            rollback(connection);
-            LOG.error(Messages.ERR_CANNOT_FIND_USER_APPLICATIONS);
-            throw new DBException(Messages.ERR_CANNOT_FIND_USER_APPLICATIONS, e);
-        } finally {
-            close(resultSet);
-            close(preparedStatement);
-            close(connection);
-        }
-        return applications;
-    }
-
     public List<FacultyApplicationsBean> findFacultyApplicationsByFacultyId(int facultyId) throws DBException {
         List<FacultyApplicationsBean> facultyApplications = new ArrayList<>();
         Connection connection = null;
@@ -618,34 +588,6 @@ public class DBManager {
             connection = getConnection();
             preparedStatement = connection.prepareStatement(SQL_FIND_FACULTY_APPLICATIONS);
             preparedStatement.setInt(1, facultyId);
-            resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                facultyApplications.add(extractFacultyApplicationsBean(resultSet, facultyId));
-            }
-        } catch (SQLException e) {
-            rollback(connection);
-            LOG.error(Messages.ERR_CANNOT_FIND_FACULTY_APPLICATIONS);
-            throw new DBException(Messages.ERR_CANNOT_FIND_FACULTY_APPLICATIONS, e);
-        } finally {
-            close(resultSet);
-            close(preparedStatement);
-            close(connection);
-        }
-        return facultyApplications;
-    }
-
-    public List<FacultyApplicationsBean> findSuccessfulApplicationsByFacultyId(int skip, int seatQuantity, int facultyId) throws DBException {
-        List<FacultyApplicationsBean> facultyApplications = new ArrayList<>();
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        try {
-            connection = getConnection();
-            preparedStatement = connection.prepareStatement(SQL_FIND_SUCCESSFUL_APPLICATIONS);
-            int k = 0;
-            preparedStatement.setInt(++k, facultyId);
-            preparedStatement.setInt(++k, skip);
-            preparedStatement.setInt(++k, seatQuantity);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 facultyApplications.add(extractFacultyApplicationsBean(resultSet, facultyId));
@@ -785,7 +727,7 @@ public class DBManager {
         return user;
     }
 
-    private Faculty extractFaculty(ResultSet resultSet) throws SQLException {
+    private Faculty extractFaculty(ResultSet resultSet) throws SQLException, DBException {
         Faculty faculty = new Faculty();
         faculty.setId(resultSet.getInt(Field.ID));
         faculty.setNameEn(resultSet.getString(Field.FACULTY_NAME_EN));
@@ -793,6 +735,8 @@ public class DBManager {
         faculty.setTotalSeats(resultSet.getInt(Field.FACULTY_TOTAL_SEATS));
         faculty.setBudgetSeats(resultSet.getInt(Field.FACULTY_BUDGET_SEATS));
         faculty.setStatusId(resultSet.getInt(Field.FACULTY_STATUS_ID));
+
+        faculty.setCriteria(findFacultyCriteriaByFacultyId(faculty.getId()));
 
         return faculty;
     }
@@ -803,14 +747,6 @@ public class DBManager {
         criterion.setNameEn(resultSet.getString(Field.CRITERIA_NAME_EN));
         criterion.setNameUk(resultSet.getString(Field.CRITERIA_NAME_UK));
         return criterion;
-    }
-
-    private UserMark extractUserMark(ResultSet resultSet) throws SQLException {
-        UserMark userMark = new UserMark();
-        userMark.setUserId(resultSet.getInt(Field.USER_ID));
-        userMark.setCriterionId(resultSet.getInt(Field.CRITERION_ID));
-        userMark.setMark(resultSet.getInt(Field.MARK));
-        return userMark;
     }
 
     private Application extractApplication(ResultSet resultSet) throws SQLException {

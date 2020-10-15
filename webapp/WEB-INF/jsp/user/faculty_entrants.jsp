@@ -17,17 +17,7 @@
             <c:choose>
                 <c:when test="${not empty facultyApplications}">
                     <h3><fmt:message key="faculty_entrants_jsp.text.list_of_applications"/>
-                        <c:choose>
-                            <c:when test="${currentLocale == 'uk'}">
-                                ${faculty.nameUk}<br>
-                            </c:when>
-                            <c:when test="${currentLocale == 'en'}">
-                                ${faculty.nameEn}<br>
-                            </c:when>
-                            <c:otherwise>
-                                ${faculty.nameEn}<br>
-                            </c:otherwise>
-                        </c:choose></h3>
+                        <localizer:facultyName currentLocaleName="${currentLocale}" faculty="${faculty}"/><br></h3>
                     <small><fmt:message key="faculty_entrants_jsp.text.sorted"/></small><br>
 
                     <svg width="15" height="15">
@@ -46,17 +36,7 @@
                             <th><fmt:message key="faculty_entrants_jsp.text.entr_name"/></th>
                             <th><fmt:message key="faculty_entrants_jsp.text.entr_surname"/></th>
                             <c:forEach var="criterion" items="${faculty.criteria}">
-                                <c:choose>
-                                    <c:when test="${currentLocale == 'uk'}">
-                                        <th>${criterion.nameUk}</th>
-                                    </c:when>
-                                    <c:when test="${currentLocale == 'en'}">
-                                        <th>${criterion.nameEn}</th>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <th>${criterion.nameEn}</th>
-                                    </c:otherwise>
-                                </c:choose>
+                                <th><localizer:criterionName currentLocaleName="${currentLocale}" criterion="${criterion}"/></th>
                             </c:forEach>
                             <th><fmt:message key="faculty_entrants_jsp.text.entr_marks_sum"/></th>
                         </tr>

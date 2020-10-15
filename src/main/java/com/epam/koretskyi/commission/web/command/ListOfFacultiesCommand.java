@@ -65,13 +65,6 @@ public class ListOfFacultiesCommand extends Command {
             LOG.trace("Faculties sorted by total amount of seats");
         }
 
-        // set criteria for each faculty
-        for (int i = 0; i < faculties.size(); i++) {
-            List<Criterion> criteria = DBManager.getInstance().findFacultyCriteriaByFacultyId(i + 1);
-            LOG.trace("Set the criteria for faculty # " + (i + 1) + " --> " + criteria);
-            faculties.get(i).setCriteria(criteria);
-        }
-
         // put faculties list to the request
         request.setAttribute("faculties", faculties);
         LOG.trace("Set the request attribute: faculties --> " + faculties);

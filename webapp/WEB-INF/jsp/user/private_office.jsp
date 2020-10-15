@@ -17,12 +17,12 @@
 
             <c:if test="${not empty successMessage}">
                 <h3><span style="color: #1B860A"><fmt:message key="private_office_jsp.message.data_changed"/><br> </span></h3>
-                <% request.getSession().removeAttribute("successMessage"); %>
+                <c:remove var="successMessage" scope="session"/>
             </c:if>
 
             <c:if test="${not empty successAppDeleteMessage}">
                 <h3><span style="color: #1B860A"><fmt:message key="private_office_jsp.message.application_deleted"/><br> </span></h3>
-                <% request.getSession().removeAttribute("successAppDeleteMessage"); %>
+                <c:remove var="successAppDeleteMessage" scope="session"/>
             </c:if>
 
             <a href="controller?command=updateUserPage"><strong><fmt:message
@@ -64,7 +64,7 @@
                                     <p>${faculty.facultyNameUk} |
                                         <a href="controller?command=viewFacultyApplications&facultyId=${faculty.facultyId}"><strong><fmt:message
                                                 key="private_office_jsp.button.view_entrants"/> </strong></a> |
-                                        <a href="controller?command=deleteUserApplication&facultyId=${faculty.facultyId}&userId=${profileOwner.id}"><strong><fmt:message
+                                        <a href="controller?command=deleteUserApplication&facultyId=${faculty.facultyId}&userId=${user.id}"><strong><fmt:message
                                                 key="user_profile_jsp.button.delete_application"/></strong></a>
                                     </p>
                                 </c:when>
@@ -72,7 +72,7 @@
                                     <p>${faculty.facultyNameEn} |
                                         <a href="controller?command=viewFacultyApplications&facultyId=${faculty.facultyId}"><strong><fmt:message
                                                 key="private_office_jsp.button.view_entrants"/></strong></a> |
-                                        <a href=href="controller?command=deleteUserApplication&facultyId=${faculty.facultyId}&userId=${profileOwner.id}"><strong><fmt:message
+                                        <a href=href="controller?command=deleteUserApplication&facultyId=${faculty.facultyId}&userId=${user.id}"><strong><fmt:message
                                                 key="user_profile_jsp.button.delete_application"/></strong></a>
                                     </p>
                                 </c:when>
@@ -80,7 +80,7 @@
                                     <p>${faculty.facultyNameEn} |
                                         <a href="controller?command=viewFacultyApplications&facultyId=${faculty.facultyId}"><strong><fmt:message
                                                 key="private_office_jsp.button.view_entrants"/></strong></a> |
-                                        <a href="controller?command=deleteUserApplication&facultyId=${faculty.facultyId}&userId=${profileOwner.id}"><strong><fmt:message
+                                        <a href="controller?command=deleteUserApplication&facultyId=${faculty.facultyId}&userId=${user.id}"><strong><fmt:message
                                                 key="user_profile_jsp.button.delete_application"/></strong></a>
                                     </p>
                                 </c:otherwise>

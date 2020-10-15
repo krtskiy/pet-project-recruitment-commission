@@ -101,6 +101,8 @@
                                     <form action="controller" method="post">
                                         <input name="command" type="hidden" value="updateUsersStatus"/>
                                         <input name="userId" type="hidden" value="${user.id}">
+                                        <input name="sort" type="hidden" value="${sortParam}">
+                                        <input name="page" type="hidden" value="${param.page}">
                                         <c:choose>
                                             <c:when test="${user.statusId == 0 and user.roleId != 1}">
                                                 <button name="status" value="1">
@@ -121,6 +123,8 @@
                                     <form action="controller" method="post">
                                         <input name="command" type="hidden" value="updateUsersStatus"/>
                                         <input name="userId" type="hidden" value="${user.id}">
+                                        <input name="sort" type="hidden" value="${sortParam}">
+                                        <input name="page" type="hidden" value="${param.page}">
                                         <c:choose>
                                             <c:when test="${user.statusId == 0 and user.roleId != 1}">
                                                 <button name="status" value="1">
@@ -167,7 +171,7 @@
             <c:if test="${not empty notFoundMessage}">
                 <h3><span style="color:  rgb(204, 0, 0);"><fmt:message key="users_jsp.message.user_not_found"/></span>
                 </h3>
-                <% request.getSession().removeAttribute("notFoundMessage"); %>
+                <c:remove var="notFoundMessage" scope="session"/>
             </c:if>
 
             <c:if test="${not empty foundUser}">
@@ -197,6 +201,8 @@
                                         key="users_jsp.text.blocked"/></span></c:when>
                             </c:choose>
                             <form action="controller" method="get">
+                                <input name="sort" type="hidden" value="${sortParam}">
+                                <input name="page" type="hidden" value="${param.page}">
                                 <input name="command" type="hidden" value="updateUsersStatus"/>
                                 <c:choose>
                                     <c:when test="${foundUser.statusId == 0 and foundUser.roleId != 1}">
@@ -219,6 +225,8 @@
             </c:if>
 
             <form action="controller?command=findUserByEmail" method="post">
+                <input name="sort" type="hidden" value="${sortParam}">
+                <input name="page" type="hidden" value="${param.page}">
                 <table id="list_search_table">
                     <tr>
                         <td><input required type="email" name="email"
@@ -238,12 +246,11 @@
 
             <c:if test="${not empty successRegMessage}">
                 <h3><span style="color: #1B860A"><fmt:message key="users_jsp.message_user_registered"/></span></h3><br>
-                <% request.getSession().removeAttribute("successRegMessage"); %>
+                <c:remove var="successRegMessage" scope="session"/>
             </c:if>
 
             <a href="controller?command=registerUserPage"><strong><fmt:message
                     key="users_jsp.button.register_new_user"/></strong></a>
-
 
         </td>
     </tr>

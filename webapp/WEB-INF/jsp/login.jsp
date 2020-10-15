@@ -24,7 +24,7 @@
                     <c:if test="${not empty successRegMessage}">
                         <h3><span style="color: #1B860A"><fmt:message key="login_jsp.text.success_message"/> </span>
                         </h3><br>
-                        <% request.getSession().removeAttribute("successRegMessage"); %>
+                        <c:remove var="successRegMessage" scope="session"/>
                     </c:if>
 
                     <h1><fmt:message key="login_jsp.text.login_form"/></h1>

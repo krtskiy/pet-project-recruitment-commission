@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<taglib version="2.1" xmlns="http://java.sun.com/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd">
+
+    <description>Localizer</description>
+    <tlib-version>1.0</tlib-version>
+    <short-name>localizer</short-name>
+    <uri>http://corporation.com/custom-tag/localizer</uri>
+
+    <tag>
+        <description>Localizes the faculty name according to the user's locale</description>
+        <name>facultyName</name>
+        <tag-class>com.epam.koretskyi.commission.tag.LocalizeFacultyNameTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <name>currentLocaleName</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <name>faculty</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>com.epam.koretskyi.commission.db.entity.Faculty</type>
+        </attribute>
+    </tag>
+
+    <tag>
+    <description>Localizes the criterion name according to the user's locale</description>
+    <name>criterionName</name>
+    <tag-class>com.epam.koretskyi.commission.tag.LocalizeCriterionNameTag</tag-class>
+    <body-content>empty</body-content>
+
+    <attribute>
+        <name>currentLocaleName</name>
+        <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+        <type>java.lang.String</type>
+    </attribute>
+
+    <attribute>
+        <name>criterion</name>
+        <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+        <type>com.epam.koretskyi.commission.db.entity.Criterion</type>
+    </attribute>
+
+</tag>
+</taglib>

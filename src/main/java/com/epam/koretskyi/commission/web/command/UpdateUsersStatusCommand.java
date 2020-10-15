@@ -24,10 +24,16 @@ public class UpdateUsersStatusCommand extends Command {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
         LOG.debug("Command starts");
 
+        HttpSession session = request.getSession();
+
         String status = request.getParameter("status");
         LOG.trace("Request parameter: status --> " + status);
 
-        HttpSession session = request.getSession();
+        String page = request.getParameter("page");
+        session.setAttribute("page", page);
+        String sort = request.getParameter("sort");
+        session.setAttribute("sort", sort);
+
         User foundUser = (User) session.getAttribute("foundUser");
 
         if (request.getParameter("userId") != null) {

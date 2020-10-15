@@ -44,20 +44,10 @@
                         <strong><fmt:message key="update_faculty_jsp.text.new_criteria"/> </strong><small><fmt:message
                             key="update_faculty_jsp.text.new_criteria_quantity"/></small><br>
                         <c:forEach var="criterion" items="${criteria}">
-                            <c:choose>
-                                <c:when test="${currentLocale == 'uk'}">
-                                    <input type="checkbox" name="criterionId"
-                                           value="${criterion.id}"> ${criterion.nameUk}<br>
-                                </c:when>
-                                <c:when test="${currentLocale == 'en'}">
-                                    <input type="checkbox" name="criterionId"
-                                           value="${criterion.id}"> ${criterion.nameEn}<br>
-                                </c:when>
-                                <c:otherwise>
-                                    <input type="checkbox" name="criterionId"
-                                           value="${criterion.id}"> ${criterion.nameEn}<br>
-                                </c:otherwise>
-                            </c:choose>
+
+                            <input type="checkbox" name="criterionId"
+                                   value="${criterion.id}"> <localizer:criterionName currentLocaleName="${currentLocale}" criterion="${criterion}"/>
+
                         </c:forEach>
                     </c:otherwise>
                 </c:choose>

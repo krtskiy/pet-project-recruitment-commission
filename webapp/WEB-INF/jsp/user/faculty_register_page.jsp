@@ -23,41 +23,21 @@
                 <h3><fmt:message key="faculty_register_page_jsp.text.enter_grades"/></h3>
                 <c:forEach var="criterion" items="${faculty.criteria}">
                     <c:choose>
-                        <c:when test="${currentLocale == 'uk'}">
-                            <c:choose>
-                                <c:when test="${criterion.id == 1}">
-                                    <small>${criterion.nameUk}:</small><br><input type="number" required name="marks"
-                                                                                  min="0" max="12"><br>
-                                </c:when>
-                                <c:otherwise>
-                                    <small>${criterion.nameUk}:</small><br><input type="number" required name="marks"
-                                                                                  min="0" max="200"><br>
-                                </c:otherwise>
-                            </c:choose>
-                        </c:when>
-                        <c:when test="${currentLocale == 'en'}">
-                            <c:choose>
-                                <c:when test="${criterion.id == 1}">
-                                    <small>${criterion.nameEn}:</small><br><input type="number" required name="marks"
-                                                                                  min="0" max="12"><br>
-                                </c:when>
-                                <c:otherwise>
-                                    <small>${criterion.nameEn}:</small><br><input type="number" required name="marks"
-                                                                                  min="0" max="200"><br>
-                                </c:otherwise>
-                            </c:choose>
+                        <c:when test="${criterion.id == 1}">
+                            <small><localizer:criterionName currentLocaleName="${currentLocale}"
+                                                            criterion="${criterion}"/>:</small><br><input type="number"
+                                                                                                          required
+                                                                                                          name="marks"
+                                                                                                          min="0"
+                                                                                                          max="12"><br>
                         </c:when>
                         <c:otherwise>
-                            <c:choose>
-                                <c:when test="${criterion.id == 1}">
-                                    <small>${criterion.nameEn}:</small><br><input type="number" required name="marks"
-                                                                                  min="0" max="12"><br>
-                                </c:when>
-                                <c:otherwise>
-                                    <small>${criterion.nameEn}:</small><br><input type="number" required name="marks"
-                                                                                  min="0" max="200"><br>
-                                </c:otherwise>
-                            </c:choose>
+                            <small><localizer:criterionName currentLocaleName="${currentLocale}"
+                                                            criterion="${criterion}"/>:</small><br><input type="number"
+                                                                                                          required
+                                                                                                          name="marks"
+                                                                                                          min="0"
+                                                                                                          max="200"><br>
                         </c:otherwise>
                     </c:choose>
                 </c:forEach>

@@ -28,8 +28,7 @@
             </c:if>
 
             <h3><c:out value="${errorMessage}"/></h3>
-
-            <% request.getSession().removeAttribute("errorMessage"); %>
+                <c:remove var="errorMessage" scope="session"/>
 
         </td>
     </tr>

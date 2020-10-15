@@ -33,17 +33,7 @@
 
                 <strong><fmt:message key="new_faculty_jsp.text.criteria"/> </strong><small><fmt:message key="new_faculty_jsp.text.criteria_quantity"/></small><br>
                 <c:forEach var="criterion" items="${criteria}">
-                    <c:choose>
-                        <c:when test="${currentLocale == 'uk'}">
-                            <input type="checkbox" name="criterionId" value="${criterion.id}"> ${criterion.nameUk}<br>
-                        </c:when>
-                        <c:when test="${currentLocale == 'en'}">
-                            <input type="checkbox" name="criterionId" value="${criterion.id}"> ${criterion.nameEn}<br>
-                        </c:when>
-                        <c:otherwise>
-                            <input type="checkbox" name="criterionId" value="${criterion.id}"> ${criterion.nameEn}<br>
-                        </c:otherwise>
-                    </c:choose>
+                    <input type="checkbox" name="criterionId" value="${criterion.id}"> <localizer:criterionName currentLocaleName="${currentLocale}" criterion="${criterion}"/>
                 </c:forEach>
                 <input type="submit" value="<fmt:message key="new_faculty_jsp.button.submit"/>">
             </form>

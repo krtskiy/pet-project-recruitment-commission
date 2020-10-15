@@ -27,7 +27,7 @@
                     </c:otherwise>
                 </c:choose>
                 </span></h3>
-                <% request.getSession().removeAttribute("facultyRegisteredFor"); %>
+                <c:remove var="facultyRegisteredFor" scope="session"/>
             </c:if>
 
             <strong><fmt:message key="faculties_jsp.text.sort_by"/></strong>
@@ -95,32 +95,14 @@
                 <c:forEach var="faculty" items="${faculties}">
                     <tr>
                         <td>${faculty.id}</td>
-                        <c:choose>
-                            <c:when test="${currentLocale == 'uk'}">
-                                <td>${faculty.nameUk}</td>
-                            </c:when>
-                            <c:when test="${currentLocale == 'en'}">
-                                <td>${faculty.nameEn}</td>
-                            </c:when>
-                            <c:otherwise>
-                                <td>${faculty.nameEn}</td>
-                            </c:otherwise>
-                        </c:choose>
+
+                        <td><localizer:facultyName currentLocaleName="${currentLocale}" faculty="${faculty}"/></td>
+
                         <td>${faculty.totalSeats}</td>
                         <td>${faculty.budgetSeats}</td>
                         <td>
                             <c:forEach var="criterion" items="${faculty.criteria}">
-                                <c:choose>
-                                    <c:when test="${currentLocale == 'uk'}">
-                                        ${criterion.nameUk}<br>
-                                    </c:when>
-                                    <c:when test="${currentLocale == 'en'}">
-                                        ${criterion.nameEn}<br>
-                                    </c:when>
-                                    <c:otherwise>
-                                        ${criterion.nameEn}<br>
-                                    </c:otherwise>
-                                </c:choose>
+                                <localizer:criterionName currentLocaleName="${currentLocale}" criterion="${criterion}"/><br>
                             </c:forEach>
                         </td>
                         <c:if test="${userRole.name == 'user' and user.statusId != 1}">

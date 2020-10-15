@@ -1,7 +1,6 @@
 package com.epam.koretskyi.commission.db.bean;
 
 import com.epam.koretskyi.commission.db.entity.Entity;
-import com.epam.koretskyi.commission.db.entity.UserMark;
 
 import java.util.List;
 

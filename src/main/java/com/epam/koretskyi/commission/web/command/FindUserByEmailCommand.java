@@ -26,6 +26,18 @@ public class FindUserByEmailCommand extends Command {
 
         HttpSession session = request.getSession();
 
+        String page = (String) session.getAttribute("page");
+        String sort = (String) session.getAttribute("sort");
+        session.removeAttribute("page");
+        session.removeAttribute("sort");
+
+        if (page == null) {
+            page = request.getParameter("page");
+        }
+        if (sort == null) {
+            sort = request.getParameter("sort");
+        }
+
         DBManager manager = DBManager.getInstance();
         String email = request.getParameter("email");
         LOG.trace("Request parameter: email --> " + email);
@@ -47,6 +59,6 @@ public class FindUserByEmailCommand extends Command {
         }
 
         LOG.debug("Commands finished");
-        return Path.COMMAND_USERS;
+        return Path.COMMAND_USERS_WITH_PARAMS + "&page=" + page + "&sort=" + sort;
     }
 }

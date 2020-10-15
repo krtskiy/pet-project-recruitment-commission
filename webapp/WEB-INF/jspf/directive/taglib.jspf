@@ -9,3 +9,6 @@ JSTL functions tag library.
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<%@ taglib prefix="localizer" uri="http://corporation.com/custom-tag/localizer"%>
+

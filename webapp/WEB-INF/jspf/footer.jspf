@@ -10,7 +10,5 @@
                     <option value="${locale.key}" ${selected}>${locale.value}</option>
                 </c:forEach>
             </form>
-
-        <% request.setAttribute("currentPage", request.getRequestURI()); %>
     </td>
 </tr>

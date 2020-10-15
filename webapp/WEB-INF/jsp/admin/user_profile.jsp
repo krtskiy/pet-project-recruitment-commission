@@ -18,7 +18,7 @@
             <c:if test="${not empty successAppDeleteMessage}">
                 <h3><span style="color: #1B860A"><fmt:message key="private_office_jsp.message.application_deleted"/><br> </span>
                 </h3>
-                <% request.getSession().removeAttribute("successAppDeleteMessage"); %>
+                <c:remove var="successAppDeleteMessage" scope="session"/>
             </c:if>
 
             <h3><fmt:message key="private_office_jsp.text.personal_info"/></h3>

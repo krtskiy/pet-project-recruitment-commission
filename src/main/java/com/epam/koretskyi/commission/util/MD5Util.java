@@ -7,6 +7,8 @@ import org.apache.commons.codec.digest.DigestUtils;
  */
 public class MD5Util {
 
+    private MD5Util() {}
+
     public static String md5Apache(String st) {
         return DigestUtils.md5Hex(st);
     }

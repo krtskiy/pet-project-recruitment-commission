@@ -1,15 +1,23 @@
 package com.epam.koretskyi.commission.web.command;
 
 import com.epam.koretskyi.commission.db.DBManager;
+import com.epam.koretskyi.commission.db.bean.FacultyApplicationsBean;
 import com.epam.koretskyi.commission.db.entity.Faculty;
 import com.epam.koretskyi.commission.exception.AppException;
+import com.epam.koretskyi.commission.exception.Messages;
+import com.epam.koretskyi.commission.util.CommunicationHelper;
 import com.epam.koretskyi.commission.util.constant.Path;
 import org.apache.log4j.Logger;
 
+import javax.mail.MessagingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 /**
  * @author D.Koretskyi on 15.10.2020.
@@ -34,7 +42,37 @@ public class CloseFacultyRecruitmentCommand extends Command {
         Faculty faculty = manager.findFacultyById(facultyId);
         faculty.setStatusId(statusId);
 
+        int totalSeats = faculty.getTotalSeats();
+        int budgetSeats = faculty.getBudgetSeats();
+
         manager.updateFaculty(faculty);
+
+        List<FacultyApplicationsBean> facultyApplications = manager.findFacultyApplicationsByFacultyId(facultyId);
+        facultyApplications.sort(Comparator.comparingInt(FacultyApplicationsBean::sumOfMarks).reversed());
+
+        if (facultyApplications.size() > faculty.getTotalSeats()) {
+            facultyApplications = facultyApplications.subList(0, faculty.getTotalSeats());
+        }
+
+        List<String> budgetEmails = new ArrayList<>();
+        for (int i = 0; i < budgetSeats; i++) {
+            budgetEmails.add(facultyApplications.get(i).getUserEmail());
+        }
+
+        List<String> contractEmails = new ArrayList<>();
+        for (int i = budgetSeats; i < totalSeats; i++) {
+            contractEmails.add(facultyApplications.get(i).getUserEmail());
+        }
+
+        String mailMessageBudget = CommunicationHelper.createMail("budget", faculty.getNameEn());
+        String mailMessageContract = CommunicationHelper.createMail("contract", faculty.getNameEn());
+
+        try {
+            CommunicationHelper.sendMail(budgetEmails, mailMessageBudget);
+            CommunicationHelper.sendMail(contractEmails, mailMessageContract);
+        } catch (MessagingException e) {
+            LOG.error(Messages.ERR_CANNOT_SEND_EMAILS);
+        }
 
         String successFacCloseMessage = "Faculty recruitment was closed successfully";
         request.getSession().setAttribute("successFacCloseMessage", successFacCloseMessage);

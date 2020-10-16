@@ -168,11 +168,13 @@ Y
 Psrc/main/java/com/epam/koretskyi/commission/web/command/ViewReportSheetPage.java,e\8\e8dae66c2c2ace0923c86b39e8a70d8f1eb02807
 ‹
 [src/main/java/com/epam/koretskyi/commission/web/command/CloseFacultyRecruitmentCommand.java,7\9\796348318f88afd67b0910f45bc7f6f46ea66bbc
-{
-Ksrc/main/java/com/epam/koretskyi/commission/tag/LocalizeFacultyNameTag.java,0\b\0b855dda9689f5000596fb2cd41dcc3691e6fd22
 Z
 *webapp/WEB-INF/jsp/taglib/localizeName.tld,0\4\0467a9a6f89ff022acb03b70676e32706504582c
-}
-Msrc/main/java/com/epam/koretskyi/commission/tag/LocalizeCriterionNameTag.java,9\6\96e344ce74276178656277e64dd28fe88ff21ff9
 X
 (webapp/WEB-INF/jsp/user/report_sheet.jsp,f\4\f4de70ab0733005b5ab71ff924cdfbef580d5272
+v
+Fsrc/main/java/com/epam/koretskyi/commission/db/entity/Localizable.java,0\b\0b019a4b5c4bcf0ca0d051dc6aeba59e74a4afd7
+t
+Dsrc/main/java/com/epam/koretskyi/commission/tag/LocalizeNameTag.java,a\9\a92b870bff2d7c0a76a77d15f548d106deb029c2
+q
+Asrc/main/java/com/epam/koretskyi/commission/util/WriteToFile.java,8\b\8be25db538d9401e86ac05943d5624226a14ae25

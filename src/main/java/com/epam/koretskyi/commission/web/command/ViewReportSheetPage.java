@@ -40,7 +40,7 @@ public class ViewReportSheetPage extends Command {
 
         if (facultyApplications.size() < totalSeats) {
             LOG.trace("Set request attribute: facultyApplications --> " + facultyApplications);
-            request.setAttribute("facultyApplications", facultyApplications.subList(0, facultyApplications.size()));
+            request.setAttribute("facultyApplications", facultyApplications);
         } else {
             LOG.trace("Set request attribute: facultyApplications --> " + facultyApplications);
             request.setAttribute("facultyApplications", facultyApplications.subList(0, totalSeats));

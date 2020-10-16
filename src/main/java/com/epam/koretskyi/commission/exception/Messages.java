@@ -20,6 +20,7 @@ public class Messages {
 
     public static final String ERR_CANNOT_INSERT_USER_MARKS = "Cannot insert user marks!";
     public static final String ERR_CANNOT_FIND_USER_MARKS = "Cannot find user marks!";
+    public static final Object ERR_CANNOT_SEND_EMAILS = "Cannot send emails!";
 
     // applications-related
     public static final String ERR_CANNOT_INSERT_APPLICATION = "Cannot insert application!";

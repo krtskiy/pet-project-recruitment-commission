@@ -83,7 +83,6 @@ public class DBManager {
         return dbManager;
     }
 
-
     private Connection getConnection() throws DBException {
         Connection connection;
         try {
@@ -255,7 +254,7 @@ public class DBManager {
     // criterion
     ///////////////////////////////////
 
-    public List<Criterion> findFacultyCriteriaByFacultyId(int facultyId) throws DBException {
+    private List<Criterion> findFacultyCriteriaByFacultyId(int facultyId) throws DBException {
         List<Criterion> criteria = new ArrayList<>();
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -268,7 +267,6 @@ public class DBManager {
             while (resultSet.next()) {
                 criteria.add(extractCriterion(resultSet));
             }
-            connection.commit();
         } catch (SQLException e) {
             rollback(connection);
             LOG.error(Messages.ERR_CANNOT_FIND_FACULTY_CRITERIA);
@@ -320,6 +318,7 @@ public class DBManager {
             if (resultSet.next()) {
                 criterion = extractCriterion(resultSet);
             }
+            connection.commit();
         } catch (SQLException e) {
             rollback(connection);
             LOG.error(Messages.ERR_CANNOT_OBTAIN_CRITERION_BY_ID, e);
@@ -389,6 +388,32 @@ public class DBManager {
         return user;
     }
 
+    public User findUserById(int userId) throws DBException {
+        User user = null;
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement(SQL_FIND_USER_BY_ID);
+            preparedStatement.setInt(1, userId);
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                user = extractUser(resultSet);
+            }
+            connection.commit();
+        } catch (SQLException e) {
+            rollback(connection);
+            LOG.error(Messages.ERR_CANNOT_OBTAIN_USER_BY_EMAIL, e);
+            throw new DBException(Messages.ERR_CANNOT_OBTAIN_USER_BY_EMAIL, e);
+        } finally {
+            close(resultSet);
+            close(preparedStatement);
+            close(connection);
+        }
+        return user;
+    }
+    
     public List<User> findAllUsers() throws DBException {
         List<User> users = new ArrayList<>();
         Connection connection = null;
@@ -495,32 +520,6 @@ public class DBManager {
         }
     }
 
-    public User findUserById(int userId) throws DBException {
-        User user = null;
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        try {
-            connection = getConnection();
-            preparedStatement = connection.prepareStatement(SQL_FIND_USER_BY_ID);
-            preparedStatement.setInt(1, userId);
-            resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                user = extractUser(resultSet);
-            }
-            connection.commit();
-        } catch (SQLException e) {
-            rollback(connection);
-            LOG.error(Messages.ERR_CANNOT_OBTAIN_USER_BY_EMAIL, e);
-            throw new DBException(Messages.ERR_CANNOT_OBTAIN_USER_BY_EMAIL, e);
-        } finally {
-            close(resultSet);
-            close(preparedStatement);
-            close(connection);
-        }
-        return user;
-    }
-
     ///////////////////////////////////
     // user marks
     ///////////////////////////////////
@@ -579,6 +578,30 @@ public class DBManager {
         }
     }
 
+    public void deleteUserApplication(int userId, int facultyId) throws DBException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        try {
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement(SQL_DELETE_USER_APPLICATION);
+            int k = 0;
+            preparedStatement.setInt(++k, facultyId);
+            preparedStatement.setInt(++k, userId);
+            preparedStatement.executeUpdate();
+            connection.commit();
+        } catch (SQLException e) {
+            rollback(connection);
+            LOG.error(Messages.ERR_CANNOT_DELETE_APPLICATION, e);
+            throw new DBException(Messages.ERR_CANNOT_DELETE_APPLICATION, e);
+        } finally {
+            close(preparedStatement);
+            close(connection);
+        }
+    }
+
+
+    // bean
+
     public List<FacultyApplicationsBean> findFacultyApplicationsByFacultyId(int facultyId) throws DBException {
         List<FacultyApplicationsBean> facultyApplications = new ArrayList<>();
         Connection connection = null;
@@ -603,30 +626,6 @@ public class DBManager {
         }
         return facultyApplications;
     }
-
-    public void deleteUserApplication(int userId, int facultyId) throws DBException {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        try {
-            connection = getConnection();
-            preparedStatement = connection.prepareStatement(SQL_DELETE_USER_APPLICATION);
-            int k = 0;
-            preparedStatement.setInt(++k, facultyId);
-            preparedStatement.setInt(++k, userId);
-            preparedStatement.executeUpdate();
-            connection.commit();
-        } catch (SQLException e) {
-            rollback(connection);
-            LOG.error(Messages.ERR_CANNOT_DELETE_APPLICATION, e);
-            throw new DBException(Messages.ERR_CANNOT_DELETE_APPLICATION, e);
-        } finally {
-            close(preparedStatement);
-            close(connection);
-        }
-    }
-
-
-    // bean
 
     public List<UserFacultiesBean> findUserFacultiesByUserId(int userId) throws DBException {
         List<UserFacultiesBean> userFaculties = new ArrayList<>();
@@ -747,13 +746,6 @@ public class DBManager {
         criterion.setNameEn(resultSet.getString(Field.CRITERIA_NAME_EN));
         criterion.setNameUk(resultSet.getString(Field.CRITERIA_NAME_UK));
         return criterion;
-    }
-
-    private Application extractApplication(ResultSet resultSet) throws SQLException {
-        Application application = new Application();
-        application.setFacultyId(resultSet.getInt(Field.FACULTY_ID));
-        application.setUserId(resultSet.getInt(Field.USER_ID));
-        return application;
     }
 
     private UserMarksBean extractUserMarksBean(ResultSet resultSet) throws SQLException {

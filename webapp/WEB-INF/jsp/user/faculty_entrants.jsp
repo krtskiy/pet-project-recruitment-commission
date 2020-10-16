@@ -17,7 +17,7 @@
             <c:choose>
                 <c:when test="${not empty facultyApplications}">
                     <h3><fmt:message key="faculty_entrants_jsp.text.list_of_applications"/>
-                        <localizer:facultyName currentLocaleName="${currentLocale}" faculty="${faculty}"/><br></h3>
+                        <localizer:name currentLocaleName="${currentLocale}" localizable="${faculty}"/><br></h3>
                     <small><fmt:message key="faculty_entrants_jsp.text.sorted"/></small><br>
 
                     <svg width="15" height="15">
@@ -36,7 +36,7 @@
                             <th><fmt:message key="faculty_entrants_jsp.text.entr_name"/></th>
                             <th><fmt:message key="faculty_entrants_jsp.text.entr_surname"/></th>
                             <c:forEach var="criterion" items="${faculty.criteria}">
-                                <th><localizer:criterionName currentLocaleName="${currentLocale}" criterion="${criterion}"/></th>
+                                <th><localizer:name currentLocaleName="${currentLocale}" localizable="${criterion}"/></th>
                             </c:forEach>
                             <th><fmt:message key="faculty_entrants_jsp.text.entr_marks_sum"/></th>
                         </tr>

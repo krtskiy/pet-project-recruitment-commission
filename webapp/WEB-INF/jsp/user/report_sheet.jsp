@@ -15,7 +15,7 @@
         <td class="content">
 
             <h3><fmt:message key="report_sheet_jsp.text.report_sheet"/>
-                <localizer:facultyName currentLocaleName="${currentLocale}" faculty="${faculty}"/></h3>
+                <localizer:name currentLocaleName="${currentLocale}" localizable="${faculty}"/></h3>
 
             <svg width="15" height="15">
                 <rect width="15" height="15" style="fill:#CCFF99;stroke-width:3;stroke:rgb(0,0,0)"/>
@@ -33,8 +33,8 @@
                     <th><fmt:message key="faculty_entrants_jsp.text.entr_name"/></th>
                     <th><fmt:message key="faculty_entrants_jsp.text.entr_surname"/></th>
                     <c:forEach var="criterion" items="${faculty.criteria}">
-                        <th><localizer:criterionName currentLocaleName="${currentLocale}"
-                                                     criterion="${criterion}"/></th>
+                        <th><localizer:name currentLocaleName="${currentLocale}"
+                                                     localizable="${criterion}"/></th>
                     </c:forEach>
                     <th><fmt:message key="faculty_entrants_jsp.text.entr_marks_sum"/></th>
                 </tr>

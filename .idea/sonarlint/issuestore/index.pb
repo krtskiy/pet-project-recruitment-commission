@@ -162,3 +162,17 @@ Ssrc/main/java/com/epam/koretskyi/commission/web/command/UserProfilePageCommand.
 Ysrc/main/java/com/epam/koretskyi/commission/web/command/DeleteUserApplicationCommand.java,c\2\c24f65ad4e254bf27fd5f37736fbf56d521a318b
 Y
 )webapp/WEB-INF/jsp/admin/user_profile.jsp,6\2\62a45f1e81119e5cf118e093a78db0399caa79c0
+9
+	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
+€
+Psrc/main/java/com/epam/koretskyi/commission/web/command/ViewReportSheetPage.java,e\8\e8dae66c2c2ace0923c86b39e8a70d8f1eb02807
+‹
+[src/main/java/com/epam/koretskyi/commission/web/command/CloseFacultyRecruitmentCommand.java,7\9\796348318f88afd67b0910f45bc7f6f46ea66bbc
+{
+Ksrc/main/java/com/epam/koretskyi/commission/tag/LocalizeFacultyNameTag.java,0\b\0b855dda9689f5000596fb2cd41dcc3691e6fd22
+Z
+*webapp/WEB-INF/jsp/taglib/localizeName.tld,0\4\0467a9a6f89ff022acb03b70676e32706504582c
+}
+Msrc/main/java/com/epam/koretskyi/commission/tag/LocalizeCriterionNameTag.java,9\6\96e344ce74276178656277e64dd28fe88ff21ff9
+X
+(webapp/WEB-INF/jsp/user/report_sheet.jsp,f\4\f4de70ab0733005b5ab71ff924cdfbef580d5272

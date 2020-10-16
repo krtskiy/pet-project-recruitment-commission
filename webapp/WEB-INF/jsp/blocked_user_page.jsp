@@ -14,7 +14,6 @@
 
     <tr>
         <td class="content center">
-            <%-- CONTENT --%>
 
             <h2 class="error">
                 <fmt:message key="blocked_user_page_jsp.text.message"/><br>

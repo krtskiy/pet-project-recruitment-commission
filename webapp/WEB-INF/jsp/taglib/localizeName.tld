@@ -10,9 +10,9 @@
     <uri>http://corporation.com/custom-tag/localizer</uri>
 
     <tag>
-        <description>Localizes the faculty name according to the user's locale</description>
-        <name>facultyName</name>
-        <tag-class>com.epam.koretskyi.commission.tag.LocalizeFacultyNameTag</tag-class>
+        <description>Localizes the entity name according to the user's locale</description>
+        <name>name</name>
+        <tag-class>com.epam.koretskyi.commission.tag.LocalizeNameTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
@@ -23,32 +23,11 @@
         </attribute>
 
         <attribute>
-            <name>faculty</name>
+            <name>localizable</name>
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
-            <type>com.epam.koretskyi.commission.db.entity.Faculty</type>
+            <type>com.epam.koretskyi.commission.db.entity.Localizable</type>
         </attribute>
     </tag>
 
-    <tag>
-    <description>Localizes the criterion name according to the user's locale</description>
-    <name>criterionName</name>
-    <tag-class>com.epam.koretskyi.commission.tag.LocalizeCriterionNameTag</tag-class>
-    <body-content>empty</body-content>
-
-    <attribute>
-        <name>currentLocaleName</name>
-        <required>true</required>
-        <rtexprvalue>true</rtexprvalue>
-        <type>java.lang.String</type>
-    </attribute>
-
-    <attribute>
-        <name>criterion</name>
-        <required>true</required>
-        <rtexprvalue>true</rtexprvalue>
-        <type>com.epam.koretskyi.commission.db.entity.Criterion</type>
-    </attribute>
-
-</tag>
 </taglib>

@@ -1,6 +1,7 @@
 package com.epam.koretskyi.commission.tag;
 
 import com.epam.koretskyi.commission.db.entity.Faculty;
+import com.epam.koretskyi.commission.db.entity.Localizable;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
@@ -10,11 +11,11 @@ import java.io.IOException;
 /**
  * @author D.Koretskyi on 15.10.2020.
  */
-public class LocalizeFacultyNameTag extends TagSupport {
+public class LocalizeNameTag extends TagSupport {
     private static final long serialVersionUID = -7532173997044764508L;
 
     private String currentLocaleName;
-    private Faculty faculty;
+    private Localizable localizable;
 
     public String getCurrentLocaleName() {
         return currentLocaleName;
@@ -24,12 +25,12 @@ public class LocalizeFacultyNameTag extends TagSupport {
         this.currentLocaleName = currentLocaleName;
     }
 
-    public Faculty getFaculty() {
-        return faculty;
+    public Localizable getLocalizable() {
+        return localizable;
     }
 
-    public void setFaculty(Faculty faculty) {
-        this.faculty = faculty;
+    public void setLocalizable(Localizable localizable) {
+        this.localizable = localizable;
     }
 
     @Override
@@ -38,16 +39,16 @@ public class LocalizeFacultyNameTag extends TagSupport {
 
         try {
             if ("uk".equals(currentLocaleName)) {
-                out.write(faculty.getNameUk());
+                out.write(localizable.getNameUk());
             }
             if ("en".equals(currentLocaleName)) {
-                out.write(faculty.getNameEn());
+                out.write(localizable.getNameEn());
             }
             if ("".equals(currentLocaleName)) {
-                out.write(faculty.getNameEn());
+                out.write(localizable.getNameEn());
             }
         } catch (IOException e) {
-            throw new JspException("Error in localizeFaculty tag", e);
+            throw new JspException("Error in Localizer tag", e);
         }
 
         return SKIP_BODY;

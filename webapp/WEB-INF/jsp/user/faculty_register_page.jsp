@@ -24,16 +24,16 @@
                 <c:forEach var="criterion" items="${faculty.criteria}">
                     <c:choose>
                         <c:when test="${criterion.id == 1}">
-                            <small><localizer:criterionName currentLocaleName="${currentLocale}"
-                                                            criterion="${criterion}"/>:</small><br><input type="number"
+                            <small><localizer:name currentLocaleName="${currentLocale}"
+                                                            localizable="${criterion}"/>:</small><br><input type="number"
                                                                                                           required
                                                                                                           name="marks"
                                                                                                           min="0"
                                                                                                           max="12"><br>
                         </c:when>
                         <c:otherwise>
-                            <small><localizer:criterionName currentLocaleName="${currentLocale}"
-                                                            criterion="${criterion}"/>:</small><br><input type="number"
+                            <small><localizer:name currentLocaleName="${currentLocale}"
+                                                            localizable="${criterion}"/>:</small><br><input type="number"
                                                                                                           required
                                                                                                           name="marks"
                                                                                                           min="0"

@@ -88,12 +88,12 @@
                 <c:forEach var="faculty" items="${faculties}">
                     <tr>
                         <td>${faculty.id}</td>
-                        <td><localizer:facultyName currentLocaleName="${currentLocale}" faculty="${faculty}"/></td>
+                        <td><localizer:name currentLocaleName="${currentLocale}" localizable="${faculty}"/></td>
                         <td>${faculty.totalSeats}</td>
                         <td>${faculty.budgetSeats}</td>
                         <td>
                             <c:forEach var="criterion" items="${faculty.criteria}">
-                                <localizer:criterionName currentLocaleName="${currentLocale}" criterion="${criterion}"/><br>
+                                <localizer:name currentLocaleName="${currentLocale}" localizable="${criterion}"/><br>
                             </c:forEach>
                         </td>
                         <td>

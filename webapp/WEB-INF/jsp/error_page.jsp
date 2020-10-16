@@ -16,15 +16,13 @@
 
     <tr>
         <td class="content center">
-            <%-- CONTENT --%>
 
             <h3 class="error">
                 The following error occurred<br>
             </h3>
 
             <c:if test="${empty errorMessage}">
-                <h3><%=HttpStatus.getStatusText(response.getStatus())%> <%=response.getStatus()%>
-                </h3>
+                <h3><%=HttpStatus.getStatusText(response.getStatus()) + " " + response.getStatus()%></h3>
             </c:if>
 
             <h3><c:out value="${errorMessage}"/></h3>

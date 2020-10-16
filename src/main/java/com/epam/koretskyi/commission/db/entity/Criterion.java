@@ -3,7 +3,7 @@ package com.epam.koretskyi.commission.db.entity;
 /**
  * @author D.Koretskyi on 10.10.2020.
  */
-public class Criterion extends Entity {
+public class Criterion extends Entity implements Localizable {
     private static final long serialVersionUID = 5324970528413169785L;
 
     private int id;

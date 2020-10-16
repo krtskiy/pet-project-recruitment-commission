@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * @author D.Koretskyi on 22.09.2020.
  */
-public class Faculty extends Entity {
+public class Faculty extends Entity implements Localizable {
     private static final long serialVersionUID = 8715704204956161957L;
 
     private int id;

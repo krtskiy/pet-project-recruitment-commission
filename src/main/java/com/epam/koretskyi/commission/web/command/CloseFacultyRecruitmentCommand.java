@@ -53,7 +53,7 @@ public class CloseFacultyRecruitmentCommand extends Command {
         if (facultyApplications.size() > faculty.getTotalSeats()) {
             facultyApplications = facultyApplications.subList(0, faculty.getTotalSeats());
         }
-
+// todo
         List<String> budgetEmails = new ArrayList<>();
         for (int i = 0; i < budgetSeats; i++) {
             budgetEmails.add(facultyApplications.get(i).getUserEmail());
@@ -69,14 +69,16 @@ public class CloseFacultyRecruitmentCommand extends Command {
 
         try {
             CommunicationHelper.sendMail(budgetEmails, mailMessageBudget);
+            LOG.debug("Emails for budget form entrants were sent");
             CommunicationHelper.sendMail(contractEmails, mailMessageContract);
+            LOG.debug("Emails for contract form entrants were sent");
+
+            String successMailingMessage = "Emails were sent to all accepted applicants";
+            request.getSession().setAttribute("successMailingMessage", successMailingMessage);
+            LOG.trace("Set the session attribute: successMailingMessage --> " + successMailingMessage);
         } catch (MessagingException e) {
             LOG.error(Messages.ERR_CANNOT_SEND_EMAILS);
         }
-
-        String successFacCloseMessage = "Faculty recruitment was closed successfully";
-        request.getSession().setAttribute("successFacCloseMessage", successFacCloseMessage);
-        LOG.trace("Set the session attribute: successFacCloseMessage --> " + successFacCloseMessage);
 
         LOG.debug("Command finished");
         return Path.COMMAND_VIEW_REPORT_SHEET + "&facultyId=" + facultyId;

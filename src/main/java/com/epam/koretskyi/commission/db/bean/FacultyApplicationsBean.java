@@ -15,6 +15,7 @@ public class FacultyApplicationsBean extends Entity {
     private String userName;
     private String userSurname;
     private String userEmail;
+    private int userStatusId;
     private List<UserMarksBean> userMarks;
 
     public String getUserName() {
@@ -63,6 +64,14 @@ public class FacultyApplicationsBean extends Entity {
 
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail;
+    }
+
+    public int getUserStatusId() {
+        return userStatusId;
+    }
+
+    public void setUserStatusId(int userStatusId) {
+        this.userStatusId = userStatusId;
     }
 
     @Override

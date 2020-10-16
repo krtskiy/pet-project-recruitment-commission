@@ -14,6 +14,12 @@
     <tr>
         <td class="content">
 
+            <c:if test="${not empty successMailingMessage}">
+                <h3><span style="color: #1B860A"><fmt:message key="report_sheet_jsp.message.emails_sent"/></span>
+                </h3><br>
+                <c:remove var="successMailingMessage" scope="session"/>
+            </c:if>
+
             <h3><fmt:message key="report_sheet_jsp.text.report_sheet"/>
                 <localizer:name currentLocaleName="${currentLocale}" localizable="${faculty}"/></h3>
 
@@ -38,8 +44,6 @@
                     </c:forEach>
                     <th><fmt:message key="faculty_entrants_jsp.text.entr_marks_sum"/></th>
                 </tr>
-                <%--                <c:choose>--%>
-                <%--                    <c:when test="${not empty facultyApplications}">--%>
                 <c:set var="k" value="0"/>
                 <c:forEach var="application" items="${facultyApplications}">
                     <c:if test="${k < faculty.totalSeats}">

@@ -36,9 +36,13 @@
                             <th><fmt:message key="faculty_entrants_jsp.text.entr_name"/></th>
                             <th><fmt:message key="faculty_entrants_jsp.text.entr_surname"/></th>
                             <c:forEach var="criterion" items="${faculty.criteria}">
-                                <th><localizer:name currentLocaleName="${currentLocale}" localizable="${criterion}"/></th>
+                                <th><localizer:name currentLocaleName="${currentLocale}"
+                                                    localizable="${criterion}"/></th>
                             </c:forEach>
                             <th><fmt:message key="faculty_entrants_jsp.text.entr_marks_sum"/></th>
+                            <c:if test="${user.roleId == 1}">
+                                <th><fmt:message key="user_profile_jsp.text.status"/></th>
+                            </c:if>
                         </tr>
                         <c:set var="k" value="0"/>
                         <c:forEach var="application" items="${facultyApplications}">
@@ -73,6 +77,17 @@
                                         </c:forEach>
                                         <td><strong>${markSum}</strong></td>
                                         <c:if test="${user.roleId == 1}">
+                                            <td>
+                                                <c:choose>
+                                                    <c:when test="${application.userStatusId == 1}">
+                                                        <span style="color: rgb(204, 0, 0); "><strong><fmt:message
+                                                                key="users_jsp.text.blocked"/></strong></span><br>
+                                                    </c:when>
+                                                    <c:otherwise><fmt:message
+                                                            key="users_jsp.text.unblocked"/>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </td>
                                             <td>
                                                 <a href="controller?command=viewUserProfilePage&userId=${application.userId}"><strong><fmt:message
                                                         key="users_jsp.button.view_profile"/></strong></a></td>

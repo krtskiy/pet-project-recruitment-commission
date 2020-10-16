@@ -69,8 +69,8 @@ public class CommunicationHelper {
     /**
      * Creates a message for email notification about admission to the university.
      *
-     * @param form - form of education
-     * @param facultyName - name of faculty
+     * @param form   form of education
+     * @param facultyName   name of faculty
      * @return
      */
     public static String createMail(String form, String facultyName) {
@@ -84,8 +84,8 @@ public class CommunicationHelper {
      * Sends Mail to list of users.
      * layer Authentication. Simple mail Transfer Protocol is used.
      *
-     * @param toList     List of email-Ids.
-     * @param msgBody    String TEXT/PLAIN or HTML/PLAIN message to deliver.
+     * @param toList   List of email-Ids.
+     * @param msgBody   String to deliver.
      * @throws MessagingException
      */
     public static boolean sendMail(List<String> toList, String msgBody) throws MessagingException {

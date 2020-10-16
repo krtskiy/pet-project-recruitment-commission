@@ -176,5 +176,3 @@ v
 Fsrc/main/java/com/epam/koretskyi/commission/db/entity/Localizable.java,0\b\0b019a4b5c4bcf0ca0d051dc6aeba59e74a4afd7
 t
 Dsrc/main/java/com/epam/koretskyi/commission/tag/LocalizeNameTag.java,a\9\a92b870bff2d7c0a76a77d15f548d106deb029c2
-q
-Asrc/main/java/com/epam/koretskyi/commission/util/WriteToFile.java,8\b\8be25db538d9401e86ac05943d5624226a14ae25

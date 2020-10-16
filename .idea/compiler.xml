@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="epam-java-summer-program-2020-final-project-recruitment-comission" />
+        <module name="pet-project-recruitment-comission" />
       </profile>
     </annotationProcessing>
   </component>

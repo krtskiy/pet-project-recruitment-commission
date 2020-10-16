@@ -56,7 +56,7 @@ public class DBManager {
 
     // applications
     private static final String SQL_INSERT_APPLICATION = "REPLACE INTO applications VALUES (DEFAULT, ?, ?)";
-    private static final String SQL_FIND_FACULTY_APPLICATIONS = "SELECT users.id, users.name, users.surname, users.email FROM users INNER JOIN applications ON users.id = applications.user_id WHERE applications.faculty_id = ?;";
+    private static final String SQL_FIND_FACULTY_APPLICATIONS = "SELECT users.id, users.name, users.surname, users.email, users.status_id FROM users INNER JOIN applications ON users.id = applications.user_id WHERE applications.faculty_id = ?;";
     private static final String SQL_DELETE_USER_APPLICATION = "DELETE FROM applications WHERE faculty_id=? AND user_id=?";
 
     ///////////////////////////////////
@@ -772,6 +772,7 @@ public class DBManager {
         facultyApplicationsBean.setUserName(resultSet.getString(Field.USER_NAME));
         facultyApplicationsBean.setUserSurname(resultSet.getString(Field.USER_SURNAME));
         facultyApplicationsBean.setUserEmail(resultSet.getString(Field.USER_EMAIL));
+        facultyApplicationsBean.setUserStatusId(resultSet.getInt(Field.USER_STATUS_ID));
         facultyApplicationsBean.setUserMarks(findUserMarksForSpecificFacultyByUserId(resultSet.getInt(Field.ID), facultyId));
         return facultyApplicationsBean;
     }

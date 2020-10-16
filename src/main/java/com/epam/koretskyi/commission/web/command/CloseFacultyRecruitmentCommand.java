@@ -13,7 +13,6 @@ import javax.mail.MessagingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -81,17 +80,18 @@ public class CloseFacultyRecruitmentCommand extends Command {
         LOG.trace("Amount of emails to send messages about the contract form of education --> " + contractEmails.size());
 
         // email messages formation
+        String mailTitle = "Congratulations on your admission to KRTSK University!";
         String mailMessageBudget = CommunicationHelper.createMail("budget", faculty.getNameEn());
         String mailMessageContract = CommunicationHelper.createMail("contract", faculty.getNameEn());
 
         // sending emails to accepted entrants
         try {
             if (!budgetEmails.isEmpty()) {
-                CommunicationHelper.sendMail(budgetEmails, mailMessageBudget);
+                CommunicationHelper.sendMail(budgetEmails, mailTitle, mailMessageBudget);
                 LOG.debug("Emails for budget form entrants were sent");
             }
             if (!contractEmails.isEmpty()) {
-                CommunicationHelper.sendMail(contractEmails, mailMessageContract);
+                CommunicationHelper.sendMail(contractEmails, mailTitle, mailMessageContract);
                 LOG.debug("Emails for contract form entrants were sent");
             }
 

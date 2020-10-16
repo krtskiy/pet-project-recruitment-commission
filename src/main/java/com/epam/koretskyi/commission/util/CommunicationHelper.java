@@ -10,9 +10,6 @@ import java.util.Properties;
 
 /**
  * Helper for sending mail to list of users with attachment.
- *
- * @author SANJAY
- * @see for list of mail servers and configuration details: https://sanjaymadnani.wordpress.com/
  */
 public class CommunicationHelper {
 
@@ -75,7 +72,7 @@ public class CommunicationHelper {
      */
     public static String createMail(String form, String facultyName) {
         return "<font size=\"5\"><p>Dear candidate,</p><p>Im writing to inform You, that You accepted on <strong>" + form +
-                "</strong> form of education to the Krtskiy University successfully.</p><p>You are enrolled to " + facultyName +
+                "</strong> form of education to the KRTSK University successfully.</p><p>You are enrolled to " + facultyName +
                 ".</p><p>You will get all information about the course in a next letter in a month</p></font>";
     }
 
@@ -85,10 +82,12 @@ public class CommunicationHelper {
      * layer Authentication. Simple mail Transfer Protocol is used.
      *
      * @param toList   List of email-Ids.
+     * @param msgTitle   Title of the list.
      * @param msgBody   String to deliver.
+     * @return   true if emails sent successfully.
      * @throws MessagingException
      */
-    public static boolean sendMail(List<String> toList, String msgBody) throws MessagingException {
+    public static boolean sendMail(List<String> toList, String msgTitle, String msgBody) throws MessagingException {
         // Creates MimeMessage by SMTP Session.
         final MimeMessage message = new MimeMessage(getSendMailSession());
         message.setFrom(new InternetAddress(USER_ID));
@@ -100,7 +99,7 @@ public class CommunicationHelper {
         message.addRecipients(Message.RecipientType.TO, toAddress);
         final Multipart multipart = new MimeMultipart();
 
-        message.setSubject("Congratulations on your admission to Krtsky University!");
+        message.setSubject(msgTitle);
         message.setSentDate(new java.util.Date());
         final BodyPart messageBodyPart1 = new MimeBodyPart();
         // Sends the message in html format.

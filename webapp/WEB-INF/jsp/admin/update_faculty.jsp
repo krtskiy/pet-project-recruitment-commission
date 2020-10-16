@@ -46,7 +46,7 @@
                         <c:forEach var="criterion" items="${criteria}">
 
                             <input type="checkbox" name="criterionId"
-                                   value="${criterion.id}"> <localizer:name currentLocaleName="${currentLocale}" localizable="${criterion}"/>
+                                   value="${criterion.id}"> <localizer:name currentLocaleName="${currentLocale}" localizable="${criterion}"/><br>
 
                         </c:forEach>
                     </c:otherwise>

@@ -50,28 +50,50 @@ public class CloseFacultyRecruitmentCommand extends Command {
         List<FacultyApplicationsBean> facultyApplications = manager.findFacultyApplicationsByFacultyId(facultyId);
         facultyApplications.sort(Comparator.comparingInt(FacultyApplicationsBean::sumOfMarks).reversed());
 
-        if (facultyApplications.size() > faculty.getTotalSeats()) {
-            facultyApplications = facultyApplications.subList(0, faculty.getTotalSeats());
-        }
-// todo
         List<String> budgetEmails = new ArrayList<>();
-        for (int i = 0; i < budgetSeats; i++) {
-            budgetEmails.add(facultyApplications.get(i).getUserEmail());
-        }
-
         List<String> contractEmails = new ArrayList<>();
-        for (int i = budgetSeats; i < totalSeats; i++) {
-            contractEmails.add(facultyApplications.get(i).getUserEmail());
+
+        // filling the lists of entrant's emails depending on the form of education
+        if (facultyApplications.size() < budgetSeats) {
+            // if the number of entrants is less then the amount of budget seats
+            for (FacultyApplicationsBean application : facultyApplications) {
+                budgetEmails.add(application.getUserEmail());
+            }
+        } else if (facultyApplications.size() > budgetSeats && facultyApplications.size() < totalSeats) {
+            // if the number of entrants is greater then amount of budget seats but less then total amount of seats
+            for (int i = 0; i < budgetSeats; i++) {
+                budgetEmails.add(facultyApplications.get(i).getUserEmail());
+            }
+            for (int i = budgetSeats; i < facultyApplications.size(); i++) {
+                contractEmails.add(facultyApplications.get(i).getUserEmail());
+            }
+        } else {
+            // if the number of entrants is greater then total amount of seats
+            for (int i = 0; i < budgetSeats; i++) {
+                budgetEmails.add(facultyApplications.get(i).getUserEmail());
+            }
+            for (int i = budgetSeats; i < totalSeats; i++) {
+                contractEmails.add(facultyApplications.get(i).getUserEmail());
+            }
         }
 
+        LOG.trace("Amount of emails to send messages about the budget form of education --> " + budgetEmails.size());
+        LOG.trace("Amount of emails to send messages about the contract form of education --> " + contractEmails.size());
+
+        // email messages formation
         String mailMessageBudget = CommunicationHelper.createMail("budget", faculty.getNameEn());
         String mailMessageContract = CommunicationHelper.createMail("contract", faculty.getNameEn());
 
+        // sending emails to accepted entrants
         try {
-            CommunicationHelper.sendMail(budgetEmails, mailMessageBudget);
-            LOG.debug("Emails for budget form entrants were sent");
-            CommunicationHelper.sendMail(contractEmails, mailMessageContract);
-            LOG.debug("Emails for contract form entrants were sent");
+            if (!budgetEmails.isEmpty()) {
+                CommunicationHelper.sendMail(budgetEmails, mailMessageBudget);
+                LOG.debug("Emails for budget form entrants were sent");
+            }
+            if (!contractEmails.isEmpty()) {
+                CommunicationHelper.sendMail(contractEmails, mailMessageContract);
+                LOG.debug("Emails for contract form entrants were sent");
+            }
 
             String successMailingMessage = "Emails were sent to all accepted applicants";
             request.getSession().setAttribute("successMailingMessage", successMailingMessage);

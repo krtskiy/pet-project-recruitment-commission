@@ -28,7 +28,7 @@
                                                             localizable="${criterion}"/>:</small><br><input type="number"
                                                                                                           required
                                                                                                           name="marks"
-                                                                                                          min="0"
+                                                                                                          min="100"
                                                                                                           max="12"><br>
                         </c:when>
                         <c:otherwise>
@@ -36,7 +36,7 @@
                                                             localizable="${criterion}"/>:</small><br><input type="number"
                                                                                                           required
                                                                                                           name="marks"
-                                                                                                          min="0"
+                                                                                                          min="100"
                                                                                                           max="200"><br>
                         </c:otherwise>
                     </c:choose>

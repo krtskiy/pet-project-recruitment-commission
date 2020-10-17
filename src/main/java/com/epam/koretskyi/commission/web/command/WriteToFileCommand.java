@@ -44,8 +44,6 @@ public class WriteToFileCommand extends Command {
         List<FacultyApplicationsBean> applications = DBManager.getInstance().findFacultyApplicationsByFacultyId(facultyId);
         applications.sort(Comparator.comparingInt(FacultyApplicationsBean::sumOfMarks).reversed());
 
-        List<Criterion> criteria = faculty.getCriteria();
-
         if (applications.size() > faculty.getTotalSeats()) {
             applications = applications.subList(0, faculty.getTotalSeats());
         }
@@ -76,39 +74,36 @@ public class WriteToFileCommand extends Command {
 
         System.out.println(newstr.toString());
         if (file == 0) {
-             File folder = new File(request.getServletContext().getRealPath(""));
-
-
-//            File folder = new File("C:/temp/");
-            File filetxt = new File(folder, "report_sheet_faculty" + facultyId + ".txt");
+            File folder = new File(request.getServletContext().getRealPath(""));
+            File filetxt = new File(folder, "report_sheet_faculty_" + facultyId + ".txt");
             filetxt.createNewFile();
             FileWriter writer = new FileWriter(filetxt);
             writer.write(newstr.toString());
             writer.flush();
             writer.close();
-//            forward = "DownloadFileServlet?path=C:/temp/report_sheet.txt";
             forward = "DownloadFileServlet?path=" + filetxt;
         }
         if (file == 1) {
-            String FILE_NAME = "C:\\temp\\report_sheet.pdf";
+            File folder = new File(request.getServletContext().getRealPath(""));
+            File filepdf = new File(folder, "report_sheet_faculty_" + facultyId + ".pdf");
             Document document = new Document();
             try {
-                PdfWriter.getInstance(document, new FileOutputStream(new File(FILE_NAME)));
+                PdfWriter.getInstance(document, new FileOutputStream(filepdf));
                 document.open();
                 Paragraph p = new Paragraph();
-                p.add("Report sheet for " + faculty.getNameEn() + System.lineSeparator());
+                p.add("Report sheet for " + faculty.getNameEn());
                 p.setAlignment(Element.ALIGN_CENTER);
                 document.add(p);
-                Paragraph p2 = new Paragraph();
-                p2.add(newstr.toString());
-                p2.setAlignment(Element.ALIGN_CENTER); // no alignment
-                document.add(p2);
+                Paragraph mainContent = new Paragraph();
+                mainContent.add(newstr.toString());
+                mainContent.setAlignment(Element.ALIGN_CENTER);
+                document.add(mainContent);
                 document.close();
                 System.out.println("Done");
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            forward = "DownloadFileServlet?path=C:/temp/report_sheet.pdf";
+            forward = "DownloadFileServlet?path=" + filepdf;
         }
         LOG.debug("Command finished");
         return forward;

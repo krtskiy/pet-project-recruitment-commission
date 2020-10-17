@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
+ * Command that forwards to registration page.
+ *
  * @author D.Koretskyi on 27.09.2020.
  */
 public class RegisterUserPageCommand extends Command {

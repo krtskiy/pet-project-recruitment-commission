@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
+ * Command that forwards to admin panel.
+ *
  * @author D.Koretskyi on 01.10.2020.
  */
 public class AdminPanelPageCommand extends Command {

@@ -20,6 +20,8 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
+ * Invoked when user wants to apply for some faculty.
+ *
  * @author D.Koretskyi on 11.10.2020.
  */
 public class RegisterForFacultyCommand extends Command {

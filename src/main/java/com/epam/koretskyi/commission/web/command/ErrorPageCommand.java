@@ -10,13 +10,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
+ * Command to forward user to an error page if any exceptions were thrown.
+ *
  * @author D.Koretskyi on 09.10.2020.
  */
 public class ErrorPageCommand extends Command {
     private static final long serialVersionUID = 373993252447786855L;
 
     private static final Logger LOG = Logger.getLogger(ErrorPageCommand.class);
-
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {

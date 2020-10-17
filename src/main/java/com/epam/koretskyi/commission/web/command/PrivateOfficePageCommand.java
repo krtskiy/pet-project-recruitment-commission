@@ -16,6 +16,8 @@ import java.io.IOException;
 import java.util.List;
 
 /**
+ * View user's private office command.
+ *
  * @author D.Koretskyi on 01.10.2020.
  */
 public class PrivateOfficePageCommand extends Command {

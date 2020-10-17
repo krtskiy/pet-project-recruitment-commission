@@ -94,6 +94,7 @@ Style for the ERROR message
     color: rgb(204, 0, 0);
 }
 
+
 /***************************************************************
 Miscellaneous
 ***************************************************************/
@@ -107,18 +108,10 @@ Miscellaneous
     vertical-align: top;
 }
 
-.noborder {
-    border: 2px solid red;
-}
-
 
 /***************************************************************
 Login form (login.jsp)
 ***************************************************************/
-
-#login_form > input[type=submit] {
-    margin-top: 5px;
-}
 
 #login_form > input {
     margin-top: 2px;
@@ -127,9 +120,6 @@ Login form (login.jsp)
 /***************************************************************
 Register form (register.jsp, new_faculty.jsp)
 ***************************************************************/
-#register_form > input[type=submit] {
-    margin-top: 5px;
-}
 
 #register_form > input {
     margin-top: 1px;
@@ -144,6 +134,17 @@ Register form (register.jsp, new_faculty.jsp)
     margin-top: 1px;
     margin-bottom: 1px;
 }
+
+/***************************************************************
+Style for the ReCaptcha
+***************************************************************/
+
+.g-recaptcha {
+    margin: 10px;
+    text-align: -webkit-center;
+    text-align: -moz-center;
+}
+
 
 /***************************************************************
 Links

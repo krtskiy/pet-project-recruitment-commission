@@ -20,7 +20,6 @@
                 <fmt:message key="blocked_user_page_jsp.text.contacts"/> admin@krtskiy.com
             </h2>
 
-
         </td>
     </tr>
 

@@ -1,6 +1,8 @@
 package com.epam.koretskyi.commission.exception;
 
 /**
+ * An exception that provides information on an application error.
+ *
  * @author D.Koretskyi on 29.09.2020.
  */
 public class AppException extends Exception {

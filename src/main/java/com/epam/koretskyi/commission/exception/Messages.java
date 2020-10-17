@@ -1,11 +1,11 @@
 package com.epam.koretskyi.commission.exception;
 
 /**
+ * Messages holder for custom exceptions.
+ *
  * @author D.Koretskyi on 29.09.2020.
  */
 public class Messages {
-
-
 
     private Messages() {
     }

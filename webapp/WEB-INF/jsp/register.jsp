@@ -82,12 +82,17 @@
                 </select><br>
 
                 <input type="text" name="city" size="35"
-                       required pattern="[A-Za-z]{1,45}" title="<fmt:message key="register_jsp.field_popup.city_format"/>"
+                       required pattern="[A-Za-z]{1,45}"
+                       title="<fmt:message key="register_jsp.field_popup.city_format"/>"
                        placeholder="<fmt:message key="register_jsp.placeholder.city"/>"><br>
 
                 <input type="text" name="institutionName" size="35"
-                       required pattern="[\w\s#№]{1,45}" title="<fmt:message key="register_jsp.field_popup.institution_format"/>"
+                       required pattern="[\w\s#№]{1,45}"
+                       title="<fmt:message key="register_jsp.field_popup.institution_format"/>"
                        placeholder="<fmt:message key="register_jsp.placeholder.institution"/>"><br>
+
+                <div class="g-recaptcha"
+                     data-sitekey="6LfrcdgZAAAAAF1KQ5-FSgCYsJn28fW4ZZyJQC_3"></div>
 
                 <input type="submit" value="<fmt:message key="register_jsp.button.submit"/> ">
             </form>

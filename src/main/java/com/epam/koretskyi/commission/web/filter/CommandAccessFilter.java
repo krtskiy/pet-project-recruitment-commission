@@ -11,6 +11,10 @@ import java.io.IOException;
 import java.util.*;
 
 /**
+ * Security filter. Checks if the user's role meets the restrictions
+ * for access to a specific command.
+ * If not, then forwards to the error page.
+ *
  * @author D.Koretskyi on 05.10.2020.
  */
 public class CommandAccessFilter implements Filter {

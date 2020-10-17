@@ -14,6 +14,11 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
+ * Command for deleting a user-submitted application for faculty.
+ * Can be called both by admin and user.
+ * Redirects back to user's profile if invoked by admin.
+ * Redirects back to private office if invoked by user.
+ *
  * @author D.Koretskyi on 14.10.2020.
  */
 public class DeleteUserApplicationCommand extends Command {

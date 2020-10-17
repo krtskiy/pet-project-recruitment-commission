@@ -19,6 +19,9 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
+ * A command to close the faculty recruitment and send emails with notifications.
+ * Redirects to the faculty report sheet page.
+ *
  * @author D.Koretskyi on 15.10.2020.
  */
 public class CloseFacultyRecruitmentCommand extends Command {
@@ -51,6 +54,7 @@ public class CloseFacultyRecruitmentCommand extends Command {
 
         List<String> budgetEmails = new ArrayList<>();
         List<String> contractEmails = new ArrayList<>();
+        List<String> failedEmails = new ArrayList<>();
 
         // filling the lists of entrant's emails depending on the form of education
         if (facultyApplications.size() < budgetSeats) {
@@ -74,24 +78,33 @@ public class CloseFacultyRecruitmentCommand extends Command {
             for (int i = budgetSeats; i < totalSeats; i++) {
                 contractEmails.add(facultyApplications.get(i).getUserEmail());
             }
+            for (int i = totalSeats; i < facultyApplications.size(); i++) {
+                failedEmails.add(facultyApplications.get(i).getUserEmail());
+            }
         }
 
         LOG.trace("Amount of emails to send messages about the budget form of education --> " + budgetEmails.size());
         LOG.trace("Amount of emails to send messages about the contract form of education --> " + contractEmails.size());
 
         // email messages formation
-        String mailTitle = "Congratulations on your admission to KRTSK University!";
-        String mailMessageBudget = CommunicationHelper.createMail("budget", faculty.getNameEn());
-        String mailMessageContract = CommunicationHelper.createMail("contract", faculty.getNameEn());
+        String mailTitleSuccess = "Congratulations on your admission to KRTSK University!";
+        String mailTitleFailed = "We are sorry to deliver bad news...";
+        String mailMessageBudget = CommunicationHelper.createMail(true, "budget", faculty.getNameEn());
+        String mailMessageContract = CommunicationHelper.createMail(true, "contract", faculty.getNameEn());
+        String mailMessageFailed = CommunicationHelper.createMail(false, null, faculty.getNameEn());
 
-        // sending emails to accepted entrants
+        // sending emails to entrants
         try {
             if (!budgetEmails.isEmpty()) {
-                CommunicationHelper.sendMail(budgetEmails, mailTitle, mailMessageBudget);
+                CommunicationHelper.sendMail(budgetEmails, mailTitleSuccess, mailMessageBudget);
                 LOG.debug("Emails for budget form entrants were sent");
             }
             if (!contractEmails.isEmpty()) {
-                CommunicationHelper.sendMail(contractEmails, mailTitle, mailMessageContract);
+                CommunicationHelper.sendMail(contractEmails, mailTitleSuccess, mailMessageContract);
+                LOG.debug("Emails for contract form entrants were sent");
+            }
+            if (!failedEmails.isEmpty()) {
+                CommunicationHelper.sendMail(failedEmails, mailTitleFailed, mailMessageFailed);
                 LOG.debug("Emails for contract form entrants were sent");
             }
 

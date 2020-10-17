@@ -14,6 +14,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
+ * Invoked when user changes his email or password.
+ *
  * @author D.Koretskyi on 06.10.2020.
  */
 public class UpdateUserCommand extends Command {

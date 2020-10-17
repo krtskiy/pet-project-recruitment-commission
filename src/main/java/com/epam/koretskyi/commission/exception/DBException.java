@@ -1,6 +1,8 @@
 package com.epam.koretskyi.commission.exception;
 
 /**
+ * An exception that provides information on a database access error.
+ *
  * @author D.Koretskyi on 29.09.2020.
  */
 public class DBException extends AppException {

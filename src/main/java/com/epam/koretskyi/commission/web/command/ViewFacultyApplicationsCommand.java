@@ -2,10 +2,7 @@ package com.epam.koretskyi.commission.web.command;
 
 import com.epam.koretskyi.commission.db.DBManager;
 import com.epam.koretskyi.commission.db.bean.FacultyApplicationsBean;
-import com.epam.koretskyi.commission.db.bean.UserMarksBean;
 import com.epam.koretskyi.commission.db.entity.Faculty;
-import com.epam.koretskyi.commission.db.entity.User;
-import com.epam.koretskyi.commission.db.entity.UserMark;
 import com.epam.koretskyi.commission.exception.AppException;
 import com.epam.koretskyi.commission.util.constant.Path;
 import org.apache.log4j.Logger;
@@ -13,12 +10,13 @@ import org.apache.log4j.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
 
 /**
+ * Command to view current applications of entrants for faculty.
+ *
  * @author D.Koretskyi on 08.10.2020.
  */
 public class ViewFacultyApplicationsCommand extends Command {

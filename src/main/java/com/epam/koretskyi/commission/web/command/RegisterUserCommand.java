@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
+ * Invoked when client registers in system.
+ *
  * @author D.Koretskyi on 23.09.2020.
  */
 public class RegisterUserCommand extends Command {

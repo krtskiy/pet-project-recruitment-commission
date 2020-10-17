@@ -43,7 +43,7 @@ public class CommandContainer {
         commands.put("viewUserProfilePage", new UserProfilePageCommand());
         commands.put("closeFacultyRecruitment", new CloseFacultyRecruitmentCommand());
 
-        // page view commands
+        // get page
         commands.put("loginPage", new LoginPageCommand());
         commands.put("registerUserPage", new RegisterUserPageCommand());
         commands.put("privateOfficePage", new PrivateOfficePageCommand());

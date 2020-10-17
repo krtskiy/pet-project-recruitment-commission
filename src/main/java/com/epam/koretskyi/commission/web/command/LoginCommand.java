@@ -1,5 +1,6 @@
 package com.epam.koretskyi.commission.web.command;
 
+import com.epam.koretskyi.commission.util.VerifyCaptcha;
 import com.epam.koretskyi.commission.util.constant.Path;
 import com.epam.koretskyi.commission.db.DBManager;
 import com.epam.koretskyi.commission.util.MD5Util;
@@ -14,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
+ * Called when user logs in.
+ *
  * @author D.Koretskyi on 23.09.2020.
  */
 public class LoginCommand extends Command {
@@ -21,11 +24,15 @@ public class LoginCommand extends Command {
 
     private static final Logger LOG = Logger.getLogger(LoginCommand.class);
 
-
     public String execute(HttpServletRequest request, HttpServletResponse response) throws AppException {
         LOG.debug("Command starts");
 
         HttpSession httpSession = request.getSession();
+
+        String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
+        if (!VerifyCaptcha.verify(gRecaptchaResponse)) {
+            throw new AppException("Captcha is invalid!");
+        }
 
         // obtain email and password from a request
         DBManager dbManager = DBManager.getInstance();
@@ -47,7 +54,6 @@ public class LoginCommand extends Command {
 
         Role userRole = Role.getRole(user);
         LOG.trace("userRole --> " + userRole);
-
 
         String forward = Path.PAGE_ERROR;
         if (userRole == Role.ADMIN) {

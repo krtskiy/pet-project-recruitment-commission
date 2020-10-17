@@ -66,14 +66,19 @@ public class CommunicationHelper {
     /**
      * Creates a message for email notification about admission to the university.
      *
-     * @param form   form of education
-     * @param facultyName   name of faculty
+     * @param isAccepted      true if entrant is accepted, false if failed.
+     * @param formOfEducation form of education
+     * @param facultyName     name of faculty
      * @return
      */
-    public static String createMail(String form, String facultyName) {
-        return "<font size=\"5\"><p>Dear candidate,</p><p>Im writing to inform You, that You accepted on <strong>" + form +
-                "</strong> form of education to the KRTSK University successfully.</p><p>You are enrolled to " + facultyName +
-                ".</p><p>You will get all information about the course in a next letter in a month</p></font>";
+    public static String createMail(boolean isAccepted, String formOfEducation, String facultyName) {
+        if (isAccepted) {
+            return "<font size=\"5\"><p>Dear candidate,</p><p>Im writing to inform You, that You accepted on <strong>" + formOfEducation +
+                    "</strong> form of education to the KRTSK University successfully.</p><p>You are enrolled to <strong>" + facultyName +
+                    "</strong>.</p><p>You will get all information about the course in a next letter in a month</p></font>";
+        }
+        return "<font size=\"5\"><p>Dear candidate,</p><p>Unfortunately, this year you were not able to enter the <strong>"
+                + facultyName + "</strong>.</p><p>You can try your hand next year.</p>";
     }
 
 
@@ -82,9 +87,9 @@ public class CommunicationHelper {
      * layer Authentication. Simple mail Transfer Protocol is used.
      *
      * @param toList   List of email-Ids.
-     * @param msgTitle   Title of the list.
-     * @param msgBody   String to deliver.
-     * @return   true if emails sent successfully.
+     * @param msgTitle Title of the list.
+     * @param msgBody  String to deliver.
+     * @return true if emails sent successfully.
      * @throws MessagingException
      */
     public static boolean sendMail(List<String> toList, String msgTitle, String msgBody) throws MessagingException {

@@ -6,7 +6,6 @@
 
 <c:set var="title" value="Sign Up" scope="page"/>
 <%@ include file="/WEB-INF/jspf/head.jspf" %>
-<script src="https://www.google.com/recaptcha/api.js"></script>
 
 <body>
 <%@ include file="/WEB-INF/jspf/blocked_user.jspf" %>
@@ -28,7 +27,7 @@
                                                             localizable="${criterion}"/>:</small><br><input type="number"
                                                                                                           required
                                                                                                           name="marks"
-                                                                                                          min="100"
+                                                                                                          min="1"
                                                                                                           max="12"><br>
                         </c:when>
                         <c:otherwise>

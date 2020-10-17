@@ -12,3 +12,15 @@ JSTL functions tag library.
 
 <%@ taglib prefix="localizer" uri="http://corporation.com/custom-tag/localizer"%>
 
+<c:choose>
+    <c:when test="${currentLocale == 'uk'}">
+        <script src='https://www.google.com/recaptcha/api.js?hl=uk'></script>
+    </c:when>
+    <c:when test="${currentLocale == 'en'}">
+        <script src='https://www.google.com/recaptcha/api.js?hl=en'></script>
+    </c:when>
+    <c:otherwise>
+        <script src='https://www.google.com/recaptcha/api.js?hl=en'></script>
+    </c:otherwise>
+</c:choose>
+

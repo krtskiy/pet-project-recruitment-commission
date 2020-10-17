@@ -36,6 +36,9 @@
                         <input type="password" name="password" maxlength="32"
                                placeholder="<fmt:message key="login_jsp.placeholder.password"/> "><br>
 
+                        <div class="g-recaptcha"
+                             data-sitekey="6LfrcdgZAAAAAF1KQ5-FSgCYsJn28fW4ZZyJQC_3"></div>
+
                         <input type="submit" value="<fmt:message key="login_jsp.button.log_in"/> ">
                     </form>
                 </c:otherwise>

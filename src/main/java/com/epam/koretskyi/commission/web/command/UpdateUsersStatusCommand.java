@@ -13,6 +13,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
+ * Invoked when admin changes lock status of user.
+ *
  * @author D.Koretskyi on 07.10.2020.
  */
 public class UpdateUsersStatusCommand extends Command {

@@ -6,7 +6,6 @@
 
 <c:set var="title" value="Sign Up" scope="page"/>
 <%@ include file="/WEB-INF/jspf/head.jspf" %>
-<script src="https://www.google.com/recaptcha/api.js"></script>
 
 <body>
 <table id="main-container">

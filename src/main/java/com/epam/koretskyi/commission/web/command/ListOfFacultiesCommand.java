@@ -1,13 +1,12 @@
 package com.epam.koretskyi.commission.web.command;
 
-import com.epam.koretskyi.commission.db.bean.UserFacultiesBean;
-import com.epam.koretskyi.commission.db.entity.User;
-import com.epam.koretskyi.commission.util.constant.Path;
 import com.epam.koretskyi.commission.db.DBManager;
 import com.epam.koretskyi.commission.db.Role;
-import com.epam.koretskyi.commission.db.entity.Criterion;
+import com.epam.koretskyi.commission.db.bean.UserFacultiesBean;
 import com.epam.koretskyi.commission.db.entity.Faculty;
+import com.epam.koretskyi.commission.db.entity.User;
 import com.epam.koretskyi.commission.exception.AppException;
+import com.epam.koretskyi.commission.util.constant.Path;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -19,13 +18,14 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
+ * Invoked when user wants to see all faculties that exist on current time.
+ *
  * @author D.Koretskyi on 02.10.2020.
  */
 public class ListOfFacultiesCommand extends Command {
     private static final long serialVersionUID = 4098462857096504435L;
 
     private static final Logger LOG = Logger.getLogger(ListOfFacultiesCommand.class);
-
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {

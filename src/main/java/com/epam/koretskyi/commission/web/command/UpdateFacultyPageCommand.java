@@ -16,6 +16,8 @@ import java.io.IOException;
 import java.util.List;
 
 /**
+ * Command that forwards to faculty update page.
+ *
  * @author D.Koretskyi on 08.10.2020.
  */
 public class UpdateFacultyPageCommand extends Command {

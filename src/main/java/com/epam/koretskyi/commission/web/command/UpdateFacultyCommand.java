@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Invoked when admin changes faculty.
+ *
  * @author D.Koretskyi on 08.10.2020.
  */
 public class UpdateFacultyCommand extends Command {

@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
+ * Forwards to faculty application page.
+ *
  * @author D.Koretskyi on 11.10.2020.
  */
 public class RegisterForFacultyPageCommand extends Command {

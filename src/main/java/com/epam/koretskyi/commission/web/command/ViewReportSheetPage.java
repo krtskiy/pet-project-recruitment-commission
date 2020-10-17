@@ -15,6 +15,8 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
+ * Command to view final report sheet of the faculty.
+ *
  * @author D.Koretskyi on 15.10.2020.
  */
 public class ViewReportSheetPage extends Command {

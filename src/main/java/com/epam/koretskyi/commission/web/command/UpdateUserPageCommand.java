@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
+ * Command that forwards to login data update page.
+ *
  * @author D.Koretskyi on 06.10.2020.
  */
 public class UpdateUserPageCommand extends Command {

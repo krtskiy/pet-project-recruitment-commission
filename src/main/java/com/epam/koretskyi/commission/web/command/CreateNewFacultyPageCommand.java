@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.util.List;
 
 /**
+ * Command that forwards to the faculty creation page.
+ *
  * @author D.Koretskyi on 08.10.2020.
  */
 public class CreateNewFacultyPageCommand extends Command {

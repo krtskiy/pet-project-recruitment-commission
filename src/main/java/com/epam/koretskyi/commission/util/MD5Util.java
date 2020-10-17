@@ -3,6 +3,8 @@ package com.epam.koretskyi.commission.util;
 import org.apache.commons.codec.digest.DigestUtils;
 
 /**
+ * Class for converting user's password to hashcode.
+ *
  * @author D.Koretskyi on 22.09.2020.
  */
 public class MD5Util {

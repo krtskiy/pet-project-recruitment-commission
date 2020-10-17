@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
+ * Command that forwards to page for blocked users, if current user is blocked.
+ *
  * @author D.Koretskyi on 10.10.2020.
  */
 public class BlockedUserPageCommand extends Command {

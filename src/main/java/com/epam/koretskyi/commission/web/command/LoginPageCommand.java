@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * Command that forwards user to login page.
+ *
  * @author D.Koretskyi on 27.09.2020.
  */
 public class LoginPageCommand extends Command {

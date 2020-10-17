@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
+ * Invoked when admin wants to see all users that exist on current time.
+ *
  * @author D.Koretskyi on 02.10.2020.
  */
 public class ListOfUsersCommand extends Command {

@@ -15,6 +15,8 @@ import java.io.IOException;
 import java.util.List;
 
 /**
+ * Command to forward admin to user profile.
+ *
  * @author D.Koretskyi on 14.10.2020.
  */
 public class UserProfilePageCommand extends Command {

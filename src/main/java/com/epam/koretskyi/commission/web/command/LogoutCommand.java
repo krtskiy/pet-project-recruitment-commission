@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
+ * Invoked when user logs out from the system.
+ *
  * @author D.Koretskyi on 23.09.2020.
  */
 public class LogoutCommand extends Command {

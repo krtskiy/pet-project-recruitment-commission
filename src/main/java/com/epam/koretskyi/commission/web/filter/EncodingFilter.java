@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 /**
+ * Encoding filter. Checks for requested client encoding. If none requested
+ * - sets to UTF-8.
+ *
  * @author D.Koretskyi on 27.09.2020.
  */
 public class EncodingFilter implements Filter {

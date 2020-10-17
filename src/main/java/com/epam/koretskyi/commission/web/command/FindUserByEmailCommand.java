@@ -13,6 +13,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
+ * Command for search for a user by email on the user management page in admin panel.
+ *
  * @author D.Koretskyi on 07.10.2020.
  */
 public class FindUserByEmailCommand extends Command {

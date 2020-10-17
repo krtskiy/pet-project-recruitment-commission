@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
+ * Invoked when admin deletes faculty.
+ *
  * @author D.Koretskyi on 08.10.2020.
  */
 public class DeleteFacultyCommand extends Command {

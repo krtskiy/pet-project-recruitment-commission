@@ -89,6 +89,12 @@
                 </c:forEach>
             </table>
 
+
+<%--            todo--%>
+            <a href="controller?command=writeToFile&facultyId=${faculty.id}&file=0">save txt</a> <br> <a
+                href="controller?command=writeToFile&facultyId=${faculty.id}&file=1">save pdf</a>
+
+
         </td>
     </tr>
     <%@ include file="/WEB-INF/jspf/footer.jspf" %>

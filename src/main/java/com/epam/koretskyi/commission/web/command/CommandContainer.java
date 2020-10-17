@@ -31,6 +31,7 @@ public class CommandContainer {
         commands.put("viewFacultyApplications", new ViewFacultyApplicationsCommand());
         commands.put("deleteUserApplication", new DeleteUserApplicationCommand());
         commands.put("viewReportSheetPage", new ViewReportSheetPage());
+        commands.put("writeToFile", new WriteToFileCommand());
 
         // admin
         commands.put("listOfUsers", new ListOfUsersCommand());

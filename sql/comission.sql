@@ -76,31 +76,36 @@ INSERT INTO users
 VALUES (DEFAULT, 'Denys', 'Denysov', 'Denysovich', 'user@user.com', 'ee11cbb19052e40b07aac0ca060c23ee', 'Kyiv obl.',
         'Kiyv', 'School #1', DEFAULT, DEFAULT);
 INSERT INTO users
-VALUES (DEFAULT, 'Vitaly', 'Vitaliev', 'Vitalievych', 'user1@user.com', 'ee11cbb19052e40b07aac0ca060c23ee',
+VALUES (DEFAULT, 'Vitaly', 'Vitaliev', 'Vitalievych', 'epam.fp.entrant1@gmail.com', 'ee11cbb19052e40b07aac0ca060c23ee',
         'Kharkiv obl.', 'Kharkiv', 'School #2', DEFAULT, DEFAULT);
 INSERT INTO users
-VALUES (DEFAULT, 'Sergiy', 'Sergiiev', 'Sergiyovych', 'user2@user.com', 'ee11cbb19052e40b07aac0ca060c23ee',
+VALUES (DEFAULT, 'Sergiy', 'Sergiiev', 'Sergiyovych', 'epam.fp.entrant2@gmail.com', 'ee11cbb19052e40b07aac0ca060c23ee',
         'Luhansk obl.', 'Luhansk', 'School #3', DEFAULT, DEFAULT);
 INSERT INTO users
-VALUES (DEFAULT, 'Volodymyr', 'Volodymyrov', 'Volodymyrovych', 'user3@user.com', 'ee11cbb19052e40b07aac0ca060c23ee',
+VALUES (DEFAULT, 'Volodymyr', 'Volodymyrov', 'Volodymyrovych', 'epam.fp.entrant3@gmail.com',
+        'ee11cbb19052e40b07aac0ca060c23ee',
         'Donetsk obl.', 'Donetsk', 'School #4', DEFAULT, DEFAULT);
 INSERT INTO users
-VALUES (DEFAULT, 'Artyom', 'Artyomov', 'Artyomovych', 'user4@user.com', 'ee11cbb19052e40b07aac0ca060c23ee',
+VALUES (DEFAULT, 'Artyom', 'Artyomov', 'Artyomovych', 'epam.fp.entrant4@gmail.com', 'ee11cbb19052e40b07aac0ca060c23ee',
         'Cherkasy obl.', 'Cherkasy', 'School #5', DEFAULT, DEFAULT);
 INSERT INTO users
-VALUES (DEFAULT, 'Danylo', 'Danylov', 'Danylovych', 'user5@user.com', 'ee11cbb19052e40b07aac0ca060c23ee',
+VALUES (DEFAULT, 'Danylo', 'Danylov', 'Danylovych', 'epam.fp.entrant5@gmail.com', 'ee11cbb19052e40b07aac0ca060c23ee',
         'Poltava obl.', 'Poltava', 'School #6', DEFAULT, DEFAULT);
 INSERT INTO users
-VALUES (DEFAULT, 'Oleksandr', 'Oleksandrov', 'Oleksandrovych', 'user6@user.com', 'ee11cbb19052e40b07aac0ca060c23ee',
+VALUES (DEFAULT, 'Oleksandr', 'Oleksandrov', 'Oleksandrovych', 'epam.fp.entrant6@gmail.com',
+        'ee11cbb19052e40b07aac0ca060c23ee',
         'Odesa obl.', 'Odesa', 'School #7', DEFAULT, DEFAULT);
 INSERT INTO users
-VALUES (DEFAULT, 'Yevgen', 'Yevgenov', 'Yevgenovych', 'user7@user.com', 'ee11cbb19052e40b07aac0ca060c23ee', 'Sumy obl.',
+VALUES (DEFAULT, 'Yevgen', 'Yevgenov', 'Yevgenovych', 'epam.fp.entrant7@gmail.com', 'ee11cbb19052e40b07aac0ca060c23ee',
+        'Sumy obl.',
         'Sumy', 'School #8', DEFAULT, DEFAULT);
 INSERT INTO users
-VALUES (DEFAULT, 'Alla', 'Allova', 'Allivna', 'user8@user.com', 'ee11cbb19052e40b07aac0ca060c23ee', 'Zaporizhia obl.',
+VALUES (DEFAULT, 'Alla', 'Allova', 'Allivna', 'epam.fp.entrant8@gmail.com', 'ee11cbb19052e40b07aac0ca060c23ee',
+        'Zaporizhia obl.',
         'Zaporizhia', 'School #9', DEFAULT, DEFAULT);
 INSERT INTO users
-VALUES (DEFAULT, 'Alina', 'Alinova', 'Alinivna', 'user9@user.com', 'ee11cbb19052e40b07aac0ca060c23ee', 'Lviv obl.',
+VALUES (DEFAULT, 'Alina', 'Alinova', 'Alinivna', 'epam.fp.entrant9@gmail.com', 'ee11cbb19052e40b07aac0ca060c23ee',
+        'Lviv obl.',
         'Lviv', 'School #10', DEFAULT, DEFAULT);
 
 
@@ -355,6 +360,19 @@ VALUES (10, 7, 180);
 INSERT INTO user_marks
 VALUES (10, 9, 177);
 
+INSERT INTO user_marks
+VALUES (11, 1, 12);
+INSERT INTO user_marks
+VALUES (11, 2, 199);
+INSERT INTO user_marks
+VALUES (11, 3, 197);
+INSERT INTO user_marks
+VALUES (11, 6, 199);
+INSERT INTO user_marks
+VALUES (11, 7, 198);
+INSERT INTO user_marks
+VALUES (11, 9, 195);
+
 
 
 CREATE TABLE `commission`.`applications`
@@ -412,3 +430,5 @@ INSERT INTO applications
 VALUES (DEFAULT, 10, 1);
 INSERT INTO applications
 VALUES (DEFAULT, 10, 2);
+INSERT INTO applications
+VALUES (DEFAULT, 11, 3);

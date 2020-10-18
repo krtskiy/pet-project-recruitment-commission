@@ -40,7 +40,7 @@
                     <th><fmt:message key="faculty_entrants_jsp.text.entr_surname"/></th>
                     <c:forEach var="criterion" items="${faculty.criteria}">
                         <th><localizer:name currentLocaleName="${currentLocale}"
-                                                     localizable="${criterion}"/></th>
+                                            localizable="${criterion}"/></th>
                     </c:forEach>
                     <th><fmt:message key="faculty_entrants_jsp.text.entr_marks_sum"/></th>
                 </tr>
@@ -89,8 +89,12 @@
                 </c:forEach>
             </table>
 
-            <a href="controller?command=writeToFile&facultyId=${faculty.id}&file=0"><strong><fmt:message key="report_sheet_jsp.button.download_txt"/></strong></a>
-            <a href="controller?command=writeToFile&facultyId=${faculty.id}&file=1"><strong><fmt:message key="report_sheet_jsp.button.download_pdf"/></strong></a>
+            <c:if test="${userRole.name == 'admin'}">
+                <a href="controller?command=writeToFile&facultyId=${faculty.id}&file=0"><strong><fmt:message
+                        key="report_sheet_jsp.button.download_txt"/></strong></a>
+                <a href="controller?command=writeToFile&facultyId=${faculty.id}&file=1"><strong><fmt:message
+                        key="report_sheet_jsp.button.download_pdf"/></strong></a>
+            </c:if>
 
         </td>
     </tr>

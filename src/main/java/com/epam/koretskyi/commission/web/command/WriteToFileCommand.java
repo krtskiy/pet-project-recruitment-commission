@@ -3,7 +3,6 @@ package com.epam.koretskyi.commission.web.command;
 import com.epam.koretskyi.commission.db.DBManager;
 import com.epam.koretskyi.commission.db.bean.FacultyApplicationsBean;
 import com.epam.koretskyi.commission.db.bean.UserMarksBean;
-import com.epam.koretskyi.commission.db.entity.Criterion;
 import com.epam.koretskyi.commission.db.entity.Faculty;
 import com.epam.koretskyi.commission.exception.AppException;
 import com.epam.koretskyi.commission.util.constant.Path;
@@ -30,7 +29,6 @@ public class WriteToFileCommand extends Command {
     private static final long serialVersionUID = -9198821548382832292L;
 
     private static final Logger LOG = Logger.getLogger(WriteToFileCommand.class);
-
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {

@@ -19,18 +19,22 @@
                 <input type="hidden" name="command" value="updateFaculty">
 
                 <h3><fmt:message key="update_faculty_jsp.text.new_info"/></h3>
-                <small><fmt:message key="update_faculty_jsp.text.new_info_hint"/></small><br>
+                <small><fmt:message key="update_faculty_jsp.text.new_info_hint"/></small><br><br>
+                <small><fmt:message key="update_faculty_jsp.placeholder.new_name_en"/>:</small><br>
                 <input type="text" name="nameEn" maxlength="100"
-                       placeholder="<fmt:message key="update_faculty_jsp.placeholder.new_name_en"/>"
+                       placeholder="${faculty.nameEn}"
                        style="width: 250px"><br>
+                <small><fmt:message key="update_faculty_jsp.placeholder.new_name_uk"/>:</small><br>
                 <input type="text" name="nameUk" maxlength="100"
-                       placeholder="<fmt:message key="update_faculty_jsp.placeholder.new_name_uk"/>"
+                       placeholder="${faculty.nameUk}"
                        style="width: 250px"><br>
+                <small><fmt:message key="update_faculty_jsp.placeholder.new_total_seats"/>:</small><br>
                 <input type="number" name="totalSeats" min="0"
-                       placeholder="<fmt:message key="update_faculty_jsp.placeholder.new_total_seats"/>"
+                       placeholder="${faculty.totalSeats}"
                        style="width: 250px"><br>
+                <small><fmt:message key="update_faculty_jsp.placeholder.new_budget_seats"/>:</small><br>
                 <input type="number" name="budgetSeats" min="0"
-                       placeholder="<fmt:message key="update_faculty_jsp.placeholder.new_budget_seats"/>"
+                       placeholder="${faculty.budgetSeats}"
                        style="width: 250px"><br>
 
                 <c:choose>

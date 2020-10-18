@@ -182,3 +182,11 @@ Isrc/main/java/com/epam/koretskyi/commission/util/CommunicationHelper.java,1\8\
 Msrc/test/java/com/epam/koretskyi/commission/util/CommunicationHelperTest.java,5\f\5fc54357879aa4487b9e6fb800adba98679cafa3
 q
 Asrc/test/java/com/epam/koretskyi/commission/util/MD5UtilTest.java,8\9\89c1e7588039842064ed415b3e99cb4ef928f559
+w
+Gsrc/main/java/com/epam/koretskyi/commission/exception/AppException.java,8\3\83b428d9093816c1c5add153a60107d06936d14e
+s
+Csrc/main/java/com/epam/koretskyi/commission/util/VerifyCaptcha.java,6\a\6af52ca53f5054646e95c53f6579c3bf04c800a3
+x
+Hsrc/main/java/com/epam/koretskyi/commission/web/DownloadFileServlet.java,4\4\449a0860659cf49a2720440eb2e5d954fb29bc8c
+
+Osrc/main/java/com/epam/koretskyi/commission/web/command/WriteToFileCommand.java,f\a\fa21761045b7aac0f380f2b9cbb32d6cafc98772

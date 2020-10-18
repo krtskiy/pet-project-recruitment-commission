@@ -33,6 +33,12 @@
                 <c:remove var="failedPdf" scope="session"/>
             </c:if>
 
+            <c:if test="${not empty failedXlsx}">
+                <h3><span style="color: rgb(204, 0, 0);">failed to create xlsx report file</span>
+                </h3><br>
+                <c:remove var="failedXlsx" scope="session"/>
+            </c:if>
+
             <h3><fmt:message key="report_sheet_jsp.text.report_sheet"/>
                 <localizer:name currentLocaleName="${currentLocale}" localizable="${faculty}"/></h3>
 
@@ -107,6 +113,8 @@
                         key="report_sheet_jsp.button.download_txt"/></strong></a>
                 <a href="controller?command=downloadFile&facultyId=${faculty.id}&file=pdf"><strong><fmt:message
                         key="report_sheet_jsp.button.download_pdf"/></strong></a>
+                <a href="controller?command=downloadFile&facultyId=${faculty.id}&file=xlsx"><strong><fmt:message
+                        key="report_sheet_jsp.button.download_xlsx"/></strong></a>
             </c:if>
 
         </td>

@@ -41,9 +41,8 @@ public class DownloadFileCommand extends Command {
         if ("pdf".equals(fileType)) {
             downloadFile = new File(filePath, "report_sheet_faculty_" + facultyId + ".pdf");
         }
-
-        if (downloadFile == null) {
-            throw new AppException("Wrong file format");
+        if ("xlsx".equals(fileType)) {
+            downloadFile = new File(filePath, "report_sheet_faculty_" + facultyId + ".xlsx");
         }
 
         try (FileInputStream inStream = new FileInputStream(downloadFile)) {

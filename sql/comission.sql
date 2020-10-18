@@ -146,9 +146,9 @@ CREATE TABLE `commission`.`faculties`
 );
 
 INSERT INTO faculties
-VALUES (1, 'Faculty of Economics', 'Факультет Економіки', 8, 4, DEFAULT);
+VALUES (1, 'Faculty of Economics', 'Факультет Економіки', 4, 2, DEFAULT);
 INSERT INTO faculties
-VALUES (2, 'Faculty of Engineering', 'Факультет Інженерії', 5, 3, DEFAULT);
+VALUES (2, 'Faculty of Engineering', 'Факультет Інженерії', 8, 4, DEFAULT);
 INSERT INTO faculties
 VALUES (3, 'Faculty of Information Technologies', 'Факультет Інформацийних Технологій', 3, 1, DEFAULT);
 
@@ -424,6 +424,8 @@ INSERT INTO applications
 VALUES (DEFAULT, 8, 3);
 INSERT INTO applications
 VALUES (DEFAULT, 9, 1);
+INSERT INTO applications
+VALUES (DEFAULT, 9, 2);
 INSERT INTO applications
 VALUES (DEFAULT, 9, 3);
 INSERT INTO applications

@@ -7,10 +7,12 @@ package com.epam.koretskyi.commission.exception;
  */
 public class Messages {
 
+
     private Messages() {
     }
 
     // user-related
+    public static final String ERR_CANNOT_DOWNLOAD_FILE = "Cannot download file!";
     public static final String ERR_CANNOT_OBTAIN_USER_STATUS_BY_ID = "Cannot obtain user status by id!";
     public static final String ERR_CANNOT_INSERT_USER = "Cannot insert user!";
     public static final String ERR_CANNOT_UPDATE_USER = "Cannot update user!";

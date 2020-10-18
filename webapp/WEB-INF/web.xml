@@ -56,7 +56,7 @@
             <param-name>admin</param-name>
             <param-value>listOfUsers adminPanelPage findUserByEmail updateUsersStatus deleteFaculty
                 updateFaculty updateFacultyPage createNewFaculty createNewFacultyPage viewFacultyApplications
-                viewUserProfilePage deleteUserApplication closeFacultyRecruitment viewReportSheetPage writeToFile
+                viewUserProfilePage deleteUserApplication closeFacultyRecruitment viewReportSheetPage downloadFile
             </param-value>
         </init-param>
         <init-param>

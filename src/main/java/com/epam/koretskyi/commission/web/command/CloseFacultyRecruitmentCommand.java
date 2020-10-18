@@ -6,6 +6,7 @@ import com.epam.koretskyi.commission.db.entity.Faculty;
 import com.epam.koretskyi.commission.exception.AppException;
 import com.epam.koretskyi.commission.exception.Messages;
 import com.epam.koretskyi.commission.util.CommunicationHelper;
+import com.epam.koretskyi.commission.util.FileCreator;
 import com.epam.koretskyi.commission.util.constant.Path;
 import org.apache.log4j.Logger;
 
@@ -47,8 +48,13 @@ public class CloseFacultyRecruitmentCommand extends Command {
         int totalSeats = faculty.getTotalSeats();
         int budgetSeats = faculty.getBudgetSeats();
 
+        // set faculty status to closed
         manager.updateFaculty(faculty);
 
+        // creating .pdf and .txt report sheets in project root
+        FileCreator.createReportSheets(facultyId, request);
+
+        // distribution of admission results to entrants
         List<FacultyApplicationsBean> facultyApplications = manager.findFacultyApplicationsByFacultyId(facultyId);
         facultyApplications.sort(Comparator.comparingInt(FacultyApplicationsBean::sumOfMarks).reversed());
 
@@ -105,7 +111,7 @@ public class CloseFacultyRecruitmentCommand extends Command {
             }
             if (!failedEmails.isEmpty()) {
                 CommunicationHelper.sendMail(failedEmails, mailTitleFailed, mailMessageFailed);
-                LOG.debug("Emails for contract form entrants were sent");
+                LOG.debug("Emails for failed entrants were sent");
             }
 
             String successMailingMessage = "Emails were sent to all accepted applicants";

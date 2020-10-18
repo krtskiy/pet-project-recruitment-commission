@@ -20,6 +20,19 @@
                 <c:remove var="successMailingMessage" scope="session"/>
             </c:if>
 
+<%--            todo l10n --%>
+            <c:if test="${not empty failedTxt}">
+                <h3><span style="color: rgb(204, 0, 0);">failed to create txt report file</span>
+                </h3><br>
+                <c:remove var="failedTxt" scope="session"/>
+            </c:if>
+
+            <c:if test="${not empty failedPdf}">
+                <h3><span style="color: rgb(204, 0, 0);">failed to create pdf report file</span>
+                </h3><br>
+                <c:remove var="failedPdf" scope="session"/>
+            </c:if>
+
             <h3><fmt:message key="report_sheet_jsp.text.report_sheet"/>
                 <localizer:name currentLocaleName="${currentLocale}" localizable="${faculty}"/></h3>
 
@@ -90,9 +103,9 @@
             </table>
 
             <c:if test="${userRole.name == 'admin'}">
-                <a href="controller?command=writeToFile&facultyId=${faculty.id}&file=0"><strong><fmt:message
+                <a href="controller?command=downloadFile&facultyId=${faculty.id}&file=txt"><strong><fmt:message
                         key="report_sheet_jsp.button.download_txt"/></strong></a>
-                <a href="controller?command=writeToFile&facultyId=${faculty.id}&file=1"><strong><fmt:message
+                <a href="controller?command=downloadFile&facultyId=${faculty.id}&file=pdf"><strong><fmt:message
                         key="report_sheet_jsp.button.download_pdf"/></strong></a>
             </c:if>
 

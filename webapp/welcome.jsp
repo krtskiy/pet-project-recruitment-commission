@@ -9,18 +9,34 @@
 
 <body>
 <table id="main-container">
-    <%-- TODO l10n --%>
     <%@ include file="/WEB-INF/jspf/header.jspf" %>
     <tr>
         <td class="content">
-            <h1>Welcome to the website of the recruitment commission of our university! Glad to see you here!</h1><br>
-            <h3>About us:</h3>
+
+            <h1><fmt:message key="welcome_jsp.text.welcome"/></h1><br>
+
+            <h3><fmt:message key="welcome_jsp.list.about_us"/>:</h3>
             <ul>
-                <li>One of the most rated universities in Europe</li>
-                <li>The most qualified teachers in Ukraine</li>
-                <li>3 faculties, 5,000 students, 100,000+ graduates</li>
+                <li><fmt:message key="welcome_jsp.list.li1"/></li>
+                <li><fmt:message key="welcome_jsp.list.li2"/></li>
+                <li><fmt:message key="welcome_jsp.list.li3"/></li>
+                <li><fmt:message key="welcome_jsp.list.li4"/></li>
             </ul>
-            <br>
+
+            <p><fmt:message key="welcome_jsp.text.p1"/></p>
+
+            <img src="images/university2.jpg" alt="image1" width="480" height="300">
+
+            <p><fmt:message key="welcome_jsp.text.p2"/></p>
+
+            <img src="images/university3.jpeg" alt="image2" width="480" height="300">
+
+            <p><fmt:message key="welcome_jsp.text.p3"/></p>
+
+            <img src="images/university4.jpg" alt="image3" width="480" height="300">
+
+            <p><fmt:message key="welcome_jsp.text.p4"/></p>
+
 
         </td>
     </tr>

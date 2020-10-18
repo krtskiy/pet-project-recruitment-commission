@@ -81,7 +81,7 @@ public class CreateNewFacultyCommand extends Command {
         DBManager.getInstance().insertFaculty(faculty);
 
         String successNewFacMessage = "Registered successfully";
-        request.getSession().setAttribute("successRegMessage", successNewFacMessage);
+        request.getSession().setAttribute("successNewFacMessage", successNewFacMessage);
         LOG.trace("Set the session attribute: successNewFacMessage --> " + successNewFacMessage);
 
         LOG.debug("Command finished");

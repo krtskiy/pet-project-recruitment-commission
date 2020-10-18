@@ -20,21 +20,20 @@
                 <c:remove var="successMailingMessage" scope="session"/>
             </c:if>
 
-<%--            todo l10n --%>
             <c:if test="${not empty failedTxt}">
-                <h3><span style="color: rgb(204, 0, 0);">failed to create txt report file</span>
+                <h3><span style="color: rgb(204, 0, 0);"><fmt:message key="report_sheet_jsp.button.fail_txt"/></span>
                 </h3><br>
                 <c:remove var="failedTxt" scope="session"/>
             </c:if>
 
             <c:if test="${not empty failedPdf}">
-                <h3><span style="color: rgb(204, 0, 0);">failed to create pdf report file</span>
+                <h3><span style="color: rgb(204, 0, 0);"><fmt:message key="report_sheet_jsp.button.fail_pdf"/></span>
                 </h3><br>
                 <c:remove var="failedPdf" scope="session"/>
             </c:if>
 
             <c:if test="${not empty failedXlsx}">
-                <h3><span style="color: rgb(204, 0, 0);">failed to create xlsx report file</span>
+                <h3><span style="color: rgb(204, 0, 0);"><fmt:message key="report_sheet_jsp.button.fail_xlsx"/></span>
                 </h3><br>
                 <c:remove var="failedXlsx" scope="session"/>
             </c:if>

@@ -94,7 +94,7 @@
                 <div class="g-recaptcha"
                      data-sitekey="6LfrcdgZAAAAAF1KQ5-FSgCYsJn28fW4ZZyJQC_3"></div>
 
-                <input type="submit" value="<fmt:message key="register_jsp.button.submit"/> ">
+                <input type="submit" value="<fmt:message key="register_jsp.button.submit"/>">
             </form>
 
         </td>

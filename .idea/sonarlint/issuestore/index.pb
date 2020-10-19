@@ -186,7 +186,7 @@ w
 Gsrc/main/java/com/epam/koretskyi/commission/exception/AppException.java,8\3\83b428d9093816c1c5add153a60107d06936d14e
 s
 Csrc/main/java/com/epam/koretskyi/commission/util/VerifyCaptcha.java,6\a\6af52ca53f5054646e95c53f6579c3bf04c800a3
-x
-Hsrc/main/java/com/epam/koretskyi/commission/web/DownloadFileServlet.java,4\4\449a0860659cf49a2720440eb2e5d954fb29bc8c
-
-Osrc/main/java/com/epam/koretskyi/commission/web/command/WriteToFileCommand.java,f\a\fa21761045b7aac0f380f2b9cbb32d6cafc98772
+q
+Asrc/main/java/com/epam/koretskyi/commission/util/FileCreator.java,d\2\d275f150c2cead07b3dd266f200f61c3adb9c319
+€
+Psrc/main/java/com/epam/koretskyi/commission/web/command/DownloadFileCommand.java,b\b\bbd280edd6a32bcfeb2bf6270da8790df5ea1726

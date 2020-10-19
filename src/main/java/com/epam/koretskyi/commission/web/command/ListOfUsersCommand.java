@@ -33,9 +33,9 @@ public class ListOfUsersCommand extends Command {
         List<User> users = DBManager.getInstance().findAllUsers();
         LOG.trace("Found in DB: count of users --> " + users.size());
 
-
         String sortParam = request.getParameter("sort");
         request.setAttribute("sortParam", sortParam);
+        LOG.trace("Set the request attribute: sortParam --> " + sortParam);
 
         // sort users by id
         if ("id".equals(sortParam)) {
@@ -70,6 +70,7 @@ public class ListOfUsersCommand extends Command {
         // banned first
         if ("banStatus".equals(sortParam)) {
             users.sort(Comparator.comparingInt(User::getStatusId).reversed());
+            LOG.trace("Users sorted by lock status");
         }
 
         // split users across multiple pages (5 per page)
@@ -78,6 +79,7 @@ public class ListOfUsersCommand extends Command {
             totalPages += 1;
         }
         request.setAttribute("totalPages", totalPages);
+        LOG.trace("Set the request attribute: totalPages --> " + totalPages);
 
         int limit = Integer.parseInt(request.getParameter("page"));
         if (limit == 1) {

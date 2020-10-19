@@ -91,6 +91,7 @@ public class CloseFacultyRecruitmentCommand extends Command {
 
         LOG.trace("Amount of emails to send messages about the budget form of education --> " + budgetEmails.size());
         LOG.trace("Amount of emails to send messages about the contract form of education --> " + contractEmails.size());
+        LOG.trace("Amount of emails to send messages about failed enrollment --> " + failedEmails.size());
 
         // email messages formation
         String mailTitleSuccess = "Congratulations on your admission to KRTSK University!";

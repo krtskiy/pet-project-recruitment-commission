@@ -7,6 +7,7 @@ import com.epam.koretskyi.commission.db.entity.Criterion;
 import com.epam.koretskyi.commission.db.entity.Faculty;
 import com.epam.koretskyi.commission.exception.DBException;
 import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -17,10 +18,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.Comparator;
 import java.util.List;
 
@@ -34,6 +32,13 @@ public class FileCreator {
 
     private static final Logger LOG = Logger.getLogger(FileCreator.class);
 
+    /**
+     * Creates content to be written to the file and calls the appropriate methods for each file type.
+     *
+     * @param facultyId ID of faculty.
+     * @param request   HttpServletRequest for setting error messages, if something went wrong.
+     * @throws DBException
+     */
     public static void createReportSheets(int facultyId, HttpServletRequest request) throws DBException {
         Faculty faculty = DBManager.getInstance().findFacultyById(facultyId);
 
@@ -45,7 +50,9 @@ public class FileCreator {
         }
 
         StringBuilder content = new StringBuilder();
+        content.append(System.lineSeparator());
 
+        int applicationNumber = 1;
         for (FacultyApplicationsBean application : applications) {
             content.append(application.getUserName());
             content.append(" ");
@@ -64,8 +71,14 @@ public class FileCreator {
             }
             content.append("sum of marks - ");
             content.append(sum);
+            content.append(", form of education: ");
+            if (applicationNumber <= faculty.getBudgetSeats()) {
+                content.append("budget");
+            } else {
+                content.append("contract");
+            }
             content.append(System.lineSeparator());
-            content.append(System.lineSeparator());
+            applicationNumber++;
         }
 
         LOG.trace(content);
@@ -76,10 +89,8 @@ public class FileCreator {
         File fileXlsx = new File(folder, "report_sheet_faculty_" + facultyId + ".xlsx");
 
         // creating txt file
-        try (FileWriter writer = new FileWriter(fileTxt)) {
-            fileTxt.createNewFile();
-            writer.write(content.toString());
-            writer.flush();
+        try {
+            createTxt(fileTxt, content);
         } catch (IOException e) {
             String failedTxt = "Cannot create txt report sheet";
             LOG.error(failedTxt);
@@ -91,19 +102,7 @@ public class FileCreator {
 
         // creating pdf file
         try {
-            Document document = new Document();
-            PdfWriter.getInstance(document, new FileOutputStream(filePdf));
-            document.open();
-            Paragraph p = new Paragraph();
-            p.add("Report sheet for " + faculty.getNameEn());
-            p.setAlignment(Element.ALIGN_CENTER);
-            document.add(p);
-            Paragraph mainContent = new Paragraph();
-            mainContent.add(content.toString());
-            mainContent.setAlignment(Element.ALIGN_CENTER);
-            document.add(mainContent);
-            document.close();
-            LOG.trace("PDF report file created");
+            createPdf(faculty.getNameEn(), filePdf, content);
         } catch (Exception e) {
             String failedPdf = "Cannot create pdf report sheet";
             LOG.error(failedPdf);
@@ -112,9 +111,69 @@ public class FileCreator {
             LOG.trace("Set the session attribute: failedPdf --> " + failedPdf);
         }
 
-        // creating excel file
-        XSSFWorkbook workbook = new XSSFWorkbook();
-        XSSFSheet sheet = workbook.createSheet("Report sheet for faculty #" + facultyId);
+        // creating xlsx file
+        try {
+            createXlsx(faculty, applications, fileXlsx);
+        } catch (IOException e) {
+            String failedXlsx = "Cannot create xlsx report sheet";
+            LOG.error(failedXlsx);
+
+            request.getSession().setAttribute("failedXlsx", failedXlsx);
+            LOG.trace("Set the session attribute: failedXlsx --> " + failedXlsx);
+        }
+    }
+
+    /**
+     * Creates a file of the report sheet in the root of the project in .txt format
+     *
+     * @param fileTxt file to write to
+     * @param content internal document content (report sheet)
+     * @throws IOException
+     */
+    private static void createTxt(File fileTxt, StringBuilder content) throws IOException {
+        try (FileWriter writer = new FileWriter(fileTxt)) {
+            fileTxt.createNewFile();
+            writer.write(content.toString().trim());
+            writer.flush();
+        }
+    }
+
+    /**
+     * Creates a file of the report sheet in the root of the project in .pdf format
+     *
+     * @param facultyName name of faculty, needed to create a file header
+     * @param filePdf     file to write to
+     * @param content     internal document content (report sheet)
+     * @throws FileNotFoundException
+     * @throws DocumentException
+     */
+    private static void createPdf(String facultyName, File filePdf, StringBuilder content) throws FileNotFoundException, DocumentException {
+        Document document = new Document();
+        PdfWriter.getInstance(document, new FileOutputStream(filePdf));
+        document.open();
+        Paragraph p = new Paragraph();
+        p.add("Report sheet for " + facultyName);
+        p.setAlignment(Element.ALIGN_CENTER);
+        document.add(p);
+        Paragraph mainContent = new Paragraph();
+        mainContent.add(content.toString());
+        mainContent.setAlignment(Element.ALIGN_CENTER);
+        document.add(mainContent);
+        document.close();
+        LOG.trace("PDF report file created");
+    }
+
+    /**
+     * Creates a file of the report sheet in the root of the project in .xlsx format
+     *
+     * @param faculty      faculty entity, needed to obtain list of faculty criteria
+     * @param applications list of applications to faculty
+     * @param fileXlsx     file to write to
+     * @throws IOException
+     */
+    private static void createXlsx(Faculty faculty, List<FacultyApplicationsBean> applications, File fileXlsx) throws IOException {
+        XSSFWorkbook reportSheet = new XSSFWorkbook();
+        XSSFSheet sheet = reportSheet.createSheet("Report sheet for faculty #" + faculty.getId());
 
         int rowCount = 0;
         int headerCellCount = 0;
@@ -139,6 +198,10 @@ public class FileCreator {
         Cell markSumCell = headerRow.createCell(headerCellCount++);
         markSumCell.setCellValue("Sum of marks");
 
+        Cell formCell = headerRow.createCell(headerCellCount++);
+        formCell.setCellValue("Form of education");
+
+        int applicationNumber = 1;
         for (FacultyApplicationsBean application : applications) {
             Row row = sheet.createRow(rowCount++);
 
@@ -162,16 +225,18 @@ public class FileCreator {
 
             Cell userMarkSumCell = row.createCell(columnCount++);
             userMarkSumCell.setCellValue(sum);
+
+            Cell userStatusCell = row.createCell(columnCount++);
+            if (applicationNumber <= faculty.getBudgetSeats()) {
+                userStatusCell.setCellValue("budget");
+            } else {
+                userStatusCell.setCellValue("contract");
+            }
+            applicationNumber++;
         }
 
         try (FileOutputStream outputStream = new FileOutputStream(fileXlsx)) {
-            workbook.write(outputStream);
-        } catch (IOException e) {
-            String failedXlsx = "Cannot create xlsx report sheet";
-            LOG.error(failedXlsx);
-
-            request.getSession().setAttribute("failedXlsx", failedXlsx);
-            LOG.trace("Set the session attribute: failedXlsx --> " + failedXlsx);
+            reportSheet.write(outputStream);
         }
     }
 

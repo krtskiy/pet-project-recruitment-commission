@@ -36,7 +36,9 @@ public class FileCreator {
      * Creates content to be written to the file and calls the appropriate methods for each file type.
      *
      * @param facultyId ID of faculty.
-     * @param request   HttpServletRequest for setting error messages, if something went wrong.
+     * @param request   HttpServletRequest for getting file path,
+     *                  or setting error messages, if something went wrong.
+     *
      * @throws DBException
      */
     public static void createReportSheets(int facultyId, HttpServletRequest request) throws DBException {

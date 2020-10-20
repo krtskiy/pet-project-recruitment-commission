@@ -29,9 +29,12 @@
                 <input type="email" name="email" maxlength="255" size="35"
                        required pattern=".*\S+.*" placeholder="Email"><br>
 
-                <input type="password" name="password" minlength="6" maxlength="32" size="35"
+                <input type="password" name="password" minlength="6" maxlength="32" size="35" id="password"
                        required pattern=".*\S+.*"
                        placeholder="<fmt:message key="register_jsp.placeholder.password"/> "><br>
+
+                <input type="password" minlength="6" maxlength="32" id="confirm_password" size="35"
+                       placeholder="<fmt:message key="register_jsp.placeholder.confirm_password"/>"><br>
 
                 <input type="text" name="name" pattern="[A-Za-z]{1,45}" size="35"
                        required title="<fmt:message key="register_jsp.field_popup.name_format"/>"
@@ -91,6 +94,14 @@
                        title="<fmt:message key="register_jsp.field_popup.institution_format"/>"
                        placeholder="<fmt:message key="register_jsp.placeholder.institution"/>"><br>
 
+                <c:if test="${user.roleId == 1}">
+                    <fmt:message key="register_jsp.role.placeholder"/>
+                    <select name="roleId">
+                        <option value="0"><fmt:message key="register_jsp.role.value_user"/></option>
+                        <option value="1"><fmt:message key="register_jsp.role.value_admin"/></option>
+                    </select>
+                </c:if>
+
                 <div class="g-recaptcha"
                      data-sitekey="6LfrcdgZAAAAAF1KQ5-FSgCYsJn28fW4ZZyJQC_3"></div>
 
@@ -101,5 +112,20 @@
     </tr>
     <%@ include file="/WEB-INF/jspf/footer.jspf" %>
 </table>
+<script>
+    var password = document.getElementById("password")
+        , confirm_password = document.getElementById("confirm_password");
+
+    function validatePassword() {
+        if (password.value != confirm_password.value) {
+            confirm_password.setCustomValidity("Passwords Don't Match");
+        } else {
+            confirm_password.setCustomValidity('');
+        }
+    }
+
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
+</script>
 </body>
 </html>

@@ -43,7 +43,7 @@ public class DBManager {
     // user
     private static final String SQL_FIND_USER_STATUS_BY_ID = "SELECT * FROM user_statuses WHERE id=?";
     private static final String SQL_FIND_USER_BY_EMAIL = "SELECT * FROM users WHERE email=?";
-    private static final String SQL_INSERT_USER = "INSERT INTO users VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, DEFAULT , DEFAULT)";
+    private static final String SQL_INSERT_USER = "INSERT INTO users VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?, DEFAULT)";
     private static final String SQL_UPDATE_USER = "UPDATE users SET email=?, password=? WHERE id=?";
     private static final String SQL_FIND_ALL_USERS = "SELECT * FROM users";
     private static final String SQL_UPDATE_USER_STATUS = "UPDATE users SET status_id=? WHERE id=?";
@@ -350,6 +350,7 @@ public class DBManager {
             preparedStatement.setString(++k, user.getRegion());
             preparedStatement.setString(++k, user.getCity());
             preparedStatement.setString(++k, user.getInstitutionName());
+            preparedStatement.setInt(++k, user.getRoleId());
             preparedStatement.execute();
             connection.commit();
         } catch (SQLException e) {

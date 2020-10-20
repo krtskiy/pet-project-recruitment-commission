@@ -22,8 +22,10 @@
                 <small><fmt:message key="update_profile_jsp.text.empty_message"/> </small><br>
                 <input type="email" name="email" maxlength="255"
                        placeholder="<fmt:message key="update_profile_jsp.placeholder.new_email"/>"><br>
-                <input type="password" name="password" minlength="6" maxlength="32"
+                <input type="password" name="password" minlength="6" maxlength="32" id="password"
                        placeholder="<fmt:message key="update_profile_jsp.placeholder.new_password"/>"><br>
+                <input type="password" minlength="6" maxlength="32" id="confirm_password"
+                       placeholder="<fmt:message key="register_jsp.placeholder.confirm_password"/>"><br>
 
                 <div class="g-recaptcha"
                      data-sitekey="6LfrcdgZAAAAAF1KQ5-FSgCYsJn28fW4ZZyJQC_3"></div>
@@ -35,5 +37,20 @@
 
     <%@ include file="/WEB-INF/jspf/footer.jspf" %>
 </table>
+<script>
+    var password = document.getElementById("password")
+        , confirm_password = document.getElementById("confirm_password");
+
+    function validatePassword() {
+        if (password.value != confirm_password.value) {
+            confirm_password.setCustomValidity("Passwords Don't Match");
+        } else {
+            confirm_password.setCustomValidity('');
+        }
+    }
+
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
+</script>
 </body>
 </html>

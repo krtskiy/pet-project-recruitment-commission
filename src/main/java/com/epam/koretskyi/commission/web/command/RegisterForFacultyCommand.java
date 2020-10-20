@@ -40,7 +40,7 @@ public class RegisterForFacultyCommand extends Command {
         List<Criterion> criteria = faculty.getCriteria();
 
         String[] marks = request.getParameterValues("marks");
-        System.out.println(Arrays.toString(marks));
+        LOG.trace("User marks --> " + Arrays.toString(marks));
         for (int i = 0; i < marks.length; i++) {
             UserMark uMark = new UserMark();
             uMark.setUserId(user.getId());

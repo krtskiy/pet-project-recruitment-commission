@@ -48,8 +48,9 @@ public class UserMarksBean extends Entity {
     @Override
     public String toString() {
         return "UserMarksBean{" +
-                "markNameEn='" + criterionNameEn + '\'' +
-                ", markNameUk='" + criterionNameUk + '\'' +
+                "criterionId=" + criterionId +
+                ", criterionNameEn='" + criterionNameEn + '\'' +
+                ", criterionNameUk='" + criterionNameUk + '\'' +
                 ", mark=" + mark +
                 '}';
     }

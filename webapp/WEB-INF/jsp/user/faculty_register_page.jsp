@@ -24,23 +24,16 @@
                     <c:choose>
                         <c:when test="${criterion.id == 1}">
                             <small><localizer:name currentLocaleName="${currentLocale}"
-                                                            localizable="${criterion}"/>:</small><br><input type="number"
-                                                                                                          required
-                                                                                                          name="marks"
-                                                                                                          min="1"
-                                                                                                          max="12"><br>
+                                                   localizable="${criterion}"/>:</small><br>
+                            <input type="number" required name="marks" min="1" max="12"><br>
                         </c:when>
                         <c:otherwise>
                             <small><localizer:name currentLocaleName="${currentLocale}"
-                                                            localizable="${criterion}"/>:</small><br><input type="number"
-                                                                                                          required
-                                                                                                          name="marks"
-                                                                                                          min="100"
-                                                                                                          max="200"><br>
+                                                   localizable="${criterion}"/>:</small><br>
+                            <input type="number" required name="marks" min="100" max="200"><br>
                         </c:otherwise>
                     </c:choose>
                 </c:forEach>
-
                 <input type="submit" value="<fmt:message key="faculty_register_page_jsp.button.apply"/>">
             </form>
 

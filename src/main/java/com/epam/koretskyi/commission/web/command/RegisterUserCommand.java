@@ -27,6 +27,10 @@ public class RegisterUserCommand extends Command {
         User user = new User();
 
         String email = request.getParameter("email");
+        User checkEmail = DBManager.getInstance().findUserByEmail(email);
+        if (checkEmail != null) {
+            throw new AppException("This email already registered!");
+        }
         user.setEmail(email);
         LOG.trace("Request parameter: email --> " + email);
 
@@ -56,7 +60,11 @@ public class RegisterUserCommand extends Command {
 
         String institutionName = request.getParameter("institutionName");
         user.setInstitutionName(institutionName);
-        LOG.trace("Request parameter: institution name --> " + institutionName);
+        LOG.trace("Request parameter: institutionName --> " + institutionName);
+
+        int roleId = Integer.parseInt(request.getParameter("roleId"));
+        user.setRoleId(roleId);
+        LOG.trace("Request parameter: roleId --> " + roleId);
 
         if (email.equals("") || password.equals("") || name.equals("") || surname.equals("") ||
                 patronymic.equals("") || region.equals("") ||

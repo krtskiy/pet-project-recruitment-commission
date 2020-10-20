@@ -118,7 +118,7 @@
                                         <a href="controller?command=viewFacultyApplications&facultyId=${faculty.id}"><strong><fmt:message
                                                 key="faculties_jsp.button.view_entrants"/></strong></a>
                                         <c:choose>
-                                            <c:when test="${fn:contains(userFaculties, faculty.id)}">
+                                            <c:when test="${fn:contains(userFaculties, faculty.nameEn)}">
                                                 <strong><span style="color: #1B860A"><fmt:message
                                                         key="faculties_jsp.text.already_registered"/></span></strong>
                                             </c:when>

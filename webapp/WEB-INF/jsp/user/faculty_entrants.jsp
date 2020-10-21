@@ -18,7 +18,7 @@
                 <c:when test="${not empty facultyApplications}">
                     <h3><fmt:message key="faculty_entrants_jsp.text.list_of_applications"/>
                         <localizer:name currentLocaleName="${currentLocale}" localizable="${faculty}"/><br></h3>
-                    <small><fmt:message key="faculty_entrants_jsp.text.sorted"/></small><br>
+                    <h6><fmt:message key="faculty_entrants_jsp.text.sorted"/></h6>
 
                     <svg width="15" height="15">
                         <rect width="15" height="15" style="fill:#CCFF99;stroke-width:3;stroke:rgb(0,0,0)"/>

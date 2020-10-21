@@ -18,6 +18,7 @@ public final class Path {
     public static final String PAGE_BLOCKED_USER = "/WEB-INF/jsp/blocked_user_page.jsp";
     public static final String PAGE_LOGIN = "/WEB-INF/jsp/login.jsp";
     public static final String PAGE_REGISTER = "/WEB-INF/jsp/register.jsp";
+    public static final String PAGE_RESET_PASSWORD = "/WEB-INF/jsp/reset_password.jsp";
 
     // user
     public static final String PAGE_FACULTIES = "/WEB-INF/jsp/user/faculties.jsp";

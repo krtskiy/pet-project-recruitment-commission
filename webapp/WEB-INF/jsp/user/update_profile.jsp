@@ -19,7 +19,7 @@
                 <input type="hidden" name="command" value="updateUser">
 
                 <h3><fmt:message key="update_profile_jsp.text.enter_new"/></h3>
-                <small><fmt:message key="update_profile_jsp.text.empty_message"/> </small><br>
+                <h6><fmt:message key="update_profile_jsp.text.empty_message"/></h6>
                 <input type="email" name="email" maxlength="255"
                        placeholder="<fmt:message key="update_profile_jsp.placeholder.new_email"/>"><br>
                 <input type="password" name="password" minlength="6" maxlength="32" id="password"

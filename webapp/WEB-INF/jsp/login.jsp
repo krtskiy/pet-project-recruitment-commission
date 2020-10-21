@@ -22,9 +22,20 @@
                 <c:otherwise>
 
                     <c:if test="${not empty successRegMessage}">
-                        <h3><span style="color: #1B860A"><fmt:message key="login_jsp.text.success_message"/> </span>
+                        <h3><span style="color: #1B860A"><fmt:message key="login_jsp.text.success_message"/></span>
                         </h3><br>
                         <c:remove var="successRegMessage" scope="session"/>
+                    </c:if>
+
+                    <c:if test="${not empty successPassResetMessage}">
+                        <h3><fmt:message key="login_jsp.text.password_reset"/></h3><br>
+                        <c:remove var="successPassResetMessage" scope="session"/>
+                    </c:if>
+
+                    <c:if test="${not empty cannotReset}">
+                        <h3><span style="color:  rgb(204, 0, 0);"><fmt:message
+                                key="login_jsp.text.cannot_reset"/></span></h3><br>
+                        <c:remove var="cannotReset" scope="session"/>
                     </c:if>
 
                     <h1><fmt:message key="login_jsp.text.login_form"/></h1>
@@ -39,7 +50,9 @@
                         <div class="g-recaptcha"
                              data-sitekey="6LfrcdgZAAAAAF1KQ5-FSgCYsJn28fW4ZZyJQC_3"></div>
 
-                        <input type="submit" value="<fmt:message key="login_jsp.button.log_in"/> ">
+                        <input type="submit" value="<fmt:message key="login_jsp.button.log_in"/>"><br><br>
+
+                        <a href="controller?command=resetPasswordPage"><fmt:message key="login_jsp.button.forgot_password"/></a>
                     </form>
                 </c:otherwise>
             </c:choose>

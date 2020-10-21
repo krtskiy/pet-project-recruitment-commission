@@ -8,6 +8,7 @@ package com.epam.koretskyi.commission.exception;
 public class Messages {
 
 
+
     private Messages() {
     }
 
@@ -19,10 +20,11 @@ public class Messages {
     public static final String ERR_CANNOT_UPDATE_STATUS = "Cannot update user status!";
     public static final String ERR_CANNOT_OBTAIN_USER_BY_EMAIL = "Cannot obtain user with this email!";
     public static final String ERR_CANNOT_FIND_USERS = "Cannot find users!";
+    public static final String ERR_CANNOT_RESET_PASSWORD = "Cannot reset password!";
 
     public static final String ERR_CANNOT_INSERT_USER_MARKS = "Cannot insert user marks!";
     public static final String ERR_CANNOT_FIND_USER_MARKS = "Cannot find user marks!";
-    public static final Object ERR_CANNOT_SEND_EMAILS = "Cannot send emails!";
+    public static final String ERR_CANNOT_SEND_EMAILS = "Cannot send emails!";
 
     // applications-related
     public static final String ERR_CANNOT_INSERT_APPLICATION = "Cannot insert application!";

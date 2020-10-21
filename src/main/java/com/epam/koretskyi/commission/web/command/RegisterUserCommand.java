@@ -62,9 +62,14 @@ public class RegisterUserCommand extends Command {
         user.setInstitutionName(institutionName);
         LOG.trace("Request parameter: institutionName --> " + institutionName);
 
-        int roleId = Integer.parseInt(request.getParameter("roleId"));
-        user.setRoleId(roleId);
-        LOG.trace("Request parameter: roleId --> " + roleId);
+        String roleId = request.getParameter("roleId");
+        if (roleId == null) {
+            user.setRoleId(0);
+            LOG.trace("New user role id -->  " + 0);
+        } else {
+            user.setRoleId(Integer.parseInt(roleId));
+            LOG.trace("New user role id -->  " + roleId);
+        }
 
         if (email.equals("") || password.equals("") || name.equals("") || surname.equals("") ||
                 patronymic.equals("") || region.equals("") ||

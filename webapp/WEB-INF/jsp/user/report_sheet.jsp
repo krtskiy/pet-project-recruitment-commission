@@ -20,6 +20,12 @@
                 <c:remove var="successMailingMessage" scope="session"/>
             </c:if>
 
+            <c:if test="${not empty failedMailingMessage}">
+                <h3><span style="color: rgb(204, 0, 0);"><fmt:message key="report_sheet_jsp.message.emails_failed"/></span>
+                </h3><br>
+                <c:remove var="failedMailingMessage" scope="session"/>
+            </c:if>
+
             <c:if test="${not empty failedTxt}">
                 <h3><span style="color: rgb(204, 0, 0);"><fmt:message key="report_sheet_jsp.button.fail_txt"/></span>
                 </h3><br>

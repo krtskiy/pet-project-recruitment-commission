@@ -96,9 +96,9 @@ public class CloseFacultyRecruitmentCommand extends Command {
         // email messages formation
         String mailTitleSuccess = "Congratulations on your admission to KRTSK University!";
         String mailTitleFailed = "We are sorry to deliver bad news...";
-        String mailMessageBudget = CommunicationHelper.createMail(true, "budget", faculty.getNameEn());
-        String mailMessageContract = CommunicationHelper.createMail(true, "contract", faculty.getNameEn());
-        String mailMessageFailed = CommunicationHelper.createMail(false, null, faculty.getNameEn());
+        String mailMessageBudget = CommunicationHelper.resultOfAdmission(true, "budget", faculty.getNameEn());
+        String mailMessageContract = CommunicationHelper.resultOfAdmission(true, "contract", faculty.getNameEn());
+        String mailMessageFailed = CommunicationHelper.resultOfAdmission(false, null, faculty.getNameEn());
 
         // sending emails to entrants
         try {
@@ -120,6 +120,9 @@ public class CloseFacultyRecruitmentCommand extends Command {
             LOG.trace("Set the session attribute: successMailingMessage --> " + successMailingMessage);
         } catch (MessagingException e) {
             LOG.error(Messages.ERR_CANNOT_SEND_EMAILS);
+            String failedMailingMessage = "Something went wrong with the mailing. Emails were not sent";
+            request.getSession().setAttribute("failedMailingMessage", failedMailingMessage);
+            LOG.trace("Set the session attribute: failedMailingMessage --> " + failedMailingMessage);
         }
 
         LOG.debug("Command finished");

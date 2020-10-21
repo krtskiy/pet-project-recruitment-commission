@@ -71,7 +71,9 @@
         </init-param>
         <init-param>
             <param-name>without-access-control</param-name>
-            <param-value>loginPage login registerUser registerUserPage listOfFaculties noCommand errorPage</param-value>
+            <param-value>loginPage login registerUser registerUserPage listOfFaculties noCommand errorPage resetPassword
+                resetPasswordPage
+            </param-value>
         </init-param>
     </filter>
     <filter-mapping>

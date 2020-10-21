@@ -69,9 +69,9 @@ public class CommunicationHelper {
      * @param isAccepted      true if entrant is accepted, false if failed.
      * @param formOfEducation form of education
      * @param facultyName     name of faculty
-     * @return
+     * @return   text of the email message to send.
      */
-    public static String createMail(boolean isAccepted, String formOfEducation, String facultyName) {
+    public static String resultOfAdmission(boolean isAccepted, String formOfEducation, String facultyName) {
         if (isAccepted) {
             return "<font size=\"5\"><p>Dear candidate,</p><p>Im writing to inform You, that You accepted on <strong>" + formOfEducation +
                     "</strong> form of education to the KRTSK University successfully.</p><p>You are enrolled to <strong>" + facultyName +
@@ -79,6 +79,17 @@ public class CommunicationHelper {
         }
         return "<font size=\"5\"><p>Dear candidate,</p><p>Unfortunately, this year you were not able to enter the <strong>"
                 + facultyName + "</strong>.</p><p>You can try your hand next year.</p>";
+    }
+
+    /**
+     * Creates a message for email notification about password reset.
+     *
+     * @param newPassword   new user password
+     * @return   text of the email message to send.
+     */
+    public static String newPassword(String newPassword) {
+        return "<font size=\"5\"><p>Your new password: <strong>" + newPassword +
+                "</strong></p><p>Please, for security reasons, change the password as soon as you login.</p></font>";
     }
 
 

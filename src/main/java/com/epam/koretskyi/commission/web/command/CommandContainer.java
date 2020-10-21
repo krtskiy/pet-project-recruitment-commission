@@ -31,6 +31,7 @@ public class CommandContainer {
         commands.put("viewFacultyApplications", new ViewFacultyApplicationsCommand());
         commands.put("deleteUserApplication", new DeleteUserApplicationCommand());
         commands.put("viewReportSheetPage", new ViewReportSheetPage());
+        commands.put("resetPassword", new ResetPasswordCommand());
 
         // admin
         commands.put("listOfUsers", new ListOfUsersCommand());
@@ -54,6 +55,7 @@ public class CommandContainer {
         commands.put("registerForFacultyPage", new RegisterForFacultyPageCommand());
         commands.put("updateFacultyPage", new UpdateFacultyPageCommand());
         commands.put("createNewFacultyPage", new CreateNewFacultyPageCommand());
+        commands.put("resetPasswordPage", new ResetPasswordPageCommand());
 
         LOG.debug("Command container was successfully initialized");
         LOG.trace("Number of commands --> " + commands.size());

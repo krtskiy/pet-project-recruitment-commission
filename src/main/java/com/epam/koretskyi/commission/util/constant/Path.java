@@ -7,8 +7,6 @@ package com.epam.koretskyi.commission.util.constant;
  */
 public final class Path {
 
-
-
     private Path() {
     }
 

@@ -7,6 +7,6 @@ package com.epam.koretskyi.commission.util.constant;
  * @author D.Koretskyi on 02.10.2020.
  */
 public enum ActionType {
-    GET, POST;
+    GET, POST
 }
 

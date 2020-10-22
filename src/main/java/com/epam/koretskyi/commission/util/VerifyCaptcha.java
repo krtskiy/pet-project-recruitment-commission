@@ -23,6 +23,7 @@ public class VerifyCaptcha {
 
     public static boolean verify(String gRecaptchaResponse) {
         LOG.trace("Captcha validation starts");
+
         if (gRecaptchaResponse == null || gRecaptchaResponse.length() == 0) {
             return false;
         }

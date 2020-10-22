@@ -30,6 +30,9 @@ import java.util.List;
  */
 public class FileCreator {
 
+    private FileCreator() {
+    }
+
     private static final Logger LOG = Logger.getLogger(FileCreator.class);
 
     /**

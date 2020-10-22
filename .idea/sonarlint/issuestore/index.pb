@@ -190,3 +190,9 @@ q
 Asrc/main/java/com/epam/koretskyi/commission/util/FileCreator.java,d\2\d275f150c2cead07b3dd266f200f61c3adb9c319
 Ä
 Psrc/main/java/com/epam/koretskyi/commission/web/command/DownloadFileCommand.java,b\b\bbd280edd6a32bcfeb2bf6270da8790df5ea1726
+U
+%webapp/WEB-INF/jsp/reset_password.jsp,9\8\98fb5fe06c55e7580976685f7b06aeba20d46a36
+Ö
+Usrc/main/java/com/epam/koretskyi/commission/web/command/ResetPasswordPageCommand.java,6\5\658219f4bfcb4b67cb9dafd93ee5c313feb7cf19
+Å
+Qsrc/main/java/com/epam/koretskyi/commission/web/command/ResetPasswordCommand.java,b\6\b6cf8eee3d11d4a616efbafdd7da2b6e008f81cd

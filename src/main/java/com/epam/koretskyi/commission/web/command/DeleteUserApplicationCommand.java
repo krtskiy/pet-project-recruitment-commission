@@ -34,9 +34,11 @@ public class DeleteUserApplicationCommand extends Command {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
 
-        int userId;
+        int facultyId = Integer.parseInt(request.getParameter("facultyId"));
+        LOG.trace("Request parameter: facultyId --> " + facultyId);
 
         String userIdStr = request.getParameter("userId");
+        int userId;
         if (userIdStr != null) {
             userId = Integer.parseInt(userIdStr);
             LOG.trace("Current user id --> " + userId);
@@ -44,9 +46,6 @@ public class DeleteUserApplicationCommand extends Command {
             userId = user.getId();
             LOG.trace("Current user id --> " + userId);
         }
-
-        int facultyId = Integer.parseInt(request.getParameter("facultyId"));
-        LOG.trace("Request parameter: facultyId --> " + facultyId);
 
         DBManager.getInstance().deleteUserApplication(userId, facultyId);
 

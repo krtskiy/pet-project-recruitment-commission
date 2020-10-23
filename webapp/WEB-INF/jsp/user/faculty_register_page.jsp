@@ -4,7 +4,7 @@
 
 <html>
 
-<c:set var="title" value="Sign Up" scope="page"/>
+<c:set var="title" value="Apply for faculty" scope="page"/>
 <%@ include file="/WEB-INF/jspf/head.jspf" %>
 
 <body>

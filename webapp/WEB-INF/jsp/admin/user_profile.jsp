@@ -16,8 +16,8 @@
         <td class="content">
 
             <c:if test="${not empty successAppDeleteMessage}">
-                <h3><span style="color: #1B860A"><fmt:message key="private_office_jsp.message.application_deleted"/><br> </span>
-                </h3>
+                <h3><span style="color: #1B860A"><fmt:message
+                        key="private_office_jsp.message.application_deleted"/></span></h3>
                 <c:remove var="successAppDeleteMessage" scope="session"/>
             </c:if>
 
@@ -36,7 +36,8 @@
                         <strong><fmt:message key="users_jsp.text.unblocked"/></strong>
                     </c:when>
                     <c:when test="${profileOwner.statusId == 1}">
-                        <span style="color: rgb(204, 0, 0); "><strong><fmt:message key="users_jsp.text.blocked"/></strong></span>
+                        <span style="color: rgb(204, 0, 0); "><strong><fmt:message
+                                key="users_jsp.text.blocked"/></strong></span>
                     </c:when>
                 </c:choose>
             </p>

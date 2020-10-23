@@ -37,40 +37,34 @@ public class ListOfUsersCommand extends Command {
         request.setAttribute("sortParam", sortParam);
         LOG.trace("Set the request attribute: sortParam --> " + sortParam);
 
-        // sort users by id
-        if ("id".equals(sortParam)) {
-            users.sort(Comparator.comparingInt(Entity::getId));
-            LOG.trace("Users sorted by id in ascending order");
-        }
-
-        // sort users by surname asc
-        if ("surnameAsc".equals(sortParam)) {
-            users.sort(Comparator.comparing(User::getSurname));
-            LOG.trace("Users sorted by name in ascending order");
-        }
-
-        // sort users by surname desc
-        if ("surnameDesc".equals(sortParam)) {
-            users.sort(Comparator.comparing(User::getSurname).reversed());
-            LOG.trace("Users sorted by name in descending order");
-        }
-
-        // sort users by email asc
-        if ("emailAsc".equals(sortParam)) {
-            users.sort(Comparator.comparing(User::getEmail));
-            LOG.trace("Users sorted by email in ascending order");
-        }
-
-        // sort users by email desc
-        if ("emailDesc".equals(sortParam)) {
-            users.sort(Comparator.comparing(User::getEmail).reversed());
-            LOG.trace("Users sorted by email in descending order");
-        }
-
-        // banned first
-        if ("banStatus".equals(sortParam)) {
-            users.sort(Comparator.comparingInt(User::getStatusId).reversed());
-            LOG.trace("Users sorted by lock status");
+        // sorting according to the selected parameter
+        switch (sortParam) {
+            case "id" :
+                users.sort(Comparator.comparingInt(Entity::getId));
+                LOG.trace("Users sorted by name in ascending order");
+                break;
+            case "surnameAsc" :
+                users.sort(Comparator.comparing(User::getSurname));
+                LOG.trace("Users sorted by name in ascending order");
+                break;
+            case "surnameDesc" :
+                users.sort(Comparator.comparing(User::getSurname).reversed());
+                LOG.trace("Users sorted by name in descending order");
+                break;
+            case "emailAsc" :
+                users.sort(Comparator.comparing(User::getEmail));
+                LOG.trace("Users sorted by email in ascending order");
+                break;
+            case "emailDesc" :
+                users.sort(Comparator.comparing(User::getEmail).reversed());
+                LOG.trace("Users sorted by email in descending order");
+                break;
+            case "banStatus" :
+                users.sort(Comparator.comparingInt(User::getStatusId).reversed());
+                LOG.trace("Users sorted by lock status");
+                break;
+            default:
+                break;
         }
 
         // split users across multiple pages (5 per page)

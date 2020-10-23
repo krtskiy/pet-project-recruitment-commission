@@ -30,15 +30,16 @@
             <p><fmt:message key="private_office_jsp.text.city"/> | <strong>${profileOwner.city}</strong></p>
             <p><fmt:message key="private_office_jsp.text.institution"/> |
                 <strong>${profileOwner.institutionName}</strong></p>
-            <p>
-                <fmt:message key="user_profile_jsp.text.status"/> |
+            <p><fmt:message key="user_profile_jsp.text.status"/> |
                 <c:choose>
-                <c:when test="${profileOwner.statusId == 0}">
-                <strong><fmt:message key="users_jsp.text.unblocked"/></strong>
-                </c:when>
-                <c:when test="${profileOwner.statusId == 1}"><span style="color: rgb(204, 0, 0); "><strong><fmt:message
-                    key="users_jsp.text.blocked"/></strong></span></c:when>
+                    <c:when test="${profileOwner.statusId == 0}">
+                        <strong><fmt:message key="users_jsp.text.unblocked"/></strong>
+                    </c:when>
+                    <c:when test="${profileOwner.statusId == 1}">
+                        <span style="color: rgb(204, 0, 0); "><strong><fmt:message key="users_jsp.text.blocked"/></strong></span>
+                    </c:when>
                 </c:choose>
+            </p>
             <form action="controller" method="get">
                 <input name="command" type="hidden" value="updateUsersStatus"/>
                 <input name="userId" type="hidden" value="${profileOwner.id}">
@@ -61,17 +62,8 @@
             <c:if test="${not empty userMarks}">
                 <h3><fmt:message key="user_profile_jsp.text.user_marks"/></h3>
                 <c:forEach var="mark" items="${userMarks}">
-                    <c:choose>
-                        <c:when test="${currentLocale == 'uk'}">
-                            <p>${mark.criterionNameUk} : <strong>${mark.mark}</strong></p>
-                        </c:when>
-                        <c:when test="${currentLocale == 'en'}">
-                            <p>${mark.criterionNameEn} : <strong>${mark.mark}</strong></p>
-                        </c:when>
-                        <c:otherwise>
-                            <p>${mark.criterionNameEn} : <strong>${mark.mark}</strong></p>
-                        </c:otherwise>
-                    </c:choose>
+                    <p><c:out value="${currentLocale eq 'uk' ? mark.criterionNameUk : mark.criterionNameEn}"/> :
+                        <strong>${mark.mark}</strong></p>
                 </c:forEach>
             </c:if>
 
@@ -80,57 +72,25 @@
                 <c:forEach var="faculty" items="${userFaculties}">
                     <c:choose>
                         <c:when test="${faculty.facultyStatusId == 0}">
-                            <c:choose>
-                                <c:when test="${currentLocale == 'uk'}">
-                                    <p>${faculty.facultyNameUk} |
-                                        <a href="controller?command=viewFacultyApplications&facultyId=${faculty.facultyId}"><strong><fmt:message
-                                                key="private_office_jsp.button.view_entrants"/> </strong></a> |
-                                        <a href="controller?command=deleteUserApplication&facultyId=${faculty.facultyId}&userId=${profileOwner.id}"><strong><fmt:message
-                                                key="user_profile_jsp.button.delete_application"/></strong></a>
-                                    </p>
-                                </c:when>
-                                <c:when test="${currentLocale == 'en'}">
-                                    <p>${faculty.facultyNameEn} |
-                                        <a href="controller?command=viewFacultyApplications&facultyId=${faculty.facultyId}"><strong><fmt:message
-                                                key="private_office_jsp.button.view_entrants"/></strong></a> |
-                                        <a href=href="controller?command=deleteUserApplication&facultyId=${faculty.facultyId}&userId=${profileOwner.id}"><strong><fmt:message
-                                                key="user_profile_jsp.button.delete_application"/></strong></a>
-                                    </p>
-                                </c:when>
-                                <c:otherwise>
-                                    <p>${faculty.facultyNameEn} |
-                                        <a href="controller?command=viewFacultyApplications&facultyId=${faculty.facultyId}"><strong><fmt:message
-                                                key="private_office_jsp.button.view_entrants"/></strong></a> |
-                                        <a href="controller?command=deleteUserApplication&facultyId=${faculty.facultyId}&userId=${profileOwner.id}"><strong><fmt:message
-                                                key="user_profile_jsp.button.delete_application"/></strong></a>
-                                    </p>
-                                </c:otherwise>
-                            </c:choose>
+                            <p>
+                                <c:out value="${currentLocale eq 'uk' ? faculty.facultyNameUk : faculty.facultyNameEn}"/>
+                                |
+                                <a href="controller?command=viewFacultyApplications&facultyId=${faculty.facultyId}"><strong><fmt:message
+                                        key="private_office_jsp.button.view_entrants"/> </strong></a> |
+                                <a href="controller?command=deleteUserApplication&facultyId=${faculty.facultyId}&userId=${profileOwner.id}"><strong><fmt:message
+                                        key="user_profile_jsp.button.delete_application"/></strong></a>
+                            </p>
                         </c:when>
                         <c:when test="${faculty.facultyStatusId == 1}">
-                            <c:choose>
-                                <c:when test="${currentLocale == 'uk'}">
-                                    <p>${faculty.facultyNameUk} | <span style="color:  rgb(204, 0, 0);"><strong><fmt:message
-                                            key="faculties_jsp.text.recruitment_closed"/></strong></span> |
-                                        <a href="controller?command=viewReportSheetPage&facultyId=${faculty.facultyId}"><strong><fmt:message
-                                                key="faculties_jsp.button.view_report"/></strong></a>
-                                    </p>
-                                </c:when>
-                                <c:when test="${currentLocale == 'en'}">
-                                    <p>${faculty.facultyNameEn} | <span style="color:  rgb(204, 0, 0);"><strong><fmt:message
-                                            key="faculties_jsp.text.recruitment_closed"/></strong></span> |
-                                        <a href="controller?command=viewReportSheetPage&facultyId=${faculty.facultyId}"><strong><fmt:message
-                                                key="faculties_jsp.button.view_report"/></strong></a>
-                                    </p>
-                                </c:when>
-                                <c:otherwise>
-                                    <p>${faculty.facultyNameEn} | <span style="color:  rgb(204, 0, 0);"><strong><fmt:message
-                                            key="faculties_jsp.text.recruitment_closed"/></strong></span> |
-                                        <a href="controller?command=viewReportSheetPage&facultyId=${faculty.facultyId}"><strong><fmt:message
-                                                key="faculties_jsp.button.view_report"/></strong></a>
-                                    </p>
-                                </c:otherwise>
-                            </c:choose>
+                            <p>
+                                <c:out value="${currentLocale eq 'uk' ? faculty.facultyNameUk : faculty.facultyNameEn}"/>
+                                |
+                                <span
+                                        style="color:  rgb(204, 0, 0);"><strong><fmt:message
+                                        key="faculties_jsp.text.recruitment_closed"/></strong></span> |
+                                <a href="controller?command=viewReportSheetPage&facultyId=${faculty.facultyId}"><strong><fmt:message
+                                        key="faculties_jsp.button.view_report"/></strong></a>
+                            </p>
                         </c:when>
                     </c:choose>
                 </c:forEach>

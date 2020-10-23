@@ -35,10 +35,11 @@ public class RegisterForFacultyCommand extends Command {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
 
-        List<UserMark> userMarks = new ArrayList<>();
-        Faculty faculty = (Faculty) session.getAttribute("faculty");
+        int facultyId = Integer.parseInt(request.getParameter("facultyId"));
+        Faculty faculty = DBManager.getInstance().findFacultyById(facultyId);
         List<Criterion> criteria = faculty.getCriteria();
 
+        List<UserMark> userMarks = new ArrayList<>();
         String[] marks = request.getParameterValues("marks");
         LOG.trace("User marks --> " + Arrays.toString(marks));
         for (int i = 0; i < marks.length; i++) {
@@ -48,7 +49,6 @@ public class RegisterForFacultyCommand extends Command {
             uMark.setMark(Integer.parseInt(marks[i]));
             userMarks.add(uMark);
         }
-
         DBManager.getInstance().insertApplication(user.getId(), faculty.getId(), userMarks);
 
         session.setAttribute("facultyRegisteredFor", faculty);

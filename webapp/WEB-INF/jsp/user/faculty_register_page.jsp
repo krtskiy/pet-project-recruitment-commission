@@ -18,6 +18,7 @@
 
             <form id="register_form" method="post" action="controller">
                 <input type="hidden" name="command" value="registerForFaculty">
+                <input type="hidden" name="facultyId" value="${faculty.id}">
 
                 <h3><fmt:message key="faculty_register_page_jsp.text.enter_grades"/></h3>
                 <c:forEach var="criterion" items="${faculty.criteria}">

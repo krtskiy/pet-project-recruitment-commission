@@ -196,3 +196,11 @@ U
 Usrc/main/java/com/epam/koretskyi/commission/web/command/ResetPasswordPageCommand.java,6\5\658219f4bfcb4b67cb9dafd93ee5c313feb7cf19
 Å
 Qsrc/main/java/com/epam/koretskyi/commission/web/command/ResetPasswordCommand.java,b\6\b6cf8eee3d11d4a616efbafdd7da2b6e008f81cd
+w
+Gsrc/test/java/com/epam/koretskyi/commission/util/VerifyCaptchaTest.java,b\b\bb0ade1bae4edd8bb0f586b8aaca5c0a0e2dd50c
+u
+Esrc/test/java/com/epam/koretskyi/commission/db/FacultyStatusTest.java,0\8\080cc8f441f4201c312dc6c8f7edbab9076fd6e0
+l
+<src/test/java/com/epam/koretskyi/commission/db/RoleTest.java,7\2\7207234d2a45eac670775367380e1337a2b24cc1
+r
+Bsrc/test/java/com/epam/koretskyi/commission/db/UserStatusTest.java,f\3\f3cf53a60d136862300a19ec824bb626183b2a48

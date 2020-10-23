@@ -15,17 +15,7 @@
 
             <c:if test="${not empty facultyRegisteredFor}">
                 <h3><span style="color: #1B860A"><fmt:message key="faculties_jsp.message.registered_for"/>
-                <c:choose>
-                    <c:when test="${currentLocale == 'uk'}">
-                        ${facultyRegisteredFor.nameUk}<br>
-                    </c:when>
-                    <c:when test="${currentLocale == 'en'}">
-                        ${facultyRegisteredFor.nameEn}<br>
-                    </c:when>
-                    <c:otherwise>
-                        ${facultyRegisteredFor.nameEn}<br>
-                    </c:otherwise>
-                </c:choose>
+                <c:out value="${currentLocale eq 'uk' ? facultyRegisteredFor.nameUk : facultyRegisteredFor.nameEn}"/><br>
                 </span></h3>
                 <c:remove var="facultyRegisteredFor" scope="session"/>
             </c:if>

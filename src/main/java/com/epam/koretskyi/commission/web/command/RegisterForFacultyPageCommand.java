@@ -29,8 +29,8 @@ public class RegisterForFacultyPageCommand extends Command {
         LOG.trace("Request parameter: Id --> " + facultyId);
 
         Faculty faculty = DBManager.getInstance().findFacultyById(Integer.parseInt(facultyId));
-        request.getSession().setAttribute("faculty", faculty);
-        LOG.trace("Set the session attribute: faculty --> " + faculty);
+        request.setAttribute("faculty", faculty);
+        LOG.trace("Set the request attribute: faculty --> " + faculty);
 
         LOG.debug("Command finished");
         return Path.PAGE_FACULTY_REGISTER;

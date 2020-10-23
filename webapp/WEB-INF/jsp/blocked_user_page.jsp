@@ -17,7 +17,7 @@
 
             <h2 class="error">
                 <fmt:message key="blocked_user_page_jsp.text.message"/><br>
-                <fmt:message key="blocked_user_page_jsp.text.contacts"/> admin@krtskiy.com
+                <fmt:message key="blocked_user_page_jsp.text.contacts"/> admin@krtsk.com
             </h2>
 
         </td>

@@ -39,30 +39,31 @@ public class ListOfFacultiesCommand extends Command {
         LOG.trace("Found in DB: faculties --> " + faculties);
 
         String sortParam = request.getParameter("sort");
-        // sort faculties by faculty number
-        if ("number".equals(sortParam)) {
-            faculties.sort(Comparator.comparing(Faculty::getId));
-            LOG.trace("Faculties sorted by faculty number in ascending order");
-        }
-        // sort faculties by name asc
-        if ("nameAsc".equals(sortParam)) {
-            faculties.sort(Comparator.comparing(Faculty::getNameEn));
-            LOG.trace("Faculties sorted by name in ascending order");
-        }
-        // sort faculties by name desc
-        if ("nameDesc".equals(sortParam)) {
-            faculties.sort(Comparator.comparing(Faculty::getNameEn).reversed());
-            LOG.trace("Faculties sorted by name in descending order");
-        }
-        // sort faculties by budget seats
-        if ("budgetSeats".equals(sortParam)) {
-            faculties.sort(Comparator.comparingInt(Faculty::getBudgetSeats).reversed());
-            LOG.trace("Faculties sorted by amount of budget seats");
-        }
-        // sort faculties by total seats
-        if ("totalSeats".equals(sortParam)) {
-            faculties.sort(Comparator.comparingInt(Faculty::getTotalSeats).reversed());
-            LOG.trace("Faculties sorted by total amount of seats");
+        
+        // sorting according to the selected parameter
+        switch (sortParam) {
+            case "number" :
+                faculties.sort(Comparator.comparing(Faculty::getId));
+                LOG.trace("Faculties sorted by faculty number in ascending order");
+                break;
+            case "nameAsc" :
+                faculties.sort(Comparator.comparing(Faculty::getNameEn));
+                LOG.trace("Faculties sorted by name in ascending order");
+                break;
+            case "nameDesc" :
+                faculties.sort(Comparator.comparing(Faculty::getNameEn).reversed());
+                LOG.trace("Faculties sorted by name in descending order");
+                break;
+            case "budgetSeats" :
+                faculties.sort(Comparator.comparingInt(Faculty::getBudgetSeats).reversed());
+                LOG.trace("Faculties sorted by amount of budget seats");
+                break;
+            case "totalSeats" :
+                faculties.sort(Comparator.comparingInt(Faculty::getTotalSeats).reversed());
+                LOG.trace("Faculties sorted by total amount of seats");
+                break;
+            default:
+                break;
         }
 
         // put faculties list to the request

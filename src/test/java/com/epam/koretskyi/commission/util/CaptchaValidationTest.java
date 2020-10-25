@@ -1,23 +1,22 @@
 package com.epam.koretskyi.commission.util;
 
+import com.epam.koretskyi.commission.util.validation.CaptchaValidation;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 /**
  * @author D.Koretskyi on 22.10.2020.
  */
-public class VerifyCaptchaTest {
+public class CaptchaValidationTest {
 
     @Test
     public void verifyTestShouldReturnFalseIfNull() {
-        Assert.assertFalse(VerifyCaptcha.verify(null));
+        Assert.assertFalse(CaptchaValidation.verify(null));
     }
 
     @Test
     public void verifyTestShouldReturnFalse() {
         String fakeRecaptchaResponse = "fakeString";
-        Assert.assertFalse(VerifyCaptcha.verify(fakeRecaptchaResponse));
+        Assert.assertFalse(CaptchaValidation.verify(fakeRecaptchaResponse));
     }
 }

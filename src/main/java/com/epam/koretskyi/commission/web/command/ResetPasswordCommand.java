@@ -8,6 +8,7 @@ import com.epam.koretskyi.commission.util.CommunicationHelper;
 import com.epam.koretskyi.commission.util.MD5Util;
 import com.epam.koretskyi.commission.util.constant.Path;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
 import javax.mail.MessagingException;
@@ -33,12 +34,8 @@ public class ResetPasswordCommand extends Command {
         LOG.debug("Command starts");
 
         String email = request.getParameter("email");
-        String checkName = request.getParameter("name");
-        String checkSurname = request.getParameter("surname");
-
         User user = DBManager.getInstance().findUserByEmail(email);
-
-        if (user == null || !user.getName().equals(checkName) || !user.getSurname().equals(checkSurname) || user.getRoleId() == 1) {
+        if (user == null || !StringUtils.isAllBlank(user.getName(), user.getSurname()) || user.getRoleId() == 1) {
             throw new AppException("User with such data does not exist!");
         }
 

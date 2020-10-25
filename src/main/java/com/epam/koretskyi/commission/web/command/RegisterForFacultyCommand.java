@@ -8,6 +8,7 @@ import com.epam.koretskyi.commission.db.entity.Faculty;
 import com.epam.koretskyi.commission.db.entity.User;
 import com.epam.koretskyi.commission.db.entity.UserMark;
 import com.epam.koretskyi.commission.exception.AppException;
+import com.epam.koretskyi.commission.util.validation.MarksValidation;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -41,7 +42,11 @@ public class RegisterForFacultyCommand extends Command {
 
         List<UserMark> userMarks = new ArrayList<>();
         String[] marks = request.getParameterValues("marks");
+        if (faculty.getCriteria().size() != marks.length) {
+            throw new AppException("You did not enter grades for all criteria");
+        }
         LOG.trace("User marks --> " + Arrays.toString(marks));
+
         for (int i = 0; i < marks.length; i++) {
             UserMark uMark = new UserMark();
             uMark.setUserId(user.getId());
@@ -49,6 +54,10 @@ public class RegisterForFacultyCommand extends Command {
             uMark.setMark(Integer.parseInt(marks[i]));
             userMarks.add(uMark);
         }
+        if (!MarksValidation.marksRangeValidation(userMarks) && !MarksValidation.isAllPositiveValidation(userMarks)) {
+            throw new AppException("Marks are not in the correct format!");
+        }
+
         DBManager.getInstance().insertApplication(user.getId(), faculty.getId(), userMarks);
 
         session.setAttribute("facultyRegisteredFor", faculty);

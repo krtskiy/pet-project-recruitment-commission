@@ -101,7 +101,7 @@
                                         <td>${mark.mark}</td>
                                     </c:forEach>
                                     <td><strong>${markSum}</strong></td>
-                                    <c:if test="${user.roleId == 1}">
+                                    <c:if test="${userRole.name == 'admin'}">
                                         <td>
                                             <a href="controller?command=viewUserProfilePage&userId=${application.userId}"><strong><fmt:message
                                                     key="users_jsp.button.view_profile"/></strong></a></td>

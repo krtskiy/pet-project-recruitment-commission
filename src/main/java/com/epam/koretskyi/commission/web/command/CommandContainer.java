@@ -32,6 +32,8 @@ public class CommandContainer {
         commands.put("deleteUserApplication", new DeleteUserApplicationCommand());
         commands.put("viewReportSheetPage", new ViewReportSheetPage());
         commands.put("resetPassword", new ResetPasswordCommand());
+        commands.put("updateMarksPage", new UpdateMarksPageCommand());
+        commands.put("updateMarks", new UpdateMarksCommand());
 
         // admin
         commands.put("listOfUsers", new ListOfUsersCommand());

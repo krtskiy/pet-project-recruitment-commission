@@ -62,7 +62,7 @@
             <param-name>user</param-name>
             <param-value>privateOfficePage updateUser updateUserPage listOfEntrantsApplications blockedUserPage
                 registerForFacultyPage registerForFaculty viewFacultyApplications deleteUserApplication
-                viewReportSheetPage
+                viewReportSheetPage updateMarksPage updateMarks
             </param-value>
         </init-param>
         <init-param>

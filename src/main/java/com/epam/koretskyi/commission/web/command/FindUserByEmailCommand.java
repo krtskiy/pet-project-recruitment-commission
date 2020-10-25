@@ -30,8 +30,6 @@ public class FindUserByEmailCommand extends Command {
 
         String page = (String) session.getAttribute("page");
         String sort = (String) session.getAttribute("sort");
-        session.removeAttribute("page");
-        session.removeAttribute("sort");
 
         if (page == null) {
             page = request.getParameter("page");

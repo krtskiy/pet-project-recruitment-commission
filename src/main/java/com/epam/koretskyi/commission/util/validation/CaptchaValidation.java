@@ -1,6 +1,5 @@
-package com.epam.koretskyi.commission.util;
+package com.epam.koretskyi.commission.util.validation;
 
-import com.epam.koretskyi.commission.exception.Messages;
 import org.apache.log4j.Logger;
 
 import javax.json.Json;
@@ -14,9 +13,9 @@ import java.net.URL;
 /**
  * @author D.Koretskyi on 17.10.2020.
  */
-public class VerifyCaptcha {
+public class CaptchaValidation {
 
-    private static final Logger LOG = Logger.getLogger(VerifyCaptcha.class);
+    private static final Logger LOG = Logger.getLogger(CaptchaValidation.class);
 
     private static final String SITE_VERIFY_URL = "https://www.google.com/recaptcha/api/siteverify";
     private static final String SECRET_KEY = "6LfrcdgZAAAAANJyG7pjVfJmKYzaK1ERTzgOEiQb";

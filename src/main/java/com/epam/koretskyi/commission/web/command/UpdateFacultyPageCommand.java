@@ -25,25 +25,21 @@ public class UpdateFacultyPageCommand extends Command {
 
     private static final Logger LOG = Logger.getLogger(UpdateFacultyPageCommand.class);
 
-
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
         LOG.debug("Command starts");
 
-        HttpSession session = request.getSession();
         DBManager manager = DBManager.getInstance();
 
-        int facultyId = Integer.parseInt(request.getParameter("facultyId"));
-        LOG.trace("Request parameter: Id --> " + facultyId);
+        Faculty faculty = DBManager.getInstance().findFacultyById(Integer.parseInt(request.getParameter("facultyId")));
+        LOG.trace("Request parameter: facultyId --> " + faculty.getId());
+        request.setAttribute("faculty", faculty);
+        LOG.trace("Set the request attribute: faculty --> " + faculty);
 
-        List<FacultyApplicationsBean> facultyApplications = manager.findFacultyApplicationsByFacultyId(facultyId);
+        List<FacultyApplicationsBean> facultyApplications = manager.findFacultyApplicationsByFacultyId(faculty.getId());
         if (!facultyApplications.isEmpty()) {
             request.setAttribute("isEmpty", true);
         }
-
-        Faculty faculty = manager.findFacultyById(facultyId);
-        session.setAttribute("faculty", faculty);
-        LOG.trace("Set the session attribute: faculty --> " + faculty);
 
         List<Criterion> criteria = manager.findAllCriteria();
         request.setAttribute("criteria", criteria);

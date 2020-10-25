@@ -1,5 +1,6 @@
 package com.epam.koretskyi.commission.web.command;
 
+import com.epam.koretskyi.commission.db.UserStatus;
 import com.epam.koretskyi.commission.util.constant.Path;
 import com.epam.koretskyi.commission.db.DBManager;
 import com.epam.koretskyi.commission.db.entity.User;
@@ -27,8 +28,9 @@ public class UpdateUsersStatusCommand extends Command {
         LOG.debug("Command starts");
 
         HttpSession session = request.getSession();
+        DBManager manager = DBManager.getInstance();
 
-        String status = request.getParameter("status");
+        int status = Integer.parseInt(request.getParameter("status"));
         LOG.trace("Request parameter: status --> " + status);
 
         String page = request.getParameter("page");
@@ -38,25 +40,38 @@ public class UpdateUsersStatusCommand extends Command {
 
         User foundUser = (User) session.getAttribute("foundUser");
 
+        String path = Path.PAGE_ERROR;
         if (request.getParameter("userId") != null) {
             int userId = Integer.parseInt(request.getParameter("userId"));
-            DBManager.getInstance().updateUserStatus(Integer.parseInt(status), userId);
-
-            if ("profile".equals(request.getParameter("forwardTo"))) {
-                return Path.COMMAND_USER_PROFILE + "&userId=" + userId;
+            manager.updateUserStatus(status, userId);
+            if (UserStatus.values()[status] == UserStatus.BLOCKED) {
+                manager.deleteAllUserApplications(userId);
             }
-
             if (foundUser != null) {
-                return Path.COMMAND_FIND_USER_BY_EMAIL + "&email=" + foundUser.getEmail();
+                path = Path.COMMAND_FIND_USER_BY_EMAIL + "&email=" + foundUser.getEmail();
+            } else {
+                path = Path.COMMAND_USERS;
             }
-
-            return Path.COMMAND_FIND_USER_BY_EMAIL;
         }
 
-        int userId = foundUser.getId();
-        DBManager.getInstance().updateUserStatus(Integer.parseInt(status), userId);
+        if (foundUser != null && request.getParameter("userId") == null) {
+            manager.updateUserStatus(status, foundUser.getId());
+            if (UserStatus.values()[status] == UserStatus.BLOCKED) {
+                manager.deleteAllUserApplications(foundUser.getId());
+            }
+            path = Path.COMMAND_FIND_USER_BY_EMAIL + "&email=" + foundUser.getEmail();
+        }
+
+        if (request.getParameter("profileOwnerId") != null) {
+            int profileOwnerId = Integer.parseInt(request.getParameter("profileOwnerId"));
+            manager.updateUserStatus(status, profileOwnerId);
+            if (UserStatus.values()[status] == UserStatus.BLOCKED) {
+                manager.deleteAllUserApplications(profileOwnerId);
+            }
+            path = Path.COMMAND_USER_PROFILE + "&userId=" + profileOwnerId;
+        }
 
         LOG.debug("Command finished");
-        return Path.COMMAND_FIND_USER_BY_EMAIL + "&email=" + foundUser.getEmail();
+        return path;
     }
 }

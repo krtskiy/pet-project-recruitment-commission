@@ -19,6 +19,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.Comparator;
 import java.util.List;
 
@@ -41,7 +42,6 @@ public class FileCreator {
      * @param facultyId ID of faculty.
      * @param request   HttpServletRequest for getting file path,
      *                  or setting error messages, if something went wrong.
-     *
      * @throws DBException
      */
     public static void createReportSheets(int facultyId, HttpServletRequest request) throws DBException {
@@ -136,7 +136,8 @@ public class FileCreator {
      * @throws IOException
      */
     private static void createTxt(File fileTxt, StringBuilder content) throws IOException {
-        try (FileWriter writer = new FileWriter(fileTxt)) {
+        try (OutputStreamWriter writer =
+                     new OutputStreamWriter(new FileOutputStream(fileTxt), StandardCharsets.UTF_8)) {
             fileTxt.createNewFile();
             writer.write(content.toString().trim());
             writer.flush();

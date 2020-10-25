@@ -53,11 +53,13 @@ public class DBManager {
     private static final String SQL_INSERT_USER_MARKS = "REPLACE INTO user_marks VALUES (?, ?, ?)";
     private static final String SQL_FIND_USER_MARKS = "SELECT criteria.id, criteria.name_en, criteria.name_uk, user_marks.mark FROM criteria INNER JOIN user_marks ON criteria.id = user_marks.criterion_id WHERE user_marks.user_id = ?;";
     private static final String SQL_FIND_USER_MARKS_FOR_FACULTY = "SELECT criteria.id, criteria.name_en, criteria.name_uk, user_marks.mark FROM criteria INNER JOIN user_marks ON criteria.id = user_marks.criterion_id WHERE user_marks.user_id = ? AND criteria.id IN (SELECT criterion_id FROM faculty_criteria WHERE faculty_id=?);";
+    private static final String SQL_UPDATE_USER_MARKS = "UPDATE user_marks SET mark=? WHERE user_id=? AND criterion_id=?";
 
     // applications
     private static final String SQL_INSERT_APPLICATION = "REPLACE INTO applications VALUES (DEFAULT, ?, ?)";
     private static final String SQL_FIND_FACULTY_APPLICATIONS = "SELECT users.id, users.name, users.surname, users.email, users.status_id FROM users INNER JOIN applications ON users.id = applications.user_id WHERE applications.faculty_id = ?;";
     private static final String SQL_DELETE_USER_APPLICATION = "DELETE FROM applications WHERE faculty_id=? AND user_id=?";
+    private static final String SQL_DELETE_ALL_USER_APPLICATION = "DELETE FROM applications WHERE user_id=?";
 
     ///////////////////////////////////
     // singleton
@@ -221,32 +223,47 @@ public class DBManager {
     }
 
     private void insertFaculty(Connection connection, Faculty faculty) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT_FACULTY);
-        int k = 0;
-        preparedStatement.setInt(++k, faculty.getId());
-        preparedStatement.setString(++k, faculty.getNameEn());
-        preparedStatement.setString(++k, faculty.getNameUk());
-        preparedStatement.setInt(++k, faculty.getTotalSeats());
-        preparedStatement.setInt(++k, faculty.getBudgetSeats());
-        preparedStatement.execute();
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement(SQL_INSERT_FACULTY);
+            int k = 0;
+            preparedStatement.setInt(++k, faculty.getId());
+            preparedStatement.setString(++k, faculty.getNameEn());
+            preparedStatement.setString(++k, faculty.getNameUk());
+            preparedStatement.setInt(++k, faculty.getTotalSeats());
+            preparedStatement.setInt(++k, faculty.getBudgetSeats());
+            preparedStatement.execute();
+        } finally {
+            close(preparedStatement);
+        }
     }
 
     private void insertFacultyCriteria(Connection connection, Faculty faculty) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT_FACULTY_CRITERIA);
-        List<Criterion> facultyCriteria = faculty.getCriteria();
-        for (Criterion facultyCriterion : facultyCriteria) {
-            int k = 0;
-            preparedStatement.setInt(++k, faculty.getId());
-            preparedStatement.setInt(++k, facultyCriterion.getId());
-            preparedStatement.addBatch();
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement(SQL_INSERT_FACULTY_CRITERIA);
+            List<Criterion> facultyCriteria = faculty.getCriteria();
+            for (Criterion facultyCriterion : facultyCriteria) {
+                int k = 0;
+                preparedStatement.setInt(++k, faculty.getId());
+                preparedStatement.setInt(++k, facultyCriterion.getId());
+                preparedStatement.addBatch();
+            }
+            preparedStatement.executeBatch();
+        } finally {
+            close(preparedStatement);
         }
-        preparedStatement.executeBatch();
     }
 
     private void deleteFacultyCriteria(Connection connection, Faculty faculty) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_FACULTY_CRITERIA);
-        preparedStatement.setInt(1, faculty.getId());
-        preparedStatement.executeUpdate();
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement(SQL_DELETE_FACULTY_CRITERIA);
+            preparedStatement.setInt(1, faculty.getId());
+            preparedStatement.executeUpdate();
+        } finally {
+            close(preparedStatement);
+        }
     }
 
 
@@ -414,7 +431,7 @@ public class DBManager {
         }
         return user;
     }
-    
+
     public List<User> findAllUsers() throws DBException {
         List<User> users = new ArrayList<>();
         Connection connection = null;
@@ -551,9 +568,7 @@ public class DBManager {
     }
 
 
-    ///////////////////////////////////
     // application
-    ///////////////////////////////////
 
     public void insertApplication(int userId, int facultyId, List<UserMark> userMarks) throws DBException {
         Connection connection = null;
@@ -588,6 +603,25 @@ public class DBManager {
             int k = 0;
             preparedStatement.setInt(++k, facultyId);
             preparedStatement.setInt(++k, userId);
+            preparedStatement.executeUpdate();
+            connection.commit();
+        } catch (SQLException e) {
+            rollback(connection);
+            LOG.error(Messages.ERR_CANNOT_DELETE_APPLICATION, e);
+            throw new DBException(Messages.ERR_CANNOT_DELETE_APPLICATION, e);
+        } finally {
+            close(preparedStatement);
+            close(connection);
+        }
+    }
+
+    public void deleteAllUserApplications(int userId) throws DBException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        try {
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement(SQL_DELETE_ALL_USER_APPLICATION);
+            preparedStatement.setInt(1, userId);
             preparedStatement.executeUpdate();
             connection.commit();
         } catch (SQLException e) {
@@ -676,6 +710,38 @@ public class DBManager {
             close(connection);
         }
         return userMarks;
+    }
+
+    public void updateUserMarks(List<UserMarksBean> userMarks, int userId) throws DBException {
+        Connection connection = null;
+        try {
+            connection = getConnection();
+            updateUserMarks(connection, userMarks, userId);
+            connection.commit();
+        } catch (SQLException e) {
+            rollback(connection);
+            LOG.error(Messages.ERR_CANNOT_UPDATE_MARKS);
+            throw new DBException(Messages.ERR_CANNOT_UPDATE_MARKS, e);
+        } finally {
+            close(connection);
+        }
+    }
+
+    private void updateUserMarks(Connection connection, List<UserMarksBean> userMarks, int userId) throws SQLException {
+        PreparedStatement preparedStatement = null;
+        try {
+        preparedStatement = connection.prepareStatement(SQL_UPDATE_USER_MARKS);
+        for (UserMarksBean mark : userMarks) {
+            int k = 0;
+            preparedStatement.setInt(++k, mark.getMark());
+            preparedStatement.setInt(++k, userId);
+            preparedStatement.setInt(++k, mark.getCriterionId());
+            preparedStatement.addBatch();
+        }
+        preparedStatement.executeBatch();
+        } finally {
+            close(preparedStatement);
+        }
     }
 
     private List<UserMarksBean> findUserMarksForSpecificFacultyByUserId(int userId, int facultyId) throws DBException {
@@ -817,7 +883,6 @@ public class DBManager {
             }
         }
     }
-
 
 
 }

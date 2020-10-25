@@ -14,12 +14,13 @@
 
     <tr>
         <td class="content center">
+            <h3><fmt:message key="update_faculty_jsp.text.new_info"/></h3>
+            <h6><fmt:message key="update_faculty_jsp.text.new_info_hint"/></h6>
 
             <form id="login_form" method="post" action="controller">
                 <input type="hidden" name="command" value="updateFaculty">
+                <input type="hidden" name="facultyId" value="${faculty.id}">
 
-                <h3><fmt:message key="update_faculty_jsp.text.new_info"/></h3>
-                <small><fmt:message key="update_faculty_jsp.text.new_info_hint"/></small><br><br>
                 <small><fmt:message key="update_faculty_jsp.placeholder.new_name_en"/>:</small><br>
                 <input type="text" name="nameEn" maxlength="100"
                        placeholder="${faculty.nameEn}"
@@ -48,10 +49,8 @@
                         <strong><fmt:message key="update_faculty_jsp.text.new_criteria"/> </strong><small><fmt:message
                             key="update_faculty_jsp.text.new_criteria_quantity"/></small><br>
                         <c:forEach var="criterion" items="${criteria}">
-
                             <input type="checkbox" name="criterionId"
                                    value="${criterion.id}"> <localizer:name currentLocaleName="${currentLocale}" localizable="${criterion}"/><br>
-
                         </c:forEach>
                     </c:otherwise>
                 </c:choose>

@@ -22,13 +22,14 @@ public class Messages {
     public static final String ERR_CANNOT_FIND_USERS = "Cannot find users!";
     public static final String ERR_CANNOT_RESET_PASSWORD = "Cannot reset password!";
 
+    // marks-related
     public static final String ERR_CANNOT_INSERT_USER_MARKS = "Cannot insert user marks!";
     public static final String ERR_CANNOT_FIND_USER_MARKS = "Cannot find user marks!";
     public static final String ERR_CANNOT_SEND_EMAILS = "Cannot send emails!";
+    public static final String ERR_CANNOT_UPDATE_MARKS = "Cannot update marks!";
 
     // applications-related
     public static final String ERR_CANNOT_INSERT_APPLICATION = "Cannot insert application!";
-    public static final String ERR_CANNOT_FIND_USER_APPLICATIONS = "Cannot find user application!";
     public static final String ERR_CANNOT_FIND_FACULTY_APPLICATIONS = "Cannot  find faculty applications!";
     public static final String ERR_CANNOT_DELETE_APPLICATION = "Cannot delete application!";
 

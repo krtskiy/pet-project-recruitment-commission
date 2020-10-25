@@ -43,8 +43,7 @@
             </p>
             <form action="controller" method="get">
                 <input name="command" type="hidden" value="updateUsersStatus"/>
-                <input name="userId" type="hidden" value="${profileOwner.id}">
-                <input name="forwardTo" type="hidden" value="profile">
+                <input name="profileOwnerId" type="hidden" value="${profileOwner.id}">
                 <c:choose>
                     <c:when test="${profileOwner.statusId == 0 and profileOwner.roleId != 1}">
                         <button name="status" value="1">

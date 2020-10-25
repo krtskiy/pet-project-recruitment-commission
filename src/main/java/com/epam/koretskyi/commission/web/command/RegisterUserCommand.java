@@ -6,6 +6,9 @@ import com.epam.koretskyi.commission.util.MD5Util;
 import com.epam.koretskyi.commission.db.Role;
 import com.epam.koretskyi.commission.db.entity.User;
 import com.epam.koretskyi.commission.exception.AppException;
+import com.epam.koretskyi.commission.util.validation.UserValidation;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,33 +37,24 @@ public class RegisterUserCommand extends Command {
         user.setEmail(email);
         LOG.trace("Request parameter: email --> " + email);
 
-        String password = MD5Util.md5Apache(request.getParameter("password"));
-        user.setPassword(password);
-        LOG.trace("Request parameter: password --> " + password);
+        String password = request.getParameter("password");
+        if (!UserValidation.validateUserPassword(password)) {
+            throw new AppException("Password must be between 6 and 32 characters!");
+        }
+        user.setPassword(MD5Util.md5Apache(password));
 
-        String name = request.getParameter("name");
-        user.setName(name);
-        LOG.trace("Request parameter: name --> " + name);
-
-        String surname = request.getParameter("surname");
-        user.setSurname(surname);
-        LOG.trace("Request parameter: surname --> " + surname);
-
-        String patronymic = request.getParameter("patronymic");
-        user.setPatronymic(patronymic);
-        LOG.trace("Request parameter: patronymic --> " + patronymic);
-
-        String region = request.getParameter("region");
-        user.setRegion(region);
-        LOG.trace("Request parameter: region --> " + region);
-
-        String city = request.getParameter("city");
-        user.setCity(city);
-        LOG.trace("Request parameter: city --> " + city);
-
-        String institutionName = request.getParameter("institutionName");
-        user.setInstitutionName(institutionName);
-        LOG.trace("Request parameter: institutionName --> " + institutionName);
+        user.setName(request.getParameter("name"));
+        LOG.trace("Request parameter: name --> " + user.getName());
+        user.setSurname(request.getParameter("surname"));
+        LOG.trace("Request parameter: surname --> " + user.getSurname());
+        user.setPatronymic(request.getParameter("patronymic"));
+        LOG.trace("Request parameter: patronymic --> " + user.getPatronymic());
+        user.setRegion(request.getParameter("region"));
+        LOG.trace("Request parameter: region --> " + user.getRegion());
+        user.setCity(request.getParameter("city"));
+        LOG.trace("Request parameter: city --> " + user.getCity());
+        user.setInstitutionName(request.getParameter("institutionName"));
+        LOG.trace("Request parameter: institutionName --> " + user.getInstitutionName());
 
         String roleId = request.getParameter("roleId");
         if (roleId == null) {
@@ -71,9 +65,7 @@ public class RegisterUserCommand extends Command {
             LOG.trace("New user role id -->  " + roleId);
         }
 
-        if (email.equals("") || password.equals("") || name.equals("") || surname.equals("") ||
-                patronymic.equals("") || region.equals("") ||
-                city.equals("") || institutionName.equals("")) {
+        if (!UserValidation.validateUserFields(user)) {
             throw new AppException("Fields can not be empty!");
         }
 
@@ -86,12 +78,13 @@ public class RegisterUserCommand extends Command {
         session.setAttribute("successRegMessage", successRegMessage);
         LOG.trace("Set the session attribute: successRegMessage --> " + successRegMessage);
 
+        String path = Path.COMMAND_LOGIN_PAGE;
         if (userRole == Role.ADMIN) {
             LOG.debug("Command finished");
-            return Path.COMMAND_USERS;
+            path = Path.COMMAND_USERS;
         }
 
         LOG.debug("Command finished");
-        return Path.COMMAND_LOGIN_PAGE;
+        return path;
     }
 }

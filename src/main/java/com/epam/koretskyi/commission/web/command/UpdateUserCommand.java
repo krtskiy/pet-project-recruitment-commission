@@ -5,6 +5,8 @@ import com.epam.koretskyi.commission.db.DBManager;
 import com.epam.koretskyi.commission.util.MD5Util;
 import com.epam.koretskyi.commission.db.entity.User;
 import com.epam.koretskyi.commission.exception.AppException;
+import com.epam.koretskyi.commission.util.validation.UserValidation;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -32,7 +34,6 @@ public class UpdateUserCommand extends Command {
         LOG.trace("Request parameter: email --> " + newEmail);
 
         String newPassword = request.getParameter("password");
-        String newPasswordHash = MD5Util.md5Apache(newPassword);
 
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
@@ -41,23 +42,25 @@ public class UpdateUserCommand extends Command {
             throw new AppException("This email is already taken!");
         }
 
-        if (user.getPassword().equals(newPasswordHash)) {
-            throw new AppException("You entered your old password!");
-        }
-
-        if (!newEmail.equals("")) {
+        if (!StringUtils.isBlank(newEmail)) {
             user.setEmail(newEmail);
         }
 
-        if (!newPassword.equals("")) {
-            user.setPassword(newPasswordHash);
+        if (!StringUtils.isBlank(newPassword)) {
+            if (!UserValidation.validateUserPassword(newPassword)) {
+                throw new AppException("Password must be between 6 and 32 characters!");
+            }
+            if (UserValidation.isPasswordSame(user, newPassword)) {
+                throw new AppException("You entered your old password!");
+            }
+            user.setPassword(MD5Util.md5Apache(newPassword));
         }
 
         DBManager.getInstance().updateUser(user);
         session.setAttribute("user", user);
         LOG.trace("Set the request attribute: user --> " + user);
 
-        if (!newPassword.equals("") || !newEmail.equals("")) {
+        if (!StringUtils.isBlank(newEmail) || !StringUtils.isBlank(newPassword)) {
             String successMessage = "Login data changed successfully";
             session.setAttribute("successMessage", successMessage);
             LOG.trace("Set the session attribute: successMessage --> " + successMessage);

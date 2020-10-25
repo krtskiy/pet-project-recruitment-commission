@@ -201,9 +201,9 @@
                                         key="users_jsp.text.blocked"/></span></c:when>
                             </c:choose>
                             <form action="controller" method="get">
+                                <input name="command" type="hidden" value="updateUsersStatus"/>
                                 <input name="sort" type="hidden" value="${sortParam}">
                                 <input name="page" type="hidden" value="${param.page}">
-                                <input name="command" type="hidden" value="updateUsersStatus"/>
                                 <c:choose>
                                     <c:when test="${foundUser.statusId == 0 and foundUser.roleId != 1}">
                                         <button name="status" value="1">

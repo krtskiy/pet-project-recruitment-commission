@@ -52,9 +52,8 @@ public class CommunicationHelper {
         props.put("mail.smtp.ssl.enable", IS_SSL_ENABLE);
         props.put("mail.smtp.starttls.enable", IS_STARTTLS_ENABLE);
         props.put("mail.smtp.port", SMTP_PORT);
-        if (IS_STARTTLS_ENABLE.equals("false") && IS_SSL_ENABLE.equals("true")) {
-            props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-        }
+        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+
         return Session.getDefaultInstance(props, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(USER_ID, USER_PASSWORD);
@@ -69,7 +68,7 @@ public class CommunicationHelper {
      * @param isAccepted      true if entrant is accepted, false if failed.
      * @param formOfEducation form of education
      * @param facultyName     name of faculty
-     * @return   text of the email message to send.
+     * @return text of the email message to send.
      */
     public static String resultOfAdmission(boolean isAccepted, String formOfEducation, String facultyName) {
         if (isAccepted) {
@@ -84,8 +83,8 @@ public class CommunicationHelper {
     /**
      * Creates a message for email notification about password reset.
      *
-     * @param newPassword   new user password
-     * @return   text of the email message to send.
+     * @param newPassword new user password
+     * @return text of the email message to send.
      */
     public static String newPassword(String newPassword) {
         return "<font size=\"5\"><p>Your new password: <strong>" + newPassword +

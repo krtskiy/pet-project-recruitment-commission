@@ -7,6 +7,7 @@ package com.epam.koretskyi.commission.util.constant;
  */
 public final class Path {
 
+
     private Path() {
     }
 
@@ -25,6 +26,7 @@ public final class Path {
     public static final String PAGE_FACULTY_REGISTER = "/WEB-INF/jsp/user/faculty_register_page.jsp";
     public static final String PAGE_FACULTY_ENTRANTS = "/WEB-INF/jsp/user/faculty_entrants.jsp";
     public static final String PAGE_REPORT_SHEET = "/WEB-INF/jsp/user/report_sheet.jsp";
+    public static final String PAGE_UPDATE_MARKS = "/WEB-INF/jsp/user/update_marks.jsp";
 
     // admin
     public static final String PAGE_ADMIN_PANEL = "/WEB-INF/jsp/admin/admin_panel.jsp";

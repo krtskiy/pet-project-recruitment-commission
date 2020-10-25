@@ -45,6 +45,16 @@
                     <p><c:out value="${currentLocale eq 'uk' ? mark.criterionNameUk : mark.criterionNameEn}"/> :
                         <strong>${mark.mark}</strong></p>
                 </c:forEach>
+                <c:choose>
+                    <c:when test="${not empty userFaculties}">
+<%--                        todo--%>
+                        <h6><span style="color: rgb(204, 0, 0);">You cannot edit your marks while you have any applications</span></h6>
+                    </c:when>
+                    <c:otherwise>
+<%--                        todo--%>
+                        <a href="controller?command=updateMarksPage"><strong>Update marks</strong></a><br>
+                    </c:otherwise>
+                </c:choose>
             </c:if>
 
             <c:if test="${not empty userFaculties}">

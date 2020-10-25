@@ -1,6 +1,6 @@
 package com.epam.koretskyi.commission.web.command;
 
-import com.epam.koretskyi.commission.util.VerifyCaptcha;
+import com.epam.koretskyi.commission.util.validation.CaptchaValidation;
 import com.epam.koretskyi.commission.util.constant.Path;
 import com.epam.koretskyi.commission.db.DBManager;
 import com.epam.koretskyi.commission.util.MD5Util;
@@ -8,6 +8,7 @@ import com.epam.koretskyi.commission.db.Role;
 import com.epam.koretskyi.commission.db.UserStatus;
 import com.epam.koretskyi.commission.db.entity.User;
 import com.epam.koretskyi.commission.exception.AppException;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,7 +31,7 @@ public class LoginCommand extends Command {
         HttpSession httpSession = request.getSession();
 
         String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
-        if (!VerifyCaptcha.verify(gRecaptchaResponse)) {
+        if (!CaptchaValidation.verify(gRecaptchaResponse)) {
             throw new AppException("Captcha is invalid!");
         }
 
@@ -41,15 +42,15 @@ public class LoginCommand extends Command {
 
         String password = request.getParameter("password");
 
-        if (email == null || password == null || email.isEmpty() || password.isEmpty()) {
-            throw new AppException("Email/password can not be empty");
+        if (StringUtils.isAllBlank(email, password)) {
+            throw new AppException("Email/password can not be empty!");
         }
 
         User user = dbManager.findUserByEmail(email);
         LOG.trace("Found in DB: user --> " + user);
 
-        if (user == null || !MD5Util.md5Apache(password).equals(user.getPassword())) {
-            throw new AppException("Cannot find user with such email/password");
+        if (user == null || !user.getPassword().equals(MD5Util.md5Apache(password))) {
+            throw new AppException("User with this email / password does not exist!");
         }
 
         Role userRole = Role.getRole(user);

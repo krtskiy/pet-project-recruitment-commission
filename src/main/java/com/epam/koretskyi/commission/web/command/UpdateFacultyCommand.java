@@ -5,6 +5,8 @@ import com.epam.koretskyi.commission.db.DBManager;
 import com.epam.koretskyi.commission.db.entity.Criterion;
 import com.epam.koretskyi.commission.db.entity.Faculty;
 import com.epam.koretskyi.commission.exception.AppException;
+import com.epam.koretskyi.commission.util.validation.FacultyValidation;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -32,18 +34,15 @@ public class UpdateFacultyCommand extends Command {
 
         String newNameEn = request.getParameter("nameEn");
         LOG.trace("Request parameter: nameEn --> " + newNameEn);
-
         String newNameUk = request.getParameter("nameUk");
         LOG.trace("Request parameter: nameUk --> " + newNameUk);
-
         String newTotalSeats = request.getParameter("totalSeats");
         LOG.trace("Request parameter: totalSeats --> " + newTotalSeats);
-
         String newBudgetSeats = request.getParameter("budgetSeats");
         LOG.trace("Request parameter: budgetSeats --> " + newBudgetSeats);
 
-        HttpSession session = request.getSession();
-        Faculty faculty = (Faculty) session.getAttribute("faculty");
+        int facultyId = Integer.parseInt(request.getParameter("facultyId"));
+        Faculty faculty = DBManager.getInstance().findFacultyById(facultyId);
 
         String[] criteriaIdArr = request.getParameterValues("criterionId");
         if (criteriaIdArr != null) {
@@ -51,36 +50,37 @@ public class UpdateFacultyCommand extends Command {
             for (String criteriaId : criteriaIdArr) {
                 criteria.add(DBManager.getInstance().findCriterionById(Integer.parseInt(criteriaId)));
             }
+
+            if (!FacultyValidation.validateFacultyCriteria(criteria)) {
+                throw new AppException("The faculty must have from 1 to 4 criteria");
+            }
+
             faculty.setCriteria(criteria);
             LOG.trace("Request parameter: faculty criteria --> " + criteria);
         }
 
-        if (!newNameEn.equals("")) {
+        if (!StringUtils.isBlank(newNameEn)) {
             faculty.setNameEn(newNameEn);
         }
-
-        if (!newNameUk.equals("")) {
+        if (!StringUtils.isBlank(newNameUk)) {
             faculty.setNameUk(newNameUk);
         }
-
-        if (!newTotalSeats.equals("")) {
+        if (!StringUtils.isBlank(newTotalSeats)) {
             faculty.setTotalSeats(Integer.parseInt(newTotalSeats));
         }
-
-        if (!newBudgetSeats.equals("")) {
-            if (Integer.parseInt(newBudgetSeats) > faculty.getTotalSeats()) {
+        if (!StringUtils.isBlank(newBudgetSeats)) {
+            faculty.setBudgetSeats(Integer.parseInt(newBudgetSeats));
+            if (!FacultyValidation.validateFacultySeats(faculty)) {
                 throw new AppException("The number of budget places cannot exceed the total number of places!");
             }
-            faculty.setBudgetSeats(Integer.parseInt(newBudgetSeats));
         }
-
         DBManager.getInstance().updateFaculty(faculty);
 
-        if (!newNameEn.equals("") || !newNameUk.equals("") || !newTotalSeats.equals("")
-                || !newBudgetSeats.equals("") || criteriaIdArr != null)
+        if (!StringUtils.isBlank(newNameEn) || !StringUtils.isBlank(newNameUk) || !StringUtils.isBlank(newTotalSeats)
+                || !StringUtils.isBlank(newBudgetSeats) || criteriaIdArr != null)
         {
             String successFacEditMessage = "Faculty changed successfully";
-            session.setAttribute("successFacEditMessage", successFacEditMessage);
+            request.getSession().setAttribute("successFacEditMessage", successFacEditMessage);
             LOG.trace("Set the session attribute: successFacEditMessage --> " + successFacEditMessage);
         }
 

@@ -40,9 +40,6 @@
                                                     localizable="${criterion}"/></th>
                             </c:forEach>
                             <th><fmt:message key="faculty_entrants_jsp.text.entr_marks_sum"/></th>
-                            <c:if test="${user.roleId == 1}">
-                                <th><fmt:message key="user_profile_jsp.text.status"/></th>
-                            </c:if>
                         </tr>
                         <c:set var="k" value="0"/>
                         <c:forEach var="application" items="${facultyApplications}">
@@ -76,21 +73,11 @@
                                             <td>${mark.mark}</td>
                                         </c:forEach>
                                         <td><strong>${markSum}</strong></td>
-                                        <c:if test="${user.roleId == 1}">
+                                        <c:if test="${userRole.name == 'admin'}">
                                             <td>
-                                                <c:choose>
-                                                    <c:when test="${application.userStatusId == 1}">
-                                                        <span style="color: rgb(204, 0, 0); "><strong><fmt:message
-                                                                key="users_jsp.text.blocked"/></strong></span><br>
-                                                    </c:when>
-                                                    <c:otherwise><fmt:message
-                                                            key="users_jsp.text.unblocked"/>
-                                                    </c:otherwise>
-                                                </c:choose>
+                                                <a href="controller?command=viewUserProfilePage&userId=${application.userId}">
+                                                    <strong><fmt:message key="users_jsp.button.view_profile"/></strong></a>
                                             </td>
-                                            <td>
-                                                <a href="controller?command=viewUserProfilePage&userId=${application.userId}"><strong><fmt:message
-                                                        key="users_jsp.button.view_profile"/></strong></a></td>
                                         </c:if>
                                     </c:otherwise>
                                 </c:choose>

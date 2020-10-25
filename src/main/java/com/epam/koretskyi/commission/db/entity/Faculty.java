@@ -78,27 +78,4 @@ public class Faculty extends Entity implements Localizable {
                 '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Faculty faculty = (Faculty) o;
-
-        if (id != faculty.id) return false;
-        if (totalSeats != faculty.totalSeats) return false;
-        if (budgetSeats != faculty.budgetSeats) return false;
-        if (!nameEn.equals(faculty.nameEn)) return false;
-        return nameUk.equals(faculty.nameUk);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + nameEn.hashCode();
-        result = 31 * result + nameUk.hashCode();
-        result = 31 * result + totalSeats;
-        result = 31 * result + budgetSeats;
-        return result;
-    }
 }

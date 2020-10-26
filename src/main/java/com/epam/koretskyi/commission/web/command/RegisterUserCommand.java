@@ -7,8 +7,6 @@ import com.epam.koretskyi.commission.db.Role;
 import com.epam.koretskyi.commission.db.entity.User;
 import com.epam.koretskyi.commission.exception.AppException;
 import com.epam.koretskyi.commission.util.validation.UserValidation;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Validate;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -65,7 +63,7 @@ public class RegisterUserCommand extends Command {
             LOG.trace("New user role id -->  " + roleId);
         }
 
-        if (!UserValidation.validateUserFields(user)) {
+        if (UserValidation.isFieldsBlank(user)) {
             throw new AppException("Fields can not be empty!");
         }
 
@@ -81,7 +79,7 @@ public class RegisterUserCommand extends Command {
         String path = Path.COMMAND_LOGIN_PAGE;
         if (userRole == Role.ADMIN) {
             LOG.debug("Command finished");
-            path = Path.COMMAND_USERS;
+            path = Path.COMMAND_USERS + "&page=1" + "&sort=id";
         }
 
         LOG.debug("Command finished");

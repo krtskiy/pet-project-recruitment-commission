@@ -72,7 +72,7 @@ public class CommunicationHelper {
      */
     public static String resultOfAdmission(boolean isAccepted, String formOfEducation, String facultyName) {
         if (isAccepted) {
-            return "<font size=\"5\"><p>Dear candidate,</p><p>Im writing to inform You, that You accepted on <strong>" + formOfEducation +
+            return "<font size=\"5\"><p>Dear candidate,</p><p>Glad to inform You, that You accepted on <strong>" + formOfEducation +
                     "</strong> form of education to the KRTSK University successfully.</p><p>You are enrolled to <strong>" + facultyName +
                     "</strong>.</p><p>You will get all information about the course in a next letter in a month</p></font>";
         }

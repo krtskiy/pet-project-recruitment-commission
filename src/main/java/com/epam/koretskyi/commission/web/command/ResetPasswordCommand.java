@@ -35,7 +35,7 @@ public class ResetPasswordCommand extends Command {
 
         String email = request.getParameter("email");
         User user = DBManager.getInstance().findUserByEmail(email);
-        if (user == null || !StringUtils.isAllBlank(user.getName(), user.getSurname()) || user.getRoleId() == 1) {
+        if (user == null || StringUtils.isAllBlank(user.getName(), user.getSurname()) || user.getRoleId() == 1) {
             throw new AppException("User with such data does not exist!");
         }
 

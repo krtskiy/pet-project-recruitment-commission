@@ -45,7 +45,7 @@ public final class Path {
     public static final String COMMAND_ADMIN_PANEL = "/controller?command=adminPanelPage";
     public static final String COMMAND_LOGIN_PAGE = "/controller?command=loginPage";
     public static final String COMMAND_FACULTIES = "/controller?command=listOfFaculties&sort=number";
-    public static final String COMMAND_USERS = "/controller?command=listOfUsers&page=1&sort=id";
+    public static final String COMMAND_USERS = "/controller?command=listOfUsers";
     public static final String COMMAND_USERS_WITH_PARAMS = "/controller?command=listOfUsers";
     public static final String COMMAND_FIND_USER_BY_EMAIL = "/controller?command=findUserByEmail";
 

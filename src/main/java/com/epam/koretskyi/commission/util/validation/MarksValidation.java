@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class MarksValidation {
 
-    public static boolean marksRangeValidation(List<UserMark> marks) {
+    public static boolean allMarksRangeValidation(List<UserMark> marks) {
         boolean validate = true;
 
         for (UserMark mark : marks) {
@@ -34,6 +34,26 @@ public class MarksValidation {
             if (mark.getMark() <= 0) {
                 validate = false;
                 break;
+            }
+        }
+
+        return validate;
+    }
+
+    public static boolean isMarkPositiveValidation(int mark) {
+        return mark > 0;
+    }
+
+    public static boolean markRangeValidation(int mark, int criterionId) {
+        boolean validate = true;
+
+        if (criterionId == 1) {
+            if (mark > 12 || mark < 1) {
+                validate = false;
+            }
+        } else {
+            if (mark > 200 || mark < 100) {
+                validate = false;
             }
         }
 

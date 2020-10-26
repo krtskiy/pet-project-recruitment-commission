@@ -5,6 +5,7 @@ import com.epam.koretskyi.commission.db.bean.UserMarksBean;
 import com.epam.koretskyi.commission.db.entity.User;
 import com.epam.koretskyi.commission.exception.AppException;
 import com.epam.koretskyi.commission.util.constant.Path;
+import com.epam.koretskyi.commission.util.validation.MarksValidation;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
@@ -30,9 +31,14 @@ public class UpdateMarksCommand extends Command {
         List<UserMarksBean> userMarks = DBManager.getInstance().findUserMarksByUserId(user.getId());
 
         for (UserMarksBean mark : userMarks) {
-            String newMark = request.getParameter(String.valueOf(mark.getCriterionId()));
-            if (!StringUtils.isBlank(newMark)) {
-                mark.setMark(Integer.parseInt(newMark));
+            String newMarkStr = request.getParameter(String.valueOf(mark.getCriterionId()));
+            if (!StringUtils.isBlank(newMarkStr)) {
+                int newMark = Integer.parseInt(newMarkStr);
+                if (!MarksValidation.isMarkPositiveValidation(newMark) ||
+                        !MarksValidation.markRangeValidation(newMark, mark.getCriterionId())) {
+                    throw new AppException("Marks are not in the correct format!");
+                }
+                mark.setMark(newMark);
             }
         }
 

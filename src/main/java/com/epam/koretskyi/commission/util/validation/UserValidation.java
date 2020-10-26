@@ -9,7 +9,7 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class UserValidation {
 
-    public static boolean validateUserFields(User user) {
+    public static boolean isFieldsBlank(User user) {
         return StringUtils.isAllBlank(user.getEmail(), user.getPassword(), user.getName(),
                 user.getPatronymic(), user.getRegion(), user.getCity(), user.getInstitutionName());
     }

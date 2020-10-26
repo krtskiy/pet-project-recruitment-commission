@@ -54,7 +54,7 @@ public class RegisterForFacultyCommand extends Command {
             uMark.setMark(Integer.parseInt(marks[i]));
             userMarks.add(uMark);
         }
-        if (!MarksValidation.marksRangeValidation(userMarks) && !MarksValidation.isAllPositiveValidation(userMarks)) {
+        if (!MarksValidation.allMarksRangeValidation(userMarks) || !MarksValidation.isAllPositiveValidation(userMarks)) {
             throw new AppException("Marks are not in the correct format!");
         }
 

@@ -50,7 +50,7 @@ public class UpdateUsersStatusCommand extends Command {
             if (foundUser != null) {
                 path = Path.COMMAND_FIND_USER_BY_EMAIL + "&email=" + foundUser.getEmail();
             } else {
-                path = Path.COMMAND_USERS;
+                path = Path.COMMAND_USERS + "&page=" + page + "&sort=" + sort;
             }
         }
 

@@ -1,4 +1,4 @@
-package com.epam.koretskyi.commission.util;
+package com.epam.koretskyi.commission.util.validation;
 
 import com.epam.koretskyi.commission.util.validation.CaptchaValidation;
 import org.junit.Assert;

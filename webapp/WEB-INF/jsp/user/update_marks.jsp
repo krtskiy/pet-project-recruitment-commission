@@ -14,8 +14,7 @@
 
     <tr>
         <td class="content center">
-<%--            todo--%>
-            <h3>Enter new marks</h3>
+            <h3><fmt:message key="update_marks_jsp.text.enter_new_marks"/></h3>
             <h6><fmt:message key="update_profile_jsp.text.empty_message"/></h6>
 
             <form id="login_form" method="post" action="controller">

@@ -2,6 +2,7 @@ package com.epam.koretskyi.commission.web.command;
 
 import com.epam.koretskyi.commission.db.DBManager;
 import com.epam.koretskyi.commission.db.Role;
+import com.epam.koretskyi.commission.db.bean.FacultyApplicationsBean;
 import com.epam.koretskyi.commission.db.bean.UserFacultiesBean;
 import com.epam.koretskyi.commission.db.entity.Faculty;
 import com.epam.koretskyi.commission.db.entity.User;
@@ -15,7 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Invoked when user wants to see all faculties that exist on current time.
@@ -66,9 +69,14 @@ public class ListOfFacultiesCommand extends Command {
                 break;
         }
 
-        // put faculties list to the request
-        request.setAttribute("faculties", faculties);
-        LOG.trace("Set the request attribute: faculties --> " + faculties);
+        // techTask
+        Map<Faculty, List<FacultyApplicationsBean>> facultyApplicationsMap = new LinkedHashMap<>();
+        for (Faculty faculty : faculties) {
+            List<FacultyApplicationsBean> facultyApplications = DBManager.getInstance().findFacultyApplicationsByFacultyId(faculty.getId());
+            facultyApplicationsMap.put(faculty, facultyApplications);
+        }
+        request.setAttribute("facultyApplicationsMap", facultyApplicationsMap);
+        // /techTask
 
         if (user != null) {
             List<UserFacultiesBean> userFaculties = DBManager.getInstance().findUserFacultiesByUserId(user.getId());

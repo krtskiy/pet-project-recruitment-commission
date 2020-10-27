@@ -200,8 +200,6 @@ l
 <src/test/java/com/epam/koretskyi/commission/db/RoleTest.java,7\2\7207234d2a45eac670775367380e1337a2b24cc1
 r
 Bsrc/test/java/com/epam/koretskyi/commission/db/UserStatusTest.java,f\3\f3cf53a60d136862300a19ec824bb626183b2a48
-{
-Ksrc/test/java/com/epam/koretskyi/commission/util/CaptchaValidationTest.java,2\9\29bcdf4a944ab1c3aa59948c044da891c3b9bcfa
 ‚
 Rsrc/main/java/com/epam/koretskyi/commission/util/validation/CaptchaValidation.java,0\e\0e87c5e64dddcbc75ea8f8c9a7f3fce2259a3eee
 ‚
@@ -216,3 +214,5 @@ Ssrc/main/java/com/epam/koretskyi/commission/web/command/UpdateMarksPageCommand.
 Osrc/main/java/com/epam/koretskyi/commission/web/command/UpdateMarksCommand.java,b\d\bd4b0db446e794122cba043e9d8d80b1e8c50924
 X
 (webapp/WEB-INF/jsp/user/update_marks.jsp,1\7\17a6b63ae76f524a510050863628b5f77ef2cf1c
+†
+Vsrc/test/java/com/epam/koretskyi/commission/util/validation/CaptchaValidationTest.java,2\f\2f020372690c14b9cbbe63dc4bae9a68bca3f57d

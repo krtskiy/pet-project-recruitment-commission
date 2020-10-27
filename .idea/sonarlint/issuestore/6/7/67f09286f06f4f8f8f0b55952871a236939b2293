@@ -1,27 +1,27 @@
 
 m
+java:S2095 "OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(¥ß—Ş8„ôß€Õ.
+m
+java:S2095™"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(¥Öç°8„ôß€Õ.
+j
+java:S2095³"GUse try-with-resources or close this "Statement" in a "finally" clause.(‡²€·ıÿÿÿÿ8„ôß€Õ.
+r
+java:S2095¹"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(ëçïÁıÿÿÿÿ8„ôß€Õ.
+m
 java:S2095š"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(½Û†8„ôß€Õ.
+m
+java:S2095ï"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(õÈŞî8„ôß€Õ.
 j
 java:S2095º"GUse try-with-resources or close this "Statement" in a "finally" clause.(‡²€·ıÿÿÿÿ8„ôß€Õ.
 m
 java:S2095†"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(”Ïâ8„ôß€Õ.
+m
+java:S2095Ì"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(¡Åü8„ôß€Õ.
+r
+java:S2095 "OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(™ğ™€úÿÿÿÿ8„ôß€Õ.
 i
 java:S2095n"GUse try-with-resources or close this "Statement" in a "finally" clause.(‡²€·ıÿÿÿÿ8„ôß€Õ.
 r
 java:S2095‡"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(‚©ìùÿÿÿÿ8„ôß€Õ.
-j
-java:S2095³"GUse try-with-resources or close this "Statement" in a "finally" clause.(‡²€·ıÿÿÿÿ8„ôß€Õ.
-r
-java:S2095 "OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(™ğ™€úÿÿÿÿ8„ôß€Õ.
 r
 java:S2095ò"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(£²›Ôûÿÿÿÿ8„ôß€Õ.
-m
-java:S2095Ì"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(¡Åü8„ôß€Õ.
-m
-java:S2095™"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(¥Öç°8„ôß€Õ.
-m
-java:S2095 "OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(¥ß—Ş8„ôß€Õ.
-r
-java:S2095¹"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(ëçïÁıÿÿÿÿ8„ôß€Õ.
-m
-java:S2095ï"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(õÈŞî8„ôß€Õ.

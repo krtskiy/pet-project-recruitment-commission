@@ -79,41 +79,44 @@
                     <th><fmt:message key="faculties_jsp.text.faculty_name"/></th>
                     <th><fmt:message key="faculties_jsp.text.faculty_total_seats"/></th>
                     <th><fmt:message key="faculties_jsp.text.faculty_budget_seats"/></th>
+                    <th>Total applications</th>
                     <th><fmt:message key="faculties_jsp.text.faculty_selection_criteria"/></th>
                 </tr>
                 </thead>
-                <c:forEach var="faculty" items="${faculties}">
+                <c:forEach var="facultiesMap" items="${facultyApplicationsMap}">
                     <tr>
-                        <td>${faculty.id}</td>
+                        <td>${facultiesMap.key.id}</td>
 
-                        <td><localizer:name currentLocaleName="${currentLocale}" localizable="${faculty}"/></td>
+                        <td><localizer:name currentLocaleName="${currentLocale}"
+                                            localizable="${facultiesMap.key}"/></td>
 
-                        <td>${faculty.totalSeats}</td>
-                        <td>${faculty.budgetSeats}</td>
+                        <td>${facultiesMap.key.totalSeats}</td>
+                        <td>${facultiesMap.key.budgetSeats}</td>
+                        <td> ${facultiesMap.value.size()} </td>
                         <td>
-                            <c:forEach var="criterion" items="${faculty.criteria}">
+                            <c:forEach var="criterion" items="${facultiesMap.key.criteria}">
                                 <localizer:name currentLocaleName="${currentLocale}" localizable="${criterion}"/><br>
                             </c:forEach>
                         </td>
                         <c:if test="${userRole.name == 'user' and user.statusId != 1}">
                             <td>
                                 <c:choose>
-                                    <c:when test="${faculty.statusId == 1}">
+                                    <c:when test="${facultiesMap.key.statusId == 1}">
                                         <span style="color:  rgb(204, 0, 0);"><strong><fmt:message
                                                 key="faculties_jsp.text.recruitment_closed"/></strong></span><br>
-                                        <a href="controller?command=viewReportSheetPage&facultyId=${faculty.id}"><strong><fmt:message
+                                        <a href="controller?command=viewReportSheetPage&facultyId=${facultiesMap.key.id}"><strong><fmt:message
                                                 key="faculties_jsp.button.view_report"/></strong></a>
                                     </c:when>
                                     <c:otherwise>
-                                        <a href="controller?command=viewFacultyApplications&facultyId=${faculty.id}"><strong><fmt:message
+                                        <a href="controller?command=viewFacultyApplications&facultyId=${facultiesMap.key.id}"><strong><fmt:message
                                                 key="faculties_jsp.button.view_entrants"/></strong></a>
                                         <c:choose>
-                                            <c:when test="${fn:contains(userFaculties, faculty.nameEn)}">
+                                            <c:when test="${fn:contains(userFaculties, facultiesMap.key.nameEn)}">
                                                 <strong><span style="color: #1B860A"><fmt:message
                                                         key="faculties_jsp.text.already_registered"/></span></strong>
                                             </c:when>
                                             <c:when test="${faculty.statusId ne 1}">
-                                                <a href="controller?command=registerForFacultyPage&facultyId=${faculty.id}"><strong><fmt:message
+                                                <a href="controller?command=registerForFacultyPage&facultyId=${facultiesMap.key.id}"><strong><fmt:message
                                                         key="faculties_jsp.button.register"/></strong></a>
                                             </c:when>
                                         </c:choose>

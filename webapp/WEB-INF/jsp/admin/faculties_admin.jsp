@@ -82,34 +82,37 @@
                     <th><fmt:message key="faculties_jsp.text.faculty_name"/></th>
                     <th><fmt:message key="faculties_jsp.text.faculty_total_seats"/></th>
                     <th><fmt:message key="faculties_jsp.text.faculty_budget_seats"/></th>
+                    <th>Total applications</th>
                     <th><fmt:message key="faculties_jsp.text.faculty_selection_criteria"/></th>
                 </tr>
                 </thead>
-                <c:forEach var="faculty" items="${faculties}">
+                <c:forEach var="facultiesMap" items="${facultyApplicationsMap}">
                     <tr>
-                        <td>${faculty.id}</td>
-                        <td><localizer:name currentLocaleName="${currentLocale}" localizable="${faculty}"/></td>
-                        <td>${faculty.totalSeats}</td>
-                        <td>${faculty.budgetSeats}</td>
+                        <td>${facultiesMap.key.id}</td>
+                        <td><localizer:name currentLocaleName="${currentLocale}"
+                                            localizable="${facultiesMap.key}"/></td>
+                        <td>${facultiesMap.key.totalSeats}</td>
+                        <td>${facultiesMap.key.budgetSeats}</td>
+                        <td> ${facultiesMap.value.size()} </td>
                         <td>
-                            <c:forEach var="criterion" items="${faculty.criteria}">
+                            <c:forEach var="criterion" items="${facultiesMap.key.criteria}">
                                 <localizer:name currentLocaleName="${currentLocale}" localizable="${criterion}"/><br>
                             </c:forEach>
                         </td>
                         <td>
                             <c:choose>
-                                <c:when test="${faculty.statusId == 1}">
+                                <c:when test="${facultiesMap.key.statusId == 1}">
                                     <span style="color:  rgb(204, 0, 0);"><strong><fmt:message
                                             key="faculties_jsp.text.recruitment_closed"/></strong></span><br>
-                                    <a href="controller?command=viewReportSheetPage&facultyId=${faculty.id}"><strong><fmt:message
+                                    <a href="controller?command=viewReportSheetPage&facultyId=${facultiesMap.key.id}"><strong><fmt:message
                                             key="faculties_jsp.button.view_report"/></strong></a>
                                 </c:when>
                                 <c:otherwise>
-                                    <a href="controller?command=deleteFaculty&facultyId=${faculty.id}"><strong><fmt:message
+                                    <a href="controller?command=deleteFaculty&facultyId=${facultiesMap.key.id}"><strong><fmt:message
                                             key="faculties_admin_jsp.button.delete"/></strong></a>
-                                    <a href="controller?command=updateFacultyPage&facultyId=${faculty.id}"><strong><fmt:message
+                                    <a href="controller?command=updateFacultyPage&facultyId=${facultiesMap.key.id}"><strong><fmt:message
                                             key="faculties_admin_jsp.button.edit"/></strong></a>
-                                    <a href="controller?command=viewFacultyApplications&facultyId=${faculty.id}"><strong><fmt:message
+                                    <a href="controller?command=viewFacultyApplications&facultyId=${facultiesMap.key.id}"><strong><fmt:message
                                             key="faculties_admin_jsp.button.view_entrants"/></strong></a>
                                 </c:otherwise>
                             </c:choose>
